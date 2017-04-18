@@ -31,6 +31,10 @@ class Wpruby_Help_Desk_Activator {
 	 */
 	public static function activate() {
 
+			//@TODO Seed Data on Activation
+
+			// insert Default Ticket Statuses
+			//wp_insert_term(	'Closed', 'tickets_status');
 	}
 
 }

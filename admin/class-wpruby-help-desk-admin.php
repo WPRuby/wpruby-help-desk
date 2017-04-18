@@ -121,6 +121,11 @@ class Wpruby_Help_Desk_Admin {
 			'not_found'          => __( 'No tickets found.', 'wpruby-help-desk' ),
 			'not_found_in_trash' => __( 'No tickets found in Trash.', 'wpruby-help-desk' )
 		);
+		$supports = array('title');
+
+		if( !isset( $_GET['post'] ) ) {
+			$supports[] = 'editor';
+		}
 
 		$args = array(
 			'labels'             => $labels,
@@ -134,21 +139,21 @@ class Wpruby_Help_Desk_Admin {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			//'supports'           => array(  'author' ),
-			'menu_icon'			 => 'dashicons-editor-unlink',
+			'supports'           => $supports,
+			'menu_icon'			 => 'dashicons-tickets',
 
 		);
 
 		register_post_type( 'support_ticket', $args );
 	}
 
-	/**
+		/**
 		 * The plugin use this method to register the custom taxonomies of the links.
 		 * @since    1.0.0
 		 */
 		public function register_taxonomies(){
 			$labels = array(
-				'name'                       => _x( 'Ticket Statuses', 'taxonomy general name' ),
+				'name'                       => _x( 'Ticket Status', 'taxonomy general name' ),
 				'singular_name'              => _x( 'Ticket Status', 'taxonomy singular name' ),
 				'search_items'               => __( 'Search Ticket Statuses', 'wpruby-help-desk' ),
 				'popular_items'              => __( 'Popular Ticket Statuses', 'wpruby-help-desk' ),
@@ -177,6 +182,57 @@ class Wpruby_Help_Desk_Admin {
 			);
 
 			register_taxonomy( 'tickets_status', 'support_ticket', $args );
+		}
+		/**
+		 * The plugin use this method to add admin pages to the dashboard menu
+		 * @since    1.0.0
+		 */
+		public function adding_admin_menus(){
+			add_submenu_page('edit.php?post_type=support_ticket',	__( 'Settings', 'wpruby-help-desk' ),	__( 'Settings', 'wpruby-help-desk' ),	'manage_options',	'wpruby-help-desk-settings',	array($this, 'display_settings'));
+		}
+		/**
+		 * The plugin use this method to display the settings page, called in adding_admin_menus()
+		 * @since    1.0.0
+		 */
+		public function display_settings(){
+				require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-settings.php';
+		}
+		/**
+		 * This method is used to add/remove different meta boxes
+		 * @since    1.0.0
+		 */
+		public function add_tickets_metaboxes(){
+			//remove the publishing box
+			// TODO remove_meta_box( 'submitdiv', 'support_ticket', 'side' );
+			// adding the reply box only when the ticket is already created
+			if(isset($_GET['post'])){
+				add_meta_box('ticket_information', __( 'Ticket Information', 'wpruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), 'support_ticket', 'normal', 'high');
+				add_meta_box('ticket_message', __( 'Ticket Message', 'wpruby-help-desk' ), array($this, 'ticket_message_meta_box_callback'), 'support_ticket', 'normal', 'high');
+				add_meta_box('reply_to_ticket', __( 'Reply', 'wpruby-help-desk' ), array($this, 'reply_meta_box_callback'), 'support_ticket', 'normal', 'high');
+			}
+		}
+		/**
+		 * This method is used to display the ticket_information meta box content
+		 * @since    1.0.0
+		 */
+		public function ticket_information_meta_box_callback($ticket){
+			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-information-metabox.php';
+		}
+		/**
+		 * This method is used to display the ticket_message meta box content
+		 * @since    1.0.0
+		 */
+		public function ticket_message_meta_box_callback($ticket){
+			if(isset($ticket->post_content)){
+				echo '<p>' .  $ticket->post_content .  '</p>';
+			}
+		}
+		/**
+		 * This method is used to display the reply_to_ticket meta box content
+		 * @since    1.0.0
+		 */
+		public function reply_meta_box_callback($ticket_id){
+			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-reply-metabox.php';
 		}
 
 

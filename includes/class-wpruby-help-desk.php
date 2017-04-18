@@ -150,9 +150,15 @@ class Wpruby_Help_Desk {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Wpruby_Help_Desk_Admin( $this->get_plugin_name(), $this->get_version() );
-		
+
 		$this->loader->add_action( 'init', $plugin_admin, 'register_post_types' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_taxonomies' );
+
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'adding_admin_menus' );
+
+
+		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_tickets_metaboxes' );
+
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
