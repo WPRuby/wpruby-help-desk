@@ -274,7 +274,11 @@ class Wpruby_Help_Desk_Admin {
 		 * @since    1.0.0
 		 */
 		public function ticket_information_meta_box_callback($ticket){
-			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-information-metabox.php';
+			//TODO move the requiring
+			require_once plugin_dir_path( __FILE__ ) . 'class-wpruby-user.php';
+			$user = new WPRuby_User($ticket->post_author);
+			$ticket_stats = $this->get_tickets_stats($ticket->post_author);
+			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-details-metabox.php';
 		}
 		/**
 		 * This method is used to display the ticket_message meta box content
@@ -312,4 +316,45 @@ class Wpruby_Help_Desk_Admin {
 			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-options-metabox.php';
 		}
 
+		public function get_tickets_stats(	$user_id	){
+	    $stats = array();
+	    $stats['total'] = 0;
+	    $stats['closed'] = 0;
+	    $stats['open'] = 0;
+
+	    //@TODO fill the real stats
+			$args = array();
+			$args['user_id'] = intval($user_id);
+			$args['status'] = 'open';
+			$stats['open'] = count($this->get_tickets(	$args	));
+			$args['status'] = 'closed';
+			$stats['closed'] = count($this->get_tickets(	$args	));
+			$stats['total'] = $stats['open'] + $stats['closed'];
+	    return $stats;
+	  }
+
+		public function get_tickets(	$args ){
+			$status_operator =  'IN';
+
+			if($args['status'] == 'open'){
+					$args['status'] = 'closed';
+					$status_operator =  'NOT IN';
+			}
+
+			$args = array(
+			    'post_type' => WPRUBY_TICKET,
+					'author'	   => (int)$args['user_id'],
+					'posts_per_page' => -1,
+			    'tax_query' => array(
+			        array(
+			            'taxonomy' => WPRUBY_TICKET_STATUS,
+			            'field'    => 'slug',
+			            'terms'    => $args['status'],
+									'operator' => $status_operator,
+			        ),
+			    ),
+			);
+			$tickets = get_posts( $args );
+			return $tickets;
+		}
 }

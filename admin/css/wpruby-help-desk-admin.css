@@ -9,3 +9,49 @@
 #ticket_options label{
   font-weight: bold;
 }
+#ticket_creator{
+
+}
+
+#ticket_creator img.avatar{
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  border: solid 2px #8e8e8e;
+}
+#ticket_creator #creator_img{
+  width: 11%;
+  float: left;
+  border-right: 2px dashed #f1f1f1;
+  height: 112px;
+}
+#ticket_creator #creator_info{
+  padding-left: 20px;
+  float:left;
+}
+#ticket_creator #creator_info ul li{
+  font-size: 90%;
+  padding-left: 110px;
+  position: relative;
+}
+#ticket_creator #creator_info ul li strong{
+  position: absolute;
+  left: 2px;
+  top: 0;
+}
+#ticket_creator #creator_info ul li span{
+  background: rgba(0, 0, 0, 0.52);
+  color: #ffffff;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+}
+.open_ticket{
+  background: rgba(38, 121, 48, 0.52) !important;
+}
+.closed_ticket{
+  background: rgba(169, 19, 19, 0.52) !important;
+}
