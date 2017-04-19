@@ -30,6 +30,11 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+// define the plugin constants
+define('WPRUBY_TICKET', 'support_ticket');
+define('WPRUBY_TICKET_STATUS', 'tickets_status');
+define('WPRUBY_TICKET_PRODUCT', 'tickets_products');
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wpruby-help-desk-activator.php

@@ -1,4 +1,11 @@
 /**
- * All of the CSS for your admin-specific functionality should be
+ * All of the CSS for admin-specific functionality is
  * included in this file.
  */
+
+ .wpruby_select{
+   width: 100%;
+ }
+#ticket_options label{
+  font-weight: bold;
+}

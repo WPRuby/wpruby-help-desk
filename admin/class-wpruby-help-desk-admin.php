@@ -134,7 +134,7 @@ class Wpruby_Help_Desk_Admin {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'support_ticket' ),
+			'rewrite'            => array( 'slug' => WPRUBY_TICKET ),
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
@@ -144,7 +144,7 @@ class Wpruby_Help_Desk_Admin {
 
 		);
 
-		register_post_type( 'support_ticket', $args );
+		register_post_type( WPRUBY_TICKET, $args );
 	}
 
 		/**
@@ -168,7 +168,7 @@ class Wpruby_Help_Desk_Admin {
 				'add_or_remove_items'        => __( 'Add or remove ticket status','wpruby-help-desk' ),
 				'choose_from_most_used'      => __( 'Choose from the most used statuses','wpruby-help-desk' ),
 				'not_found'                  => __( 'No Tickets Statuses found.','wpruby-help-desk' ),
-				'menu_name'                  => __( 'Ticket Statuses','wpruby-help-desk' ),
+				'menu_name'                  => __( 'Statuses','wpruby-help-desk' ),
 			);
 
 			$args = array(
@@ -181,8 +181,62 @@ class Wpruby_Help_Desk_Admin {
 				'rewrite'               => array( 'slug' => 'statuses' ),
 			);
 
-			register_taxonomy( 'tickets_status', 'support_ticket', $args );
+			register_taxonomy( WPRUBY_TICKET_STATUS, WPRUBY_TICKET, $args );
+			//adding the products taxonomy
+			$labels = array(
+				'name'                       => _x( 'Product', 'taxonomy general name' ),
+				'singular_name'              => _x( 'Product', 'taxonomy singular name' ),
+				'search_items'               => __( 'Search Products', 'wpruby-help-desk' ),
+				'popular_items'              => __( 'Popular Products', 'wpruby-help-desk' ),
+				'all_items'                  => __( 'All Products','wpruby-help-desk' ),
+				'parent_item'                => null,
+				'parent_item_colon'          => null,
+				'edit_item'                  => __( 'Edit Product','wpruby-help-desk' ),
+				'update_item'                => __( 'Update Product','wpruby-help-desk' ),
+				'add_new_item'               => __( 'Add New Product','wpruby-help-desk' ),
+				'new_item_name'              => __( 'New Product','wpruby-help-desk' ),
+				'separate_items_with_commas' => __( 'Separate statuses with commas','wpruby-help-desk' ),
+				'add_or_remove_items'        => __( 'Add or remove ticket status','wpruby-help-desk' ),
+				'choose_from_most_used'      => __( 'Choose from the most used statuses','wpruby-help-desk' ),
+				'not_found'                  => __( 'No Tickets Statuses found.','wpruby-help-desk' ),
+				'menu_name'                  => __( 'Products','wpruby-help-desk' ),
+			);
+
+			$args = array(
+				'hierarchical'          => true,
+				'labels'                => $labels,
+				'show_ui'               => true,
+				'show_admin_column'     => true,
+				'update_count_callback' => '_update_post_term_count',
+				'query_var'             => true,
+				'rewrite'               => array( 'slug' => WPRUBY_TICKET_PRODUCT ),
+			);
+
+			register_taxonomy( WPRUBY_TICKET_PRODUCT, WPRUBY_TICKET, $args );
 		}
+
+		/**
+		 * The plugin use this method to save ticket details, such as status, product ... etc.
+		 * @since    1.0.0
+		 */
+		public function save_ticket_details( $post_id, $post, $update){
+			if(isset($_POST) && !empty($_POST)){
+					$post_type = get_post_type($post_id);
+					if(WPRUBY_TICKET == $post_type){
+						$tickets_status = $_POST['ticket_status'];
+						$tickets_product = $_POST['ticket_product'];
+						if(-1 != $tickets_status){
+							wp_set_post_terms( $post_id, intval($tickets_status), WPRUBY_TICKET_STATUS );
+						}
+						if(-1 != $tickets_product){
+							wp_set_post_terms( $post_id, intval($tickets_product), WPRUBY_TICKET_PRODUCT );
+						}
+					}
+			}
+
+
+		}
+
 		/**
 		 * The plugin use this method to add admin pages to the dashboard menu
 		 * @since    1.0.0
@@ -203,12 +257,16 @@ class Wpruby_Help_Desk_Admin {
 		 */
 		public function add_tickets_metaboxes(){
 			//remove the publishing box
-			// TODO remove_meta_box( 'submitdiv', 'support_ticket', 'side' );
+			remove_meta_box( 'submitdiv', WPRUBY_TICKET, 'side' );
+			remove_meta_box( 'tickets_productsdiv', WPRUBY_TICKET, 'side' );
+			remove_meta_box( 'tickets_statusdiv', WPRUBY_TICKET, 'side' );
+
 			// adding the reply box only when the ticket is already created
+			add_meta_box('ticket_options', __( 'Ticket Options', 'wpruby-help-desk' ), array($this, 'ticket_options_meta_box_callback'), WPRUBY_TICKET, 'side', 'high');
 			if(isset($_GET['post'])){
-				add_meta_box('ticket_information', __( 'Ticket Information', 'wpruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), 'support_ticket', 'normal', 'high');
-				add_meta_box('ticket_message', __( 'Ticket Message', 'wpruby-help-desk' ), array($this, 'ticket_message_meta_box_callback'), 'support_ticket', 'normal', 'high');
-				add_meta_box('reply_to_ticket', __( 'Reply', 'wpruby-help-desk' ), array($this, 'reply_meta_box_callback'), 'support_ticket', 'normal', 'high');
+				add_meta_box('ticket_information', __( 'Ticket Details', 'wpruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), WPRUBY_TICKET, 'normal', 'high');
+				add_meta_box('ticket_message', __( 'Ticket Message', 'wpruby-help-desk' ), array($this, 'ticket_message_meta_box_callback'), WPRUBY_TICKET, 'normal', 'high');
+				add_meta_box('reply_to_ticket', __( 'Reply', 'wpruby-help-desk' ), array($this, 'reply_meta_box_callback'), WPRUBY_TICKET, 'normal', 'high');
 			}
 		}
 		/**
@@ -232,8 +290,26 @@ class Wpruby_Help_Desk_Admin {
 		 * @since    1.0.0
 		 */
 		public function reply_meta_box_callback($ticket_id){
+			$editor_settings = array( 'media_buttons' => false, 'textarea_rows' => 7 );
 			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-reply-metabox.php';
 		}
+		/**
+		 * This method is used to display the ticket publishing box
+		 * @since    1.0.0
+		 */
+		public function ticket_options_meta_box_callback($ticket){
+			// get terms
+			$statuses = get_terms( WPRUBY_TICKET_STATUS, array(  'hide_empty' => false ) );
+			$products = get_terms( WPRUBY_TICKET_PRODUCT, array(  'hide_empty' => false ) );
+			// get ticket's terms
+			$ticket_status = wp_get_post_terms($ticket->ID, WPRUBY_TICKET_STATUS, array("fields" => "ids"));
+			$ticket_product = wp_get_post_terms($ticket->ID, WPRUBY_TICKET_PRODUCT, array("fields" => "ids"));
 
+			$ticket_status = (isset($ticket_status[0]))? $ticket_status[0]: -1;
+			$ticket_product = (isset($ticket_product[0]))? $ticket_product[0]: -1;
+
+			$publish_button_text = (isset($_GET['post']))? __('Update Ticket', 'wpruby-help-desk'): __('Create Ticket','wpruby-help-desk');
+			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-options-metabox.php';
+		}
 
 }
