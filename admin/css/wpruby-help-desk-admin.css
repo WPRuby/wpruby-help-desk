@@ -9,8 +9,15 @@
 #ticket_options label{
   font-weight: bold;
 }
-#ticket_creator{
-
+#ticket_options .ticket_status_label{
+  float:left;
+  margin-left: 4px;
+  padding: 5px;
+  background: rgba(49, 156, 57, 0.64);
+  color: #ffffff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 #ticket_creator img.avatar{
@@ -92,4 +99,9 @@
   font-size:8pt;
   font-style: italic;
 
+}
+.button-close{
+  border-color: #bf4444 !important;
+  background: #d24e4e !important;
+  color: #ffffff !important;
 }

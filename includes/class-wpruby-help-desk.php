@@ -120,6 +120,7 @@ class Wpruby_Help_Desk {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wpruby-help-desk-public.php';
 
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-ticket.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-user.php';
 
 		$this->loader = new Wpruby_Help_Desk_Loader();

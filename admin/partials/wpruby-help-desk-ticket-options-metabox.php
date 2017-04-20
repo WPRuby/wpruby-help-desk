@@ -20,7 +20,7 @@
   <select id="ticket_status" class="wpruby_select" name="ticket_status">
     <option value="-1"><?php _e('No Status assigned', 'wpruby-help-desk'); ?></option>
     <?php foreach ($statuses as $key => $status): ?>
-      <option <?php selected($ticket_status, $status->term_id); ?> value="<?php echo $status->term_id; ?>"><?php echo $status->name; ?></option>
+      <option <?php selected($ticket_status['id'], $status->term_id); ?> value="<?php echo $status->term_id; ?>"><?php echo $status->name; ?></option>
     <?php endforeach; ?>
   </select>
 </p>
@@ -36,5 +36,6 @@
  <div id="publishing-action">
  <span class="spinner"></span>
  		<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php echo $publish_button_text; ?>"></div>
+    <span class="ticket_status_label <?php echo $ticket_status['slug']; ?>_ticket"><?php echo $ticket_status['name']; ?></span>
  <div class="clear"></div>
 </div>
