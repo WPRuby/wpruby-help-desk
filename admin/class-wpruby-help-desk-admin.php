@@ -279,6 +279,10 @@ class Wpruby_Help_Desk_Admin {
 										);
 										wp_insert_post( $ticket_reply_args );
 								}
+								if(isset($_POST['reply-close'])){
+									//close the ticket
+									wp_set_object_terms( intval($post_id), 'closed', WPRUBY_TICKET_STATUS, false );
+								}
 						}
 					}
 			}
@@ -376,7 +380,7 @@ class Wpruby_Help_Desk_Admin {
 	    $stats['closed'] = 0;
 	    $stats['open'] = 0;
 
-	    //@TODO fill the real stats
+
 			$args = array();
 			$args['user_id'] = intval($user_id);
 			$args['status'] = 'open';
