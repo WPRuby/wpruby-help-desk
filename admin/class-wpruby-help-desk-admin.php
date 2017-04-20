@@ -145,6 +145,42 @@ class Wpruby_Help_Desk_Admin {
 		);
 
 		register_post_type( WPRUBY_TICKET, $args );
+
+
+		//Tickets Reply
+			$labels = array(
+				'name'               => _x( 'Tickets Reply', 'post type general name', 'wpruby-help-desk' ),
+				'singular_name'      => _x( 'Create Ticket Reply', 'post type singular name', 'wpruby-help-desk' ),
+				'menu_name'          => _x( 'Ruby Desk', 'admin menu', 'wpruby-help-desk' ),
+				'name_admin_bar'     => _x( 'Ticket Reply', 'add new on admin bar', 'wpruby-help-desk' ),
+				'add_new'            => _x( 'Create Ticket Reply', 'book', 'wpruby-help-desk' ),
+				'add_new_item'       => __( 'Create New Ticket Reply', 'wpruby-help-desk' ),
+				'new_item'           => __( 'Create New Ticket Reply', 'wpruby-help-desk' ),
+				'edit_item'          => __( 'Edit Ticket Reply', 'wpruby-help-desk' ),
+				'view_item'          => __( 'View Ticket Reply', 'wpruby-help-desk' ),
+				'all_items'          => __( 'All Tickets Reply', 'wpruby-help-desk' ),
+				'search_items'       => __( 'Search Tickets Reply', 'wpruby-help-desk' ),
+				'parent_item_colon'  => __( 'Parent Tickets Reply:', 'wpruby-help-desk' ),
+				'not_found'          => __( 'No tickets found.', 'wpruby-help-desk' ),
+				'not_found_in_trash' => __( 'No tickets found in Trash.', 'wpruby-help-desk' )
+			);
+
+
+			$args = array(
+				'labels'             => $labels,
+				'public'             => true,
+				'publicly_queryable' => false,
+				'show_ui'            => false,
+				'show_in_menu'       => false,
+				'query_var'          => true,
+				'rewrite'            => array( 'slug' => WPRUBY_TICKET_REPLY ),
+				'capability_type'    => 'post',
+				'has_archive'        => true,
+				'hierarchical'       => false,
+				'menu_position'      => null,
+			);
+
+			register_post_type( WPRUBY_TICKET_REPLY, $args );
 	}
 
 		/**
@@ -223,13 +259,26 @@ class Wpruby_Help_Desk_Admin {
 			if(isset($_POST) && !empty($_POST)){
 					$post_type = get_post_type($post_id);
 					if(WPRUBY_TICKET == $post_type){
-						$tickets_status = $_POST['ticket_status'];
-						$tickets_product = $_POST['ticket_product'];
-						if(-1 != $tickets_status){
-							wp_set_post_terms( $post_id, intval($tickets_status), WPRUBY_TICKET_STATUS );
-						}
-						if(-1 != $tickets_product){
-							wp_set_post_terms( $post_id, intval($tickets_product), WPRUBY_TICKET_PRODUCT );
+						if(isset( $_POST['publish'] )){
+									$tickets_status = $_POST['ticket_status'];
+									$tickets_product = $_POST['ticket_product'];
+									if(-1 != $tickets_status){
+										wp_set_post_terms( $post_id, intval($tickets_status), WPRUBY_TICKET_STATUS );
+									}
+									if(-1 != $tickets_product){
+										wp_set_post_terms( $post_id, intval($tickets_product), WPRUBY_TICKET_PRODUCT );
+									}
+						}elseif (isset( $_POST['reply'] ) || isset( $_POST['reply-close'] )) {
+								if(isset($_POST['ticket_reply']) && "" != $_POST['ticket_reply']){
+										$ticket_reply_args = array(
+											'post_title'		=>	'Reply to ticket #' . $post_id,
+											'post_content'	=>	$_POST['ticket_reply'],
+											'post_status'		=>	'publish',
+											'post_type'			=>	WPRUBY_TICKET_REPLY,
+											'post_parent'		=>	intval($post_id),
+										);
+										wp_insert_post( $ticket_reply_args );
+								}
 						}
 					}
 			}
@@ -264,9 +313,16 @@ class Wpruby_Help_Desk_Admin {
 			// adding the reply box only when the ticket is already created
 			add_meta_box('ticket_options', __( 'Ticket Options', 'wpruby-help-desk' ), array($this, 'ticket_options_meta_box_callback'), WPRUBY_TICKET, 'side', 'high');
 			if(isset($_GET['post'])){
-				add_meta_box('ticket_information', __( 'Ticket Details', 'wpruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), WPRUBY_TICKET, 'normal', 'high');
+				add_meta_box('ticket_information', __( 'Ticket Details', 'wpruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), WPRUBY_TICKET, 'side', 'high');
+
 				add_meta_box('ticket_message', __( 'Ticket Message', 'wpruby-help-desk' ), array($this, 'ticket_message_meta_box_callback'), WPRUBY_TICKET, 'normal', 'high');
+
+				if($this->get_replies($_GET['post'])){
+					add_meta_box('ticket_replies', __( 'Replies', 'wpruby-help-desk' ), array($this, 'replies_meta_box_callback'), WPRUBY_TICKET, 'normal', 'high');
+				}
+
 				add_meta_box('reply_to_ticket', __( 'Reply', 'wpruby-help-desk' ), array($this, 'reply_meta_box_callback'), WPRUBY_TICKET, 'normal', 'high');
+
 			}
 		}
 		/**
@@ -274,8 +330,6 @@ class Wpruby_Help_Desk_Admin {
 		 * @since    1.0.0
 		 */
 		public function ticket_information_meta_box_callback($ticket){
-			//TODO move the requiring
-			require_once plugin_dir_path( __FILE__ ) . 'class-wpruby-user.php';
 			$user = new WPRuby_User($ticket->post_author);
 			$ticket_stats = $this->get_tickets_stats($ticket->post_author);
 			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-details-metabox.php';
@@ -293,7 +347,7 @@ class Wpruby_Help_Desk_Admin {
 		 * This method is used to display the reply_to_ticket meta box content
 		 * @since    1.0.0
 		 */
-		public function reply_meta_box_callback($ticket_id){
+		public function reply_meta_box_callback($ticket){
 			$editor_settings = array( 'media_buttons' => false, 'textarea_rows' => 7 );
 			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-reply-metabox.php';
 		}
@@ -333,6 +387,12 @@ class Wpruby_Help_Desk_Admin {
 	    return $stats;
 	  }
 
+		public function replies_meta_box_callback($ticket)
+		{
+			$replies = $this->get_replies($ticket->ID);
+			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-replies-metabox.php';
+		}
+
 		public function get_tickets(	$args ){
 			$status_operator =  'IN';
 
@@ -356,5 +416,23 @@ class Wpruby_Help_Desk_Admin {
 			);
 			$tickets = get_posts( $args );
 			return $tickets;
+		}
+
+		public function get_replies(	$ticket_id ){
+
+			$args = array(
+			    'post_type' 		 => WPRUBY_TICKET_REPLY,
+					'post_parent'	   => intval($ticket_id),
+					'orderby'          => 'date',
+					'order'            => 'ASC',
+					'posts_per_page' => -1,
+			);
+			$replies = get_posts( $args );
+			foreach ($replies as $key => $reply):
+				$user = new WPRuby_User($reply->post_author);
+				$replies[$key]->user = $user;
+			endforeach;
+
+			return $replies;
 		}
 }

@@ -21,7 +21,8 @@
 class WPRuby_User {
 
   protected $default_avatar = 'https://www.somewhere.com/homestar.jpg';
-  protected $avater_size = 80;
+  protected $avater_size = 60;
+  protected $id = 0;
   protected $email = '';
   protected $username = '';
   protected $first_name = '';
@@ -32,7 +33,7 @@ class WPRuby_User {
 
   public function __construct($user_id){
     $user_info = get_userdata($user_id);
-
+    $this->id = $user_id;
     $this->email = $user_info->user_email;
     $this->username = $user_info->user_login;
     $this->first_name = $user_info->first_name;
@@ -53,6 +54,10 @@ class WPRuby_User {
 
   public function get_username(){
     return $this->username;
+  }
+
+  public function get_id(){
+    return $this->id;
   }
 
   public function get_first_name(){

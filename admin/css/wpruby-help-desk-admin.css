@@ -20,13 +20,13 @@
   border: solid 2px #8e8e8e;
 }
 #ticket_creator #creator_img{
-  width: 11%;
-  float: left;
-  border-right: 2px dashed #f1f1f1;
+  width: 24%;
+  float: right;
   height: 112px;
 }
 #ticket_creator #creator_info{
-  padding-left: 20px;
+  padding-left: 5px;
+
   float:left;
 }
 #ticket_creator #creator_info ul li{
@@ -34,12 +34,12 @@
   padding-left: 110px;
   position: relative;
 }
-#ticket_creator #creator_info ul li strong{
-  position: absolute;
-  left: 2px;
-  top: 0;
+#ticket_creator #creator_info strong{
+  font-size: 10pt;
+  display: block;
+  margin-top: 20px;
 }
-#ticket_creator #creator_info ul li span{
+#ticket_creator #creator_info span{
   background: rgba(0, 0, 0, 0.52);
   color: #ffffff;
   -moz-border-radius: 2px;
@@ -54,4 +54,42 @@
 }
 .closed_ticket{
   background: rgba(169, 19, 19, 0.52) !important;
+}
+#ticket_replies .inside{
+  margin: 0 0 0 0 !important;
+  padding: 0 0 0 0 !important;
+}
+.ticket_reply{
+  width:100%;
+  padding: 10px;
+  border-bottom:2px solid #f1f1f1;
+}
+.reply_avatar{
+  float:left;
+  width:15%;
+  text-align: center;
+  border-right: 2px dashed #f1f1f1;
+}
+.reply_avatar img{
+  width:60px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+.reply_content{
+  width:80%;
+  float:left;
+  padding: 10px;
+}
+
+.ticket_reply .reply_username{
+  display: block;
+  padding-left: 10px;
+  font-weight: bold;
+}
+.ticket_reply .reply_time{
+  display: block;
+  font-size:8pt;
+  font-style: italic;
+
 }

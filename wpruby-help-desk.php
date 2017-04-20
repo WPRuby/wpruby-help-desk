@@ -32,6 +32,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 // define the plugin constants
 define('WPRUBY_TICKET', 'support_ticket');
+define('WPRUBY_TICKET_REPLY', 'support_ticket_reply');
 define('WPRUBY_TICKET_STATUS', 'tickets_status');
 define('WPRUBY_TICKET_PRODUCT', 'tickets_products');
 
