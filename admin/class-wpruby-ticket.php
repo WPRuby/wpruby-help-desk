@@ -143,4 +143,30 @@ class WPRuby_Ticket {
      }
      return $status;
    }
+
+
+
+     /**
+      * Get open tickets.
+      *
+      * @since    1.0.0
+      * @return      array    $tickets      The array of tickets.
+      */
+     public static function get_open_tickets(){
+
+       $args = array(
+           'post_type' => WPRUBY_TICKET,
+           'posts_per_page' => -1,
+           'tax_query' => array(
+               array(
+                   'taxonomy' => WPRUBY_TICKET_STATUS,
+                   'field'    => 'slug',
+                   'terms'    => 'closed',
+                   'operator' => 'NOT IN',
+               ),
+           ),
+       );
+       $tickets = get_posts( $args );
+       return $tickets;
+     }
 }

@@ -423,12 +423,34 @@ class Wpruby_Help_Desk_Admin {
 				</tr>
 				<?php
 		}
-
+		/**
+		 * Save Ticket Status Color
+		 *
+		 * @param number The status term ID.
+		 * @since  1.0.0
+		 */
 		public function save_ticket_status_color_meta( $term_id ) {
 			if ( isset( $_POST['ticket_status_color'] ) ) {
 				$color = $_POST['ticket_status_color'];
 				update_term_meta ($term_id, 'ticket_status_color', $color);
 			}
 		}
+		/**
+		 * Add ticket count in admin menu item.
+		 *
+		 * @return boolean True if the ticket count was added, false otherwise
+		 * @since  1.0.0
+		 */
+		public function pas_tickets_count() {
 
+			global $menu, $current_user;
+			$count = count(WPRuby_Ticket::get_open_tickets());
+			foreach ( $menu as $key => $value ) {
+				if ( $menu[ $key ][2] == 'edit.php?post_type=support_ticket' ) {
+					$menu[ $key ][0] .= ' <span class="awaiting-mod count-' . $count . '"><span class="pending-count">' . $count . '</span></span>';
+				}
+			}
+
+			return true;
+		}
 }

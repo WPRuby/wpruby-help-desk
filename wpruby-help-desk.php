@@ -79,3 +79,7 @@ function run_wpruby_help_desk() {
 
 }
 run_wpruby_help_desk();
+
+
+
+add_action( 'admin_menu', 'pas_tickets_count' );
