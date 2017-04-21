@@ -394,8 +394,41 @@ class Wpruby_Help_Desk_Admin {
 			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-replies-metabox.php';
 		}
 
+		/**
+		 * This method is used to display the ticket replies box
+		 * @since    1.0.0
+		 */
+		public function add_color_field_to_ticket_status() {
+				// this will add the color meta field to the add new status page
+				?>
+					<div class="form-field">
+						<label for="ticket_status_color"><?php _e( 'Status Color', 'wpruby-help-desk' ); ?></label>
+						<input type="text" name="ticket_status_color" class="ticket-status-color-field" id="ticket_status_color" value="">
+					</div>
+				<?php
+		}
+		public function edit_color_field_to_ticket_status($term) {
+				// put the term ID into a variable
+				$term_id = intval($term->term_id);
 
+				// retrieve the existing value(s) for this meta field. This returns an array
+				$color = get_term_meta($term_id, 'ticket_status_color', true);
+				 ?>
 
+				 <tr class="form-field">
+ 				 		<th scope="row" valign="top"><label for="ticket_status_color"><?php _e( 'Status Color', 'wpruby-help-desk' ); ?></label></th>
+							<td>
+								<input type="text" name="ticket_status_color" class="ticket-status-color-field" id="ticket_status_color" value="<?php echo $color; ?>">
+							</td>
+				</tr>
+				<?php
+		}
 
+		public function save_ticket_status_color_meta( $term_id ) {
+			if ( isset( $_POST['ticket_status_color'] ) ) {
+				$color = $_POST['ticket_status_color'];
+				update_term_meta ($term_id, 'ticket_status_color', $color);
+			}
+		}
 
 }

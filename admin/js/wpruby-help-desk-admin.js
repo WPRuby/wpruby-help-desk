@@ -2,7 +2,11 @@
 	'use strict';
 	$(function() {
 		$('#title-prompt-text').html('Ticket Subject');
+		$('.ticket-status-color-field').wpColorPicker();
+
   });
+
+
 	/**
 	 * All of the code for your admin-facing JavaScript source
 	 * should reside in this file.

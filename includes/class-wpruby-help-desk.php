@@ -166,6 +166,12 @@ class Wpruby_Help_Desk {
 		// info: custom action publish_{$custom_post_type}
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_ticket_details', 10, 3 );
 
+		// info: custom action to add fields to the new taxonomy term page {taxonomy}_add_form_fields
+		$this->loader->add_action( WPRUBY_TICKET_STATUS . '_add_form_fields', $plugin_admin, 'add_color_field_to_ticket_status' );
+		$this->loader->add_action( WPRUBY_TICKET_STATUS . '_edit_form_fields', $plugin_admin, 'edit_color_field_to_ticket_status' );
+
+		$this->loader->add_action( 'edited_' . WPRUBY_TICKET_STATUS, $plugin_admin, 'save_ticket_status_color_meta' );
+		$this->loader->add_action( 'create_' . WPRUBY_TICKET_STATUS, $plugin_admin, 'save_ticket_status_color_meta' );
 
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
