@@ -137,6 +137,7 @@ class WPRuby_Ticket {
        $status['id'] = $ticket_status[0]->term_id;
        $status['name'] = $ticket_status[0]->name;
        $status['slug'] = $ticket_status[0]->slug;
+       $status['color'] = get_term_meta( $ticket_status[0]->term_id, 'ticket_status_color', true);
      }else{
        return false;
      }
