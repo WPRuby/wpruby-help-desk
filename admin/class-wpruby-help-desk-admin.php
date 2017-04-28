@@ -454,24 +454,34 @@ class Wpruby_Help_Desk_Admin {
 			return true;
 		}
 
-
+		/**
+		 * Add ticket_status custom column
+		 * @param		array The original columns
+		 * @return array The altered columns
+		 * @since  1.0.0
+		 */
 		public function set_custom_edit_support_ticket_columns($columns) {
 		    unset( $columns['taxonomy-tickets_status'] );
-		    $columns['support_ticket_author'] = __( 'Status', 'wpruby-help-desk' );
+		    $columns['support_ticket_status'] = __( 'Status', 'wpruby-help-desk' );
 		    return $columns;
 		}
 
+		/**
+		 * Add the ticket status HTML to the custom column
+		 * @param		string The column ID
+		 * @param		number The ticket ID
+		 * @since  1.0.0
+		 */
 		public function custom_support_ticket_column( $column, $post_id ) {
 		    switch ( $column ) {
 
-		        case 'support_ticket_author' :
+		        case 'support_ticket_status' :
 								$ticket = new WPRuby_Ticket(	$post_id	);
 								$ticket_status = $ticket->get_status();
-								if($ticket_status){
+								if($ticket_status)
 									echo '<span class="ticket_status_label" style="background:'.$ticket_status['color'].';">'. $ticket_status['name'] .'</span>';
-								}else{
+								else
 									_e( '-', 'wpruby-help-desk' );
-								}
 		            break;
 		    }
 		}
