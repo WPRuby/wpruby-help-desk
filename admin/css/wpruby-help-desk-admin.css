@@ -9,7 +9,7 @@
 #ticket_options label{
   font-weight: bold;
 }
-#ticket_options .ticket_status_label{
+#ticket_options .ticket_status_label, .support_ticket_author .ticket_status_label{
   float:left;
   margin-left: 4px;
   padding: 5px;
