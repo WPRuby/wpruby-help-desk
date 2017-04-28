@@ -79,31 +79,3 @@ function run_wpruby_help_desk() {
 
 }
 run_wpruby_help_desk();
-
-
-add_filter( 'manage_support_ticket_posts_columns', 'set_custom_edit_support_ticket_columns' );
-add_action( 'manage_support_ticket_posts_custom_column' , 'custom_support_ticket_column', 1, 2 );
-
-function set_custom_edit_support_ticket_columns($columns) {
-    unset( $columns['taxonomy-tickets_status'] );
-    $columns['support_ticket_author'] = __( 'Status', 'wpruby-help-desk' );
-    return $columns;
-}
-
-function custom_support_ticket_column( $column, $post_id ) {
-    switch ( $column ) {
-
-        case 'support_ticket_author' :
-						$ticket = new WPRuby_Ticket(	$post_id	);
-						$ticket_status = $ticket->get_status();
-						if($ticket_status){
-							echo '<span class="ticket_status_label" style="background:'.$ticket_status['color'].';">'. $ticket_status['name'] .'</span>';
-						}else{
-							_e( '-', 'wpruby-help-desk' );
-						}
-            break;
-
-
-
-    }
-}
