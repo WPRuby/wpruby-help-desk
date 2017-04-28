@@ -36,6 +36,9 @@
  <div id="publishing-action">
  <span class="spinner"></span>
  		<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php echo $publish_button_text; ?>"></div>
-    <span class="ticket_status_label" style="background:<?php echo $ticket_status['color']; ?>;"><?php echo $ticket_status['name']; ?></span>
+    <?php if(isset($_GET['post']) && isset($ticket_status['name'])){ ?>
+        <span class="ticket_status_label" style="background:<?php echo $ticket_status['color']; ?>;"><?php echo $ticket_status['name']; ?></span>
+    <?php } ?>
+
  <div class="clear"></div>
 </div>

@@ -172,6 +172,9 @@ class Wpruby_Help_Desk {
 
 		$this->loader->add_action( 'edited_' . WPRUBY_TICKET_STATUS, $plugin_admin, 'save_ticket_status_color_meta' );
 		$this->loader->add_action( 'create_' . WPRUBY_TICKET_STATUS, $plugin_admin, 'save_ticket_status_color_meta' );
+		
+		//info: add opened tickets count notice in the admin menu.
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'tickets_count' );
 
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );

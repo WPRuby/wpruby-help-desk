@@ -441,7 +441,7 @@ class Wpruby_Help_Desk_Admin {
 		 * @return boolean True if the ticket count was added, false otherwise
 		 * @since  1.0.0
 		 */
-		public function pas_tickets_count() {
+		public function tickets_count() {
 
 			global $menu, $current_user;
 			$count = count(WPRuby_Ticket::get_open_tickets());
