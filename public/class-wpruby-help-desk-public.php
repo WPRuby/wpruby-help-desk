@@ -62,7 +62,6 @@ class Wpruby_Help_Desk_Public {
 	public function enqueue_styles() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Wpruby_Help_Desk_Loader as all of the hooks are defined
@@ -85,7 +84,6 @@ class Wpruby_Help_Desk_Public {
 	public function enqueue_scripts() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Wpruby_Help_Desk_Loader as all of the hooks are defined
@@ -100,4 +98,40 @@ class Wpruby_Help_Desk_Public {
 
 	}
 
+
+	public function shortcode_add_ticket(){
+		ob_start();
+		$products = $this->get_products();
+		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-add-ticket.php';
+		return ob_get_clean();
+	}
+
+	public function get_products(){
+		$products = get_terms( WPRUBY_TICKET_PRODUCT, array(	'hide_empty' => false		) );
+		return $products;
+	}
+
+	public function process_ticket_submission(  ) {
+			if(isset($_POST['action']) && $_POST['action'] == 'add_ticket_form'){
+				$ticket = array();
+				$ticket['subject'] = sanitize_text_field(	$_POST['ticket_subject']	);
+				$ticket['product'] = intval(	$_POST['ticket_product']	);
+				$ticket['content'] = sanitize_text_field(	$_POST['ticket_reply']	);
+				WPRuby_Ticket::add($ticket);
+				wp_redirect($this->get_page('submit_ticket'));
+				exit;
+			}
+	}
+	//@TODO
+	public function get_page($page){
+		switch ($page) {
+			case 'submit_ticket':
+				return 'http://localhost:8888/wp/adding-tickets/';
+				break;
+
+			default:
+				return 'http://localhost:8888/wp/adding-tickets/';
+				break;
+		}
+	}
 }
