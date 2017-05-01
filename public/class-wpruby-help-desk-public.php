@@ -99,12 +99,20 @@ class Wpruby_Help_Desk_Public {
 	}
 
 
-	public function shortcode_add_ticket(){
+	public function shortcode_submit_ticket(){
 		ob_start();
 		$products = $this->get_products();
-		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-add-ticket.php';
+		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-submit-ticket.php';
 		return ob_get_clean();
 	}
+
+	public function shortcode_my_tickets(){
+		ob_start();
+		$my_tickets = WPRuby_Ticket::get_my_tickets();
+		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-my-tickets.php';
+		return ob_get_clean();
+	}
+
 
 	public function get_products(){
 		$products = get_terms( WPRUBY_TICKET_PRODUCT, array(	'hide_empty' => false		) );

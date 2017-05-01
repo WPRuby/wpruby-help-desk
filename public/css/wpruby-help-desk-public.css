@@ -2,3 +2,15 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+ .ticket_status_label{
+   float:left;
+   margin-left: 4px;
+   padding: 5px;
+   background: rgba(49, 156, 57, 0.64);
+   color: #ffffff;
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+   font-size: 10pt;
+ }

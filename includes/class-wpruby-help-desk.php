@@ -198,7 +198,8 @@ class Wpruby_Help_Desk {
 		$plugin_public = new Wpruby_Help_Desk_Public( $this->get_plugin_name(), $this->get_version() );
 
 		//adding shortcodes
-		add_shortcode('add_ticket', array($plugin_public, 'shortcode_add_ticket'));
+		add_shortcode('submit_ticket', array($plugin_public, 'shortcode_submit_ticket'));
+		add_shortcode('my_tickets', array($plugin_public, 'shortcode_my_tickets'));
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );

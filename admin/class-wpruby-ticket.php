@@ -125,7 +125,7 @@ class WPRuby_Ticket {
     return $stats;
   }
   /**
-   * Get user stats of tickets
+   * Get ticket status
    *
    * @since    1.0.0
    * @param      number    $user_id     The User ID.
@@ -144,7 +144,24 @@ class WPRuby_Ticket {
      return $status;
    }
 
-
+   /**
+    * Get ticket product
+    *
+    * @since    1.0.0
+    * @param      number    $user_id     The User ID.
+    */
+    public function get_product(){
+      $product = array();
+      $ticket_product = wp_get_object_terms($this->ticket_id, WPRUBY_TICKET_PRODUCT, array("fields" => "all"));
+      if(isset($ticket_product[0])){
+        $product['id'] = $ticket_product[0]->term_id;
+        $product['name'] = $ticket_product[0]->name;
+        $product['slug'] = $ticket_product[0]->slug;
+      }else{
+        return false;
+      }
+      return $product;
+    }
 
      /**
       * Get open tickets.
@@ -193,5 +210,35 @@ class WPRuby_Ticket {
 
        );
        return wp_insert_post($postattr);
+     }
+
+
+     /**
+     * Get the tickets of the current user.
+     *
+     * @since    1.0.0
+     */
+     public static function get_my_tickets( ){
+
+       $args = array(
+           'post_type' 		      => WPRUBY_TICKET,
+           'orderby'            => 'date',
+           'order'              => 'DESC',
+           'posts_per_page'     => -1,
+           'author'             => get_current_user_id(),
+           'post_status'      => 'publish',
+       );
+       $tickets = get_posts( $args );
+       foreach ($tickets as $key => $ticket):
+         $user = new WPRuby_User($ticket->post_author);
+         $tickets[$key]->user = $user;
+         $tickets[$key]->post_title = ($ticket->post_title == '')?__('(No Subject)', 'wpruby-help-desk'):$ticket->post_title;
+         $tick = new WPRuby_Ticket($ticket->ID);
+         $tickets[$key]->product = $tick->get_product();
+         $tickets[$key]->status = $tick->get_status();
+         $tickets[$key]->replies_count = count($tick->get_replies());
+
+       endforeach;
+       return $tickets;
      }
 }
