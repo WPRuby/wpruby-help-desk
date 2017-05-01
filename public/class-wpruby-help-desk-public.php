@@ -113,6 +113,20 @@ class Wpruby_Help_Desk_Public {
 		return ob_get_clean();
 	}
 
+	public function display_single_ticket( $contnet ){
+		global $post;
+		//info: if it is not a ticket, do not do any thing
+		if($post->post_type != WPRUBY_TICKET) return $content;
+		ob_start();
+		$ticket = new WPRuby_Ticket(	$post->ID );
+		$user = new WPRuby_User($post->post_author);
+		$replies = $ticket->get_replies();
+		$replies_count = count($replies);
+		$editor_settings = array( 'media_buttons' => false, 'textarea_rows' => 7 );
+		require_once plugin_dir_path( __FILE__ ) . 'partials/single-ticket.php';
+		return ob_get_clean();
+	}
+
 
 	public function get_products(){
 		$products = get_terms( WPRUBY_TICKET_PRODUCT, array(	'hide_empty' => false		) );
@@ -120,13 +134,29 @@ class Wpruby_Help_Desk_Public {
 	}
 
 	public function process_ticket_submission(  ) {
-			if(isset($_POST['action']) && $_POST['action'] == 'add_ticket_form'){
+			if(isset($_POST['action']) && $_POST['action'] == 'submit_ticket'){
 				$ticket = array();
 				$ticket['subject'] = sanitize_text_field(	$_POST['ticket_subject']	);
 				$ticket['product'] = intval(	$_POST['ticket_product']	);
 				$ticket['content'] = sanitize_text_field(	$_POST['ticket_reply']	);
 				WPRuby_Ticket::add($ticket);
 				wp_redirect($this->get_page('submit_ticket'));
+				exit;
+			}
+	}
+
+	public function process_ticket_reply(  ) {
+			if(isset($_POST['action']) && $_POST['action'] == 'submit_reply'){
+				$ticket_id = intval($_POST['ticket_id']);
+				$ticket_reply_args = array(
+					'post_title'		=>	'Reply to ticket #' . $ticket_id,
+					'post_content'	=>	$_POST['ticket_reply'],
+					'post_status'		=>	'publish',
+					'post_type'			=>	WPRUBY_TICKET_REPLY,
+					'post_parent'		=>	intval($ticket_id),
+				);
+				wp_insert_post( $ticket_reply_args );
+				wp_redirect(get_permalink($ticket_id));
 				exit;
 			}
 	}

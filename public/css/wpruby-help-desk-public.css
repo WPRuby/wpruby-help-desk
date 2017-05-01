@@ -2,7 +2,9 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
-
+.support_ticket-template-default .entry-content{
+  width:100% !important;
+}
  .ticket_status_label{
    float:left;
    margin-left: 4px;
@@ -14,3 +16,90 @@
    border-radius: 5px;
    font-size: 10pt;
  }
+
+#ticket_message{
+  background: #ffffff;
+  width:100%;
+  padding: 10px;
+  border: 1px solid #b3b3b3;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+
+}
+#ticket_message #ticket_content{
+  padding: 10px;
+}
+#ticket_message #ticket_info_bar{
+  width: 100%;
+  border-bottom: dashed 1px #b3b3b3;
+  font-size: 10pt;
+  color: #636363;
+  background: #f3f3f3;
+  padding: 7px;
+}
+#ticket_message span{
+  padding: 10px;
+}
+#ticket_message .ticket_date,
+#ticket_message .ticket_replies_count,
+#ticket_message .ticket_number{
+  border-right: 1px solid #b3b3b3;
+}
+
+
+#reply_box{
+  margin-top: 20px;
+  background: #ffffff;
+  width:100%;
+  padding: 10px;
+  border: 1px solid #b3b3b3;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+}
+#reply_box h4{
+  margin-bottom: 0;
+}
+
+
+.ticket_reply{
+  margin-top: 20px;
+  background: #ffffff;
+  width:100%;
+  padding: 10px;
+  border: 1px solid #b3b3b3;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+}
+.reply_avatar{
+  float:left;
+  width:15%;
+  text-align: center;
+  border-right: 2px dashed #f1f1f1;
+}
+.reply_avatar img{
+  width:60px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+.reply_content{
+  width:80%;
+  float:left;
+  padding: 10px;
+}
+
+.ticket_reply .reply_username{
+  display: block;
+  padding-left: 10px;
+  font-weight: bold;
+  font-size: 10pt;
+}
+.ticket_reply .reply_time{
+  display: block;
+  font-size:8pt;
+  font-style: italic;
+
+}

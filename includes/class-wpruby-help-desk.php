@@ -204,6 +204,9 @@ class Wpruby_Help_Desk {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_public, 'process_ticket_submission' );
+		$this->loader->add_action( 'init', $plugin_public, 'process_ticket_reply' );
+		//info: Replace the default content of the Ticket Post Type.
+		$this->loader->add_filter( 'the_content', $plugin_public, 'display_single_ticket' );
 
 	}
 
