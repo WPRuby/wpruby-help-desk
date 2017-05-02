@@ -349,9 +349,9 @@ class Wpruby_Help_Desk_Admin {
 		 * @since    1.0.0
 		 */
 		public function ticket_message_meta_box_callback($ticket){
-			if(isset($ticket->post_content)){
-				echo '<p>' .  $ticket->post_content .  '</p>';
-			}
+			$ticket_object = new WPRuby_Ticket($ticket->ID);
+			$attachments = $ticket_object->get_attachments();
+			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-message-metabox.php';
 		}
 		/**
 		 * This method is used to display the reply_to_ticket meta box content

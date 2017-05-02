@@ -209,7 +209,12 @@ class WPRuby_Ticket {
                     'post_status'   =>  'publish',
 
        );
-       return wp_insert_post($postattr);
+       $ticket_id = wp_insert_post($postattr);
+       if(isset($ticket['attachment'])){
+         self::add_attachment($ticket_id, $ticket['attachment']);
+       }
+
+       return $ticket_id;
      }
 
 
@@ -240,5 +245,49 @@ class WPRuby_Ticket {
 
        endforeach;
        return $tickets;
+     }
+
+     /**
+     * Handle Ticket Attachments
+     *
+     * @since    1.0.0
+     */
+     public static function add_attachment( $ticket_id, $filename ){
+
+       	// Check the type of file. We'll use this as the 'post_mime_type'.
+       	$filetype = wp_check_filetype( basename( $filename ), null );
+       	// Get the path to the upload directory.
+       	$wp_upload_dir = wp_upload_dir();
+
+       	// Prepare an array of post data for the attachment.
+       	$attachment = array(
+       		'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ),
+       		'post_mime_type' => $filetype['type'],
+       		'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+       		'post_content'   => '',
+       		'post_status'    => 'inherit'
+       	);
+
+       	// Insert the attachment.
+       	$attach_id = wp_insert_attachment( $attachment, $filename, $ticket_id );
+
+        return $attach_id;
+
+     }
+
+     /**
+     * Get ticket attachments
+     *
+     * @since    1.0.0
+     */
+     public function get_attachments(){
+         $args = array(
+   				'post_type' => 'attachment',
+   				'numberposts' => null,
+   				'post_status' => null,
+   				'post_parent' => $this->ticket_id,
+   			);
+   			$attachments = get_posts($args);
+        return $attachments;
      }
 }

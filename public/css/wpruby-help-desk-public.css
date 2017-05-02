@@ -59,7 +59,8 @@
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
 }
 #reply_box h4{
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
 }
 
 
@@ -102,4 +103,7 @@
   font-size:8pt;
   font-style: italic;
 
+}
+#submit_ticket label{
+  color:#6b6b6b;
 }

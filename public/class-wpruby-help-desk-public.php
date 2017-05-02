@@ -113,7 +113,7 @@ class Wpruby_Help_Desk_Public {
 		return ob_get_clean();
 	}
 
-	public function display_single_ticket( $contnet ){
+	public function display_single_ticket( $content ){
 		global $post;
 		//info: if it is not a ticket, do not do any thing
 		if($post->post_type != WPRUBY_TICKET) return $content;
@@ -139,6 +139,19 @@ class Wpruby_Help_Desk_Public {
 				$ticket['subject'] = sanitize_text_field(	$_POST['ticket_subject']	);
 				$ticket['product'] = intval(	$_POST['ticket_product']	);
 				$ticket['content'] = sanitize_text_field(	$_POST['ticket_reply']	);
+
+				//info: if there is an attachment
+				if(isset($_FILES['ticket_attachment'])){
+					if ( ! function_exists( 'wp_handle_upload' ) ) {
+							require_once( ABSPATH . 'wp-admin/includes/file.php' );
+					}
+					$uploadedfile = $_FILES['ticket_attachment'];
+					$upload_overrides = array( 'test_form' => false );
+					$ticket_uploaded_file = wp_handle_upload( $uploadedfile, $upload_overrides );
+					$ticket['attachment'] = $ticket_uploaded_file['file'];
+				}
+
+
 				WPRuby_Ticket::add($ticket);
 				wp_redirect($this->get_page('submit_ticket'));
 				exit;
