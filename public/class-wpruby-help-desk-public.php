@@ -120,6 +120,7 @@ class Wpruby_Help_Desk_Public {
 		ob_start();
 		$ticket = new WPRuby_Ticket(	$post->ID );
 		$user = new WPRuby_User($post->post_author);
+		$attachments = $ticket->get_attachments();
 		$replies = $ticket->get_replies();
 		$replies_count = count($replies);
 		$editor_settings = array( 'media_buttons' => false, 'textarea_rows' => 7 );
