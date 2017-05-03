@@ -161,14 +161,9 @@ class Wpruby_Help_Desk_Public {
 	public function process_ticket_reply(  ) {
 			if(isset($_POST['action']) && $_POST['action'] == 'submit_reply'){
 				$ticket_id = intval($_POST['ticket_id']);
-				$ticket_reply_args = array(
-					'post_title'		=>	'Reply to ticket #' . $ticket_id,
-					'post_content'	=>	$_POST['ticket_reply'],
-					'post_status'		=>	'publish',
-					'post_type'			=>	WPRUBY_TICKET_REPLY,
-					'post_parent'		=>	intval($ticket_id),
-				);
-				wp_insert_post( $ticket_reply_args );
+
+				$reply_id = WPRuby_Ticket::add_reply($ticket_id);
+
 				wp_redirect(get_permalink($ticket_id));
 				exit;
 			}

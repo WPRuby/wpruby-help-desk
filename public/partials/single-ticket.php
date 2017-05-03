@@ -29,12 +29,16 @@
 
   <div id="reply_box">
 
-    <form class="" action="" method="post">
+    <form class="" action="" method="post" enctype="multipart/form-data">
       <h4><?php _e('Write a reply', 'wpruby-help-desk'); ?></h4>
       <?php wp_editor('', 'ticket_reply', $editor_settings); ?>
       <p>
         <input type="hidden" name="ticket_id" value="<?php echo $post->ID; ?>">
         <input type="hidden" name="action" value="submit_reply">
+        <p>
+          <label for="reply_attachment"><?php _e('Attachments', 'wpruby-help-desk'); ?></label><br>
+              <input type="file" id="reply_attachment" name="reply_attachment" value="">
+        </p>
         <input type="submit" name="submit_reply" value="<?php _e('Submit a reply', 'wpruby-help-desk'); ?>">
       </p>
     </form>

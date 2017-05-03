@@ -122,3 +122,17 @@
 #ticket_message ol li{
   font-size: 11pt;
 }
+
+.ticket_reply hr{
+ width: 50%;
+ margin-top: 50px;
+ color: #000000;
+ border-top: 1px dashed #a9a8a8;
+ border-bottom: 1px dashed #a9a8a8;
+}
+.reply_content ol li{
+  font-size: 11pt;
+}
+.reply_content h3{
+  font-size: 12pt;
+}

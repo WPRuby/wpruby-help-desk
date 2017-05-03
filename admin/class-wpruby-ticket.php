@@ -66,6 +66,7 @@ class WPRuby_Ticket {
     foreach ($replies as $key => $reply):
       $user = new WPRuby_User($reply->post_author);
       $replies[$key]->user = $user;
+			$replies[$key]->attachments = $this->get_attachments($reply->ID);
     endforeach;
 
     return $replies;
@@ -217,7 +218,32 @@ class WPRuby_Ticket {
        return $ticket_id;
      }
 
+     public static function add_reply( $ticket_id = '' ){
+       //info: if there is an attachment
+       if(isset($_FILES['reply_attachment'])){
+         if ( ! function_exists( 'wp_handle_upload' ) ) {
+             require_once( ABSPATH . 'wp-admin/includes/file.php' );
+         }
+         $uploadedfile = $_FILES['reply_attachment'];
+         $upload_overrides = array( 'test_form' => false );
+         $reply_uploaded_file = wp_handle_upload( $uploadedfile, $upload_overrides );
+         $reply_file = $reply_uploaded_file['file'];
+       }
+       $ticket_reply_args = array(
+         'post_title'		=>	'Reply to ticket #' . $ticket_id,
+         'post_content'	=>	$_POST['ticket_reply'],
+         'post_status'		=>	'publish',
+         'post_type'			=>	WPRUBY_TICKET_REPLY,
+         'post_parent'		=>	intval($ticket_id),
+       );
+       $reply_id = wp_insert_post( $ticket_reply_args );
 
+       if(isset($reply_file) && $reply_id){
+         self::add_attachment($reply_id, $reply_file);
+       }
+
+       return $reply_id;
+     }
      /**
      * Get the tickets of the current user.
      *
@@ -252,7 +278,7 @@ class WPRuby_Ticket {
      *
      * @since    1.0.0
      */
-     public static function add_attachment( $ticket_id, $filename ){
+     public static function add_attachment( $object_id, $filename ){
 
        	// Check the type of file. We'll use this as the 'post_mime_type'.
        	$filetype = wp_check_filetype( basename( $filename ), null );
@@ -269,7 +295,7 @@ class WPRuby_Ticket {
        	);
 
        	// Insert the attachment.
-       	$attach_id = wp_insert_attachment( $attachment, $filename, $ticket_id );
+       	$attach_id = wp_insert_attachment( $attachment, $filename, $object_id );
 
         return $attach_id;
 
@@ -280,12 +306,13 @@ class WPRuby_Ticket {
      *
      * @since    1.0.0
      */
-     public function get_attachments(){
+     public function get_attachments($object_id = null){
+         $object_id = ($object_id == null)?$this->ticket_id:$object_id;
          $args = array(
    				'post_type' => 'attachment',
    				'numberposts' => null,
    				'post_status' => null,
-   				'post_parent' => $this->ticket_id,
+   				'post_parent' => $object_id,
    			);
    			$attachments = get_posts($args);
         return $attachments;
