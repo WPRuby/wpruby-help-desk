@@ -1,9 +1,9 @@
 <div id="my_tickets">
 
 
-<table>
+<table id="my_tickets_table">
   <thead>
-    <th><?php _e('Subject', 'wpruby-help-desk'); ?></th>
+    <th style="width:35%;"><?php _e('Subject', 'wpruby-help-desk'); ?></th>
     <th><?php _e('Status', 'wpruby-help-desk'); ?></th>
     <th><?php _e('Product', 'wpruby-help-desk'); ?></th>
     <th><?php _e('Date', 'wpruby-help-desk'); ?></th>

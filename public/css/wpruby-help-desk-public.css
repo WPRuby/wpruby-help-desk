@@ -16,7 +16,6 @@
    border-radius: 5px;
    font-size: 10pt;
  }
-
 #ticket_message{
   background: #ffffff;
   width:100%;
@@ -106,4 +105,115 @@
 }
 #submit_ticket label{
   color:#6b6b6b;
+}
+
+
+
+/*** Table Styles **/
+#my_tickets_table .ticket_status_label{
+  opacity: 0.7 !important;
+}
+#my_tickets_table {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  margin: auto;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+
+#my_tickets_table th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:18px;
+  font-weight: 100;
+  padding:10px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+#my_tickets_table th:first-child {
+  border-top-left-radius:3px;
+}
+
+#my_tickets_table th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+
+#my_tickets_table tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+#my_tickets_table tr td a{
+  color: #585d61 !important;
+}
+#my_tickets_table tr:first-child {
+  border-top:none;
+}
+
+#my_tickets_table tr:last-child {
+  border-bottom:none;
+}
+
+#my_tickets_table tr:nth-child(odd) td {
+  background:#EBEBEB;
+}
+
+
+#my_tickets_table tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+
+#my_tickets_table r:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+
+#my_tickets_table td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:14px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+#my_tickets_table td:last-child {
+  border-right: 0px;
+}
+
+#my_tickets_table th.text-left {
+  text-align: left;
+}
+
+#my_tickets_table th.text-center {
+  text-align: center;
+}
+
+#my_tickets_table th.text-right {
+  text-align: right;
+}
+
+#my_tickets_table td.text-left {
+  text-align: left;
+}
+
+#my_tickets_table td.text-center {
+  text-align: center;
+}
+
+#my_tickets_table td.text-right {
+  text-align: right;
 }
