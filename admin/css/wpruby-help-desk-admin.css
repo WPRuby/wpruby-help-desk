@@ -105,3 +105,20 @@
   background: #d24e4e !important;
   color: #ffffff !important;
 }
+
+#ticket_message hr{
+  width: 50%;
+  margin-top: 50px;
+  color: #000000;
+  border-top: 1px dashed #a9a8a8;
+  border-bottom: 1px dashed #a9a8a8;
+}
+
+#ticket_message #ticket_content p{
+  font-size: 10pt;
+  padding: 15px;
+}
+
+#ticket_message ol li{
+  font-size: 11pt;
+}
