@@ -521,5 +521,49 @@ class Wpruby_Help_Desk_Admin {
 	    echo $out;
 	}
 
-	
+	/**
+	 * add plugin links to the top admin menu
+	 * @param		object The admin menu object
+	 * @since  1.0.0
+	 */
+	public function add_quicklinks_to_admin_topbar(	$admin_bar	){
+		//In case the user has no capabilities
+		if(!current_user_can('manage_options')) return;
+		$admin_bar->add_menu( array(
+			'id'    => 'rhd_main_menu',
+			'title' => __('Help Desk', 'wpruby-help-desk'),
+			'href'  => '#',
+		));
+		$admin_bar->add_menu( array(
+			'id'    => 'rhd_all_tickets',
+			'title' => __('All Tickets','wpruby-help-desk'),
+			'href'  => admin_url('edit.php?post_type='. WPRUBY_TICKET),
+			'parent'=> 'rhd_main_menu'
+		));
+		$admin_bar->add_menu( array(
+			'id'    => 'rhd_create_ticket',
+			'title' => __('Create Ticket','wpruby-help-desk'),
+			'href'  => admin_url('post-new.php?post_type=' . WPRUBY_TICKET),
+			'parent'=> 'rhd_main_menu'
+		));
+		$admin_bar->add_menu( array(
+			'id'    => 'rhd_statuses',
+			'title' => __('Statuses','wpruby-help-desk'),
+			'href'  => admin_url('edit-tags.php?taxonomy='. WPRUBY_TICKET_STATUS .'&post_type=' . WPRUBY_TICKET),
+			'parent'=> 'rhd_main_menu'
+		));
+		$admin_bar->add_menu( array(
+			'id'    => 'rhd_products',
+			'title' => __('Products','wpruby-help-desk'),
+			'href'  => admin_url('edit-tags.php?taxonomy='. WPRUBY_TICKET_PRODUCT .'&post_type=' . WPRUBY_TICKET),
+			'parent'=> 'rhd_main_menu'
+		));
+		$admin_bar->add_menu( array(
+			'id'    => 'rhd_settings',
+			'title' => __('Settings','wpruby-help-desk'),
+			'href'  => admin_url('edit.php?post_type='. WPRUBY_TICKET .'&page=wpruby-help-desk-settings'),
+			'parent'=> 'rhd_main_menu'
+		));
+	}
+
 } //class end

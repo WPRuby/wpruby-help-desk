@@ -187,6 +187,9 @@ class Wpruby_Help_Desk {
 		$this->loader->add_filter( 'manage_edit-' .  WPRUBY_TICKET_STATUS . '_columns', $plugin_admin, 'set_custom_ticket_status_columns_heads', 1, 2 );
 		$this->loader->add_filter( 'manage_'. WPRUBY_TICKET_STATUS .'_custom_column', $plugin_admin, 'set_custom_ticket_status_columns_data', 10, 3 );
 
+		//info: add plugin links to the top admin menu
+		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'add_quicklinks_to_admin_topbar', 100);
+
 
 	}
 
