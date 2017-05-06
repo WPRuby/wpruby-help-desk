@@ -16,6 +16,16 @@
    border-radius: 5px;
    font-size: 10pt;
  }
+ #single_ticket .status_single_ticket{
+    float: right !important;
+    padding: 4px !important;
+    font-size: 9pt;
+    margin-top: 0px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    opacity: 0.6;
+}
 #ticket_message{
   background: #ffffff;
   width:100%;

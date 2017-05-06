@@ -119,6 +119,7 @@ class Wpruby_Help_Desk_Public {
 		if($post->post_type != WPRUBY_TICKET) return $content;
 		ob_start();
 		$ticket = new WPRuby_Ticket(	$post->ID );
+		$status = $ticket->get_status();
 		$user = new WPRuby_User($post->post_author);
 		$attachments = $ticket->get_attachments();
 		$replies = $ticket->get_replies();

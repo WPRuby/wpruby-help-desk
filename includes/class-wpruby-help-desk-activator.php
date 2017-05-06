@@ -37,6 +37,7 @@ class Wpruby_Help_Desk_Activator {
 	 * @since    1.0.0
 	 */
 	public function activate() {
+		$this->set_seeded('no');
 
 			if($this->is_seeded !== 'yes'){
 				$this->seed_pages();
@@ -96,24 +97,26 @@ class Wpruby_Help_Desk_Activator {
 					array(
 						'term'	=>	'Closed',
 						'color'	=>	'#ff0000',
+						'slug'	=>	'closed',
 					),
 					array(
 						'term'	=>	'In Progress',
 						'color'	=>	'#679469',
+						'slug'	=>	'in-progress',
 					),
 					array(
 						'term'	=>	'New',
 						'color'	=>	'#b491ce',
+						'slug'	=>	'new',
 					),
 				);
 
 				foreach($statuses as $key => $status){
 					if(! term_exists($status['term'],	WPRUBY_TICKET_STATUS)){
-							$term = wp_insert_term($status['term'], WPRUBY_TICKET_STATUS);
+							$term = wp_insert_term($status['term'], WPRUBY_TICKET_STATUS, array('slug' => $status['slug']));
 							if(isset($term['term_id'])){
 								update_term_meta ($term['term_id'], 'ticket_status_color', $status['color']);
-								update_option( 'wpruby_' . $term['slug'], $term['term_id']);
-
+								update_option( 'wpruby_ticket_status_' . $status['slug'], $term['term_id']);
 							}
 					}
 				}

@@ -196,15 +196,15 @@ class WPRuby_Ticket {
       * @return      number    $ticket_id      The ID of the new ticket.
       */
      public static function add(  $ticket  ){
-       $inprogress = get_term_by( 'slug', 'in-progress', WPRUBY_TICKET_STATUS);
-       $inprogress = ($inprogress === FALSE)?-1:$inprogress->term_id;
+       $new_status = get_option('wpruby_ticket_status_new');
+       $new_status = ($new_status === FALSE)?-1:$new_status;
 
        $postattr = array(
                     'post_title'    =>  $ticket['subject'],
                     'post_content'  =>  $ticket['content'],
                     'post_type'     =>  WPRUBY_TICKET,
                     'tax_input'     =>  array(
-                                              WPRUBY_TICKET_STATUS => $inprogress,
+                                              WPRUBY_TICKET_STATUS => intval($new_status),
                                               WPRUBY_TICKET_PRODUCT => $ticket['product'],
                     ),
                     'post_status'   =>  'publish',

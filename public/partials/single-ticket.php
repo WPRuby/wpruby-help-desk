@@ -4,6 +4,7 @@
       <span class="ticket_number"><?php _e('Ticket', 'wpruby-help-desk'); ?> #<?php echo $post->ID; ?></span>
       <span class="ticket_date"><?php _e('Created before', 'wpruby-help-desk'); ?> <?php echo human_time_diff(strtotime($post->post_date), time()); ?> <?php _e('on','wpruby-help-desk'); ?> <?php echo date('M d, Y', strtotime($post->post_date)); ?> </span>
       <span class="ticket_replies_count"><strong class="dashicons dashicons-admin-comments"></strong><?php echo $replies_count; ?></span>
+      <span class="ticket_status_label status_single_ticket" style="background:<?php echo $status['color']; ?>;"><?php echo $status['name']; ?></span>
     </div>
     <div id="ticket_content">
       <p><?php echo $post->post_content; ?></p>
