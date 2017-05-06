@@ -26,7 +26,9 @@ class Wpruby_Help_Desk_Activator {
 
 
 
-	public function __construct(){}
+	public function __construct(){
+		$this->is_seeded = get_option('wpruby_help_desk_seeded');
+	}
 	/**
 	 * Short Description. (use period)
 	 *
@@ -35,16 +37,16 @@ class Wpruby_Help_Desk_Activator {
 	 * @since    1.0.0
 	 */
 	public function activate() {
-			$this->set_seeded('no');
-			//@TODO Seed Data on Activation
-			$this->is_seeded = get_option('wpruby_help_desk_seeded');
 
 			if($this->is_seeded !== 'yes'){
 				$this->seed_pages();
 				$this->seed_statuses();
+				$this->seed_products();
+
 				//set the seeded flag.
 				$this->set_seeded('yes');
 		 	}
+
 
 	}
 
@@ -104,13 +106,30 @@ class Wpruby_Help_Desk_Activator {
 						'color'	=>	'#b491ce',
 					),
 				);
-				
+
 				foreach($statuses as $key => $status){
 					if(! term_exists($status['term'],	WPRUBY_TICKET_STATUS)){
 							$term = wp_insert_term($status['term'], WPRUBY_TICKET_STATUS);
 							if(isset($term['term_id'])){
 								update_term_meta ($term['term_id'], 'ticket_status_color', $status['color']);
+								update_option( 'wpruby_' . $term['slug'], $term['term_id']);
+
 							}
+					}
+				}
+	}
+
+
+	private function seed_products(){
+				// insert default Ticket Statuses
+				$products = array(
+						array(
+							'term'	=>	'Sample Product',
+						)
+				);
+				foreach($products as $key => $product){
+					if(! term_exists($product['term'],	WPRUBY_TICKET_PRODUCT)){
+							$term = wp_insert_term($product['term'], WPRUBY_TICKET_PRODUCT);
 					}
 				}
 	}

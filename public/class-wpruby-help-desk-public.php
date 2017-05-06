@@ -153,8 +153,8 @@ class Wpruby_Help_Desk_Public {
 				}
 
 
-				WPRuby_Ticket::add($ticket);
-				wp_redirect($this->get_page('submit_ticket'));
+				$ticket_id =  WPRuby_Ticket::add($ticket);
+				wp_redirect(get_permalink($ticket_id));
 				exit;
 			}
 	}
@@ -171,14 +171,7 @@ class Wpruby_Help_Desk_Public {
 	}
 	//@TODO
 	public function get_page($page){
-		switch ($page) {
-			case 'submit_ticket':
-				return 'http://localhost:8888/wp/adding-tickets/';
-				break;
-
-			default:
-				return 'http://localhost:8888/wp/adding-tickets/';
-				break;
-		}
+		$page_id = get_option( "wpruby_[{$page}]");
+		return get_permalink($page_id);
 	}
 }
