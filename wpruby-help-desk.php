@@ -36,13 +36,25 @@ define('WPRUBY_TICKET_REPLY', 'support_ticket_reply');
 define('WPRUBY_TICKET_STATUS', 'tickets_status');
 define('WPRUBY_TICKET_PRODUCT', 'tickets_products');
 
+
+/**
+ * The core plugin class that is used to define internationalization,
+ * admin-specific hooks, and public-facing site hooks.
+ */
+require plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk.php';
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wpruby-help-desk-activator.php
  */
 function activate_wpruby_help_desk() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk-activator.php';
-	Wpruby_Help_Desk_Activator::activate();
+	$plugin_name = 'wpruby-help-desk';
+	$version = '1.0.0';
+	$plugin_admin = new Wpruby_Help_Desk_Admin( $plugin_name, $version );
+	$plugin_admin->register_taxonomies();
+	$activator = new Wpruby_Help_Desk_Activator();
+	$activator->activate();
 }
 
 /**
@@ -57,11 +69,7 @@ function deactivate_wpruby_help_desk() {
 register_activation_hook( __FILE__, 'activate_wpruby_help_desk' );
 register_deactivation_hook( __FILE__, 'deactivate_wpruby_help_desk' );
 
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk.php';
+
 
 /**
  * Begins execution of the plugin.
