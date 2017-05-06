@@ -184,6 +184,10 @@ class Wpruby_Help_Desk {
 		$this->loader->add_filter( 'manage_'. WPRUBY_TICKET .'_posts_columns', $plugin_admin, 'set_custom_edit_support_ticket_columns', 1, 2 );
 		$this->loader->add_action( 'manage_'. WPRUBY_TICKET .'_posts_custom_column', $plugin_admin, 'custom_support_ticket_column', 1, 2 );
 
+		$this->loader->add_filter( 'manage_edit-' .  WPRUBY_TICKET_STATUS . '_columns', $plugin_admin, 'set_custom_ticket_status_columns_heads', 1, 2 );
+		$this->loader->add_filter( 'manage_'. WPRUBY_TICKET_STATUS .'_custom_column', $plugin_admin, 'set_custom_ticket_status_columns_data', 10, 3 );
+
+
 	}
 
 	/**

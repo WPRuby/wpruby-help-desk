@@ -485,4 +485,41 @@ class Wpruby_Help_Desk_Admin {
 		            break;
 		    }
 		}
-}
+
+
+	/**
+	 * Add the ticket status HTML to the custom column in the taxonomy page
+	 * @param		array The original columns
+	 * @return array The altered columns
+	 * @since  1.0.0
+	 */
+	public function set_custom_ticket_status_columns_heads(	$columns	) {
+			$columns['posts'] = __('Tickets', 'wpruby-help-desk');
+			unset($columns['description']);
+			$columns['color'] = __('Color', 'wpruby-help-desk');
+	    return $columns;
+	}
+
+
+	/**
+	 * Add the ticket status HTML to the custom column
+	 * @param		string Original Content
+	 * @param		string The column name
+	 * @param		number The term (Status) ID
+	 * @since  1.0.0
+	 */
+	public function set_custom_ticket_status_columns_data($out, $column_name, $term_id) {
+			$color = get_term_meta($term_id, 'ticket_status_color', true);
+	    switch ($column_name) {
+	        case 'color':
+							$out .= '<div class="ticket_status_label" style="background:'.$color.'; width:50px; height:20px;"></div>';
+	            break;
+
+	        default:
+	            break;
+	    }
+	    echo $out;
+	}
+
+	
+} //class end
