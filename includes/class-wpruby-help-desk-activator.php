@@ -37,9 +37,10 @@ class Wpruby_Help_Desk_Activator {
 	 * @since    1.0.0
 	 */
 	public function activate() {
-		$this->set_seeded('no');
+			$this->set_seeded('no');
 
 			if($this->is_seeded !== 'yes'){
+				$this->add_roles();
 				$this->seed_pages();
 				$this->seed_statuses();
 				$this->seed_products();
@@ -50,13 +51,13 @@ class Wpruby_Help_Desk_Activator {
 
 
 	}
-
+	//@TODO
 	private function set_seeded( $value ){
 		update_option( 'wpruby_help_desk_seeded', $value);
 		$this->is_seeded = $value;
 	}
 
-
+	//@TODO
 	private function seed_pages(){
 				// insert Default Pages
 				$main_page = array(
@@ -90,7 +91,7 @@ class Wpruby_Help_Desk_Activator {
 				}
 	}
 
-
+	//@TODO
 	private function seed_statuses(){
 				// insert default Ticket Statuses
 				$statuses = array(
@@ -122,18 +123,26 @@ class Wpruby_Help_Desk_Activator {
 				}
 	}
 
-
+	//TODO
 	private function seed_products(){
-				// insert default Ticket Statuses
-				$products = array(
-						array(
-							'term'	=>	'Sample Product',
-						)
-				);
-				foreach($products as $key => $product){
-					if(! term_exists($product['term'],	WPRUBY_TICKET_PRODUCT)){
-							$term = wp_insert_term($product['term'], WPRUBY_TICKET_PRODUCT);
-					}
+			// insert default Ticket Statuses
+			$products = array(
+					array(
+						'term'	=>	'Sample Product',
+					)
+			);
+			foreach($products as $key => $product){
+				if(! term_exists($product['term'],	WPRUBY_TICKET_PRODUCT)){
+						$term = wp_insert_term($product['term'], WPRUBY_TICKET_PRODUCT);
 				}
+			}
+	}
+
+	//@TODO
+	public function add_roles(){
+		$author     = get_role( 'author' );
+		$subscriber = get_role( 'subscriber' );
+		add_role( 'ruby_desk_agent', __('Help Desk Agent', 'wpruby-help-desk'), $author->capabilities );
+		add_role( 'ruby_desk_customer', 'Help Desk Customer', $subscriber->capabilities );
 	}
 }

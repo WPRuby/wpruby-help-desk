@@ -33,6 +33,15 @@
     <?php endforeach; ?>
   </select>
 </p>
+<p>
+  <label for="ticket_agent"><?php _e('Assign to', 'wpruby-help-desk'); ?>:</label>
+  <select id="ticket_agent" class="wpruby_select" name="ticket_agent">
+    <option value="-1"><?php _e('No Agent assigned', 'wpruby-help-desk'); ?></option>
+    <?php foreach ($agents as $key => $agent): ?>
+      <option <?php selected($ticket_product, $agent->ID); ?> value="<?php echo $agent->ID; ?>"><?php echo $agent->user_login; ?></option>
+    <?php endforeach; ?>
+  </select>
+</p>
  <div id="publishing-action">
  <span class="spinner"></span>
  		<input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php echo $publish_button_text; ?>"></div>

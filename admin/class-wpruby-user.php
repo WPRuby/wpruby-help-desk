@@ -80,7 +80,13 @@ class WPRuby_User {
     return $this->registerd_at;
   }
 
-
+  public static function get_agents(){
+    $args = array(
+      	'role'         => 'ruby_desk_agent',
+      	'fields'       => 'all'
+    );
+    return get_users( $args );
+  }
 
 
 

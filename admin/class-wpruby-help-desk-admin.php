@@ -359,6 +359,7 @@ class Wpruby_Help_Desk_Admin {
 			// get terms
 			$statuses = get_terms( WPRUBY_TICKET_STATUS, array(  'hide_empty' => false ) );
 			$products = get_terms( WPRUBY_TICKET_PRODUCT, array(  'hide_empty' => false ) );
+			$agents = WPRuby_User::get_agents();
 			// get ticket's terms @TODO change ids to slugs
 			$ticket_product = wp_get_object_terms($post->ID, WPRUBY_TICKET_PRODUCT, array("fields" => "ids"));
 
