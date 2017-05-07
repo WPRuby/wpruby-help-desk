@@ -299,7 +299,7 @@ class Wpruby_Help_Desk_Admin {
 		 * @since    1.0.0
 		 */
 		public function adding_admin_menus(){
-			add_submenu_page('edit.php?post_type=support_ticket',	__( 'Settings', 'wpruby-help-desk' ),	__( 'Settings', 'wpruby-help-desk' ),	'manage_options',	'wpruby-help-desk-settings',	array($this, 'display_settings'));
+			//add_submenu_page('edit.php?post_type=support_ticket',	__( 'Settings', 'wpruby-help-desk' ),	__( 'Settings', 'wpruby-help-desk' ),	'manage_options',	'wpruby-help-desk-settings',	array($this, 'display_settings'));
 		}
 		/**
 		 * The plugin use this method to display the settings page, called in adding_admin_menus()

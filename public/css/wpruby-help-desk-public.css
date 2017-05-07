@@ -116,6 +116,10 @@
 #submit_ticket label{
   color:#6b6b6b;
 }
+#submit_ticket .file_extensions{
+  font-size: 10pt;
+  color: #7b7b7b;
+}
 #ticket_content hr{
   width: 50%;
   margin-top: 30px;

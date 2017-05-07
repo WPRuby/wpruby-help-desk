@@ -39,7 +39,14 @@ class Wpruby_Help_Desk_Public {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
-
+	/**
+	 * The plugin settings Object.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      object    $version    The plugin settings Object.
+	 */
+	protected $settings;
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -47,10 +54,11 @@ class Wpruby_Help_Desk_Public {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $settings ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->settings = $settings;
 
 	}
 
@@ -102,6 +110,7 @@ class Wpruby_Help_Desk_Public {
 	public function shortcode_submit_ticket(){
 		ob_start();
 		$products = $this->get_products();
+		$attachments_settings = $this->settings->get_option('wpruby_help_desk_attachments');
 		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-submit-ticket.php';
 		return ob_get_clean();
 	}

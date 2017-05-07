@@ -136,3 +136,11 @@
 .reply_content h3{
   font-size: 12pt;
 }
+
+
+#wpruby_help_desk_settings_page .group{
+  background: #ffffff;
+  padding: 10px;
+  border: 1px solid #ccc;
+
+}

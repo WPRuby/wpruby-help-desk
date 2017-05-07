@@ -56,6 +56,14 @@ class Wpruby_Help_Desk {
 	 * @var      string    $version    The current version of the plugin.
 	 */
 	protected $version;
+	/**
+	 * The plugin settings Object.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $version    The current version of the plugin.
+	 */
+	protected $settings;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -72,6 +80,7 @@ class Wpruby_Help_Desk {
 		$this->version = '1.0.0';
 
 		$this->load_dependencies();
+		$this->settings = new WPRuby_Help_Desk_Settings();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
@@ -122,6 +131,12 @@ class Wpruby_Help_Desk {
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-ticket.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-user.php';
+
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-settings-api.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-settings.php';
+
+
 
 		$this->loader = new Wpruby_Help_Desk_Loader();
 
@@ -202,7 +217,7 @@ class Wpruby_Help_Desk {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Wpruby_Help_Desk_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Wpruby_Help_Desk_Public( $this->get_plugin_name(), $this->get_version(), $this->settings );
 
 		//adding shortcodes
 		add_shortcode('submit_ticket', array($plugin_public, 'shortcode_submit_ticket'));

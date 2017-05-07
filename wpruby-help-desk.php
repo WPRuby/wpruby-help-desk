@@ -81,9 +81,7 @@ register_deactivation_hook( __FILE__, 'deactivate_wpruby_help_desk' );
  * @since    1.0.0
  */
 function run_wpruby_help_desk() {
-
 	$plugin = new Wpruby_Help_Desk();
 	$plugin->run();
-
 }
 run_wpruby_help_desk();
