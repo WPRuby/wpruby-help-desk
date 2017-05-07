@@ -173,7 +173,7 @@ class WPRuby_Settings_API {
      */
     function callback_text( $args ) {
 
-        $value       = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $value       = esc_attr( $this->get_option( $args['section'], $args['id'] , $args['std'] ) );
         $size        = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $type        = isset( $args['type'] ) ? $args['type'] : 'text';
         $placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . $args['placeholder'] . '"';
@@ -199,7 +199,7 @@ class WPRuby_Settings_API {
      * @param array   $args settings field args
      */
     function callback_number( $args ) {
-        $value       = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $value       = esc_attr( $this->get_option( $args['section'], $args['id'], $args['std'] ) );
         $size        = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $type        = isset( $args['type'] ) ? $args['type'] : 'number';
         $placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="' . $args['placeholder'] . '"';
@@ -220,7 +220,7 @@ class WPRuby_Settings_API {
      */
     function callback_checkbox( $args ) {
 
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $value = esc_attr( $this->get_option( $args['section'], $args['id'], $args['std'] ) );
 
         $html  = '<fieldset>';
         $html  .= sprintf( '<label for="wpuf-%1$s[%2$s]">', $args['section'], $args['id'] );
@@ -239,7 +239,7 @@ class WPRuby_Settings_API {
      */
     function callback_multicheck( $args ) {
 
-        $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
+        $value = $this->get_option( $args['section'], $args['id'], $args['std'] );
         $html  = '<fieldset>';
         $html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="" />', $args['section'], $args['id'] );
         foreach ( $args['options'] as $key => $label ) {
@@ -262,7 +262,7 @@ class WPRuby_Settings_API {
      */
     function callback_radio( $args ) {
 
-        $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
+        $value = $this->get_option( $args['section'], $args['id'],  $args['std'] );
         $html  = '<fieldset>';
 
         foreach ( $args['options'] as $key => $label ) {
@@ -284,7 +284,7 @@ class WPRuby_Settings_API {
      */
     function callback_select( $args ) {
 
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $value = esc_attr( $this->get_option( $args['section'], $args['id'],  $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $html  = sprintf( '<select class="%1$s" name="%2$s[%3$s]" id="%2$s[%3$s]">', $size, $args['section'], $args['id'] );
 
@@ -305,7 +305,7 @@ class WPRuby_Settings_API {
      */
     function callback_textarea( $args ) {
 
-        $value       = esc_textarea( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $value       = esc_textarea( $this->get_option( $args['section'], $args['id'],  $args['std'] ) );
         $size        = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $placeholder = empty( $args['placeholder'] ) ? '' : ' placeholder="'.$args['placeholder'].'"';
 
@@ -332,7 +332,7 @@ class WPRuby_Settings_API {
      */
     function callback_wysiwyg( $args ) {
 
-        $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
+        $value = $this->get_option( $args['section'], $args['id'],  $args['std'] );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
 
         echo '<div style="max-width: ' . $size . ';">';
@@ -361,7 +361,7 @@ class WPRuby_Settings_API {
      */
     function callback_file( $args ) {
 
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $value = esc_attr( $this->get_option( $args['section'], $args['id'],  $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $id    = $args['section']  . '[' . $args['id'] . ']';
         $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File' );
@@ -380,7 +380,7 @@ class WPRuby_Settings_API {
      */
     function callback_password( $args ) {
 
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $value = esc_attr( $this->get_option( $args['section'],$args['id'],  $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 
         $html  = sprintf( '<input type="password" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
@@ -396,7 +396,7 @@ class WPRuby_Settings_API {
      */
     function callback_color( $args ) {
 
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $value = esc_attr( $this->get_option( $args['section'], $args['id'],  $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 
         $html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', $size, $args['section'], $args['id'], $value, $args['std'] );

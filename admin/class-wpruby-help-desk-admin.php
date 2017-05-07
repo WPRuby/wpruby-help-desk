@@ -295,20 +295,6 @@ class Wpruby_Help_Desk_Admin {
 		}
 
 		/**
-		 * The plugin use this method to add admin pages to the dashboard menu
-		 * @since    1.0.0
-		 */
-		public function adding_admin_menus(){
-			//add_submenu_page('edit.php?post_type=support_ticket',	__( 'Settings', 'wpruby-help-desk' ),	__( 'Settings', 'wpruby-help-desk' ),	'manage_options',	'wpruby-help-desk-settings',	array($this, 'display_settings'));
-		}
-		/**
-		 * The plugin use this method to display the settings page, called in adding_admin_menus()
-		 * @since    1.0.0
-		 */
-		public function display_settings(){
-				require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-settings.php';
-		}
-		/**
 		 * This method is used to add/remove different meta boxes
 		 * @since    1.0.0
 		 */

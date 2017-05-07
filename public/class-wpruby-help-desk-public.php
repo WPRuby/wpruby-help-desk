@@ -54,6 +54,8 @@ class Wpruby_Help_Desk_Public {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
+	 protected $error = '';
+
 	public function __construct( $plugin_name, $version, $settings ) {
 
 		$this->plugin_name = $plugin_name;
@@ -134,6 +136,7 @@ class Wpruby_Help_Desk_Public {
 		$replies = $ticket->get_replies();
 		$replies_count = count($replies);
 		$editor_settings = array( 'media_buttons' => false, 'textarea_rows' => 7 );
+		$attachments_settings = get_option('wpruby_help_desk_attachments');
 		require_once plugin_dir_path( __FILE__ ) . 'partials/single-ticket.php';
 		return ob_get_clean();
 	}
@@ -144,7 +147,7 @@ class Wpruby_Help_Desk_Public {
 		return $products;
 	}
 
-	public function process_ticket_submission(  ) {
+	public function process_ticket_submission() {
 			if(isset($_POST['action']) && $_POST['action'] == 'submit_ticket'){
 				$ticket = array();
 				$ticket['subject'] = sanitize_text_field(	$_POST['ticket_subject']	);
@@ -169,19 +172,50 @@ class Wpruby_Help_Desk_Public {
 			}
 	}
 
-	public function process_ticket_reply(  ) {
+	public function process_ticket_reply() {
 			if(isset($_POST['action']) && $_POST['action'] == 'submit_reply'){
 				$ticket_id = intval($_POST['ticket_id']);
 
 				$reply_id = WPRuby_Ticket::add_reply($ticket_id);
 
-				wp_redirect(get_permalink($ticket_id));
-				exit;
+				if(!isset($reply_id['error'])){
+					wp_redirect(get_permalink($ticket_id));
+					exit;
+				}else{
+					$this->error = $reply_id['error'];
+				}
+
 			}
 	}
 	//@TODO
 	public function get_page($page){
 		$page_id = get_option( "wpruby_[{$page}]");
 		return get_permalink($page_id);
+	}
+
+	public function validate_attachment_file(	$file	){
+
+		//info: only applied when a ticket or a reply is submittied
+		if(! (isset($_POST['action']) && in_array($_POST['action'], array('submit_ticket', 'submit_reply'))) ) return $file;
+
+		$attachments_settings = get_option('wpruby_help_desk_attachments');
+
+		if($attachments_settings['enable_attachments'] === 'off')	return $file;
+
+
+		$filetypes      = explode( ',', $attachments_settings['allowed_extensions_attachments'] );
+		$ext            = strtolower( pathinfo( $file['name'], PATHINFO_EXTENSION ) );
+		$max_file_size       = $attachments_settings['max_size_attachments'];
+		$max_file_size_bytes = $max_file_size * 1024 * 1024;
+
+		if ( ! in_array( $ext, $filetypes ) ) {
+			$file['error'] = sprintf( __( 'This file type (%s) is not allowed', 'wpruby-help-desk' ), $ext );
+		}
+
+		if ( $file['size'] > $max_file_size_bytes ) {
+			$file['error'] = sprintf( __( 'The file is too big. The maximum allowed file size is %s', 'wpruby-help-desk' ), "$max_file_size Mb" );
+		}
+
+		return $file;
 	}
 }

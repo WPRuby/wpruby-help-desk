@@ -227,8 +227,13 @@ class WPRuby_Ticket {
          $uploadedfile = $_FILES['reply_attachment'];
          $upload_overrides = array( 'test_form' => false );
          $reply_uploaded_file = wp_handle_upload( $uploadedfile, $upload_overrides );
-         $reply_file = $reply_uploaded_file['file'];
+
        }
+       //info: if the file is not validated
+       if(isset($reply_uploaded_file['error'])){
+         return $reply_uploaded_file;
+       }
+
        $ticket_reply_args = array(
          'post_title'		=>	'Reply to ticket #' . $ticket_id,
          'post_content'	=>	$_POST['ticket_reply'],
@@ -238,8 +243,8 @@ class WPRuby_Ticket {
        );
        $reply_id = wp_insert_post( $ticket_reply_args );
 
-       if(isset($reply_file) && $reply_id){
-         self::add_attachment($reply_id, $reply_file);
+       if(isset($reply_uploaded_file['file']) && $reply_id){
+         self::add_attachment($reply_id, $reply_uploaded_file['file']);
        }
 
        return $reply_id;

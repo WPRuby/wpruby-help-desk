@@ -80,10 +80,10 @@ class Wpruby_Help_Desk {
 		$this->version = '1.0.0';
 
 		$this->load_dependencies();
-		$this->settings = new WPRuby_Help_Desk_Settings();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->settings = new WPRuby_Help_Desk_Settings();
 
 	}
 
@@ -173,9 +173,6 @@ class Wpruby_Help_Desk {
 		$this->loader->add_action( 'init', $plugin_admin, 'register_post_types' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_taxonomies' );
 
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'adding_admin_menus' );
-
-
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_tickets_metaboxes' );
 
 		// info: custom action publish_{$custom_post_type}
@@ -206,6 +203,8 @@ class Wpruby_Help_Desk {
 		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'add_quicklinks_to_admin_topbar', 100);
 
 
+
+
 	}
 
 	/**
@@ -229,6 +228,9 @@ class Wpruby_Help_Desk {
 		$this->loader->add_action( 'init', $plugin_public, 'process_ticket_reply' );
 		//info: Replace the default content of the Ticket Post Type.
 		$this->loader->add_filter( 'the_content', $plugin_public, 'display_single_ticket' );
+
+		$this->loader->add_filter( 'wp_handle_upload_prefilter', $plugin_public, 'validate_attachment_file' );
+
 
 	}
 

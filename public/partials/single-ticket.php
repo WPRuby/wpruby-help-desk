@@ -56,17 +56,25 @@
   </div>
 
   <div id="reply_box">
-
+    <?php if($this->error != ''): ?>
+      <div class="alert"><?php echo $this->error; ?></div>
+    <?php endif; ?>
     <form class="" action="" method="post" enctype="multipart/form-data">
       <h4><?php _e('Write a reply', 'wpruby-help-desk'); ?></h4>
       <?php wp_editor('', 'ticket_reply', $editor_settings); ?>
       <p>
         <input type="hidden" name="ticket_id" value="<?php echo $post->ID; ?>">
         <input type="hidden" name="action" value="submit_reply">
-        <p>
-          <label for="reply_attachment"><?php _e('Attachments', 'wpruby-help-desk'); ?></label><br>
-              <input type="file" id="reply_attachment" name="reply_attachment" value="">
-        </p>
+
+        <?php if($attachments_settings['enable_attachments'] === 'on'): ?>
+          <p>
+            <label for="ticket_attachment"><?php _e('Attachments', 'wpruby-help-desk'); ?></label><br>
+                <input type="file" id="reply_attachment" name="reply_attachment" value="">
+                <span class="file_extensions"><?php _e('Allowed Extensions', 'wpruby-help-desk'); ?>: <?php echo $attachments_settings['allowed_extensions_attachments']; ?></span>
+
+          </p>
+        <?php endif; ?>
+        
         <input type="submit" name="submit_reply" value="<?php _e('Submit a reply', 'wpruby-help-desk'); ?>">
       </p>
     </form>
