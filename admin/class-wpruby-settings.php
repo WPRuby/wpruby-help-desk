@@ -51,9 +51,16 @@ class WPRuby_Help_Desk_Settings {
      * @return array settings fields
      */
     public function get_settings_fields() {
+        $agents = WPRuby_User::get_agents();
         $settings_fields = array(
             'wpruby_help_desk_general' => array(
-
+              array(
+                  'name'    => 'default_agent_assignee',
+                  'label'   => __( 'Assign tickets by default to:', 'wpruby-help-desk' ),
+                  'desc'    => __( 'When a ticket is created, it will be assigned to the selected agent.', 'wpruby-help-desk' ),
+                  'type'    => 'select',
+                  'options' => $agents
+              ),
                 /*array(
                     'name'              => 'text_val',
                     'label'             => __( 'Text Input', 'wpruby-help-desk' ),
@@ -81,17 +88,7 @@ class WPRuby_Help_Desk_Settings {
                         'no'  => 'No'
                     )
                 ),
-                array(
-                    'name'    => 'selectbox',
-                    'label'   => __( 'A Dropdown', 'wpruby-help-desk' ),
-                    'desc'    => __( 'Dropdown description', 'wpruby-help-desk' ),
-                    'type'    => 'select',
-                    'default' => 'no',
-                    'options' => array(
-                        'yes' => 'Yes',
-                        'no'  => 'No'
-                    )
-                ),
+
                 array(
                     'name'    => 'password',
                     'label'   => __( 'Password', 'wpruby-help-desk' ),

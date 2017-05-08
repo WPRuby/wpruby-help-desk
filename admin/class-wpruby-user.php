@@ -83,9 +83,14 @@ class WPRuby_User {
   public static function get_agents(){
     $args = array(
       	'role'         => 'ruby_desk_agent',
-      	'fields'       => 'all'
+      	'fields'       => array('ID', 'user_login')
     );
-    return get_users( $args );
+    $agents = get_users( $args );
+    $final_agents = array();
+    foreach ($agents as $key => $agent) {
+      $final_agents[$agent->ID] = $agent->user_login;
+    }
+    return $final_agents;
   }
 
 

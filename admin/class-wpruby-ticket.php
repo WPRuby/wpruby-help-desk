@@ -214,6 +214,9 @@ class WPRuby_Ticket {
        if(isset($ticket['attachment'])){
          self::add_attachment($ticket_id, $ticket['attachment']);
        }
+       //info: add default ticket assignee
+       $general_options = get_option('wpruby_help_desk_general');
+       update_post_meta(intval($ticket_id), 'ticket_agent_id', intval($general_options['default_agent_assignee']) );
 
        return $ticket_id;
      }
