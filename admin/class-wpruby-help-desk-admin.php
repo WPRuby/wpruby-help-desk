@@ -263,12 +263,14 @@ class Wpruby_Help_Desk_Admin {
 						if(isset( $_POST['publish'] )){
 									$tickets_status = $_POST['ticket_status'];
 									$tickets_product = $_POST['ticket_product'];
+									$ticket_agent = $_POST['ticket_agent'];
 									if(-1 != $tickets_status){
 										wp_set_post_terms( $post_id, intval($tickets_status), WPRUBY_TICKET_STATUS );
 									}
 									if(-1 != $tickets_product){
 										wp_set_post_terms( $post_id, intval($tickets_product), WPRUBY_TICKET_PRODUCT );
 									}
+									update_post_meta( $post_id, 'ticket_agent_id', intval($ticket_agent) );
 						}elseif (isset( $_POST['reply'] ) || isset( $_POST['reply-close'] )	|| isset( $_POST['reply-reopen'] )) {
 								if(isset($_POST['ticket_reply']) && "" != $_POST['ticket_reply']){
 										$ticket_reply_args = array(
@@ -359,6 +361,8 @@ class Wpruby_Help_Desk_Admin {
 			// get terms
 			$statuses = get_terms( WPRUBY_TICKET_STATUS, array(  'hide_empty' => false ) );
 			$products = get_terms( WPRUBY_TICKET_PRODUCT, array(  'hide_empty' => false ) );
+			$ticket_agent = get_post_meta( $post->ID, 'ticket_agent_id', true );
+
 			$agents = WPRuby_User::get_agents();
 			// get ticket's terms @TODO change ids to slugs
 			$ticket_product = wp_get_object_terms($post->ID, WPRUBY_TICKET_PRODUCT, array("fields" => "ids"));

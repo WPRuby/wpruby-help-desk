@@ -38,7 +38,7 @@
   <select id="ticket_agent" class="wpruby_select" name="ticket_agent">
     <option value="-1"><?php _e('No Agent assigned', 'wpruby-help-desk'); ?></option>
     <?php foreach ($agents as $key => $agent): ?>
-      <option <?php selected($ticket_product, $agent->ID); ?> value="<?php echo $agent->ID; ?>"><?php echo $agent->user_login; ?></option>
+      <option <?php selected($ticket_agent, $agent->ID); ?> value="<?php echo $agent->ID; ?>"><?php echo $agent->user_login; ?></option>
     <?php endforeach; ?>
   </select>
 </p>
