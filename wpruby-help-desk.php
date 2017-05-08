@@ -35,6 +35,9 @@ define('WPRUBY_TICKET', 'support_ticket');
 define('WPRUBY_TICKET_REPLY', 'support_ticket_reply');
 define('WPRUBY_TICKET_STATUS', 'tickets_status');
 define('WPRUBY_TICKET_PRODUCT', 'tickets_products');
+//Help Desk roles
+define('WPRUBY_AGENT', 'ruby_desk_agent');
+define('WPRUBY_CUSTOMER', 'ruby_desk_customer');
 
 
 /**

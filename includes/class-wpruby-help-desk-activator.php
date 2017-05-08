@@ -140,9 +140,25 @@ class Wpruby_Help_Desk_Activator {
 
 	//@TODO
 	public function add_roles(){
+
+
+		//info: add the help desk custom roles
 		$author     = get_role( 'author' );
 		$subscriber = get_role( 'subscriber' );
-		add_role( 'ruby_desk_agent', __('Help Desk Agent', 'wpruby-help-desk'), $author->capabilities );
-		add_role( 'ruby_desk_customer', 'Help Desk Customer', $subscriber->capabilities );
+		add_role( WPRUBY_AGENT, __('Help Desk Agent', 'wpruby-help-desk'), $author->capabilities );
+		add_role( WPRUBY_CUSTOMER, __('Help Desk Customer', 'wpruby-help-desk'), $subscriber->capabilities );
+
+		//add the Agent role to all of the admin
+		$administrators = get_users(
+			array(
+				'role'		=>	'administrator',
+				'fields'  =>	array('ID', 'user_login')
+			)
+		);
+		foreach($administrators as $admin){
+			$admin_user = new WP_User($admin->ID);
+			$admin_user->add_role(WPRUBY_AGENT);
+		}
+
 	}
 }
