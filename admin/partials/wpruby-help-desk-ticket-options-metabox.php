@@ -37,8 +37,8 @@
   <label for="ticket_agent"><?php _e('Assign to', 'wpruby-help-desk'); ?>:</label>
   <select id="ticket_agent" class="wpruby_select" name="ticket_agent">
     <option value="-1"><?php _e('No Agent assigned', 'wpruby-help-desk'); ?></option>
-    <?php foreach ($agents as $key => $agent): ?>
-      <option <?php selected($ticket_agent, $agent->ID); ?> value="<?php echo $agent->ID; ?>"><?php echo $agent->user_login; ?></option>
+    <?php foreach ($agents as $agent_id => $agent): var_dump($agent); ?>
+      <option <?php selected($ticket_agent, $agent_id); ?> value="<?php echo $agent_id; ?>"><?php echo $agent; ?></option>
     <?php endforeach; ?>
   </select>
 </p>

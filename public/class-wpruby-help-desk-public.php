@@ -112,7 +112,7 @@ class Wpruby_Help_Desk_Public {
 	public function shortcode_submit_ticket(){
 		ob_start();
 		$products = $this->get_products();
-		$attachments_settings = $this->settings->get_option('wpruby_help_desk_attachments');
+		$attachments_settings = get_option('wpruby_help_desk_attachments');
 		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-submit-ticket.php';
 		return ob_get_clean();
 	}
@@ -155,7 +155,7 @@ class Wpruby_Help_Desk_Public {
 				$ticket['content'] = sanitize_text_field(	$_POST['ticket_reply']	);
 
 				//info: if there is an attachment
-				if(isset($_FILES['ticket_attachment'])){
+				if(isset($_FILES['ticket_attachment']) && $_FILES['ticket_attachment']['name'] != ''){
 					if ( ! function_exists( 'wp_handle_upload' ) ) {
 							require_once( ABSPATH . 'wp-admin/includes/file.php' );
 					}
