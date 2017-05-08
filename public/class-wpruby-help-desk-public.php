@@ -173,8 +173,20 @@ class Wpruby_Help_Desk_Public {
 	}
 
 	public function process_ticket_reply() {
-			if(isset($_POST['action']) && $_POST['action'] == 'submit_reply'){
+			if(isset($_POST['ticket_id'])){
 				$ticket_id = intval($_POST['ticket_id']);
+			}
+
+			//if closing the ticket
+			if(isset($_POST['close_ticket'])){
+				$ticket = new WPRuby_Ticket(	$ticket_id	);
+				//closing the ticket
+				$ticket->close_ticket();
+				wp_redirect(get_permalink($ticket_id));
+				exit;
+			}
+
+			if(isset($_POST['action']) && $_POST['action'] == 'submit_reply'){
 
 				$reply_id = WPRuby_Ticket::add_reply($ticket_id);
 

@@ -74,8 +74,9 @@
 
           </p>
         <?php endif; ?>
-        
+
         <input type="submit" name="submit_reply" value="<?php _e('Submit a reply', 'wpruby-help-desk'); ?>">
+        <input type="submit" name="close_ticket" value="<?php _e('Close Ticket', 'wpruby-help-desk'); ?>" class="close_ticket">
       </p>
     </form>
 

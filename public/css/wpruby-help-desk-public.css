@@ -265,3 +265,12 @@
 #my_tickets_table td.text-right {
   text-align: right;
 }
+
+.close_ticket{
+  background-color: #f44336 !important;
+}
+.close_ticket:hover{
+  background-color: #ffffff !important;
+  color:#f44336;
+  border:1px solid #000000;
+}
