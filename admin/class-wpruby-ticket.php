@@ -38,6 +38,10 @@ class WPRuby_Ticket {
 	 * @since    1.0.0
 	 */
   public function close_ticket(){
+    $general_options = get_option('wpruby_help_desk_general');
+    if(isset($general_options['enable_email_transcript']) && $general_options['enable_email_transcript'] == 'on'){
+      //@TODO send the transcript email
+    }
     wp_set_object_terms( intval($this->ticket_id), 'closed', WPRUBY_TICKET_STATUS, false );
   }
   /**

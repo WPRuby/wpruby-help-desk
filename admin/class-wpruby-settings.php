@@ -61,6 +61,12 @@ class WPRuby_Help_Desk_Settings {
                   'type'    => 'select',
                   'options' => $agents
               ),
+              array(
+                  'name'  => 'enable_email_transcript',
+                  'label' => __( 'Enable Ticket Email Transcript', 'wpruby-help-desk' ),
+                  'desc'  => __( 'If this option is enabled, a transcript text file of the ticket will be sent to the client email when the ticket is closed.', 'wpruby-help-desk' ),
+                  'type'  => 'checkbox'
+              ),
                 /*array(
                     'name'              => 'text_val',
                     'label'             => __( 'Text Input', 'wpruby-help-desk' ),
