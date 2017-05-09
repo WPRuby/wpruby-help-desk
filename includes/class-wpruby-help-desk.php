@@ -221,6 +221,7 @@ class Wpruby_Help_Desk {
 		//adding shortcodes
 		add_shortcode('submit_ticket', array($plugin_public, 'shortcode_submit_ticket'));
 		add_shortcode('my_tickets', array($plugin_public, 'shortcode_my_tickets'));
+		add_shortcode('ruby_help_desk_login', array($plugin_public, 'shortcode_login_form'));
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );

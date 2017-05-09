@@ -124,6 +124,16 @@ class Wpruby_Help_Desk_Public {
 		return ob_get_clean();
 	}
 
+
+	public function shortcode_login_form(){
+		ob_start();
+		$my_ticket_page = get_option('wpruby_[my_tickets]');
+		$login_form_args = array(
+			'redirect'	=> get_permalink($my_ticket_page),
+		);
+		wp_login_form($login_form_args);
+		return ob_get_clean();
+	}
 	public function display_single_ticket( $content ){
 		global $post;
 		//info: if it is not a ticket, do not do any thing

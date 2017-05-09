@@ -24,7 +24,4 @@
 <?php else: ?>
   <p> <?php _e('You do not have any tickets yet', 'wpruby-help-desk'); ?>.</p>
 <?php endif; ?>
-
-
-
 </div>
