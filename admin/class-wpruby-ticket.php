@@ -29,7 +29,7 @@ class WPRuby_Ticket {
 	 * @param      number    $ticket_id       The ID of the ticket.
 	 */
   public function __construct($ticket_id){
-    $this->ticket_id = $ticket_id;
+    $this->ticket_id = intval($ticket_id);
   }
 
   /**
@@ -40,7 +40,7 @@ class WPRuby_Ticket {
   public function close_ticket(){
     $general_options = get_option('wpruby_help_desk_general');
     if(isset($general_options['enable_email_transcript']) && $general_options['enable_email_transcript'] == 'on'){
-      //@TODO send the transcript email
+      $this->send_transcript();
     }
     wp_set_object_terms( intval($this->ticket_id), 'closed', WPRUBY_TICKET_STATUS, false );
   }
@@ -328,5 +328,75 @@ class WPRuby_Ticket {
    			);
    			$attachments = get_posts($args);
         return $attachments;
+     }
+
+     /**
+     * Send the ticket email transcript
+     *
+     * @since    1.0.0
+     */
+     public function send_transcript(){
+       $author = $this->get_author();
+       $current_user = wp_get_current_user();
+       //preparing the email body
+       ob_start();
+       require_once plugin_dir_path( __FILE__ ) . 'partials/emails/transcript.php';
+       $email_content   =  ob_get_clean();
+       $email_title     =  sprintf(__('Your ticket #%s is closed', 'wpruby-help-desk'), $this->ticket_id);
+       $headers         =  array('Content-Type: text/html; charset=UTF-8');
+       $temp_text       =  plugin_dir_path( __FILE__ ) . 'partials/emails/temp/ticket_transcript_'. $this->ticket_id . '.txt';
+       $temp_text_file  =  fopen($temp_text, 'w');
+       fwrite($temp_text_file, $this->get_transcript_text());
+       fclose($f);
+       wp_mail($author->get_email(),  $email_title, $email_content, $headers, array($temp_text));
+       //info: delete the temp text attachment.
+       unlink($temp_text);
+     }
+
+     /**
+     * get_transcript_text()
+     * Get the text file content of the transcript email.
+     * @return   string   ticket transcript
+     * @since    1.0.0
+     */
+     public function get_transcript_text(){
+       $ticket_title    =     get_post_field( 'post_title', $this->ticket_id );
+       $ticket_content  =     strip_tags( get_post_field( 'post_content', $this->ticket_id ) );
+       $ticket_date     =     get_post_field( 'post_date', $this->ticket_id );
+       $replies = $this->get_replies();
+
+       $final_transcript = '';
+       $final_transcript .= $ticket_title .  PHP_EOL . PHP_EOL;
+       $final_transcript .= '========='.  __('Ticket Content', 'wpruby-help-desk')  .' ('.  $ticket_date  .')===========' .  PHP_EOL;
+       $final_transcript .= $ticket_content .  PHP_EOL;
+       $final_transcript .= PHP_EOL. '=========='.  __('Ticket Replies', 'wpruby-help-desk') .'==========' .  PHP_EOL . PHP_EOL . PHP_EOL;
+       $reply_number = 1;
+       foreach ($replies as $key => $reply) {
+         $final_transcript .= '========== #'. $reply_number .' ( '.  $reply->post_date .' by '. get_the_author_meta('nicename', $reply->post_author) .' )==========' .  PHP_EOL . PHP_EOL;
+         $final_transcript .= $reply->post_content .  PHP_EOL;
+         $reply_number++;
+       }
+       return $final_transcript;
+     }
+
+
+     /**
+     * Get ticket author
+     * @return  Object the ticket author
+     * @since    1.0.0
+     */
+     public function get_author(){
+       $ticket_author_id = get_post_field( 'post_author', $this->ticket_id );
+       $user = new WPRuby_User($ticket_author_id);
+       return $user;
+     }
+
+     /**
+     * Get ticket title
+     * @return  Object the ticket author
+     * @since    1.0.0
+     */
+     public function get_title(){
+       return get_post_field( 'post_title', $this->ticket_id );
      }
 }
