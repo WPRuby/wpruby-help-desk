@@ -232,6 +232,8 @@ class Wpruby_Help_Desk {
 
 		$this->loader->add_filter( 'wp_handle_upload_prefilter', $plugin_public, 'validate_attachment_file' );
 
+		//info: restrict tickets on the author
+		$this->loader->add_action( 'wp', $plugin_public, 'restrict_ticket_page' );
 
 	}
 

@@ -240,4 +240,17 @@ class Wpruby_Help_Desk_Public {
 
 		return $file;
 	}
+
+	//@TODO
+	public function restrict_ticket_page(){
+		global $post;
+		if(isset($post->post_type) && $post->post_type == WPRUBY_TICKET){
+			$current_user_id = get_current_user_id();
+			$ticket_author_id = get_post_field( 'post_author', $post->ID);
+			if($current_user_id != $ticket_author_id){
+				wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
+				exit;
+			}
+		}
+	}
 }

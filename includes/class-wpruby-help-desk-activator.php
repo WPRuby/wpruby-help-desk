@@ -136,7 +136,7 @@ class Wpruby_Help_Desk_Activator {
 			// insert default Ticket Statuses
 			$products = array(
 					array(
-						'term'	=>	'Sample Product',
+						'term'	=>	__('Sample Product', 'wpruby-help-desk'),
 					)
 			);
 			foreach($products as $key => $product){
