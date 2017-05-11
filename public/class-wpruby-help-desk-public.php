@@ -242,8 +242,9 @@ class Wpruby_Help_Desk_Public {
 	}
 
 	//@TODO
-	public function restrict_ticket_page(){
+	public function restrict_tickets_pages(){
 		global $post;
+		//info: 1. restrict single tickets
 		if(isset($post->post_type) && $post->post_type == WPRUBY_TICKET){
 			$current_user_id = get_current_user_id();
 			$ticket_author_id = get_post_field( 'post_author', $post->ID);
@@ -252,5 +253,23 @@ class Wpruby_Help_Desk_Public {
 				exit;
 			}
 		}
+		//info: 2. restrict my_tickets page
+		$my_tickets_page_id = get_option('wpruby_[my_tickets]');
+		if($post->ID == $my_tickets_page_id){
+			if(get_current_user_id() === 0){
+				wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
+				exit;
+			}
+		}
+
+		//info: 2. restrict submit_ticket page
+		$submit_ticket_page_id = get_option('wpruby_[submit_ticket]');
+		if($post->ID == $submit_ticket_page_id){
+			if(get_current_user_id() === 0){
+				wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
+				exit;
+			}
+		}
+
 	}
 }

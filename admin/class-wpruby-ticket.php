@@ -262,7 +262,6 @@ class WPRuby_Ticket {
      * @since    1.0.0
      */
      public static function get_my_tickets( ){
-
        $args = array(
            'post_type' 		      => WPRUBY_TICKET,
            'orderby'            => 'date',
