@@ -108,7 +108,7 @@ class Wpruby_Help_Desk_Public {
 
 	}
 
-
+	//@TODO
 	public function shortcode_submit_ticket(){
 		ob_start();
 		$products = $this->get_products();
@@ -116,7 +116,7 @@ class Wpruby_Help_Desk_Public {
 		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-submit-ticket.php';
 		return ob_get_clean();
 	}
-
+	//@TODO
 	public function shortcode_my_tickets(){
 		ob_start();
 		$my_tickets = WPRuby_Ticket::get_my_tickets();
@@ -124,7 +124,7 @@ class Wpruby_Help_Desk_Public {
 		return ob_get_clean();
 	}
 
-
+	//@TODO
 	public function shortcode_login_form(){
 		ob_start();
 		$my_ticket_page = get_option('wpruby_[my_tickets]');
@@ -134,6 +134,13 @@ class Wpruby_Help_Desk_Public {
 		wp_login_form($login_form_args);
 		return ob_get_clean();
 	}
+	//@TODO
+	public function shortcode_signup_form(){
+		ob_start();
+		require_once plugin_dir_path( __FILE__ ) . 'partials/signup.php';
+		return ob_get_clean();
+	}
+	//@TODO
 	public function display_single_ticket( $content ){
 		global $post;
 		//info: if it is not a ticket, do not do any thing
@@ -151,12 +158,12 @@ class Wpruby_Help_Desk_Public {
 		return ob_get_clean();
 	}
 
-
+	//@TODO
 	public function get_products(){
 		$products = get_terms( WPRUBY_TICKET_PRODUCT, array(	'hide_empty' => false		) );
 		return $products;
 	}
-
+	//@TODO
 	public function process_ticket_submission() {
 			if(isset($_POST['action']) && $_POST['action'] == 'submit_ticket'){
 				$ticket = array();
@@ -181,7 +188,7 @@ class Wpruby_Help_Desk_Public {
 				exit;
 			}
 	}
-
+	//@TODO
 	public function process_ticket_reply() {
 			if(isset($_POST['ticket_id'])){
 				$ticket_id = intval($_POST['ticket_id']);
@@ -244,32 +251,77 @@ class Wpruby_Help_Desk_Public {
 	//@TODO
 	public function restrict_tickets_pages(){
 		global $post;
-		//info: 1. restrict single tickets
-		if(isset($post->post_type) && $post->post_type == WPRUBY_TICKET){
-			$current_user_id = get_current_user_id();
-			$ticket_author_id = get_post_field( 'post_author', $post->ID);
-			if($current_user_id != $ticket_author_id){
-				wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
-				exit;
-			}
-		}
-		//info: 2. restrict my_tickets page
-		$my_tickets_page_id = get_option('wpruby_[my_tickets]');
-		if($post->ID == $my_tickets_page_id){
-			if(get_current_user_id() === 0){
-				wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
-				exit;
-			}
-		}
+		if(is_object($post) && !is_admin()){
+					//info: 1. restrict single tickets
+					if(isset($post->post_type) && $post->post_type == WPRUBY_TICKET){
+						$current_user_id = get_current_user_id();
+						$ticket_author_id = get_post_field( 'post_author', $post->ID);
+						if($current_user_id != $ticket_author_id){
+							wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
+							exit;
+						}
+					}
+					//info: 2. restrict my_tickets page
+					$my_tickets_page_id = get_option('wpruby_[my_tickets]');
+					if($post->ID == $my_tickets_page_id){
+						if(get_current_user_id() === 0){
+							wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
+							exit;
+						}
+					}
 
-		//info: 2. restrict submit_ticket page
-		$submit_ticket_page_id = get_option('wpruby_[submit_ticket]');
-		if($post->ID == $submit_ticket_page_id){
-			if(get_current_user_id() === 0){
-				wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
-				exit;
-			}
+					//info: 2. restrict submit_ticket page
+					$submit_ticket_page_id = get_option('wpruby_[submit_ticket]');
+					if($post->ID == $submit_ticket_page_id){
+						if(get_current_user_id() === 0){
+							wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
+							exit;
+						}
+					}
 		}
+	}
+	//@TODO
+	public function process_signup(){
+		if(isset($_POST['action']) && $_POST['action'] == 'helpdesk_signup'){
+			$this->errors = array();
+			$user = array();
+			//info: validate username
+			$user['user_login'] = sanitize_user( $_POST['user_login']	);
+			if(username_exists($user['user_login'])){
+				$this->errors[] = __('The usrename already exists', 'wpruby-help-desk');
+			}
+			//info: validate email
+			$user['user_email'] = sanitize_email( $_POST['user_email']	);
+			if($user['user_email'] == ''){
+				$this->errors[] = __('Please provide a valid email', 'wpruby-help-desk');
+			}
+			if ( email_exists( $user['user_email'] ) ) {
+				$this->errors[] = __('The email is already exist', 'wpruby-help-desk');
+			}
+			//info: validate password
+			$user['user_pass'] = $_POST['user_pass'];
+			if(strlen(trim($user['user_pass'])) < 7 ){
+				$this->errors[] = __('Please provide a password longer than 7 charachters', 'wpruby-help-desk');
+			}
+			if(trim($user['user_pass']) != trim($_POST['user_pass_repeated'])){
+				$this->errors[] = __('The passwords do not match', 'wpruby-help-desk');
+			}
 
+			if(empty($this->errors)){
+				$new_user_id = wp_insert_user(	$user	);
+				if(is_wp_error(	$new_user_id	)){
+					$this->errors[] = $new_user_id->get_error_message();
+				}else{
+					//info: on success auto-login and redirect to my_tickets page.
+					wp_set_current_user($new_user_id, $user['user_login']);
+        	wp_set_auth_cookie($new_user_id);
+					do_action('wp_login', $user['user_login']);
+					$my_ticket_page = get_option('wpruby_[my_tickets]');
+        	wp_redirect(get_permalink($my_ticket_page));
+					exit;
+				}
+			}
+
+		}
 	}
 }

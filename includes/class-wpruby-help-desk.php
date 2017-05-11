@@ -222,11 +222,13 @@ class Wpruby_Help_Desk {
 		add_shortcode('submit_ticket', array($plugin_public, 'shortcode_submit_ticket'));
 		add_shortcode('my_tickets', array($plugin_public, 'shortcode_my_tickets'));
 		add_shortcode('ruby_help_desk_login', array($plugin_public, 'shortcode_login_form'));
+		add_shortcode('ruby_help_desk_signup', array($plugin_public, 'shortcode_signup_form'));
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_public, 'process_ticket_submission' );
 		$this->loader->add_action( 'init', $plugin_public, 'process_ticket_reply' );
+		$this->loader->add_action( 'init', $plugin_public, 'process_signup' );
 		//info: Replace the default content of the Ticket Post Type.
 		$this->loader->add_filter( 'the_content', $plugin_public, 'display_single_ticket' );
 
