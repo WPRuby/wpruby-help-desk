@@ -511,7 +511,37 @@ class Wpruby_Help_Desk_Admin {
 	    }
 	    echo $out;
 	}
+	/**
+	 * Setup the Dashboard Widget
+	 * @since  1.0.0
+	 */
+	public function helpdesk_status_dashboard_widget() {
 
+		wp_add_dashboard_widget('ruby_helpdesk_status_dashboard_widget',	__('Ruby Help Desk Status',	'wpruby-help-desk'),	array($this,	'helpdesk_status_dashboard_widget_content'));
+
+		//info: Forcing the widget to the top
+		global $wp_meta_boxes;
+		$normal_dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
+
+	 	$ruby_helpdesk_widget_backup = array( 'ruby_helpdesk_status_dashboard_widget' => $normal_dashboard['ruby_helpdesk_status_dashboard_widget'] );
+	 	unset( $normal_dashboard['ruby_helpdesk_status_dashboard_widget'] );
+
+	 	// Merge the two arrays together so our widget is at the beginning
+	 	$sorted_dashboard = array_merge( $ruby_helpdesk_widget_backup, $normal_dashboard );
+
+	 	// Save the sorted array back into the original metaboxes
+	 	$wp_meta_boxes['dashboard']['normal']['core'] = $sorted_dashboard;
+
+	}
+	/**
+	 * Output the contents of the Dashboard Status Widget.
+	 * @since  1.0.0
+	 */
+	public function helpdesk_status_dashboard_widget_content() {
+		$tickets_object = new WPRuby_Ticket();
+		$tickets_stats = $tickets_object->get_tickets_stats();
+		require_once plugin_dir_path( __FILE__ ) . 'partials/widgets/status.php';
+	}
 	/**
 	 * add plugin links to the top admin menu
 	 * @param		object The admin menu object

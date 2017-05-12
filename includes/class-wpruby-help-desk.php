@@ -202,8 +202,8 @@ class Wpruby_Help_Desk {
 		//info: add plugin links to the top admin menu
 		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'add_quicklinks_to_admin_topbar', 100);
 
-
-
+		//info: add the helpdesk status dashboard widget
+		$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'helpdesk_status_dashboard_widget');
 
 	}
 

@@ -28,7 +28,7 @@ class WPRuby_Ticket {
 	 * @since    1.0.0
 	 * @param      number    $ticket_id       The ID of the ticket.
 	 */
-  public function __construct($ticket_id){
+  public function __construct($ticket_id = 0){
     $this->ticket_id = intval($ticket_id);
   }
 
@@ -89,18 +89,18 @@ class WPRuby_Ticket {
         $args['status'] = 'closed';
         $status_operator =  'NOT IN';
     }
-
+    $author = (isset($args['user_id']))?intval($args['user_id']):'';
     $args = array(
-        'post_type' => WPRUBY_TICKET,
-        'author'	   => (int)$args['user_id'],
+        'post_type'      => WPRUBY_TICKET,
+        'author'	       => $author,
         'posts_per_page' => -1,
-        'tax_query' => array(
-            array(
-                'taxonomy' => WPRUBY_TICKET_STATUS,
-                'field'    => 'slug',
-                'terms'    => $args['status'],
-                'operator' => $status_operator,
-            ),
+        'tax_query'      => array(
+              array(
+                  'taxonomy' => WPRUBY_TICKET_STATUS,
+                  'field'    => 'slug',
+                  'terms'    => $args['status'],
+                  'operator' => $status_operator,
+              ),
         ),
     );
     $tickets = get_posts( $args );
@@ -113,19 +113,32 @@ class WPRuby_Ticket {
    * @since    1.0.0
    * @param      number    $user_id     The User ID.
    */
-  public function get_tickets_stats(	$user_id	){
+  public function get_tickets_stats(	$user_id = ''	){
     $stats = array();
     $stats['total'] = 0;
     $stats['closed'] = 0;
     $stats['open'] = 0;
+    $stats['new'] = 0;
+    $stats['in-progress'] = 0;
+    $stats['open'] = 0;
 
 
     $args = array();
-    $args['user_id'] = intval($user_id);
+    if($user_id !== ''){
+      $args['user_id'] = intval($user_id);
+    }
+    $args['status'] = 'new';
+    $stats['new'] = count($this->get_tickets(	$args	));
+
+    $args['status'] = 'in-progress';
+    $stats['in-progress'] = count($this->get_tickets(	$args	));
+
     $args['status'] = 'open';
     $stats['open'] = count($this->get_tickets(	$args	));
+
     $args['status'] = 'closed';
     $stats['closed'] = count($this->get_tickets(	$args	));
+
     $stats['total'] = $stats['open'] + $stats['closed'];
     return $stats;
   }
@@ -397,5 +410,21 @@ class WPRuby_Ticket {
      */
      public function get_title(){
        return get_post_field( 'post_title', $this->ticket_id );
+     }
+     /**
+     * Get status ticket admin interface URL.
+     * @return  Object the ticket author
+     * @since    1.0.0
+     */
+     public function get_status_tickets_link( $status = ''){
+       if($status == 'total'){
+         return admin_url('edit.php?post_type=' . WPRUBY_TICKET);
+       }
+
+       if($status == ''){
+         return '#';
+       }
+      return admin_url('edit.php?tickets_status='.  $status  .'&post_type=' . WPRUBY_TICKET);
+
      }
 }

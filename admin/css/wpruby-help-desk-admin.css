@@ -144,3 +144,64 @@
   border: 1px solid #ccc;
 
 }
+
+/*  Dashboard Widget  */
+.wpruby_status_list{
+  overflow: hidden;
+  margin: 0;
+}
+.wpruby_status_list li{
+    width: 50%;
+    float: left;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 0;
+    border-top: 1px solid #ececec;
+    color: #aaa;
+}
+.wpruby_status_list li a {
+    display: inline-block;
+    color: #aaa;
+    padding: 12px 15px;
+    -webkit-transition: all ease .5s;
+    position: relative;
+    font-size: 14px;
+}
+.wpruby_status_list li .dashicons{
+  margin:5px;
+  font-size: 24pt;
+}
+
+.wpruby_status_list li.new-tickets{
+  border-left: 1px solid #ececec;
+  border-right: 1px solid #ececec;
+}
+.wpruby_status_list li.new-tickets .dashicons{
+  color:#6db16f;
+}
+
+
+.wpruby_status_list li.in-progress-tickets{
+  border-right: 1px solid #ececec;
+}
+.wpruby_status_list li.in-progress-tickets .dashicons{
+  color:#009688;
+}
+
+.wpruby_status_list li.closed-tickets{
+      border-bottom: 1px solid #ececec;
+      border-right: 1px solid #ececec;
+      border-left: 1px solid #ececec;
+}
+.wpruby_status_list li.closed-tickets .dashicons{
+  color:#f38989;
+}
+
+.wpruby_status_list li.total-tickets{
+  border-right: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
+
+}
+.wpruby_status_list li.total-tickets .dashicons{
+  color:#607d8b;
+}
