@@ -252,20 +252,23 @@ class Wpruby_Help_Desk_Public {
 	public function restrict_tickets_pages(){
 		global $post;
 		if(is_object($post) && !is_admin()){
+					$login_page_id = get_option('wpruby_[ruby_help_desk_login]');
+					$signup_page_id = get_option('wpruby_[ruby_help_desk_signup]');
+					$my_tickets_page_id = get_option('wpruby_[my_tickets]');
+
 					//info: 1. restrict single tickets
 					if(isset($post->post_type) && $post->post_type == WPRUBY_TICKET){
 						$current_user_id = get_current_user_id();
 						$ticket_author_id = get_post_field( 'post_author', $post->ID);
 						if($current_user_id != $ticket_author_id){
-							wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
+							wp_redirect(get_permalink(	$login_page_id	));
 							exit;
 						}
 					}
 					//info: 2. restrict my_tickets page
-					$my_tickets_page_id = get_option('wpruby_[my_tickets]');
 					if($post->ID == $my_tickets_page_id){
 						if(get_current_user_id() === 0){
-							wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
+							wp_redirect(get_permalink(	$login_page_id	));
 							exit;
 						}
 					}
@@ -274,10 +277,19 @@ class Wpruby_Help_Desk_Public {
 					$submit_ticket_page_id = get_option('wpruby_[submit_ticket]');
 					if($post->ID == $submit_ticket_page_id){
 						if(get_current_user_id() === 0){
-							wp_redirect(get_permalink(	get_option('wpruby_[ruby_help_desk_login]')	));
+							wp_redirect(get_permalink(	$login_page_id	));
 							exit;
 						}
 					}
+					//info: 3. if user is logged in, he should not access Sign Up and Login pages.
+					if(is_user_logged_in()){
+						if(in_array($post->ID, array($login_page_id,	$signup_page_id))){
+							wp_redirect(get_permalink(	$my_tickets_page_id	));
+							exit;
+						}
+					}
+
+
 		}
 	}
 	//@TODO
