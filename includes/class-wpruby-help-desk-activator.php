@@ -44,6 +44,7 @@ class Wpruby_Help_Desk_Activator {
 				$this->seed_pages();
 				$this->seed_statuses();
 				$this->seed_products();
+				$this->seed_settings();
 
 				//set the seeded flag.
 				$this->set_seeded('yes');
@@ -175,4 +176,24 @@ class Wpruby_Help_Desk_Activator {
 		}
 
 	}
+
+	//@TODO
+	public function seed_settings(){
+		$default_options = array(
+				'wpruby_help_desk_general'	=>	array(
+					'default_agent_assignee'	=>	get_current_user_id(),
+					'enable_email_transcript'	=>	'off',
+				),
+				'wpruby_help_desk_attachments'	=>	array(
+					'enable_attachments'	=>	'on',
+					'max_size_attachments'	=>	'2',
+					'allowed_extensions_attachments'	=>	'pdf,jpg,png,zip',
+				)
+		);
+
+		foreach($default_options as $key => $option){
+				add_option($key,	$option);
+		}
+	}
+
 }
