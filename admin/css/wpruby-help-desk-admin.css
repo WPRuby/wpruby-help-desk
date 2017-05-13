@@ -9,7 +9,7 @@
 #ticket_options label{
   font-weight: bold;
 }
-#ticket_options .ticket_status_label, .support_ticket_status .ticket_status_label{
+#ticket_options .ticket_status_label, .support_ticket_status .ticket_status_label, .wpruby_recent_tickets .ticket_status_label{
   float:left;
   margin-left: 4px;
   padding: 5px;
@@ -204,4 +204,32 @@
 }
 .wpruby_status_list li.total-tickets .dashicons{
   color:#607d8b;
+}
+.wpruby_recent_tickets li{
+  border-top: 1px solid #ececec;
+  border-left: 1px solid #ececec;
+  border-right: 1px solid #ececec;
+  padding: 10px;
+  margin:0;
+}
+.wpruby_recent_tickets li span.since{
+  float:right;
+  color:#aaa;
+  font-style: italic;
+}
+.wpruby_recent_tickets li:last-child{
+  border-bottom: 1px solid #ececec;
+}
+.wpruby_dashboard_widget h4{
+  font-weight: bold !important;
+  color:#808080 !important;
+  margin-top: 15px !important;
+}
+.wpruby_recent_tickets .ticket_status_label{
+  padding: 4px;
+  margin-right: 4px;
+  font-size: 8pt;
+  opacity: 0.5;
+  border-radius: 0;
+  float:none;
 }

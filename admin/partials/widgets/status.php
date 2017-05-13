@@ -1,35 +1,47 @@
-<ul class="wpruby_status_list">
+<div class="wpruby_dashboard_widget">
 
-    <li class="new-tickets">
-      <span class="dashicons dashicons-sos"></span>
+  <ul class="wpruby_status_list">
 
-			<a href="<?php echo $tickets_object->get_status_tickets_link('new'); ?>">
+      <li class="new-tickets">
+        <span class="dashicons dashicons-sos"></span>
 
-           <strong><?php echo $tickets_stats['new']; ?> ticket</strong> awaiting response
-      </a>
-		</li>
+  			<a href="<?php echo $tickets_object->get_status_tickets_link('new'); ?>">
 
-		<li class="in-progress-tickets">
-      <span class="dashicons dashicons-admin-tools"></span>
+             <strong><?php echo $tickets_stats['new']; ?> ticket</strong> awaiting response
+        </a>
+  		</li>
 
-			<a href="<?php echo $tickets_object->get_status_tickets_link('in-progress'); ?>">
+  		<li class="in-progress-tickets">
+        <span class="dashicons dashicons-admin-tools"></span>
 
-			<strong><?php echo $tickets_stats['in-progress']; ?> tickets</strong> in progress			</a>
-		</li>
+  			<a href="<?php echo $tickets_object->get_status_tickets_link('in-progress'); ?>">
 
-		<li class="closed-tickets">
-      <span class="dashicons dashicons-welcome-comments"></span>
-			<a href="<?php echo $tickets_object->get_status_tickets_link('closed'); ?>">
+  			<strong><?php echo $tickets_stats['in-progress']; ?> tickets</strong> in progress			</a>
+  		</li>
 
-			<strong><?php echo $tickets_stats['closed']; ?> tickets</strong> closed			</a>
-		</li>
+  		<li class="closed-tickets">
+        <span class="dashicons dashicons-welcome-comments"></span>
+  			<a href="<?php echo $tickets_object->get_status_tickets_link('closed'); ?>">
 
-		<li class="total-tickets">
-      <span class="dashicons dashicons-tickets-alt"></span>
+  			<strong><?php echo $tickets_stats['closed']; ?> tickets</strong> closed			</a>
+  		</li>
 
-      <a href="<?php echo $tickets_object->get_status_tickets_link('total'); ?>">
+  		<li class="total-tickets">
+        <span class="dashicons dashicons-tickets-alt"></span>
 
-      <strong><?php echo $tickets_stats['total']; ?> tickets</strong> in total			</a>
-		</li>
+        <a href="<?php echo $tickets_object->get_status_tickets_link('total'); ?>">
 
-</ul>
+        <strong><?php echo $tickets_stats['total']; ?> tickets</strong> in total			</a>
+  		</li>
+
+  </ul>
+
+  <h4><?php _e('Recent Tickets', 'wpruby-help-desk'); ?></h4>
+  <ul class="wpruby_recent_tickets">
+    <?php foreach ($recent_tickets as $key => $ticket): $status = $tickets_object->get_status($ticket->ID); ?>
+      <li> <a href="<?php echo get_edit_post_link($ticket->ID); ?>"><?php echo $ticket->post_title; ?></a> <span class="ticket_status_label" style="background:<?php echo $status['color']; ?>;"><?php echo $status['name']; ?></span><span class="since"><?php echo human_time_diff(strtotime($ticket->post_date)); ?></span></li>
+    <?php endforeach; ?>
+  </ul>
+
+
+</div>

@@ -83,27 +83,31 @@ class WPRuby_Ticket {
    * @param      array    $args      The parameters of the tickets query.
    */
   public function get_tickets(	$args ){
-    $status_operator =  'IN';
 
-    if($args['status'] == 'open'){
-        $args['status'] = 'closed';
-        $status_operator =  'NOT IN';
+
+    $tickets_args = array();
+    $tickets_args['post_type']  = WPRUBY_TICKET;
+    $tickets_args['author']     = (isset($args['user_id']))?intval($args['user_id']):'';
+    $tickets_args['posts_per_page']  = (isset($args['posts_per_page']))?$args['posts_per_page']:-1;
+
+    if(isset($args['status'])){
+
+      $status_operator =  'IN';
+      if($args['status'] == 'open'){
+          $args['status'] = 'closed';
+          $status_operator =  'NOT IN';
+      }
+
+      $tickets_args['tax_query']  = array(
+            array(
+                'taxonomy' => WPRUBY_TICKET_STATUS,
+                'field'    => 'slug',
+                'terms'    => $args['status'],
+                'operator' => $status_operator,
+            ),
+      );
     }
-    $author = (isset($args['user_id']))?intval($args['user_id']):'';
-    $args = array(
-        'post_type'      => WPRUBY_TICKET,
-        'author'	       => $author,
-        'posts_per_page' => -1,
-        'tax_query'      => array(
-              array(
-                  'taxonomy' => WPRUBY_TICKET_STATUS,
-                  'field'    => 'slug',
-                  'terms'    => $args['status'],
-                  'operator' => $status_operator,
-              ),
-        ),
-    );
-    $tickets = get_posts( $args );
+    $tickets = get_posts( $tickets_args );
     return $tickets;
   }
 
@@ -148,9 +152,10 @@ class WPRuby_Ticket {
    * @since    1.0.0
    * @param      number    $user_id     The User ID.
    */
-   public function get_status(){
+   public function get_status(  $ticket_id = null ){
+     $ticket_id = ($ticket_id === null)?$this->ticket_id:$ticket_id;
      $status = array();
-     $ticket_status = wp_get_object_terms($this->ticket_id, WPRUBY_TICKET_STATUS, array("fields" => "all"));
+     $ticket_status = wp_get_object_terms($ticket_id, WPRUBY_TICKET_STATUS, array("fields" => "all"));
      if(isset($ticket_status[0])){
        $status['id'] = $ticket_status[0]->term_id;
        $status['name'] = $ticket_status[0]->name;

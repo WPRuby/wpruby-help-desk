@@ -540,6 +540,7 @@ class Wpruby_Help_Desk_Admin {
 	public function helpdesk_status_dashboard_widget_content() {
 		$tickets_object = new WPRuby_Ticket();
 		$tickets_stats = $tickets_object->get_tickets_stats();
+		$recent_tickets = $tickets_object->get_tickets(array('posts_per_page'	=>	5));
 		require_once plugin_dir_path( __FILE__ ) . 'partials/widgets/status.php';
 	}
 	/**
