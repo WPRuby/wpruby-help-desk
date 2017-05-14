@@ -52,13 +52,20 @@ class Wpruby_Help_Desk_Activator {
 
 
 	}
-	//@TODO
+	/**
+	 * Set the "already seeded" flag. It's used so the plugin does not seed in every activation.
+	 * @param		 string		'on' or 'off'
+	 * @since    1.0.0
+	 */
 	private function set_seeded( $value ){
 		update_option( 'wpruby_help_desk_seeded', $value);
 		$this->is_seeded = $value;
 	}
 
-	//@TODO
+	/**
+	 * Seeding the plugin frontend pages.
+	 * @since    1.0.0
+	 */
 	private function seed_pages(){
 				// insert Default Pages
 				$main_page = array(
@@ -106,7 +113,10 @@ class Wpruby_Help_Desk_Activator {
 				}
 	}
 
-	//@TODO
+	/**
+	 * Seeding the plugin tickets default statuses
+	 * @since    1.0.0
+	 */
 	private function seed_statuses(){
 				// insert default Ticket Statuses
 				$statuses = array(
@@ -138,7 +148,10 @@ class Wpruby_Help_Desk_Activator {
 				}
 	}
 
-	//TODO
+	/**
+	 * Seeding the plugin tickets default product.
+	 * @since    1.0.0
+	 */
 	private function seed_products(){
 			// insert default Ticket Statuses
 			$products = array(
@@ -153,10 +166,12 @@ class Wpruby_Help_Desk_Activator {
 			}
 	}
 
-	//@TODO
+	/**
+	 * Adding the help desk custom roles, and adding the Agent role to all of the admins.
+	 *
+	 * @since    1.0.0
+	 */
 	public function add_roles(){
-
-
 		//info: add the help desk custom roles
 		$author     = get_role( 'author' );
 		$subscriber = get_role( 'subscriber' );
@@ -177,7 +192,11 @@ class Wpruby_Help_Desk_Activator {
 
 	}
 
-	//@TODO
+	/**
+	 * Seeding the default plugin's settings.
+	 *
+	 * @since    1.0.0
+	 */
 	public function seed_settings(){
 		$default_options = array(
 				'wpruby_help_desk_general'	=>	array(

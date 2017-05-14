@@ -108,7 +108,11 @@ class Wpruby_Help_Desk_Public {
 
 	}
 
-	//@TODO
+	/**
+	 * Display the output of the [submit_ticket] shortcode.
+	 * @return	 string  the shortcode output
+	 * @since    1.0.0
+	 */
 	public function shortcode_submit_ticket(){
 		ob_start();
 		$products = $this->get_products();
@@ -116,7 +120,11 @@ class Wpruby_Help_Desk_Public {
 		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-submit-ticket.php';
 		return ob_get_clean();
 	}
-	//@TODO
+	/**
+	 * Display the output of the [my_tickets] shortcode.
+	 * @return	 string  the shortcode output
+	 * @since    1.0.0
+	 */
 	public function shortcode_my_tickets(){
 		ob_start();
 		$my_tickets = WPRuby_Ticket::get_my_tickets();
@@ -124,7 +132,11 @@ class Wpruby_Help_Desk_Public {
 		return ob_get_clean();
 	}
 
-	//@TODO
+	/**
+	 * Display the output of the [ruby_help_desk_login] shortcode.
+	 * @return	 string  the shortcode output
+	 * @since    1.0.0
+	 */
 	public function shortcode_login_form(){
 		ob_start();
 		$my_ticket_page = get_option('wpruby_[my_tickets]');
@@ -134,13 +146,22 @@ class Wpruby_Help_Desk_Public {
 		wp_login_form($login_form_args);
 		return ob_get_clean();
 	}
-	//@TODO
+	/**
+	 * Display the output of the [ruby_help_desk_signup] shortcode.
+	 * @return	 string  the shortcode output
+	 * @since    1.0.0
+	 */
 	public function shortcode_signup_form(){
 		ob_start();
 		require_once plugin_dir_path( __FILE__ ) . 'partials/signup.php';
 		return ob_get_clean();
 	}
-	//@TODO
+	/**
+	 * Overwrite the default view of the ticket custom post type.
+	 * @param	 string  the default content of the ticket.
+	 * @return	 string  the single ticket html output
+	 * @since    1.0.0
+	 */
 	public function display_single_ticket( $content ){
 		global $post;
 		//info: if it is not a ticket, do not do any thing
@@ -158,12 +179,19 @@ class Wpruby_Help_Desk_Public {
 		return ob_get_clean();
 	}
 
-	//@TODO
+	/**
+	 * Get all the tickets products
+	 * @return	 string  array of products' objects
+	 * @since    1.0.0
+	 */
 	public function get_products(){
 		$products = get_terms( WPRUBY_TICKET_PRODUCT, array(	'hide_empty' => false		) );
 		return $products;
 	}
-	//@TODO
+	/**
+	 * Processing frontend ticket submission form.
+	 * @since    1.0.0
+	 */
 	public function process_ticket_submission() {
 			if(isset($_POST['action']) && $_POST['action'] == 'submit_ticket'){
 				$ticket = array();
@@ -188,7 +216,10 @@ class Wpruby_Help_Desk_Public {
 				exit;
 			}
 	}
-	//@TODO
+	/**
+	 * Processing frontend ticket reply submission form.
+	 * @since    1.0.0
+	 */
 	public function process_ticket_reply() {
 			if(isset($_POST['ticket_id'])){
 				$ticket_id = intval($_POST['ticket_id']);
@@ -216,12 +247,22 @@ class Wpruby_Help_Desk_Public {
 
 			}
 	}
-	//@TODO
+	/**
+	 * Helper method to get the HelpDesk fronend pages permalinks.
+	 * @param    string			page name
+	 * @return   string			page permalink
+	 * @since    1.0.0
+	 */
 	public function get_page($page){
 		$page_id = get_option( "wpruby_[{$page}]");
 		return get_permalink($page_id);
 	}
-
+	/**
+	 * Helper method to get the HelpDesk fronend pages permalinks.
+	 * @param    array 		The file HTTP array.
+	 * @return   array    The file array for the uploaded file information.
+	 * @since    1.0.0
+	 */
 	public function validate_attachment_file(	$file	){
 
 		//info: only applied when a ticket or a reply is submittied
@@ -248,7 +289,10 @@ class Wpruby_Help_Desk_Public {
 		return $file;
 	}
 
-	//@TODO
+	/**
+	 * Adding restriction on the fronend pages.
+	 * @since    1.0.0
+	 */
 	public function restrict_tickets_pages(){
 		global $post;
 		if(is_object($post) && !is_admin()){
@@ -292,7 +336,10 @@ class Wpruby_Help_Desk_Public {
 
 		}
 	}
-	//@TODO
+	/**
+	 * Processing frontend signup form.
+ 	 * @since    1.0.0
+ 	 */
 	public function process_signup(){
 		if(isset($_POST['action']) && $_POST['action'] == 'helpdesk_signup'){
 			$this->errors = array();

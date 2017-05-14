@@ -364,7 +364,6 @@ class Wpruby_Help_Desk_Admin {
 			$ticket_agent = get_post_meta( $post->ID, 'ticket_agent_id', true );
 
 			$agents = WPRuby_User::get_agents();
-			// get ticket's terms @TODO change ids to slugs
 			$ticket_product = wp_get_object_terms($post->ID, WPRUBY_TICKET_PRODUCT, array("fields" => "ids"));
 
 			$ticket_product = (isset($ticket_product[0]))? $ticket_product[0]: -1;
