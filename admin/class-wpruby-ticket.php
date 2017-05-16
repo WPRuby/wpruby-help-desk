@@ -249,7 +249,7 @@ class WPRuby_Ticket {
 
      public static function add_reply( $ticket_id = '' ){
        //info: if there is an attachment
-       if(isset($_FILES['reply_attachment'])){
+       if(isset($_FILES['reply_attachment'])  && $_FILES['reply_attachment']['name'] != ''){
          if ( ! function_exists( 'wp_handle_upload' ) ) {
              require_once( ABSPATH . 'wp-admin/includes/file.php' );
          }
@@ -275,7 +275,7 @@ class WPRuby_Ticket {
        if(isset($reply_uploaded_file['file']) && $reply_id){
          self::add_attachment($reply_id, $reply_uploaded_file['file']);
        }
-
+       WPRuby_Email::reply_added( $ticket_id, $reply_id  );
        return $reply_id;
      }
      /**

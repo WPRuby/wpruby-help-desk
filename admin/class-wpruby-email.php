@@ -49,6 +49,37 @@ class WPRuby_Email {
   }
 
 
+
+    /**
+    * Send notification when a ticket reply is added
+    *
+    * @since    1.0.0
+    */
+    public static function reply_added( $ticket_id = '', $reply_id = '' ){
+      $ticket         =  new WPRuby_Ticket( $ticket_id  );
+      $assignee       =  $ticket->get_assignee();
+      $ticket_author  =  $ticket->get_author();
+      $reply_author   =  new WPRuby_User( get_current_user_id() );
+      if($reply_author->get_id()  == $assignee->get_id()){
+        //send notification to ticket author
+        ob_start();
+        require_once plugin_dir_path( __FILE__ ) . 'partials/emails/reply_added_author.php';
+        $email_content   =  ob_get_clean();
+        $email_title     =  sprintf(__('New Reply on your ticket #%s', 'wpruby-help-desk'), $ticket_id);
+        $headers         =  array('Content-Type: text/html; charset=UTF-8');
+        wp_mail($ticket_author->get_email(),  $email_title, $email_content, $headers);
+      }elseif($reply_author->get_id()  == $ticket_author->get_id()){
+        //send notification to ticket assignee
+        ob_start();
+        require_once plugin_dir_path( __FILE__ ) . 'partials/emails/reply_added_assignee.php';
+        $email_content   =  ob_get_clean();
+        $email_title     =  sprintf(__('New Reply on your assigned ticket #%s', 'wpruby-help-desk'), $ticket_id);
+        $headers         =  array('Content-Type: text/html; charset=UTF-8');
+        wp_mail($assignee->get_email(),  $email_title, $email_content, $headers);
+      }
+
+    }
+
   /**
   * Send the ticket email transcript
   *
