@@ -100,7 +100,7 @@
                     <tr>
                       <td style="font-family:sans-serif;font-size:14px;vertical-align:top;">
                         <p style="font-family:sans-serif;font-size:14px;font-weight:normal;margin:0;Margin-bottom:15px;">Hi <?php echo $author->get_full_name(); ?>,</p>
-                        <p style="font-family:sans-serif;font-size:14px;font-weight:normal;margin:0;Margin-bottom:15px;">Your ticket <strong>#<?php echo $this->ticket_id; ?> (<?php echo $this->get_title(); ?>)</strong> is closed by <?php echo $current_user->display_name; ?></p>
+                        <p style="font-family:sans-serif;font-size:14px;font-weight:normal;margin:0;Margin-bottom:15px;">Your ticket <strong>#<?php echo $ticket_id; ?> (<?php echo $ticket->get_title(); ?>)</strong> is closed by <?php echo $current_user->display_name; ?></p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;box-sizing:border-box;width:100%;">
                           <tbody>
                             <tr>

@@ -48,7 +48,7 @@ class Wpruby_Help_Desk_Activator {
 
 				//set the seeded flag.
 				$this->set_seeded('yes');
-		 	}
+				}
 
 
 	}

@@ -95,11 +95,18 @@ class WPRuby_Email {
     $email_content   =  ob_get_clean();
     $email_title     =  sprintf(__('Your ticket #%s is closed', 'wpruby-help-desk'), $ticket_id);
     $headers         =  array('Content-Type: text/html; charset=UTF-8');
-    $temp_text       =  plugin_dir_path( __FILE__ ) . 'partials/emails/temp/ticket_transcript_'. $ticket_id . '.txt';
-    $temp_text_file  =  fopen($temp_text, 'w');
-    fwrite($temp_text_file, self::get_transcript_text($ticket_id));
-    fclose($f);
-    wp_mail($author->get_email(),  $email_title, $email_content, $headers, array($temp_text));
+
+    $attachments = array();
+    $general_options = get_option('wpruby_help_desk_general');
+    if(isset($general_options['enable_email_transcript']) && $general_options['enable_email_transcript'] == 'on'){
+      $temp_text       =  plugin_dir_path( __FILE__ ) . 'partials/emails/temp/ticket_transcript_'. $ticket_id . '.txt';
+      $temp_text_file  =  fopen($temp_text, 'w');
+      fwrite($temp_text_file, self::get_transcript_text($ticket_id));
+      fclose($f);
+      $attachments = array($temp_text);
+    }
+
+    wp_mail($author->get_email(),  $email_title, $email_content, $headers, $attachments);
     //info: delete the temp text attachment.
     unlink($temp_text);
   }
