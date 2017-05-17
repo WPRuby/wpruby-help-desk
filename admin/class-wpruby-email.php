@@ -48,7 +48,24 @@ class WPRuby_Email {
 
   }
 
+  /**
+  * Send notification when a ticket is re-assigned to another agent
+  * @TODO Need testing
+  * @since    1.0.0
+  */
+  public static function ticket_reassigned( $ticket_id = '' ){
+    $ticket         =  new WPRuby_Ticket( $ticket_id  );
+    $assignee       =  $ticket->get_assignee();
+    $ticket_author  =  $ticket->get_author();
+    //info: 1. email to assignee
+    ob_start();
+    require_once plugin_dir_path( __FILE__ ) . 'partials/emails/ticket_opened_assignee.php';
+    $email_content   =  ob_get_clean();
+    $email_title     =  sprintf(__('You have a new ticket( #%s ) assigned', 'wpruby-help-desk'), $ticket_id);
+    $headers         =  array('Content-Type: text/html; charset=UTF-8');
+    wp_mail($assignee->get_email(),  $email_title, $email_content, $headers);
 
+  }
 
     /**
     * Send notification when a ticket reply is added

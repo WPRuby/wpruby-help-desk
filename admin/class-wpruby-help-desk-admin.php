@@ -270,6 +270,11 @@ class Wpruby_Help_Desk_Admin {
 									if(-1 != $tickets_product){
 										wp_set_post_terms( $post_id, intval($tickets_product), WPRUBY_TICKET_PRODUCT );
 									}
+									//info: check if the ticket was re-assigned.
+									$old_assignee = get_post_meta( $post_id, 'ticket_agent_id', true );
+									if($old_assignee != $ticket_agent){
+										WPRuby_Email::ticket_reassigned(	$post_id	);
+									}
 									update_post_meta( $post_id, 'ticket_agent_id', intval($ticket_agent) );
 						}elseif (isset( $_POST['reply'] ) || isset( $_POST['reply-close'] )	|| isset( $_POST['reply-reopen'] )) {
 								if(isset($_POST['ticket_reply']) && "" != $_POST['ticket_reply']){
