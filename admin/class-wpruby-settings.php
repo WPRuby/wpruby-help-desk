@@ -1,9 +1,8 @@
 <?php
 
 /**
- * WordPress settings API demo class
+ * WordPress settings API class
  *
- * @author Tareq Hasan
  */
 if ( !class_exists('WPRuby_Help_Desk_Settings' ) ):
 class WPRuby_Help_Desk_Settings {

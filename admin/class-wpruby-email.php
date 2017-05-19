@@ -53,13 +53,13 @@ class WPRuby_Email {
   * @TODO Need testing
   * @since    1.0.0
   */
-  public static function ticket_reassigned( $ticket_id = '' ){
+  public static function ticket_reassigned( $ticket_id = '', $old_assignee = '' ){
     $ticket         =  new WPRuby_Ticket( $ticket_id  );
     $assignee       =  $ticket->get_assignee();
-    $ticket_author  =  $ticket->get_author();
+    $old_assignee  =   new WPRuby_User( intval($old_assignee)  );
     //info: 1. email to assignee
     ob_start();
-    require_once plugin_dir_path( __FILE__ ) . 'partials/emails/ticket_opened_assignee.php';
+    require_once plugin_dir_path( __FILE__ ) . 'partials/emails/ticket_reassigned.php';
     $email_content   =  ob_get_clean();
     $email_title     =  sprintf(__('You have a new ticket( #%s ) assigned', 'wpruby-help-desk'), $ticket_id);
     $headers         =  array('Content-Type: text/html; charset=UTF-8');

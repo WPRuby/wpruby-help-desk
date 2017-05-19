@@ -273,7 +273,7 @@ class Wpruby_Help_Desk_Admin {
 									//info: check if the ticket was re-assigned.
 									$old_assignee = get_post_meta( $post_id, 'ticket_agent_id', true );
 									if($old_assignee != $ticket_agent){
-										WPRuby_Email::ticket_reassigned(	$post_id	);
+										WPRuby_Email::ticket_reassigned(	$post_id, 	$old_assignee);
 									}
 									update_post_meta( $post_id, 'ticket_agent_id', intval($ticket_agent) );
 						}elseif (isset( $_POST['reply'] ) || isset( $_POST['reply-close'] )	|| isset( $_POST['reply-reopen'] )) {
