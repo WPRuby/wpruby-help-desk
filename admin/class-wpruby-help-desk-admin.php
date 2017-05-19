@@ -457,7 +457,13 @@ class Wpruby_Help_Desk_Admin {
 		 */
 		public function set_custom_edit_support_ticket_columns($columns) {
 		    unset( $columns['taxonomy-tickets_status'] );
-		    $columns['support_ticket_status'] = __( 'Status', 'wpruby-help-desk' );
+				$columns['support_ticket_status'] = __( 'Status', 'wpruby-help-desk' );
+				$columns['support_ticket_assignee'] = __( 'Assignee', 'wpruby-help-desk' );
+				$columns['support_ticket_customer'] = __( 'Customer', 'wpruby-help-desk' );
+		    $columns['support_ticket_replies'] = __( 'Replies', 'wpruby-help-desk' );
+				$id = array();
+				$id['support_ticket_id'] = __('Ticket #ID', 'wpruby-help-desk');
+				$columns = array_merge($id , $columns);
 		    return $columns;
 		}
 
@@ -478,6 +484,22 @@ class Wpruby_Help_Desk_Admin {
 								else
 									_e( '-', 'wpruby-help-desk' );
 		            break;
+						case 'support_ticket_assignee' :
+							 	$ticket = new WPRuby_Ticket(	$post_id	);
+							  echo '<a href="'. admin_url('user-edit.php?user_id=' . $ticket->get_assignee()->get_id()) .'">'	.	$ticket->get_assignee()->get_full_name()	.	'</a>';
+								break;
+						case 'support_ticket_customer' :
+								$ticket = new WPRuby_Ticket(	$post_id	);
+								echo '<a href="'. admin_url('user-edit.php?user_id=' . $ticket->get_author()->get_id()) .'">'	.	$ticket->get_author()->get_full_name()	.	'</a>';
+								break;
+						case 'support_ticket_replies' :
+								$ticket = new WPRuby_Ticket(	$post_id	);
+								$replies_count = count(	$ticket->get_replies()	);
+								echo $replies_count;
+								break;
+						case 'support_ticket_id' :
+								echo $post_id;
+								break;
 		    }
 		}
 
