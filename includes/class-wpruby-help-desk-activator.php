@@ -106,6 +106,13 @@ class Wpruby_Help_Desk_Activator {
 								'post_status'	=>	'publish',
 								'post_parent' => $main_page_id,
 					),
+					array(
+								'post_content'	=>	'[knowledgebase]',
+								'post_title'	=>	__('Knowledgebase', 'wpruby-help-desk'),
+								'post_type'		=>	'page',
+								'post_status'	=>	'publish',
+								'post_parent' => $main_page_id,
+					),
 				);
 				foreach ($pages as $key => $page_args) {
 					$page_id = wp_insert_post(	$page_args );

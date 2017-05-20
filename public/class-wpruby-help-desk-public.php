@@ -131,7 +131,34 @@ class Wpruby_Help_Desk_Public {
 		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-my-tickets.php';
 		return ob_get_clean();
 	}
-
+	/**
+	 * Display the output of the [knowledgebase] shortcode.
+	 * @return	 string  the shortcode output
+	 * @since    1.0.0
+	 */
+	public function shortcode_knowledgebase(){
+		$products = $this->get_products(	true	);
+		if(!is_wp_error($products)){
+			foreach ($products as $key => $product) {
+				$products[$key]->documents = get_posts(
+					array(
+							'posts_per_page' => -1,
+							'post_type' => WPRUBY_KNOWLEDGEBASE,
+							'tax_query' => array(
+									array(
+											'taxonomy' => WPRUBY_TICKET_PRODUCT,
+											'field' => 'term_id',
+											'terms' => $product->term_id,
+									)
+							)
+					)
+				);
+			}
+		}
+		ob_start();
+		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-knowledgebase.php';
+		return ob_get_clean();
+	}
 	/**
 	 * Display the output of the [ruby_help_desk_login] shortcode.
 	 * @return	 string  the shortcode output
@@ -184,8 +211,8 @@ class Wpruby_Help_Desk_Public {
 	 * @return	 string  array of products' objects
 	 * @since    1.0.0
 	 */
-	public function get_products(){
-		$products = get_terms( WPRUBY_TICKET_PRODUCT, array(	'hide_empty' => false		) );
+	public function get_products($hide_empty = false){
+		$products = get_terms( WPRUBY_TICKET_PRODUCT, array(	'hide_empty' => $hide_empty		) );
 		return $products;
 	}
 	/**

@@ -222,6 +222,7 @@ class Wpruby_Help_Desk {
 		//adding shortcodes
 		add_shortcode('submit_ticket', array($plugin_public, 'shortcode_submit_ticket'));
 		add_shortcode('my_tickets', array($plugin_public, 'shortcode_my_tickets'));
+		add_shortcode('knowledgebase', array($plugin_public, 'shortcode_knowledgebase'));
 		add_shortcode('ruby_help_desk_login', array($plugin_public, 'shortcode_login_form'));
 		add_shortcode('ruby_help_desk_signup', array($plugin_public, 'shortcode_signup_form'));
 

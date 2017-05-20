@@ -147,7 +147,43 @@ class Wpruby_Help_Desk_Admin {
 		register_post_type( WPRUBY_TICKET, $args );
 
 
-		//Tickets Reply
+			//Knowledgebase Articles
+			$labels = array(
+				'name'               => _x( 'Knowledgebase', 'post type general name', 'wpruby-help-desk' ),
+				'singular_name'      => _x( 'New Document', 'post type singular name', 'wpruby-help-desk' ),
+				'menu_name'          => _x( 'Ruby Desk Knowledgebase', 'admin menu', 'wpruby-help-desk' ),
+				'name_admin_bar'     => _x( 'Knowledgebase', 'add new on admin bar', 'wpruby-help-desk' ),
+				'add_new'            => _x( 'New Document', 'book', 'wpruby-help-desk' ),
+				'add_new_item'       => __( 'Create New Document', 'wpruby-help-desk' ),
+				'new_item'           => __( 'Create New Document', 'wpruby-help-desk' ),
+				'edit_item'          => __( 'Edit Document', 'wpruby-help-desk' ),
+				'view_item'          => __( 'View Document', 'wpruby-help-desk' ),
+				'all_items'          => __( 'Knowledgebase', 'wpruby-help-desk' ),
+				'search_items'       => __( 'Search Documents', 'wpruby-help-desk' ),
+				'parent_item_colon'  => __( 'Parent Documents:', 'wpruby-help-desk' ),
+				'not_found'          => __( 'No documents found.', 'wpruby-help-desk' ),
+				'not_found_in_trash' => __( 'No documents found in Trash.', 'wpruby-help-desk' )
+			);
+
+
+			$args = array(
+				'labels'             => $labels,
+				'public'             => true,
+				'publicly_queryable' => true,
+				'show_ui'            => true,
+				'show_in_menu'       => 'edit.php?post_type='	.	WPRUBY_TICKET,
+				'query_var'          => true,
+				'rewrite'            => array( 'slug' => WPRUBY_KNOWLEDGEBASE ),
+				'capability_type'    => 'post',
+				'has_archive'        => true,
+				'hierarchical'       => false,
+				'menu_icon'			 => 'dashicons-tickets',
+
+			);
+			register_post_type( WPRUBY_KNOWLEDGEBASE, $args );
+
+
+			//Tickets Reply
 			$labels = array(
 				'name'               => _x( 'Tickets Reply', 'post type general name', 'wpruby-help-desk' ),
 				'singular_name'      => _x( 'Create Ticket Reply', 'post type singular name', 'wpruby-help-desk' ),
@@ -248,7 +284,7 @@ class Wpruby_Help_Desk_Admin {
 				'rewrite'               => array( 'slug' => WPRUBY_TICKET_PRODUCT ),
 			);
 
-			register_taxonomy( WPRUBY_TICKET_PRODUCT, WPRUBY_TICKET, $args );
+			register_taxonomy( WPRUBY_TICKET_PRODUCT, array(WPRUBY_KNOWLEDGEBASE, WPRUBY_TICKET) , $args );
 		}
 
 		/**
@@ -609,6 +645,12 @@ class Wpruby_Help_Desk_Admin {
 			'id'    => 'rhd_products',
 			'title' => __('Products','wpruby-help-desk'),
 			'href'  => admin_url('edit-tags.php?taxonomy='. WPRUBY_TICKET_PRODUCT .'&post_type=' . WPRUBY_TICKET),
+			'parent'=> 'rhd_main_menu'
+		));
+		$admin_bar->add_menu( array(
+			'id'    => 'rhd_knowledgebase',
+			'title' => __('Knowledgebase','wpruby-help-desk'),
+			'href'  => admin_url('edit.php?post_type=' . WPRUBY_KNOWLEDGEBASE),
 			'parent'=> 'rhd_main_menu'
 		));
 		$admin_bar->add_menu( array(
