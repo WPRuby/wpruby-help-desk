@@ -455,16 +455,18 @@ class Wpruby_Help_Desk_Admin {
 		 * @return array The altered columns
 		 * @since  1.0.0
 		 */
-		public function set_custom_edit_support_ticket_columns($columns) {
-		    unset( $columns['taxonomy-tickets_status'] );
-				$columns['support_ticket_status'] = __( 'Status', 'wpruby-help-desk' );
-				$columns['support_ticket_assignee'] = __( 'Assignee', 'wpruby-help-desk' );
-				$columns['support_ticket_customer'] = __( 'Customer', 'wpruby-help-desk' );
-		    $columns['support_ticket_replies'] = __( 'Replies', 'wpruby-help-desk' );
-				$id = array();
-				$id['support_ticket_id'] = __('Ticket #ID', 'wpruby-help-desk');
-				$columns = array_merge($id , $columns);
-		    return $columns;
+		public function set_custom_edit_support_ticket_columns($old_columns) {
+				$new_columns = array();
+				$new_columns['cb'] = $old_columns['cb'];
+				$new_columns['support_ticket_id'] = __('Ticket #ID', 'wpruby-help-desk');
+				$new_columns['support_ticket_title'] = __('Ticket title', 'wpruby-help-desk');
+				$new_columns['taxonomy-tickets_products'] = $old_columns['taxonomy-tickets_products'];
+				$new_columns['support_ticket_status'] = __( 'Status', 'wpruby-help-desk' );
+				$new_columns['support_ticket_assignee'] = __( 'Assignee', 'wpruby-help-desk' );
+				$new_columns['support_ticket_customer'] = __( 'Customer', 'wpruby-help-desk' );
+		    $new_columns['support_ticket_replies'] = __( 'Replies', 'wpruby-help-desk' );
+				$new_columns['date'] = $old_columns['date'];
+		    return $new_columns;
 		}
 
 		/**
@@ -499,6 +501,9 @@ class Wpruby_Help_Desk_Admin {
 								break;
 						case 'support_ticket_id' :
 								echo $post_id;
+								break;
+						case 'support_ticket_title' :
+								echo get_post_field( 'post_title', $post_id );
 								break;
 		    }
 		}

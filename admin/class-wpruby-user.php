@@ -33,13 +33,16 @@ class WPRuby_User {
 
   public function __construct($user_id){
     $user_info = get_userdata($user_id);
-    $this->id = $user_id;
-    $this->email = $user_info->user_email;
-    $this->username = $user_info->user_login;
-    $this->first_name = $user_info->first_name;
-    $this->last_name = $user_info->last_name;
-    $this->nicename = $user_info->user_nicename;
-    $this->registerd_at = $user_info->user_registered;
+    if(false !== $user_info){
+      $this->id = $user_id;
+      $this->email = $user_info->user_email;
+      $this->username = $user_info->user_login;
+      $this->first_name = $user_info->first_name;
+      $this->last_name = $user_info->last_name;
+      $this->nicename = $user_info->user_nicename;
+      $this->registerd_at = $user_info->user_registered;
+    }
+
 
   }
 
