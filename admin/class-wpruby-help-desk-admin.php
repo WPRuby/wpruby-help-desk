@@ -539,7 +539,7 @@ class Wpruby_Help_Desk_Admin {
 								echo $post_id;
 								break;
 						case 'support_ticket_title' :
-								echo get_post_field( 'post_title', $post_id );
+								echo '<a href="'. get_edit_post_link($post_id) .'">' .get_post_field( 'post_title', $post_id )  . '</a>';
 								break;
 		    }
 		}
