@@ -213,7 +213,6 @@
   margin:0;
 }
 .wpruby_recent_tickets li span.since{
-  float:right;
   color:#aaa;
   font-style: italic;
 }
@@ -231,5 +230,8 @@
   font-size: 8pt;
   opacity: 0.5;
   border-radius: 0;
-  float:none;
+  float:right;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
