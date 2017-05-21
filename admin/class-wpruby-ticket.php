@@ -255,6 +255,10 @@ class WPRuby_Ticket {
          $reply_uploaded_file = wp_handle_upload( $uploadedfile, $upload_overrides );
 
        }
+       //info: if the reply is empty
+       if(isset($_POST['ticket_reply']) && trim($_POST['ticket_reply']) == ''){
+         return array('error' =>  __('The reply should not be empty', 'wpruby-help-desk'));
+       }
        //info: if the file is not validated
        if(isset($reply_uploaded_file['error'])){
          return $reply_uploaded_file;
