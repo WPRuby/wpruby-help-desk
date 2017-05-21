@@ -30,6 +30,14 @@ class Wpruby_Help_Desk_Public {
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
 	private $plugin_name;
+	/**
+	 * The errors array for frontend submission validation.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      array    $errors    The errors array.
+	 */
+	private $errors = array();
 
 	/**
 	 * The version of this plugin.
@@ -225,7 +233,14 @@ class Wpruby_Help_Desk_Public {
 				$ticket['subject'] = sanitize_text_field(	$_POST['ticket_subject']	);
 				$ticket['product'] = intval(	$_POST['ticket_product']	);
 				$ticket['content'] = sanitize_text_field(	$_POST['ticket_reply']	);
-
+				//info: validation start
+				$errors = array();
+				if(trim($ticket['subject']) == ''){
+					$errors[] = __('Ticket Subject should not be empty', 'wpruby-help-desk');
+				}
+				if(trim($ticket['content']) == ''){
+					$errors[] = __('Ticket Description should not be empty', 'wpruby-help-desk');
+				}
 				//info: if there is an attachment
 				if(isset($_FILES['ticket_attachment']) && $_FILES['ticket_attachment']['name'] != ''){
 					if ( ! function_exists( 'wp_handle_upload' ) ) {
@@ -234,13 +249,18 @@ class Wpruby_Help_Desk_Public {
 					$uploadedfile = $_FILES['ticket_attachment'];
 					$upload_overrides = array( 'test_form' => false );
 					$ticket_uploaded_file = wp_handle_upload( $uploadedfile, $upload_overrides );
+					if(isset($ticket_uploaded_file['error'])){
+						$errors[] = $ticket_uploaded_file['error'];
+					}
 					$ticket['attachment'] = $ticket_uploaded_file['file'];
 				}
-
-
-				$ticket_id =  WPRuby_Ticket::add($ticket);
-				wp_redirect(get_permalink($ticket_id));
-				exit;
+				if(empty($errors)){
+					$ticket_id =  WPRuby_Ticket::add($ticket);
+					wp_redirect(get_permalink($ticket_id));
+					exit;
+				}else{
+					$this->errors = $errors;
+				}
 			}
 	}
 	/**

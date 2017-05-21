@@ -215,8 +215,7 @@ class WPRuby_Ticket {
       * @return      number    $ticket_id      The ID of the new ticket.
       */
      public static function add(  $ticket  ){
-       $new_status = get_option('wpruby_ticket_status_new');
-       $new_status = ($new_status === FALSE)?-1:$new_status;
+       $new_status = get_option('wpruby_ticket_status_new', -1);
 
        $postattr = array(
                     'post_title'    =>  $ticket['subject'],
@@ -265,8 +264,8 @@ class WPRuby_Ticket {
        }
 
        $ticket_reply_args = array(
-         'post_title'		=>	'Reply to ticket #' . $ticket_id,
-         'post_content'	=>	$_POST['ticket_reply'],
+         'post_title'		  =>	'Reply to ticket #' . $ticket_id,
+         'post_content'	  =>	$_POST['ticket_reply'],
          'post_status'		=>	'publish',
          'post_type'			=>	WPRUBY_TICKET_REPLY,
          'post_parent'		=>	intval($ticket_id),
