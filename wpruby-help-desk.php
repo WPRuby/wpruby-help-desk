@@ -1,12 +1,6 @@
 <?php
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
  *
  * @link              https://wpruby.com
  * @since             1.0.0
@@ -14,8 +8,8 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Ruby Help Desk
- * Plugin URI:        https://wpruby.com/plugin/help-desk
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin URI:        https://wpruby.com/plugin/ruby-help-desk
+ * Description:       A simple Help Desk to support your customers efficiently.
  * Version:           1.0.0
  * Author:            WPRuby
  * Author URI:        https://wpruby.com
@@ -29,16 +23,16 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-
+define('RHD_VERSION', 					'1.0.0');
 // define the plugin constants
-define('WPRUBY_TICKET', 'support_ticket');
-define('WPRUBY_KNOWLEDGEBASE', 'help_knowledgebase');
-define('WPRUBY_TICKET_REPLY', 'support_ticket_reply');
-define('WPRUBY_TICKET_STATUS', 'tickets_status');
+define('WPRUBY_TICKET', 				'support_ticket');
+define('WPRUBY_KNOWLEDGEBASE', 	'help_knowledgebase');
+define('WPRUBY_TICKET_REPLY', 	'support_ticket_reply');
+define('WPRUBY_TICKET_STATUS', 	'tickets_status');
 define('WPRUBY_TICKET_PRODUCT', 'tickets_products');
 //Help Desk roles
-define('WPRUBY_AGENT', 'ruby_desk_agent');
-define('WPRUBY_CUSTOMER', 'ruby_desk_customer');
+define('WPRUBY_AGENT', 					'ruby_desk_agent');
+define('WPRUBY_CUSTOMER', 			'ruby_desk_customer');
 
 
 /**
@@ -54,8 +48,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk.php';
 function activate_wpruby_help_desk() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk-activator.php';
 	$plugin_name = 'wpruby-help-desk';
-	$version = '1.0.0';
-	$plugin_admin = new Wpruby_Help_Desk_Admin( $plugin_name, $version );
+	$plugin_admin = new Wpruby_Help_Desk_Admin( $plugin_name, RHD_VERSION );
 	$plugin_admin->register_taxonomies();
 	$activator = new Wpruby_Help_Desk_Activator();
 	$activator->activate();

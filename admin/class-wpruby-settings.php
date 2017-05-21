@@ -66,51 +66,7 @@ class WPRuby_Help_Desk_Settings {
                   'desc'  => __( 'If this option is enabled, a transcript text file of the ticket will be sent to the client email when the ticket is closed.', 'wpruby-help-desk' ),
                   'type'  => 'checkbox'
               ),
-                /*array(
-                    'name'              => 'text_val',
-                    'label'             => __( 'Text Input', 'wpruby-help-desk' ),
-                    'desc'              => __( 'Text input description', 'wpruby-help-desk' ),
-                    'placeholder'       => __( 'Text Input placeholder', 'wpruby-help-desk' ),
-                    'type'              => 'text',
-                    'default'           => 'Title',
-                    'sanitize_callback' => 'sanitize_text_field'
-                ),
 
-
-                array(
-                    'name'        => 'html',
-                    'desc'        => __( 'HTML area description. You can use any <strong>bold</strong> or other HTML elements.', 'wpruby-help-desk' ),
-                    'type'        => 'html'
-                ),
-
-                array(
-                    'name'    => 'radio',
-                    'label'   => __( 'Radio Button', 'wpruby-help-desk' ),
-                    'desc'    => __( 'A radio button', 'wpruby-help-desk' ),
-                    'type'    => 'radio',
-                    'options' => array(
-                        'yes' => 'Yes',
-                        'no'  => 'No'
-                    )
-                ),
-
-                array(
-                    'name'    => 'password',
-                    'label'   => __( 'Password', 'wpruby-help-desk' ),
-                    'desc'    => __( 'Password description', 'wpruby-help-desk' ),
-                    'type'    => 'password',
-                    'default' => ''
-                ),
-                array(
-                    'name'    => 'file',
-                    'label'   => __( 'File', 'wpruby-help-desk' ),
-                    'desc'    => __( 'File description', 'wpruby-help-desk' ),
-                    'type'    => 'file',
-                    'default' => '',
-                    'options' => array(
-                        'button_label' => 'Choose Image'
-                    )
-                )*/
             ),
             'wpruby_help_desk_attachments' => array(
               array(
@@ -140,40 +96,7 @@ class WPRuby_Help_Desk_Settings {
                     'type'        => 'textarea'
                 ),
 
-                /*array(
-                    'name'    => 'color',
-                    'label'   => __( 'Color', 'wpruby-help-desk' ),
-                    'desc'    => __( 'Color description', 'wpruby-help-desk' ),
-                    'type'    => 'color',
-                    'default' => ''
-                ),
-                array(
-                    'name'    => 'password',
-                    'label'   => __( 'Password', 'wpruby-help-desk' ),
-                    'desc'    => __( 'Password description', 'wpruby-help-desk' ),
-                    'type'    => 'password',
-                    'default' => ''
-                ),
-                array(
-                    'name'    => 'wysiwyg',
-                    'label'   => __( 'Advanced Editor', 'wpruby-help-desk' ),
-                    'desc'    => __( 'WP_Editor description', 'wpruby-help-desk' ),
-                    'type'    => 'wysiwyg',
-                    'default' => ''
-                ),
-                array(
-                    'name'    => 'multicheck',
-                    'label'   => __( 'Multile checkbox', 'wpruby-help-desk' ),
-                    'desc'    => __( 'Multi checkbox description', 'wpruby-help-desk' ),
-                    'type'    => 'multicheck',
-                    'default' => array('one' => 'one', 'four' => 'four'),
-                    'options' => array(
-                        'one'   => 'One',
-                        'two'   => 'Two',
-                        'three' => 'Three',
-                        'four'  => 'Four'
-                    )
-                ),*/
+              
             )
         );
 
