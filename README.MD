@@ -2,11 +2,17 @@
 [![codebeat badge](https://codebeat.co/badges/27b944d8-e639-4d4b-a0fb-6511f5172d0e)](https://codebeat.co/projects/github-com-wsenjer-wpruby-help-desk-master)
 
 **Contributors:** wprubyplugins, waseem_senjer
+
 **Requires at least:** WordPress 3.0.1
+
 **Tested up to:** WordPress 4.7.3
+
 **Stable tag:** 1.0.0
+
 **License:** GPLv2 or later
+
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
+
 
 Ruby Help Desk is a WordPress plugin which work as a customer support platform.
 
