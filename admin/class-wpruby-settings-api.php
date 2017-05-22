@@ -6,8 +6,6 @@
  * @version 1.3 (27-Sep-2016)
  *
  * @author Tareq Hasan <tareq@weDevs.com>
- * @link https://tareq.co Tareq Hasan
- * @example example/oop-example.php How to use the class
  */
 if ( !class_exists( 'WPRuby_Settings_API' ) ):
 class WPRuby_Settings_API {

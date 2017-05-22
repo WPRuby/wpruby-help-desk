@@ -1,4 +1,15 @@
+<?php
 
+/**
+ * Display the ticket content
+ * @link       https://wpruby.com
+ * @since      1.0.0
+ *
+ * @package    Wpruby_Help_Desk
+ * @subpackage Wpruby_Help_Desk/admin/partials
+ */
+
+?>
 <div id="ticket_message">
 
 

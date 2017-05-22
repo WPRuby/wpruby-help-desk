@@ -1,9 +1,14 @@
 <?php
+ /**
+  * WordPress settings API class
+  *
+  * @link       https://wpruby.com
+  * @since      1.0.0
+  *
+  * @package    WPRuby_Help_Desk_Settings
+  * @subpackage WPRuby_Help_Desk_Settings/admin
+  */
 
-/**
- * WordPress settings API class
- *
- */
 if ( !class_exists('WPRuby_Help_Desk_Settings' ) ):
 class WPRuby_Help_Desk_Settings {
 
@@ -96,7 +101,7 @@ class WPRuby_Help_Desk_Settings {
                     'type'        => 'textarea'
                 ),
 
-              
+
             )
         );
 

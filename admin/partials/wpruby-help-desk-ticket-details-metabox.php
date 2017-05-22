@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Provide a admin area view for the plugin
- *
- * This file is used to markup the admin-facing aspects of the plugin.
- *
+ * Display information about the ticket owner.
  * @link       https://wpruby.com
  * @since      1.0.0
  *

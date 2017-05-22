@@ -8,14 +8,6 @@
  *
  * @package    WPRuby_Ticket
  * @subpackage WPRuby_Ticket/admin
- */
-
-/**
- * The User helper class of the plugin.
- *
- *
- * @package    WPRuby_Ticket
- * @subpackage WPRuby_Ticket/admin
  * @author     WPRuby <info@wpruby.com>
  */
 class WPRuby_Ticket {

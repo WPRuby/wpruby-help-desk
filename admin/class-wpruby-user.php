@@ -1,15 +1,4 @@
 <?php
-
-/**
- * The User helper class of the plugin.
- *
- * @link       https://wpruby.com
- * @since      1.0.0
- *
- * @package    WPRuby_User
- * @subpackage WPRuby_User/admin
- */
-
 /**
  * The User helper class of the plugin.
  *
@@ -20,7 +9,6 @@
  */
 class WPRuby_User {
 
-  protected $default_avatar = 'https://www.somewhere.com/homestar.jpg';
   protected $avater_size = 60;
   protected $id = 0;
   protected $email = '';
