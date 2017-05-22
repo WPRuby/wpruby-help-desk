@@ -49,6 +49,7 @@ function activate_wpruby_help_desk() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk-activator.php';
 	$plugin_name = 'wpruby-help-desk';
 	$plugin_admin = new Wpruby_Help_Desk_Admin( $plugin_name, RHD_VERSION );
+	$plugin_admin->register_post_types();
 	$plugin_admin->register_taxonomies();
 	$activator = new Wpruby_Help_Desk_Activator();
 	$activator->activate();

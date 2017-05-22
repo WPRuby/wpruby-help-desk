@@ -37,8 +37,9 @@ class Wpruby_Help_Desk_Activator {
 					$this->seed_statuses();
 					$this->seed_products();
 					$this->seed_settings();
-
-					//set the seeded flag.
+					//info: flush rewrite rules for the new Post Types.
+					flush_rewrite_rules();
+					//info: set the seeded flag.
 					$this->set_seeded('yes');
 			}
 	}
