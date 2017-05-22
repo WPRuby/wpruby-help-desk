@@ -31,7 +31,7 @@ class Wpruby_Help_Desk_Activator {
 	 * @since    1.0.0
 	 */
 	public function activate() {
-			if(!$this->is_same_version()){
+			if(!$this->is_seeded()){
 					$this->add_roles();
 					$this->seed_pages();
 					$this->seed_statuses();
@@ -39,25 +39,24 @@ class Wpruby_Help_Desk_Activator {
 					$this->seed_settings();
 
 					//set the seeded flag.
-					$this->set_version(RHD_VERSION);
+					$this->set_seeded('yes');
 			}
 	}
 	/**
-	 * Set the "already seeded" flag. It's used so the plugin does not seed in every activation.
+	 * Set the "already seeded" flag. It's used so the plugin does not seed on every activation.
 	 * @param		 string		'on' or 'off'
 	 * @since    1.0.0
 	 */
-	private function set_version( $value ){
-		update_option( 'wpruby_help_desk_version'	, $value);
+	private function set_seeded( $value ){
+		update_option( 'wpruby_help_desk_seeded'	, $value);
 	}
 	/**
-	 * Get if the plugin is seeded based on the version number
+	 * Get if the plugin is seeded based.
 	 * @param		 string		'on' or 'off'
 	 * @since    1.0.0
 	 */
-	private function is_same_version( ){
-		$old_version = get_option( 'wpruby_help_desk_version');
-		return ($old_version === RHD_VERSION);
+	private function is_seeded( ){
+		return get_option( 'wpruby_help_desk_seeded', 'no');
 	}
 	/**
 	 * Seeding the plugin frontend pages.
