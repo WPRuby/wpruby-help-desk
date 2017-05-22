@@ -56,7 +56,7 @@ class Wpruby_Help_Desk_Activator {
 	 * @since    1.0.0
 	 */
 	private function is_seeded( ){
-		return get_option( 'wpruby_help_desk_seeded', 'no');
+		return (get_option( 'wpruby_help_desk_seeded', 'no') === 'yes');
 	}
 	/**
 	 * Seeding the plugin frontend pages.
