@@ -14,11 +14,10 @@
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
 
-Ruby Help Desk is a WordPress plugin which work as a customer support platform.
+Ruby Help Desk is a WordPress plugin which works as a customer support platform.
 
 ## Description
-Ruby Help Desk is a WordPress plugin which work as a customer support platform. The plugin includes many features such as Frontend submissions, ticket attachments, Knowledgebase and statistics.
-
+Ruby Help Desk is a WordPress plugin which works as a customer support platform. The plugin includes many features such as Frontend submissions, ticket attachments, Knowledgebase, and statistics.
 
 ## Installation
 ### Using The WordPress Dashboard
