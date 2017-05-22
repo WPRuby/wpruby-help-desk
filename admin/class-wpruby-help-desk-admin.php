@@ -494,8 +494,8 @@ class Wpruby_Help_Desk_Admin {
 		public function set_custom_edit_support_ticket_columns($old_columns) {
 				$new_columns = array();
 				$new_columns['cb'] = $old_columns['cb'];
-				$new_columns['support_ticket_id'] = __('Ticket #ID', 'wpruby-help-desk');
 				$new_columns['support_ticket_title'] = __('Ticket title', 'wpruby-help-desk');
+				$new_columns['support_ticket_id'] = __('Ticket #ID', 'wpruby-help-desk');
 				$new_columns['taxonomy-tickets_products'] = $old_columns['taxonomy-tickets_products'];
 				$new_columns['support_ticket_status'] = __( 'Status', 'wpruby-help-desk' );
 				$new_columns['support_ticket_assignee'] = __( 'Assignee', 'wpruby-help-desk' );
