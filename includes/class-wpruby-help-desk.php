@@ -206,6 +206,13 @@ class Wpruby_Help_Desk {
 		//info: add the helpdesk status dashboard widget
 		$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'helpdesk_status_dashboard_widget');
 
+		//info: a hook to perform upgrades if necessary
+		$db_version = get_option('wpruby_help_desk_db_version', '1.0.0');
+		if(version_compare($db_version, RHD_VERSION, 'ne')){
+			//upgrade might be needed since the db version and files version are different
+			$this->loader->add_action( 'admin_init', $plugin_admin, 'perform_upgrades');
+		}
+
 	}
 
 	/**

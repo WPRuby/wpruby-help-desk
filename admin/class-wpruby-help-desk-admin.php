@@ -660,5 +660,17 @@ class Wpruby_Help_Desk_Admin {
 			'parent'=> 'rhd_main_menu'
 		));
 	}
+	/**
+	 * Perform upgrades, shall be used extensively in the future releases.
+	 * @since  1.0.0
+	 */
+	public function perform_upgrades(){
+
+		//add upgrades here (Use a different class)
+
+		//after performing the upgrades, set the db version to the current files version
+		update_option('wpruby_help_desk_db_version', RHD_VERSION);
+
+	}
 
 } //class end
