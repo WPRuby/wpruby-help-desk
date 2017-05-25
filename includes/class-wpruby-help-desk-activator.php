@@ -142,8 +142,8 @@ class Wpruby_Help_Desk_Activator {
 				);
 
 				foreach($statuses as $key => $status){
-					if(! term_exists($status['term'],	WPRUBY_TICKET_STATUS)){
-							$term = wp_insert_term($status['term'], WPRUBY_TICKET_STATUS, array('slug' => $status['slug']));
+					if(! term_exists($status['term'],	RHD_TICKET_STATUS)){
+							$term = wp_insert_term($status['term'], RHD_TICKET_STATUS, array('slug' => $status['slug']));
 							if(isset($term['term_id'])){
 								update_term_meta ($term['term_id'], 'ticket_status_color', $status['color']);
 								update_option( 'wpruby_ticket_status_' . $status['slug'], $term['term_id']);
@@ -164,8 +164,8 @@ class Wpruby_Help_Desk_Activator {
 					)
 			);
 			foreach($products as $key => $product){
-				if(! term_exists($product['term'],	WPRUBY_TICKET_PRODUCT)){
-						$term = wp_insert_term($product['term'], WPRUBY_TICKET_PRODUCT);
+				if(! term_exists($product['term'],	RHD_TICKET_PRODUCT)){
+						$term = wp_insert_term($product['term'], RHD_TICKET_PRODUCT);
 				}
 			}
 	}
@@ -179,8 +179,8 @@ class Wpruby_Help_Desk_Activator {
 		//info: add the help desk custom roles
 		$author     = get_role( 'author' );
 		$subscriber = get_role( 'subscriber' );
-		add_role( WPRUBY_AGENT, __('Help Desk Agent', 'wpruby-help-desk'), $author->capabilities );
-		add_role( WPRUBY_CUSTOMER, __('Help Desk Customer', 'wpruby-help-desk'), $subscriber->capabilities );
+		add_role( RHD_AGENT, __('Help Desk Agent', 'wpruby-help-desk'), $author->capabilities );
+		add_role( RHD_CUSTOMER, __('Help Desk Customer', 'wpruby-help-desk'), $subscriber->capabilities );
 
 		//add the Agent role to all of the admin
 		$administrators = get_users(
@@ -191,7 +191,7 @@ class Wpruby_Help_Desk_Activator {
 		);
 		foreach($administrators as $admin){
 			$admin_user = new WP_User($admin->ID);
-			$admin_user->add_role(WPRUBY_AGENT);
+			$admin_user->add_role(RHD_AGENT);
 		}
 
 	}

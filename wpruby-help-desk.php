@@ -25,14 +25,14 @@ if ( ! defined( 'WPINC' ) ) {
 }
 define('RHD_VERSION', 					'1.0.0');
 // define the plugin constants
-define('WPRUBY_TICKET', 				'support_ticket');
-define('WPRUBY_KNOWLEDGEBASE', 	'help_knowledgebase');
-define('WPRUBY_TICKET_REPLY', 	'support_ticket_reply');
-define('WPRUBY_TICKET_STATUS', 	'tickets_status');
-define('WPRUBY_TICKET_PRODUCT', 'tickets_products');
+define('RHD_TICKET', 				'support_ticket');
+define('RHD_KNOWLEDGEBASE', 	'help_knowledgebase');
+define('RHD_TICKET_REPLY', 	'support_ticket_reply');
+define('RHD_TICKET_STATUS', 	'tickets_status');
+define('RHD_TICKET_PRODUCT', 'tickets_products');
 //Help Desk roles
-define('WPRUBY_AGENT', 					'ruby_desk_agent');
-define('WPRUBY_CUSTOMER', 			'ruby_desk_customer');
+define('RHD_AGENT', 					'ruby_desk_agent');
+define('RHD_CUSTOMER', 			'ruby_desk_customer');
 
 
 /**
@@ -45,7 +45,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk.php';
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wpruby-help-desk-activator.php
  */
-function activate_wpruby_help_desk() {
+function rhd_activate_wpruby_help_desk() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk-activator.php';
 	$plugin_name = 'wpruby-help-desk';
 	$plugin_admin = new Wpruby_Help_Desk_Admin( $plugin_name, RHD_VERSION );
@@ -59,13 +59,13 @@ function activate_wpruby_help_desk() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-wpruby-help-desk-deactivator.php
  */
-function deactivate_wpruby_help_desk() {
+function rhd_deactivate_wpruby_help_desk() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk-deactivator.php';
 	Wpruby_Help_Desk_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_wpruby_help_desk' );
-register_deactivation_hook( __FILE__, 'deactivate_wpruby_help_desk' );
+register_activation_hook( __FILE__, 'rhd_activate_wpruby_help_desk' );
+register_deactivation_hook( __FILE__, 'rhd_deactivate_wpruby_help_desk' );
 
 
 
@@ -78,8 +78,8 @@ register_deactivation_hook( __FILE__, 'deactivate_wpruby_help_desk' );
  *
  * @since    1.0.0
  */
-function run_wpruby_help_desk() {
+function rhd_run_wpruby_help_desk() {
 	$plugin = new Wpruby_Help_Desk();
 	$plugin->run();
 }
-run_wpruby_help_desk();
+rhd_run_wpruby_help_desk();

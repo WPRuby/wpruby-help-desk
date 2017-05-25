@@ -134,7 +134,7 @@ class Wpruby_Help_Desk_Admin {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => WPRUBY_TICKET ),
+			'rewrite'            => array( 'slug' => RHD_TICKET ),
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
@@ -144,7 +144,7 @@ class Wpruby_Help_Desk_Admin {
 
 		);
 
-		register_post_type( WPRUBY_TICKET, $args );
+		register_post_type( RHD_TICKET, $args );
 
 
 			//Knowledgebase Articles
@@ -171,16 +171,16 @@ class Wpruby_Help_Desk_Admin {
 				'public'             => true,
 				'publicly_queryable' => true,
 				'show_ui'            => true,
-				'show_in_menu'       => 'edit.php?post_type='	.	WPRUBY_TICKET,
+				'show_in_menu'       => 'edit.php?post_type='	.	RHD_TICKET,
 				'query_var'          => true,
-				'rewrite'            => array( 'slug' => WPRUBY_KNOWLEDGEBASE ),
+				'rewrite'            => array( 'slug' => RHD_KNOWLEDGEBASE ),
 				'capability_type'    => 'post',
 				'has_archive'        => true,
 				'hierarchical'       => false,
 				'menu_icon'			 => 'dashicons-tickets',
 
 			);
-			register_post_type( WPRUBY_KNOWLEDGEBASE, $args );
+			register_post_type( RHD_KNOWLEDGEBASE, $args );
 
 
 			//Tickets Reply
@@ -209,14 +209,14 @@ class Wpruby_Help_Desk_Admin {
 				'show_ui'            => false,
 				'show_in_menu'       => false,
 				'query_var'          => true,
-				'rewrite'            => array( 'slug' => WPRUBY_TICKET_REPLY ),
+				'rewrite'            => array( 'slug' => RHD_TICKET_REPLY ),
 				'capability_type'    => 'post',
 				'has_archive'        => true,
 				'hierarchical'       => false,
 				'menu_position'      => null,
 			);
 
-			register_post_type( WPRUBY_TICKET_REPLY, $args );
+			register_post_type( RHD_TICKET_REPLY, $args );
 	}
 
 		/**
@@ -253,7 +253,7 @@ class Wpruby_Help_Desk_Admin {
 				'rewrite'               => array( 'slug' => 'statuses' ),
 			);
 
-			register_taxonomy( WPRUBY_TICKET_STATUS, WPRUBY_TICKET, $args );
+			register_taxonomy( RHD_TICKET_STATUS, RHD_TICKET, $args );
 			//adding the products taxonomy
 			$labels = array(
 				'name'                       => _x( 'Product', 'taxonomy general name' ),
@@ -281,10 +281,10 @@ class Wpruby_Help_Desk_Admin {
 				'show_admin_column'     => true,
 				'update_count_callback' => '_update_post_term_count',
 				'query_var'             => true,
-				'rewrite'               => array( 'slug' => WPRUBY_TICKET_PRODUCT ),
+				'rewrite'               => array( 'slug' => RHD_TICKET_PRODUCT ),
 			);
 
-			register_taxonomy( WPRUBY_TICKET_PRODUCT, array(WPRUBY_KNOWLEDGEBASE, WPRUBY_TICKET) , $args );
+			register_taxonomy( RHD_TICKET_PRODUCT, array(RHD_KNOWLEDGEBASE, RHD_TICKET) , $args );
 		}
 
 		/**
@@ -294,17 +294,17 @@ class Wpruby_Help_Desk_Admin {
 		public function save_ticket_details( $post_id, $post, $update){
 			if(isset($_POST) && !empty($_POST)){
 					$post_type = get_post_type($post_id);
-					if(WPRUBY_TICKET == $post_type){
+					if(RHD_TICKET == $post_type){
 						$ticket = new WPRuby_Ticket(	$post_id	);
 						if(isset( $_POST['publish'] )){
 									$tickets_status = $_POST['ticket_status'];
 									$tickets_product = $_POST['ticket_product'];
 									$ticket_agent = $_POST['ticket_agent'];
 									if(-1 != $tickets_status){
-										wp_set_post_terms( $post_id, intval($tickets_status), WPRUBY_TICKET_STATUS );
+										wp_set_post_terms( $post_id, intval($tickets_status), RHD_TICKET_STATUS );
 									}
 									if(-1 != $tickets_product){
-										wp_set_post_terms( $post_id, intval($tickets_product), WPRUBY_TICKET_PRODUCT );
+										wp_set_post_terms( $post_id, intval($tickets_product), RHD_TICKET_PRODUCT );
 									}
 									//info: check if the ticket was re-assigned.
 									$old_assignee = get_post_meta( $post_id, 'ticket_agent_id', true );
@@ -318,7 +318,7 @@ class Wpruby_Help_Desk_Admin {
 											'post_title'		=>	'Reply to ticket #' . $post_id,
 											'post_content'	=>	$_POST['ticket_reply'],
 											'post_status'		=>	'publish',
-											'post_type'			=>	WPRUBY_TICKET_REPLY,
+											'post_type'			=>	RHD_TICKET_REPLY,
 											'post_parent'		=>	intval($post_id),
 										);
 										wp_insert_post( $ticket_reply_args );
@@ -343,23 +343,23 @@ class Wpruby_Help_Desk_Admin {
 		 */
 		public function add_tickets_metaboxes(){
 			//remove the publishing box
-			remove_meta_box( 'submitdiv', WPRUBY_TICKET, 'side' );
-			remove_meta_box( 'tickets_productsdiv', WPRUBY_TICKET, 'side' );
-			remove_meta_box( 'tickets_statusdiv', WPRUBY_TICKET, 'side' );
+			remove_meta_box( 'submitdiv', RHD_TICKET, 'side' );
+			remove_meta_box( 'tickets_productsdiv', RHD_TICKET, 'side' );
+			remove_meta_box( 'tickets_statusdiv', RHD_TICKET, 'side' );
 
 			// adding the reply box only when the ticket is already created
-			add_meta_box('ticket_options', __( 'Ticket Options', 'wpruby-help-desk' ), array($this, 'ticket_options_meta_box_callback'), WPRUBY_TICKET, 'side', 'high');
+			add_meta_box('ticket_options', __( 'Ticket Options', 'wpruby-help-desk' ), array($this, 'ticket_options_meta_box_callback'), RHD_TICKET, 'side', 'high');
 			if(isset($_GET['post'])){
 				$ticket = new WPRuby_Ticket($_GET['post']);
 
-				add_meta_box('ticket_information', __( 'Ticket Details', 'wpruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), WPRUBY_TICKET, 'side', 'high');
+				add_meta_box('ticket_information', __( 'Ticket Details', 'wpruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), RHD_TICKET, 'side', 'high');
 
-				add_meta_box('ticket_message', __( 'Ticket Message', 'wpruby-help-desk' ), array($this, 'ticket_message_meta_box_callback'), WPRUBY_TICKET, 'normal', 'high');
+				add_meta_box('ticket_message', __( 'Ticket Message', 'wpruby-help-desk' ), array($this, 'ticket_message_meta_box_callback'), RHD_TICKET, 'normal', 'high');
 				if($ticket->get_replies()){
-					add_meta_box('ticket_replies', __( 'Replies', 'wpruby-help-desk' ), array($this, 'replies_meta_box_callback'), WPRUBY_TICKET, 'normal', 'high');
+					add_meta_box('ticket_replies', __( 'Replies', 'wpruby-help-desk' ), array($this, 'replies_meta_box_callback'), RHD_TICKET, 'normal', 'high');
 				}
 
-				add_meta_box('reply_to_ticket', __( 'Reply', 'wpruby-help-desk' ), array($this, 'reply_meta_box_callback'), WPRUBY_TICKET, 'normal', 'high');
+				add_meta_box('reply_to_ticket', __( 'Reply', 'wpruby-help-desk' ), array($this, 'reply_meta_box_callback'), RHD_TICKET, 'normal', 'high');
 
 			}
 		}
@@ -400,12 +400,12 @@ class Wpruby_Help_Desk_Admin {
 			$ticket = new WPRuby_Ticket(	$post->ID	);
 			$ticket_status = $ticket->get_status();
 			// get terms
-			$statuses = get_terms( WPRUBY_TICKET_STATUS, array(  'hide_empty' => false ) );
-			$products = get_terms( WPRUBY_TICKET_PRODUCT, array(  'hide_empty' => false ) );
+			$statuses = get_terms( RHD_TICKET_STATUS, array(  'hide_empty' => false ) );
+			$products = get_terms( RHD_TICKET_PRODUCT, array(  'hide_empty' => false ) );
 			$ticket_agent = get_post_meta( $post->ID, 'ticket_agent_id', true );
 
 			$agents = WPRuby_User::get_agents();
-			$ticket_product = wp_get_object_terms($post->ID, WPRUBY_TICKET_PRODUCT, array("fields" => "ids"));
+			$ticket_product = wp_get_object_terms($post->ID, RHD_TICKET_PRODUCT, array("fields" => "ids"));
 
 			$ticket_product = (isset($ticket_product[0]))? $ticket_product[0]: -1;
 
@@ -626,37 +626,37 @@ class Wpruby_Help_Desk_Admin {
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_all_tickets',
 			'title' => __('All Tickets','wpruby-help-desk'),
-			'href'  => admin_url('edit.php?post_type='. WPRUBY_TICKET),
+			'href'  => admin_url('edit.php?post_type='. RHD_TICKET),
 			'parent'=> 'rhd_main_menu'
 		));
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_create_ticket',
 			'title' => __('Create Ticket','wpruby-help-desk'),
-			'href'  => admin_url('post-new.php?post_type=' . WPRUBY_TICKET),
+			'href'  => admin_url('post-new.php?post_type=' . RHD_TICKET),
 			'parent'=> 'rhd_main_menu'
 		));
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_statuses',
 			'title' => __('Statuses','wpruby-help-desk'),
-			'href'  => admin_url('edit-tags.php?taxonomy='. WPRUBY_TICKET_STATUS .'&post_type=' . WPRUBY_TICKET),
+			'href'  => admin_url('edit-tags.php?taxonomy='. RHD_TICKET_STATUS .'&post_type=' . RHD_TICKET),
 			'parent'=> 'rhd_main_menu'
 		));
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_products',
 			'title' => __('Products','wpruby-help-desk'),
-			'href'  => admin_url('edit-tags.php?taxonomy='. WPRUBY_TICKET_PRODUCT .'&post_type=' . WPRUBY_TICKET),
+			'href'  => admin_url('edit-tags.php?taxonomy='. RHD_TICKET_PRODUCT .'&post_type=' . RHD_TICKET),
 			'parent'=> 'rhd_main_menu'
 		));
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_knowledgebase',
 			'title' => __('Knowledgebase','wpruby-help-desk'),
-			'href'  => admin_url('edit.php?post_type=' . WPRUBY_KNOWLEDGEBASE),
+			'href'  => admin_url('edit.php?post_type=' . RHD_KNOWLEDGEBASE),
 			'parent'=> 'rhd_main_menu'
 		));
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_settings',
 			'title' => __('Settings','wpruby-help-desk'),
-			'href'  => admin_url('edit.php?post_type='. WPRUBY_TICKET .'&page=wpruby-help-desk-settings'),
+			'href'  => admin_url('edit.php?post_type='. RHD_TICKET .'&page=wpruby-help-desk-settings'),
 			'parent'=> 'rhd_main_menu'
 		));
 	}

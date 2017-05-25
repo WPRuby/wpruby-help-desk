@@ -150,10 +150,10 @@ class Wpruby_Help_Desk_Public {
 				$products[$key]->documents = get_posts(
 					array(
 							'posts_per_page' => -1,
-							'post_type' => WPRUBY_KNOWLEDGEBASE,
+							'post_type' => RHD_KNOWLEDGEBASE,
 							'tax_query' => array(
 									array(
-											'taxonomy' => WPRUBY_TICKET_PRODUCT,
+											'taxonomy' => RHD_TICKET_PRODUCT,
 											'field' => 'term_id',
 											'terms' => $product->term_id,
 									)
@@ -199,7 +199,7 @@ class Wpruby_Help_Desk_Public {
 	public function display_single_ticket( $content ){
 		global $post;
 		//info: if it is not a ticket, do not do any thing
-		if($post->post_type != WPRUBY_TICKET) return $content;
+		if($post->post_type != RHD_TICKET) return $content;
 		ob_start();
 		$ticket = new WPRuby_Ticket(	$post->ID );
 		$status = $ticket->get_status();
@@ -219,7 +219,7 @@ class Wpruby_Help_Desk_Public {
 	 * @since    1.0.0
 	 */
 	public function get_products($hide_empty = false){
-		$products = get_terms( WPRUBY_TICKET_PRODUCT, array(	'hide_empty' => $hide_empty		) );
+		$products = get_terms( RHD_TICKET_PRODUCT, array(	'hide_empty' => $hide_empty		) );
 		return $products;
 	}
 	/**
@@ -346,7 +346,7 @@ class Wpruby_Help_Desk_Public {
 					$my_tickets_page_id = get_option('wpruby_[my_tickets]');
 
 					//info: 1. restrict single tickets
-					if(isset($post->post_type) && $post->post_type == WPRUBY_TICKET){
+					if(isset($post->post_type) && $post->post_type == RHD_TICKET){
 						$current_user_id = get_current_user_id();
 						$ticket_author_id = get_post_field( 'post_author', $post->ID);
 						if($current_user_id != $ticket_author_id){

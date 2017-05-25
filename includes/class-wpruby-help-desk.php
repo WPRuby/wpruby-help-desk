@@ -180,11 +180,11 @@ class Wpruby_Help_Desk {
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_ticket_details', 10, 3 );
 
 		// info: custom action to add fields to the new taxonomy term page {taxonomy}_add_form_fields
-		$this->loader->add_action( WPRUBY_TICKET_STATUS . '_add_form_fields', $plugin_admin, 'add_color_field_to_ticket_status' );
-		$this->loader->add_action( WPRUBY_TICKET_STATUS . '_edit_form_fields', $plugin_admin, 'edit_color_field_to_ticket_status' );
+		$this->loader->add_action( RHD_TICKET_STATUS . '_add_form_fields', $plugin_admin, 'add_color_field_to_ticket_status' );
+		$this->loader->add_action( RHD_TICKET_STATUS . '_edit_form_fields', $plugin_admin, 'edit_color_field_to_ticket_status' );
 
-		$this->loader->add_action( 'edited_' . WPRUBY_TICKET_STATUS, $plugin_admin, 'save_ticket_status_color_meta' );
-		$this->loader->add_action( 'create_' . WPRUBY_TICKET_STATUS, $plugin_admin, 'save_ticket_status_color_meta' );
+		$this->loader->add_action( 'edited_' . RHD_TICKET_STATUS, $plugin_admin, 'save_ticket_status_color_meta' );
+		$this->loader->add_action( 'create_' . RHD_TICKET_STATUS, $plugin_admin, 'save_ticket_status_color_meta' );
 
 		//info: add opened tickets count notice in the admin menu.
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'tickets_count' );
@@ -194,11 +194,11 @@ class Wpruby_Help_Desk {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 
-		$this->loader->add_filter( 'manage_'. WPRUBY_TICKET .'_posts_columns', $plugin_admin, 'set_custom_edit_support_ticket_columns', 1, 2 );
-		$this->loader->add_action( 'manage_'. WPRUBY_TICKET .'_posts_custom_column', $plugin_admin, 'custom_support_ticket_column', 1, 2 );
+		$this->loader->add_filter( 'manage_'. RHD_TICKET .'_posts_columns', $plugin_admin, 'set_custom_edit_support_ticket_columns', 1, 2 );
+		$this->loader->add_action( 'manage_'. RHD_TICKET .'_posts_custom_column', $plugin_admin, 'custom_support_ticket_column', 1, 2 );
 
-		$this->loader->add_filter( 'manage_edit-' .  WPRUBY_TICKET_STATUS . '_columns', $plugin_admin, 'set_custom_ticket_status_columns_heads', 1, 2 );
-		$this->loader->add_filter( 'manage_'. WPRUBY_TICKET_STATUS .'_custom_column', $plugin_admin, 'set_custom_ticket_status_columns_data', 10, 3 );
+		$this->loader->add_filter( 'manage_edit-' .  RHD_TICKET_STATUS . '_columns', $plugin_admin, 'set_custom_ticket_status_columns_heads', 1, 2 );
+		$this->loader->add_filter( 'manage_'. RHD_TICKET_STATUS .'_custom_column', $plugin_admin, 'set_custom_ticket_status_columns_data', 10, 3 );
 
 		//info: add plugin links to the top admin menu
 		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'add_quicklinks_to_admin_topbar', 100);

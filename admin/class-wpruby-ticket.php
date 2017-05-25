@@ -31,7 +31,7 @@ class WPRuby_Ticket {
 	 */
   public function close_ticket(){
     WPRuby_Email::ticket_closed($this->ticket_id);
-    wp_set_object_terms( intval($this->ticket_id), 'closed', WPRUBY_TICKET_STATUS, false );
+    wp_set_object_terms( intval($this->ticket_id), 'closed', RHD_TICKET_STATUS, false );
   }
   /**
 	 * Opening the ticket.
@@ -39,7 +39,7 @@ class WPRuby_Ticket {
 	 * @since    1.0.0
 	 */
   public function open_ticket(){
-    wp_set_object_terms( intval($this->ticket_id), 'in-progress', WPRUBY_TICKET_STATUS, false );
+    wp_set_object_terms( intval($this->ticket_id), 'in-progress', RHD_TICKET_STATUS, false );
   }
   /**
 	 * Get the replies of the current ticket.
@@ -49,7 +49,7 @@ class WPRuby_Ticket {
   public function get_replies( ){
 
     $args = array(
-        'post_type' 		 => WPRUBY_TICKET_REPLY,
+        'post_type' 		 => RHD_TICKET_REPLY,
         'post_parent'	   => intval($this->ticket_id),
         'orderby'          => 'date',
         'order'            => 'ASC',
@@ -75,7 +75,7 @@ class WPRuby_Ticket {
 
 
     $tickets_args = array();
-    $tickets_args['post_type']  = WPRUBY_TICKET;
+    $tickets_args['post_type']  = RHD_TICKET;
     $tickets_args['author']     = (isset($args['user_id']))?intval($args['user_id']):'';
     $tickets_args['posts_per_page']  = (isset($args['posts_per_page']))?$args['posts_per_page']:-1;
 
@@ -89,7 +89,7 @@ class WPRuby_Ticket {
 
       $tickets_args['tax_query']  = array(
             array(
-                'taxonomy' => WPRUBY_TICKET_STATUS,
+                'taxonomy' => RHD_TICKET_STATUS,
                 'field'    => 'slug',
                 'terms'    => $args['status'],
                 'operator' => $status_operator,
@@ -144,7 +144,7 @@ class WPRuby_Ticket {
    public function get_status(  $ticket_id = null ){
      $ticket_id = ($ticket_id === null)?$this->ticket_id:$ticket_id;
      $status = array();
-     $ticket_status = wp_get_object_terms($ticket_id, WPRUBY_TICKET_STATUS, array("fields" => "all"));
+     $ticket_status = wp_get_object_terms($ticket_id, RHD_TICKET_STATUS, array("fields" => "all"));
      if(isset($ticket_status[0])){
        $status['id'] = $ticket_status[0]->term_id;
        $status['name'] = $ticket_status[0]->name;
@@ -164,7 +164,7 @@ class WPRuby_Ticket {
     */
     public function get_product(){
       $product = array();
-      $ticket_product = wp_get_object_terms($this->ticket_id, WPRUBY_TICKET_PRODUCT, array("fields" => "all"));
+      $ticket_product = wp_get_object_terms($this->ticket_id, RHD_TICKET_PRODUCT, array("fields" => "all"));
       if(isset($ticket_product[0])){
         $product['id'] = $ticket_product[0]->term_id;
         $product['name'] = $ticket_product[0]->name;
@@ -184,11 +184,11 @@ class WPRuby_Ticket {
      public static function get_open_tickets(){
 
        $args = array(
-           'post_type' => WPRUBY_TICKET,
+           'post_type' => RHD_TICKET,
            'posts_per_page' => -1,
            'tax_query' => array(
                array(
-                   'taxonomy' => WPRUBY_TICKET_STATUS,
+                   'taxonomy' => RHD_TICKET_STATUS,
                    'field'    => 'slug',
                    'terms'    => 'closed',
                    'operator' => 'NOT IN',
@@ -212,10 +212,10 @@ class WPRuby_Ticket {
        $postattr = array(
                     'post_title'    =>  $ticket['subject'],
                     'post_content'  =>  $ticket['content'],
-                    'post_type'     =>  WPRUBY_TICKET,
+                    'post_type'     =>  RHD_TICKET,
                     'tax_input'     =>  array(
-                                              WPRUBY_TICKET_STATUS => intval($new_status),
-                                              WPRUBY_TICKET_PRODUCT => $ticket['product'],
+                                              RHD_TICKET_STATUS => intval($new_status),
+                                              RHD_TICKET_PRODUCT => $ticket['product'],
                     ),
                     'post_status'   =>  'publish',
 
@@ -259,7 +259,7 @@ class WPRuby_Ticket {
          'post_title'		  =>	'Reply to ticket #' . $ticket_id,
          'post_content'	  =>	$_POST['ticket_reply'],
          'post_status'		=>	'publish',
-         'post_type'			=>	WPRUBY_TICKET_REPLY,
+         'post_type'			=>	RHD_TICKET_REPLY,
          'post_parent'		=>	intval($ticket_id),
        );
        $reply_id = wp_insert_post( $ticket_reply_args );
@@ -277,7 +277,7 @@ class WPRuby_Ticket {
      */
      public static function get_my_tickets( ){
        $args = array(
-           'post_type' 		      => WPRUBY_TICKET,
+           'post_type' 		      => RHD_TICKET,
            'orderby'            => 'date',
            'order'              => 'DESC',
            'posts_per_page'     => -1,
@@ -381,13 +381,13 @@ class WPRuby_Ticket {
      */
      public function get_status_tickets_link( $status = ''){
        if($status == 'total'){
-         return admin_url('edit.php?post_type=' . WPRUBY_TICKET);
+         return admin_url('edit.php?post_type=' . RHD_TICKET);
        }
 
        if($status == ''){
          return '#';
        }
-      return admin_url('edit.php?tickets_status='.  $status  .'&post_type=' . WPRUBY_TICKET);
+      return admin_url('edit.php?tickets_status='.  $status  .'&post_type=' . RHD_TICKET);
 
      }
 }
