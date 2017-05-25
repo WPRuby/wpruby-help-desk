@@ -299,3 +299,6 @@
   color: #808080;
   text-decoration: none;
 }
+.submit_ticket_form #ticket_subject{
+  width:90%;
+}
