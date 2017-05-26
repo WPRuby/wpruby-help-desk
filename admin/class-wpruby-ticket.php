@@ -257,7 +257,7 @@ class WPRuby_Ticket {
 
        $ticket_reply_args = array(
          'post_title'		  =>	'Reply to ticket #' . $ticket_id,
-         'post_content'	  =>	$_POST['ticket_reply'],
+         'post_content'	  =>	sanitize_textarea_field($_POST['ticket_reply']),
          'post_status'		=>	'publish',
          'post_type'			=>	RHD_TICKET_REPLY,
          'post_parent'		=>	intval($ticket_id),

@@ -403,11 +403,11 @@ class Wpruby_Help_Desk_Public {
 				$this->errors[] = __('The email is already exist', 'wpruby-help-desk');
 			}
 			//info: validate password
-			$user['user_pass'] = $_POST['user_pass'];
+			$user['user_pass'] = sanitize_text_field( $_POST['user_pass'] );
 			if(strlen(trim($user['user_pass'])) < 7 ){
 				$this->errors[] = __('Please provide a password longer than 7 charachters', 'wpruby-help-desk');
 			}
-			if(trim($user['user_pass']) != trim($_POST['user_pass_repeated'])){
+			if(trim($user['user_pass']) != trim(sanitize_text_field($_POST['user_pass_repeated']))){
 				$this->errors[] = __('The passwords do not match', 'wpruby-help-desk');
 			}
 

@@ -297,26 +297,26 @@ class Wpruby_Help_Desk_Admin {
 					if(RHD_TICKET == $post_type){
 						$ticket = new WPRuby_Ticket(	$post_id	);
 						if(isset( $_POST['publish'] )){
-									$tickets_status = $_POST['ticket_status'];
-									$tickets_product = $_POST['ticket_product'];
-									$ticket_agent = $_POST['ticket_agent'];
+									$tickets_status = intval($_POST['ticket_status']);
+									$tickets_product = intval($_POST['ticket_product']);
+									$ticket_agent = intval($_POST['ticket_agent']);
 									if(-1 != $tickets_status){
-										wp_set_post_terms( $post_id, intval($tickets_status), RHD_TICKET_STATUS );
+										wp_set_post_terms( $post_id, $tickets_status, RHD_TICKET_STATUS );
 									}
 									if(-1 != $tickets_product){
-										wp_set_post_terms( $post_id, intval($tickets_product), RHD_TICKET_PRODUCT );
+										wp_set_post_terms( $post_id, $tickets_product, RHD_TICKET_PRODUCT );
 									}
 									//info: check if the ticket was re-assigned.
 									$old_assignee = get_post_meta( $post_id, 'ticket_agent_id', true );
 									if($old_assignee != $ticket_agent){
 										WPRuby_Email::ticket_reassigned(	$post_id, 	$old_assignee);
 									}
-									update_post_meta( $post_id, 'ticket_agent_id', intval($ticket_agent) );
+									update_post_meta( $post_id, 'ticket_agent_id', $ticket_agent );
 						}elseif (isset( $_POST['reply'] ) || isset( $_POST['reply-close'] )	|| isset( $_POST['reply-reopen'] )) {
 								if(isset($_POST['ticket_reply']) && "" != $_POST['ticket_reply']){
 										$ticket_reply_args = array(
 											'post_title'		=>	'Reply to ticket #' . $post_id,
-											'post_content'	=>	$_POST['ticket_reply'],
+											'post_content'	=>	sanitize_textarea_field($_POST['ticket_reply']),
 											'post_status'		=>	'publish',
 											'post_type'			=>	RHD_TICKET_REPLY,
 											'post_parent'		=>	intval($post_id),
@@ -350,7 +350,7 @@ class Wpruby_Help_Desk_Admin {
 			// adding the reply box only when the ticket is already created
 			add_meta_box('ticket_options', __( 'Ticket Options', 'wpruby-help-desk' ), array($this, 'ticket_options_meta_box_callback'), RHD_TICKET, 'side', 'high');
 			if(isset($_GET['post'])){
-				$ticket = new WPRuby_Ticket($_GET['post']);
+				$ticket = new WPRuby_Ticket(intval($_GET['post']));
 
 				add_meta_box('ticket_information', __( 'Ticket Details', 'wpruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), RHD_TICKET, 'side', 'high');
 
@@ -462,7 +462,7 @@ class Wpruby_Help_Desk_Admin {
 		 */
 		public function save_ticket_status_color_meta( $term_id ) {
 			if ( isset( $_POST['ticket_status_color'] ) ) {
-				$color = $_POST['ticket_status_color'];
+				$color = sanitize_text_field($_POST['ticket_status_color']);
 				update_term_meta ($term_id, 'ticket_status_color', $color);
 			}
 		}
