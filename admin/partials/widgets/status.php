@@ -39,7 +39,7 @@
     <h4><?php _e('Recent Tickets', 'ruby-help-desk'); ?></h4>
     <ul class="rhd_recent_tickets">
       <?php foreach ($recent_tickets as $key => $ticket): $status = $tickets_object->get_status($ticket->ID); ?>
-        <li> <a href="<?php echo get_edit_post_link($ticket->ID); ?>"><?php echo $ticket->post_title; ?></a> <span class="ticket_status_label" style="background:<?php echo $status['color']; ?>;"><?php echo $status['name']; ?></span><span class="since"> <?php echo human_time_diff(strtotime($ticket->post_date)); ?></span></li>
+        <li> <a href="<?php echo get_edit_post_link($ticket->ID); ?>"><?php echo wp_trim_words( $ticket->post_title, 7, '... ' ); ?></a> <span class="ticket_status_label" style="background:<?php echo $status['color']; ?>;"><?php echo $status['name']; ?></span><span class="since"> <?php echo human_time_diff(strtotime($ticket->post_date)); ?></span></li>
       <?php endforeach; ?>
     </ul>
   <?php endif; ?>
