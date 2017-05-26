@@ -1,0 +1,654 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-05-26 03:08+0200\n"
+"PO-Revision-Date: 2017-05-26 03:08+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"X-Poedit-Basepath: ../../../Applications/MAMP/htdocs/wp/wp-content/plugins/"
+"wpruby-help-desk\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;__(;_e(;_e;_x;_x(\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-ruby-help-desk-admin.php:109
+#: admin/class-ruby-help-desk-admin.php:555
+#: admin/partials/ruby-help-desk-ticket-details-metabox.php:21
+msgid "Tickets"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:110
+#: admin/class-ruby-help-desk-admin.php:113
+#: admin/class-ruby-help-desk-admin.php:412
+#: admin/class-ruby-help-desk-admin.php:634
+msgid "Create Ticket"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:111
+#: admin/class-ruby-help-desk-admin.php:190
+msgid "Ruby Desk"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:112 public/partials/single-ticket.php:4
+msgid "Ticket"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:114
+#: admin/class-ruby-help-desk-admin.php:115
+msgid "Create New Ticket"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:116
+msgid "Edit Ticket"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:117
+msgid "View Ticket"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:118
+#: admin/class-ruby-help-desk-admin.php:628
+msgid "All Tickets"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:119
+msgid "Search Tickets"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:120
+msgid "Parent Tickets:"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:121
+#: admin/class-ruby-help-desk-admin.php:200
+msgid "No tickets found."
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:122
+#: admin/class-ruby-help-desk-admin.php:201
+msgid "No tickets found in Trash."
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:152
+#: admin/class-ruby-help-desk-admin.php:155
+#: admin/class-ruby-help-desk-admin.php:161
+#: admin/class-ruby-help-desk-admin.php:652
+#: includes/class-ruby-help-desk-activator.php:108
+msgid "Knowledgebase"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:153
+#: admin/class-ruby-help-desk-admin.php:156
+msgid "New Document"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:154
+msgid "Ruby Desk Knowledgebase"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:157
+#: admin/class-ruby-help-desk-admin.php:158
+msgid "Create New Document"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:159
+msgid "Edit Document"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:160
+msgid "View Document"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:162
+msgid "Search Documents"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:163
+msgid "Parent Documents:"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:164
+msgid "No documents found."
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:165
+msgid "No documents found in Trash."
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:188
+msgid "Tickets Reply"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:189
+#: admin/class-ruby-help-desk-admin.php:192
+msgid "Create Ticket Reply"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:191
+msgid "Ticket Reply"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:193
+#: admin/class-ruby-help-desk-admin.php:194
+msgid "Create New Ticket Reply"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:195
+msgid "Edit Ticket Reply"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:196
+msgid "View Ticket Reply"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:197
+msgid "All Tickets Reply"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:198
+msgid "Search Tickets Reply"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:199
+msgid "Parent Tickets Reply:"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:228
+#: admin/class-ruby-help-desk-admin.php:229
+#: admin/partials/ruby-help-desk-ticket-options-metabox.php:16
+msgid "Ticket Status"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:230
+msgid "Search Ticket Statuses"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:231
+msgid "Popular Ticket Statuses"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:232
+msgid "All Ticket Statuses"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:235
+msgid "Edit Ticket Status"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:236
+msgid "Update Ticket Status"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:237
+msgid "Add New Ticket Status"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:238
+msgid "New Ticket Status"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:239
+#: admin/class-ruby-help-desk-admin.php:270
+msgid "Separate statuses with commas"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:240
+#: admin/class-ruby-help-desk-admin.php:271
+msgid "Add or remove ticket status"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:241
+#: admin/class-ruby-help-desk-admin.php:272
+msgid "Choose from the most used statuses"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:242
+#: admin/class-ruby-help-desk-admin.php:273
+msgid "No Tickets Statuses found."
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:243
+#: admin/class-ruby-help-desk-admin.php:640
+msgid "Statuses"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:259
+#: admin/class-ruby-help-desk-admin.php:260
+#: public/partials/shortcodes/shortcode-my-tickets.php:8
+#: public/partials/shortcodes/shortcode-submit-ticket.php:15
+msgid "Product"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:261
+msgid "Search Products"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:262
+msgid "Popular Products"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:263
+msgid "All Products"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:266
+msgid "Edit Product"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:267
+msgid "Update Product"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:268
+msgid "Add New Product"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:269
+msgid "New Product"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:274
+#: admin/class-ruby-help-desk-admin.php:646
+msgid "Products"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:351
+msgid "Ticket Options"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:355
+msgid "Ticket Details"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:357
+msgid "Ticket Message"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:359
+#: admin/class-ruby-help-desk-admin.php:503
+#: public/partials/shortcodes/shortcode-my-tickets.php:10
+msgid "Replies"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:362
+#: admin/partials/ruby-help-desk-ticket-reply-metabox.php:17
+msgid "Reply"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:412
+msgid "Update Ticket"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:436
+#: admin/class-ruby-help-desk-admin.php:450
+msgid "Status Color"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:497
+msgid "Ticket title"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:498
+msgid "Ticket #ID"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:500
+#: public/partials/shortcodes/shortcode-my-tickets.php:7
+msgid "Status"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:501
+msgid "Assignee"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:502
+msgid "Customer"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:523
+msgid "-"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:557
+msgid "Color"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:587
+msgid "Ruby Help Desk Status"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:623
+#: includes/class-ruby-help-desk-activator.php:70
+msgid "Help Desk"
+msgstr ""
+
+#: admin/class-ruby-help-desk-admin.php:658
+#: admin/class-ruby-help-desk-settings.php:35
+msgid "Settings"
+msgstr ""
+
+#: admin/class-ruby-help-desk-email.php:36
+#: admin/class-ruby-help-desk-email.php:64
+#, php-format
+msgid "You have a new ticket( #%s ) assigned"
+msgstr ""
+
+#: admin/class-ruby-help-desk-email.php:44
+#, php-format
+msgid "We recieved your ticket #%s"
+msgstr ""
+
+#: admin/class-ruby-help-desk-email.php:85
+#, php-format
+msgid "New Reply on your ticket #%s"
+msgstr ""
+
+#: admin/class-ruby-help-desk-email.php:93
+#, php-format
+msgid "New Reply on your assigned ticket #%s"
+msgstr ""
+
+#: admin/class-ruby-help-desk-email.php:113
+#, php-format
+msgid "Your ticket #%s is closed"
+msgstr ""
+
+#: admin/class-ruby-help-desk-email.php:150
+msgid "Ticket Content"
+msgstr ""
+
+#: admin/class-ruby-help-desk-email.php:152
+msgid "Ticket Replies"
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings-api.php:365
+msgid "Choose File"
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:42
+msgid "General"
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:46
+#: admin/partials/ruby-help-desk-ticket-message-metabox.php:27
+#: admin/partials/ruby-help-desk-ticket-replies-metabox.php:29
+#: public/partials/shortcodes/shortcode-submit-ticket.php:31
+#: public/partials/single-ticket.php:14 public/partials/single-ticket.php:40
+#: public/partials/single-ticket.php:71
+msgid "Attachments"
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:63
+msgid "Assign tickets by default to:"
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:64
+msgid "When a ticket is created, it will be assigned to the selected agent."
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:70
+msgid "Enable Ticket Email Transcript"
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:71
+msgid ""
+"If this option is enabled, a transcript text file of the ticket will be sent "
+"to the client email when the ticket is closed."
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:79
+msgid "Enable Attachments"
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:80
+msgid ""
+"Check this if you want to allow clients and agents to upload file "
+"attachments with the support tickets."
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:85
+msgid "Maximum file size"
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:86
+msgid "Maximum file size for each file attachment (in MB)"
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:87
+msgid "2"
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:97
+msgid "Allowed File Extensions"
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:98
+msgid ""
+"The allowed file extensions for support ticket attachments, separated by a "
+"comma (,)."
+msgstr ""
+
+#: admin/class-ruby-help-desk-settings.php:99
+msgid "pdf,jpg,png,zip"
+msgstr ""
+
+#: admin/class-ruby-help-desk-ticket.php:251
+msgid "The reply should not be empty"
+msgstr ""
+
+#: admin/class-ruby-help-desk-ticket.php:291
+msgid "(No Subject)"
+msgstr ""
+
+#: admin/partials/emails/reply_added_assignee.php:94
+msgid "You have a new reply on your assigned ticket"
+msgstr ""
+
+#: admin/partials/emails/reply_added_assignee.php:111
+#: admin/partials/emails/reply_added_author.php:111
+#: admin/partials/emails/ticket_closed.php:111
+#: admin/partials/emails/ticket_opened_assignee.php:111
+#: admin/partials/emails/ticket_opened_author.php:111
+#: admin/partials/emails/ticket_reassigned.php:111
+msgid "Visit the ticket"
+msgstr ""
+
+#: admin/partials/emails/reply_added_author.php:94
+msgid "You have a new reply on your ticket"
+msgstr ""
+
+#: admin/partials/emails/ticket_closed.php:94
+msgid "Your ticket is closed"
+msgstr ""
+
+#: admin/partials/emails/ticket_opened_assignee.php:94
+#: admin/partials/emails/ticket_reassigned.php:94
+msgid "You have a new ticket"
+msgstr ""
+
+#: admin/partials/emails/ticket_opened_author.php:94
+msgid "Your ticket is recieved and we will reply as soon as possible"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-details-metabox.php:18
+msgid "Name"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-details-metabox.php:19
+msgid "Member since"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-details-metabox.php:20
+#: public/partials/signup.php:12
+msgid "Email"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-details-metabox.php:21
+msgid "Total"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-details-metabox.php:21
+msgid "Closed"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-options-metabox.php:18
+msgid "No Status assigned"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-options-metabox.php:25
+msgid "Ticket Product"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-options-metabox.php:27
+msgid "No Product assigned"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-options-metabox.php:34
+msgid "Assign to"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-options-metabox.php:36
+msgid "No Agent assigned"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-reply-metabox.php:18
+msgid "Reply and Close"
+msgstr ""
+
+#: admin/partials/ruby-help-desk-ticket-reply-metabox.php:22
+msgid "Reply and re-open"
+msgstr ""
+
+#: admin/partials/widgets/status.php:39
+msgid "Recent Tickets"
+msgstr ""
+
+#: includes/class-ruby-help-desk-activator.php:80
+#: public/partials/shortcodes/shortcode-submit-ticket.php:38
+msgid "Submit Ticket"
+msgstr ""
+
+#: includes/class-ruby-help-desk-activator.php:87
+msgid "My Tickets"
+msgstr ""
+
+#: includes/class-ruby-help-desk-activator.php:94
+msgid "Login"
+msgstr ""
+
+#: includes/class-ruby-help-desk-activator.php:101
+#: public/partials/signup.php:26
+msgid "Sign Up"
+msgstr ""
+
+#: includes/class-ruby-help-desk-activator.php:163
+msgid "Sample Product"
+msgstr ""
+
+#: includes/class-ruby-help-desk-activator.php:182
+msgid "Help Desk Agent"
+msgstr ""
+
+#: includes/class-ruby-help-desk-activator.php:183
+msgid "Help Desk Customer"
+msgstr ""
+
+#: public/class-ruby-help-desk-public.php:238
+msgid "Ticket Subject should not be empty"
+msgstr ""
+
+#: public/class-ruby-help-desk-public.php:241
+msgid "Ticket Description should not be empty"
+msgstr ""
+
+#: public/class-ruby-help-desk-public.php:327
+#, php-format
+msgid "This file type (%s) is not allowed"
+msgstr ""
+
+#: public/class-ruby-help-desk-public.php:331
+#, php-format
+msgid "The file is too big. The maximum allowed file size is %s"
+msgstr ""
+
+#: public/class-ruby-help-desk-public.php:395
+msgid "The usrename already exists"
+msgstr ""
+
+#: public/class-ruby-help-desk-public.php:400
+msgid "Please provide a valid email"
+msgstr ""
+
+#: public/class-ruby-help-desk-public.php:403
+msgid "The email is already exist"
+msgstr ""
+
+#: public/class-ruby-help-desk-public.php:408
+msgid "Please provide a password longer than 7 charachters"
+msgstr ""
+
+#: public/class-ruby-help-desk-public.php:411
+msgid "The passwords do not match"
+msgstr ""
+
+#: public/partials/shortcodes/shortcode-my-tickets.php:6
+msgid "Subject"
+msgstr ""
+
+#: public/partials/shortcodes/shortcode-my-tickets.php:9
+msgid "Date"
+msgstr ""
+
+#: public/partials/shortcodes/shortcode-my-tickets.php:25
+msgid "You do not have any tickets yet"
+msgstr ""
+
+#: public/partials/shortcodes/shortcode-submit-ticket.php:10
+msgid "Ticket Subject"
+msgstr ""
+
+#: public/partials/shortcodes/shortcode-submit-ticket.php:23
+msgid "Ticket Description"
+msgstr ""
+
+#: public/partials/shortcodes/shortcode-submit-ticket.php:33
+#: public/partials/single-ticket.php:73
+msgid "Allowed Extensions"
+msgstr ""
+
+#: public/partials/signup.php:8
+msgid "Username"
+msgstr ""
+
+#: public/partials/signup.php:16
+msgid "Password"
+msgstr ""
+
+#: public/partials/signup.php:20
+msgid "Repeat Password"
+msgstr ""
+
+#: public/partials/single-ticket.php:5
+msgid "Created before"
+msgstr ""
+
+#: public/partials/single-ticket.php:5
+msgid "on"
+msgstr ""
+
+#: public/partials/single-ticket.php:63
+msgid "Write a reply"
+msgstr ""
+
+#: public/partials/single-ticket.php:78
+msgid "Submit a reply"
+msgstr ""
+
+#: public/partials/single-ticket.php:79
+msgid "Close Ticket"
+msgstr ""
