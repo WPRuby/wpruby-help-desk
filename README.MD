@@ -1,5 +1,5 @@
 # Ruby Help Desk
-[![codebeat badge](https://codebeat.co/badges/27b944d8-e639-4d4b-a0fb-6511f5172d0e)](https://codebeat.co/projects/github-com-wsenjer-wpruby-help-desk-master)
+[![codebeat badge](https://codebeat.co/badges/27b944d8-e639-4d4b-a0fb-6511f5172d0e)](https://codebeat.co/projects/github-com-wsenjer-ruby-help-desk-master)
 
 **Contributors:** wprubyplugins, waseem_senjer
 
@@ -31,15 +31,15 @@ Ruby Help Desk is a WordPress plugin which works as a customer support platform.
 
 1. Navigate to the `Add New` in the plugins dashboard
 1. Navigate to the `Upload` area
-1. Select `wpruby-help-desk.zip` from your computer
+1. Select `ruby-help-desk.zip` from your computer
 1. Click 'Install Now'
 1. Activate the plugin in the Plugin dashboard
 
 ### Using FTP
 
-1. Download `wpruby-help-desk.zip`
-1. Extract the `wpruby-help-desk` directory to your computer
-1. Upload the `wpruby-help-desk` directory to the `/wp-content/plugins/` directory
+1. Download `ruby-help-desk.zip`
+1. Extract the `ruby-help-desk` directory to your computer
+1. Upload the `ruby-help-desk` directory to the `/wp-content/plugins/` directory
 1. Activate the plugin in the Plugin dashboard
 
 ## Changelog

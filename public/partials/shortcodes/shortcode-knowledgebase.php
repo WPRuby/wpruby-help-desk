@@ -1,4 +1,4 @@
-<div id="ruby_help_desk_knowledgebase">
+<div id="rhd_knowledgebase">
     <?php foreach ($products as $key => $product): ?>
       <div class="product_documents">
         <h4><?php echo $product->name; ?></h4>

@@ -1,6 +1,6 @@
-<div class="wpruby_dashboard_widget">
+<div class="rhd_dashboard_widget">
 
-  <ul class="wpruby_status_list">
+  <ul class="rhd_status_list">
 
       <li class="new-tickets">
         <span class="dashicons dashicons-sos"></span>
@@ -37,7 +37,7 @@
   </ul>
   <?php if(!empty($recent_tickets)): ?>
     <h4><?php _e('Recent Tickets', 'ruby-help-desk'); ?></h4>
-    <ul class="wpruby_recent_tickets">
+    <ul class="rhd_recent_tickets">
       <?php foreach ($recent_tickets as $key => $ticket): $status = $tickets_object->get_status($ticket->ID); ?>
         <li> <a href="<?php echo get_edit_post_link($ticket->ID); ?>"><?php echo $ticket->post_title; ?></a> <span class="ticket_status_label" style="background:<?php echo $status['color']; ?>;"><?php echo $status['name']; ?></span><span class="since"> <?php echo human_time_diff(strtotime($ticket->post_date)); ?></span></li>
       <?php endforeach; ?>

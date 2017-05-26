@@ -7,8 +7,8 @@
  *
  * @author Tareq Hasan <tareq@weDevs.com>
  */
-if ( !class_exists( 'WPRuby_Settings_API' ) ):
-class WPRuby_Settings_API {
+if ( !class_exists( 'RHD_Settings_API' ) ):
+class RHD_Settings_API {
 
     /**
      * settings sections array

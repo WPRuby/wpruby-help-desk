@@ -49,7 +49,7 @@ class RHD_Activator {
 	 * @since    1.0.0
 	 */
 	private function set_seeded( $value ){
-		update_option( 'wpruby_help_desk_seeded'	, $value);
+		update_option( 'rhd_seeded'	, $value);
 	}
 	/**
 	 * Get if the plugin is seeded based.
@@ -57,7 +57,7 @@ class RHD_Activator {
 	 * @since    1.0.0
 	 */
 	private function is_seeded( ){
-		return (get_option( 'wpruby_help_desk_seeded', 'no') === 'yes');
+		return (get_option( 'rhd_seeded', 'no') === 'yes');
 	}
 	/**
 	 * Seeding the plugin frontend pages.
@@ -113,7 +113,7 @@ class RHD_Activator {
 				);
 				foreach ($pages as $key => $page_args) {
 					$page_id = wp_insert_post(	$page_args );
-					update_option( 'wpruby_' . $page_args['post_content'], $page_id);
+					update_option( 'rhd_' . $page_args['post_content'], $page_id);
 				}
 	}
 
@@ -146,7 +146,7 @@ class RHD_Activator {
 							$term = wp_insert_term($status['term'], RHD_TICKET_STATUS, array('slug' => $status['slug']));
 							if(isset($term['term_id'])){
 								update_term_meta ($term['term_id'], 'ticket_status_color', $status['color']);
-								update_option( 'wpruby_ticket_status_' . $status['slug'], $term['term_id']);
+								update_option( 'rhd_ticket_status_' . $status['slug'], $term['term_id']);
 							}
 					}
 				}
@@ -203,11 +203,11 @@ class RHD_Activator {
 	 */
 	public function seed_settings(){
 		$default_options = array(
-				'wpruby_help_desk_general'	=>	array(
+				'rhd_general'	=>	array(
 					'default_agent_assignee'	=>	get_current_user_id(),
 					'enable_email_transcript'	=>	'off',
 				),
-				'wpruby_help_desk_attachments'	=>	array(
+				'rhd_attachments'	=>	array(
 					'enable_attachments'	=>	'on',
 					'max_size_attachments'	=>	'2',
 					'allowed_extensions_attachments'	=>	'pdf,jpg,png,zip',

@@ -6,11 +6,11 @@
  * @link       https://wpruby.com
  * @since      1.0.0
  *
- * @package    WPRuby_Ticket
- * @subpackage WPRuby_Ticket/admin
+ * @package    RHD_Ticket
+ * @subpackage RHD_Ticket/admin
  * @author     WPRuby <info@wpruby.com>
  */
-class WPRuby_Ticket {
+class RHD_Ticket {
 
   protected $ticket_id = 0;
 
@@ -30,7 +30,7 @@ class WPRuby_Ticket {
 	 * @since    1.0.0
 	 */
   public function close_ticket(){
-    WPRuby_Email::ticket_closed($this->ticket_id);
+    RHD_Email::ticket_closed($this->ticket_id);
     wp_set_object_terms( intval($this->ticket_id), 'closed', RHD_TICKET_STATUS, false );
   }
   /**
@@ -57,7 +57,7 @@ class WPRuby_Ticket {
     );
     $replies = get_posts( $args );
     foreach ($replies as $key => $reply):
-      $user = new WPRuby_User($reply->post_author);
+      $user = new RHD_User($reply->post_author);
       $replies[$key]->user = $user;
 			$replies[$key]->attachments = $this->get_attachments($reply->ID);
     endforeach;
@@ -207,7 +207,7 @@ class WPRuby_Ticket {
       * @return      number    $ticket_id      The ID of the new ticket.
       */
      public static function add(  $ticket  ){
-       $new_status = get_option('wpruby_ticket_status_new', -1);
+       $new_status = get_option('rhd_ticket_status_new', -1);
 
        $postattr = array(
                     'post_title'    =>  $ticket['subject'],
@@ -226,11 +226,11 @@ class WPRuby_Ticket {
        }
 
        //info: add default ticket assignee
-       $general_options = get_option('wpruby_help_desk_general');
+       $general_options = get_option('rhd_general');
        update_post_meta(intval($ticket_id), 'ticket_agent_id', intval($general_options['default_agent_assignee']) );
 
        //info: send email notifications ticket-is-opened
-       WPRuby_Email::ticket_opened($ticket_id);
+       RHD_Email::ticket_opened($ticket_id);
 
        return $ticket_id;
      }
@@ -267,7 +267,7 @@ class WPRuby_Ticket {
        if(isset($reply_uploaded_file['file']) && $reply_id){
          self::add_attachment($reply_id, $reply_uploaded_file['file']);
        }
-       WPRuby_Email::reply_added( $ticket_id, $reply_id  );
+       RHD_Email::reply_added( $ticket_id, $reply_id  );
        return $reply_id;
      }
      /**
@@ -286,10 +286,10 @@ class WPRuby_Ticket {
        );
        $tickets = get_posts( $args );
        foreach ($tickets as $key => $ticket):
-         $user = new WPRuby_User($ticket->post_author);
+         $user = new RHD_User($ticket->post_author);
          $tickets[$key]->user = $user;
          $tickets[$key]->post_title = ($ticket->post_title == '')?__('(No Subject)', 'ruby-help-desk'):$ticket->post_title;
-         $tick = new WPRuby_Ticket($ticket->ID);
+         $tick = new RHD_Ticket($ticket->ID);
          $tickets[$key]->product = $tick->get_product();
          $tickets[$key]->status = $tick->get_status();
          $tickets[$key]->replies_count = count($tick->get_replies());
@@ -353,7 +353,7 @@ class WPRuby_Ticket {
      */
      public function get_author(){
        $ticket_author_id = get_post_field( 'post_author', $this->ticket_id );
-       $user = new WPRuby_User($ticket_author_id);
+       $user = new RHD_User($ticket_author_id);
        return $user;
      }
      /**
@@ -363,7 +363,7 @@ class WPRuby_Ticket {
      */
      public function get_assignee(){
        $assingee_id = get_post_meta(  $this->ticket_id, 'ticket_agent_id', true );
-       $assingee = new WPRuby_User($assingee_id);
+       $assingee = new RHD_User($assingee_id);
        return $assingee;
      }
      /**

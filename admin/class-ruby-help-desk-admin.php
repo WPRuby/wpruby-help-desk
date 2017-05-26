@@ -73,7 +73,7 @@ class RHD_Admin {
 		 * class.
 		 */
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wpruby-help-desk-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ruby-help-desk-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -96,7 +96,7 @@ class RHD_Admin {
 		 * class.
 		 */
 		wp_enqueue_script( 'wp-color-picker');
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wpruby-help-desk-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ruby-help-desk-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 	/**
@@ -295,7 +295,7 @@ class RHD_Admin {
 			if(isset($_POST) && !empty($_POST)){
 					$post_type = get_post_type($post_id);
 					if(RHD_TICKET == $post_type){
-						$ticket = new WPRuby_Ticket(	$post_id	);
+						$ticket = new RHD_Ticket(	$post_id	);
 						if(isset( $_POST['publish'] )){
 									$tickets_status = intval($_POST['ticket_status']);
 									$tickets_product = intval($_POST['ticket_product']);
@@ -309,7 +309,7 @@ class RHD_Admin {
 									//info: check if the ticket was re-assigned.
 									$old_assignee = get_post_meta( $post_id, 'ticket_agent_id', true );
 									if($old_assignee != $ticket_agent){
-										WPRuby_Email::ticket_reassigned(	$post_id, 	$old_assignee);
+										RHD_Email::ticket_reassigned(	$post_id, 	$old_assignee);
 									}
 									update_post_meta( $post_id, 'ticket_agent_id', $ticket_agent );
 						}elseif (isset( $_POST['reply'] ) || isset( $_POST['reply-close'] )	|| isset( $_POST['reply-reopen'] )) {
@@ -350,7 +350,7 @@ class RHD_Admin {
 			// adding the reply box only when the ticket is already created
 			add_meta_box('ticket_options', __( 'Ticket Options', 'ruby-help-desk' ), array($this, 'ticket_options_meta_box_callback'), RHD_TICKET, 'side', 'high');
 			if(isset($_GET['post'])){
-				$ticket = new WPRuby_Ticket(intval($_GET['post']));
+				$ticket = new RHD_Ticket(intval($_GET['post']));
 
 				add_meta_box('ticket_information', __( 'Ticket Details', 'ruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), RHD_TICKET, 'side', 'high');
 
@@ -368,19 +368,19 @@ class RHD_Admin {
 		 * @since    1.0.0
 		 */
 		public function ticket_information_meta_box_callback($ticket){
-			$user = new WPRuby_User($ticket->post_author);
-			$ticket_object = new WPRuby_Ticket($ticket->ID);
+			$user = new RHD_User($ticket->post_author);
+			$ticket_object = new RHD_Ticket($ticket->ID);
 			$ticket_stats = $ticket_object->get_tickets_stats($ticket->post_author);
-			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-details-metabox.php';
+			require_once plugin_dir_path( __FILE__ ) . 'partials/ruby-help-desk-ticket-details-metabox.php';
 		}
 		/**
 		 * This method is used to display the ticket_message meta box content
 		 * @since    1.0.0
 		 */
 		public function ticket_message_meta_box_callback($ticket){
-			$ticket_object = new WPRuby_Ticket($ticket->ID);
+			$ticket_object = new RHD_Ticket($ticket->ID);
 			$attachments = $ticket_object->get_attachments();
-			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-message-metabox.php';
+			require_once plugin_dir_path( __FILE__ ) . 'partials/ruby-help-desk-ticket-message-metabox.php';
 		}
 		/**
 		 * This method is used to display the reply_to_ticket meta box content
@@ -388,29 +388,29 @@ class RHD_Admin {
 		 */
 		public function reply_meta_box_callback($post){
 			$editor_settings = array( 'media_buttons' => false, 'textarea_rows' => 7 );
-			$ticket = new WPRuby_Ticket(	$post->ID	);
+			$ticket = new RHD_Ticket(	$post->ID	);
 			$ticket_status = $ticket->get_status();
-			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-reply-metabox.php';
+			require_once plugin_dir_path( __FILE__ ) . 'partials/ruby-help-desk-ticket-reply-metabox.php';
 		}
 		/**
 		 * This method is used to display the ticket publishing box
 		 * @since    1.0.0
 		 */
 		public function ticket_options_meta_box_callback($post){
-			$ticket = new WPRuby_Ticket(	$post->ID	);
+			$ticket = new RHD_Ticket(	$post->ID	);
 			$ticket_status = $ticket->get_status();
 			// get terms
 			$statuses = get_terms( RHD_TICKET_STATUS, array(  'hide_empty' => false ) );
 			$products = get_terms( RHD_TICKET_PRODUCT, array(  'hide_empty' => false ) );
 			$ticket_agent = get_post_meta( $post->ID, 'ticket_agent_id', true );
 
-			$agents = WPRuby_User::get_agents();
+			$agents = RHD_User::get_agents();
 			$ticket_product = wp_get_object_terms($post->ID, RHD_TICKET_PRODUCT, array("fields" => "ids"));
 
 			$ticket_product = (isset($ticket_product[0]))? $ticket_product[0]: -1;
 
 			$publish_button_text = (isset($_GET['post']))? __('Update Ticket', 'ruby-help-desk'): __('Create Ticket','ruby-help-desk');
-			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-options-metabox.php';
+			require_once plugin_dir_path( __FILE__ ) . 'partials/ruby-help-desk-ticket-options-metabox.php';
 		}
 
 
@@ -420,9 +420,9 @@ class RHD_Admin {
 		 */
 		public function replies_meta_box_callback($ticket)
 		{
-			$ticket_object = new WPRuby_Ticket(	$ticket->ID	);
+			$ticket_object = new RHD_Ticket(	$ticket->ID	);
 			$replies = $ticket_object->get_replies();
-			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-replies-metabox.php';
+			require_once plugin_dir_path( __FILE__ ) . 'partials/ruby-help-desk-ticket-replies-metabox.php';
 		}
 
 		/**
@@ -475,7 +475,7 @@ class RHD_Admin {
 		public function tickets_count() {
 
 			global $menu, $current_user;
-			$count = count(WPRuby_Ticket::get_open_tickets());
+			$count = count(RHD_Ticket::get_open_tickets());
 			foreach ( $menu as $key => $value ) {
 				if ( $menu[ $key ][2] == 'edit.php?post_type=support_ticket' ) {
 					$menu[ $key ][0] .= ' <span class="awaiting-mod count-' . $count . '"><span class="pending-count">' . $count . '</span></span>';
@@ -515,7 +515,7 @@ class RHD_Admin {
 		    switch ( $column ) {
 
 		        case 'support_ticket_status' :
-								$ticket = new WPRuby_Ticket(	$post_id	);
+								$ticket = new RHD_Ticket(	$post_id	);
 								$ticket_status = $ticket->get_status();
 								if($ticket_status)
 									echo '<span class="ticket_status_label" style="background:'.$ticket_status['color'].';">'. $ticket_status['name'] .'</span>';
@@ -523,15 +523,15 @@ class RHD_Admin {
 									_e( '-', 'ruby-help-desk' );
 		            break;
 						case 'support_ticket_assignee' :
-							 	$ticket = new WPRuby_Ticket(	$post_id	);
+							 	$ticket = new RHD_Ticket(	$post_id	);
 							  echo '<a href="'. admin_url('user-edit.php?user_id=' . $ticket->get_assignee()->get_id()) .'">'	.	$ticket->get_assignee()->get_full_name()	.	'</a>';
 								break;
 						case 'support_ticket_customer' :
-								$ticket = new WPRuby_Ticket(	$post_id	);
+								$ticket = new RHD_Ticket(	$post_id	);
 								echo '<a href="'. admin_url('user-edit.php?user_id=' . $ticket->get_author()->get_id()) .'">'	.	$ticket->get_author()->get_full_name()	.	'</a>';
 								break;
 						case 'support_ticket_replies' :
-								$ticket = new WPRuby_Ticket(	$post_id	);
+								$ticket = new RHD_Ticket(	$post_id	);
 								$replies_count = count(	$ticket->get_replies()	);
 								echo $replies_count;
 								break;
@@ -605,7 +605,7 @@ class RHD_Admin {
 	 * @since  1.0.0
 	 */
 	public function helpdesk_status_dashboard_widget_content() {
-		$tickets_object = new WPRuby_Ticket();
+		$tickets_object = new RHD_Ticket();
 		$tickets_stats = $tickets_object->get_tickets_stats();
 		$recent_tickets = $tickets_object->get_tickets(array('posts_per_page'	=>	5));
 		require_once plugin_dir_path( __FILE__ ) . 'partials/widgets/status.php';
@@ -656,7 +656,7 @@ class RHD_Admin {
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_settings',
 			'title' => __('Settings','ruby-help-desk'),
-			'href'  => admin_url('edit.php?post_type='. RHD_TICKET .'&page=wpruby-help-desk-settings'),
+			'href'  => admin_url('edit.php?post_type='. RHD_TICKET .'&page=ruby-help-desk-settings'),
 			'parent'=> 'rhd_main_menu'
 		));
 	}
@@ -669,7 +669,7 @@ class RHD_Admin {
 		//add upgrades here (Use a different class)
 
 		//after performing the upgrades, set the db version to the current files version
-		update_option('wpruby_help_desk_db_version', RHD_VERSION);
+		update_option('rhd_db_version', RHD_VERSION);
 
 	}
 

@@ -90,7 +90,7 @@ class RHD_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wpruby-help-desk-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ruby-help-desk-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -123,7 +123,7 @@ class RHD_Public {
 	public function shortcode_submit_ticket(){
 		ob_start();
 		$products = $this->get_products();
-		$attachments_settings = get_option('wpruby_help_desk_attachments');
+		$attachments_settings = get_option('rhd_attachments');
 		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-submit-ticket.php';
 		return ob_get_clean();
 	}
@@ -134,7 +134,7 @@ class RHD_Public {
 	 */
 	public function shortcode_my_tickets(){
 		ob_start();
-		$my_tickets = WPRuby_Ticket::get_my_tickets();
+		$my_tickets = RHD_Ticket::get_my_tickets();
 		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-my-tickets.php';
 		return ob_get_clean();
 	}
@@ -173,7 +173,7 @@ class RHD_Public {
 	 */
 	public function shortcode_login_form(){
 		ob_start();
-		$my_ticket_page = get_option('wpruby_[my_tickets]');
+		$my_ticket_page = get_option('rhd_[my_tickets]');
 		$login_form_args = array(
 			'redirect'	=> get_permalink($my_ticket_page),
 		);
@@ -201,14 +201,14 @@ class RHD_Public {
 		//info: if it is not a ticket, do not do any thing
 		if($post->post_type != RHD_TICKET) return $content;
 		ob_start();
-		$ticket = new WPRuby_Ticket(	$post->ID );
+		$ticket = new RHD_Ticket(	$post->ID );
 		$status = $ticket->get_status();
-		$user = new WPRuby_User($post->post_author);
+		$user = new RHD_User($post->post_author);
 		$attachments = $ticket->get_attachments();
 		$replies = $ticket->get_replies();
 		$replies_count = count($replies);
 		$editor_settings = array( 'media_buttons' => false, 'textarea_rows' => 7 );
-		$attachments_settings = get_option('wpruby_help_desk_attachments');
+		$attachments_settings = get_option('rhd_attachments');
 		require_once plugin_dir_path( __FILE__ ) . 'partials/single-ticket.php';
 		return ob_get_clean();
 	}
@@ -254,7 +254,7 @@ class RHD_Public {
 					$ticket['attachment'] = $ticket_uploaded_file['file'];
 				}
 				if(empty($errors)){
-					$ticket_id =  WPRuby_Ticket::add($ticket);
+					$ticket_id =  RHD_Ticket::add($ticket);
 					wp_redirect(get_permalink($ticket_id));
 					exit;
 				}else{
@@ -272,7 +272,7 @@ class RHD_Public {
 			}
 			//if closing the ticket
 			if(isset($_POST['close_ticket'])){
-				$ticket = new WPRuby_Ticket(	$ticket_id	);
+				$ticket = new RHD_Ticket(	$ticket_id	);
 				//closing the ticket
 				$ticket->close_ticket();
 				wp_redirect(get_permalink($ticket_id));
@@ -281,7 +281,7 @@ class RHD_Public {
 
 			if(isset($_POST['action']) && $_POST['action'] == 'submit_reply'){
 
-				$reply = WPRuby_Ticket::add_reply($ticket_id);
+				$reply = RHD_Ticket::add_reply($ticket_id);
 
 				if(!isset($reply['error'])){
 					wp_redirect(get_permalink($ticket_id));
@@ -299,7 +299,7 @@ class RHD_Public {
 	 * @since    1.0.0
 	 */
 	public function get_page($page){
-		$page_id = get_option( "wpruby_[{$page}]");
+		$page_id = get_option( "rhd_[{$page}]");
 		return get_permalink($page_id);
 	}
 	/**
@@ -313,7 +313,7 @@ class RHD_Public {
 		//info: only applied when a ticket or a reply is submittied
 		if(! (isset($_POST['action']) && in_array($_POST['action'], array('submit_ticket', 'submit_reply'))) ) return $file;
 
-		$attachments_settings = get_option('wpruby_help_desk_attachments');
+		$attachments_settings = get_option('rhd_attachments');
 
 		if($attachments_settings['enable_attachments'] === 'off')	return $file;
 
@@ -341,9 +341,9 @@ class RHD_Public {
 	public function restrict_tickets_pages(){
 		global $post;
 		if(is_object($post) && !is_admin()){
-					$login_page_id = get_option('wpruby_[ruby_help_desk_login]');
-					$signup_page_id = get_option('wpruby_[ruby_help_desk_signup]');
-					$my_tickets_page_id = get_option('wpruby_[my_tickets]');
+					$login_page_id = get_option('rhd_[ruby_help_desk_login]');
+					$signup_page_id = get_option('rhd_[ruby_help_desk_signup]');
+					$my_tickets_page_id = get_option('rhd_[my_tickets]');
 
 					//info: 1. restrict single tickets
 					if(isset($post->post_type) && $post->post_type == RHD_TICKET){
@@ -363,7 +363,7 @@ class RHD_Public {
 					}
 
 					//info: 2. restrict submit_ticket page
-					$submit_ticket_page_id = get_option('wpruby_[submit_ticket]');
+					$submit_ticket_page_id = get_option('rhd_[submit_ticket]');
 					if($post->ID == $submit_ticket_page_id){
 						if(get_current_user_id() === 0){
 							wp_redirect(get_permalink(	$login_page_id	));
@@ -420,7 +420,7 @@ class RHD_Public {
 					wp_set_current_user($new_user_id, $user['user_login']);
         	wp_set_auth_cookie($new_user_id);
 					do_action('wp_login', $user['user_login']);
-					$my_ticket_page = get_option('wpruby_[my_tickets]');
+					$my_ticket_page = get_option('rhd_[my_tickets]');
         	wp_redirect(get_permalink($my_ticket_page));
 					exit;
 				}

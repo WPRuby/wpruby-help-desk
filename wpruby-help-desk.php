@@ -15,7 +15,7 @@
  * Author URI:        https://wpruby.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       wpruby-help-desk
+ * Text Domain:       ruby-help-desk
  * Domain Path:       /languages
  */
 
@@ -39,14 +39,14 @@ define('RHD_CUSTOMER', 			'ruby_desk_customer');
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-ruby-help-desk.php';
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-wpruby-help-desk-activator.php
+ * This action is documented in includes/class-ruby-help-desk-activator.php
  */
-function rhd_activate_wpruby_help_desk() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk-activator.php';
+function rhd_activate_help_desk() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ruby-help-desk-activator.php';
 	$plugin_name = 'ruby-help-desk';
 	$plugin_admin = new RHD_Admin( $plugin_name, RHD_VERSION );
 	$plugin_admin->register_post_types();
@@ -57,15 +57,15 @@ function rhd_activate_wpruby_help_desk() {
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-wpruby-help-desk-deactivator.php
+ * This action is documented in includes/class-ruby-help-desk-deactivator.php
  */
-function rhd_deactivate_wpruby_help_desk() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk-deactivator.php';
+function rhd_deactivate_help_desk() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ruby-help-desk-deactivator.php';
 	RHD_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'rhd_activate_wpruby_help_desk' );
-register_deactivation_hook( __FILE__, 'rhd_deactivate_wpruby_help_desk' );
+register_activation_hook( __FILE__, 'rhd_activate_help_desk' );
+register_deactivation_hook( __FILE__, 'rhd_deactivate_help_desk' );
 
 
 
@@ -78,8 +78,8 @@ register_deactivation_hook( __FILE__, 'rhd_deactivate_wpruby_help_desk' );
  *
  * @since    1.0.0
  */
-function rhd_run_wpruby_help_desk() {
+function rhd_run_help_desk() {
 	$plugin = new Ruby_Help_Desk();
 	$plugin->run();
 }
-rhd_run_wpruby_help_desk();
+rhd_run_help_desk();

@@ -3,11 +3,11 @@
  * The User helper class of the plugin.
  *
  *
- * @package    WPRuby_User
- * @subpackage WPRuby_User/admin
+ * @package    RHD_User
+ * @subpackage RHD_User/admin
  * @author     WPRuby <info@wpruby.com>
  */
-class WPRuby_User {
+class RHD_User {
 
   protected $avater_size = 60;
   protected $id = 0;

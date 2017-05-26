@@ -3,13 +3,13 @@
  * included in this file.
  */
 
- .wpruby_select{
+ .rhd_select{
    width: 100%;
  }
 #ticket_options label{
   font-weight: bold;
 }
-#ticket_options .ticket_status_label, .support_ticket_status .ticket_status_label, .wpruby_recent_tickets .ticket_status_label{
+#ticket_options .ticket_status_label, .support_ticket_status .ticket_status_label, .rhd_recent_tickets .ticket_status_label{
   float:left;
   margin-left: 4px;
   padding: 5px;
@@ -138,7 +138,7 @@
 }
 
 
-#wpruby_help_desk_settings_page .group{
+#rhd_settings_page .group{
   background: #ffffff;
   padding: 10px;
   border: 1px solid #ccc;
@@ -146,11 +146,11 @@
 }
 
 /*  Dashboard Widget  */
-.wpruby_status_list{
+.rhd_status_list{
   overflow: hidden;
   margin: 0;
 }
-.wpruby_status_list li{
+.rhd_status_list li{
     width: 50%;
     float: left;
     padding: 5px;
@@ -159,7 +159,7 @@
     border-top: 1px solid #ececec;
     color: #aaa;
 }
-.wpruby_status_list li a {
+.rhd_status_list li a {
     display: inline-block;
     color: #aaa;
     padding: 12px 15px;
@@ -167,64 +167,64 @@
     position: relative;
     font-size: 14px;
 }
-.wpruby_status_list li .dashicons{
+.rhd_status_list li .dashicons{
   margin:5px;
   font-size: 24pt;
 }
 
-.wpruby_status_list li.new-tickets{
+.rhd_status_list li.new-tickets{
   border-left: 1px solid #ececec;
   border-right: 1px solid #ececec;
 }
-.wpruby_status_list li.new-tickets .dashicons{
+.rhd_status_list li.new-tickets .dashicons{
   color:#6db16f;
 }
 
 
-.wpruby_status_list li.in-progress-tickets{
+.rhd_status_list li.in-progress-tickets{
   border-right: 1px solid #ececec;
 }
-.wpruby_status_list li.in-progress-tickets .dashicons{
+.rhd_status_list li.in-progress-tickets .dashicons{
   color:#009688;
 }
 
-.wpruby_status_list li.closed-tickets{
+.rhd_status_list li.closed-tickets{
       border-bottom: 1px solid #ececec;
       border-right: 1px solid #ececec;
       border-left: 1px solid #ececec;
 }
-.wpruby_status_list li.closed-tickets .dashicons{
+.rhd_status_list li.closed-tickets .dashicons{
   color:#f38989;
 }
 
-.wpruby_status_list li.total-tickets{
+.rhd_status_list li.total-tickets{
   border-right: 1px solid #ececec;
   border-bottom: 1px solid #ececec;
 
 }
-.wpruby_status_list li.total-tickets .dashicons{
+.rhd_status_list li.total-tickets .dashicons{
   color:#607d8b;
 }
-.wpruby_recent_tickets li{
+.rhd_recent_tickets li{
   border-top: 1px solid #ececec;
   border-left: 1px solid #ececec;
   border-right: 1px solid #ececec;
   padding: 10px;
   margin:0;
 }
-.wpruby_recent_tickets li span.since{
+.rhd_recent_tickets li span.since{
   color:#aaa;
   font-style: italic;
 }
-.wpruby_recent_tickets li:last-child{
+.rhd_recent_tickets li:last-child{
   border-bottom: 1px solid #ececec;
 }
-.wpruby_dashboard_widget h4{
+.rhd_dashboard_widget h4{
   font-weight: bold !important;
   color:#808080 !important;
   margin-top: 15px !important;
 }
-.wpruby_recent_tickets .ticket_status_label{
+.rhd_recent_tickets .ticket_status_label{
   padding: 4px;
   margin-right: 4px;
   font-size: 8pt;

@@ -14,7 +14,7 @@
 
 <p>
   <label for="ticket_status"><?php _e('Ticket Status', 'ruby-help-desk'); ?>:</label>
-  <select id="ticket_status" class="wpruby_select" name="ticket_status">
+  <select id="ticket_status" class="rhd_select" name="ticket_status">
     <option value="-1"><?php _e('No Status assigned', 'ruby-help-desk'); ?></option>
     <?php foreach ($statuses as $key => $status): ?>
       <option <?php selected($ticket_status['id'], $status->term_id); ?> value="<?php echo $status->term_id; ?>"><?php echo $status->name; ?></option>
@@ -23,7 +23,7 @@
 </p>
 <p>
   <label for="ticket_product"><?php _e('Ticket Product', 'ruby-help-desk'); ?>:</label>
-  <select id="ticket_product" class="wpruby_select" name="ticket_product">
+  <select id="ticket_product" class="rhd_select" name="ticket_product">
     <option value="-1"><?php _e('No Product assigned', 'ruby-help-desk'); ?></option>
     <?php foreach ($products as $key => $product): ?>
       <option <?php selected($ticket_product, $product->term_id); ?> value="<?php echo $product->term_id; ?>"><?php echo $product->name; ?></option>
@@ -32,7 +32,7 @@
 </p>
 <p>
   <label for="ticket_agent"><?php _e('Assign to', 'ruby-help-desk'); ?>:</label>
-  <select id="ticket_agent" class="wpruby_select" name="ticket_agent">
+  <select id="ticket_agent" class="rhd_select" name="ticket_agent">
     <option value="-1"><?php _e('No Agent assigned', 'ruby-help-desk'); ?></option>
     <?php foreach ($agents as $agent_id => $agent): ?>
       <option <?php selected($ticket_agent, $agent_id); ?> value="<?php echo $agent_id; ?>"><?php echo $agent; ?></option>

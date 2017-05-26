@@ -274,20 +274,20 @@
   color:#f44336;
   border:1px solid #000000;
 }
-#ruby_help_desk_knowledgebase .product_documents{
+#rhd_knowledgebase .product_documents{
   width: 44%;
   margin: 0 35px 30px 0;
   display: inline-block;
   vertical-align: top;
   position: relative;
 }
-#ruby_help_desk_knowledgebase .product_documents .documents_list{
+#rhd_knowledgebase .product_documents .documents_list{
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-#ruby_help_desk_knowledgebase .product_documents .documents_list li{
+#rhd_knowledgebase .product_documents .documents_list li{
   margin-bottom: 20px;
   margin-left: 0;
   background: url(../images/document.png) no-repeat left center;
@@ -295,7 +295,7 @@
   padding: 0 0 0 32px;
   line-height: 20px;
 }
-#ruby_help_desk_knowledgebase .product_documents .documents_list li a{
+#rhd_knowledgebase .product_documents .documents_list li a{
   color: #808080;
   text-decoration: none;
 }

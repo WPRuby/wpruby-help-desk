@@ -5,17 +5,17 @@
   * @link       https://wpruby.com
   * @since      1.0.0
   *
-  * @package    WPRuby_Help_Desk_Settings
-  * @subpackage WPRuby_Help_Desk_Settings/admin
+  * @package    RHD_Settings
+  * @subpackage RHD_Settings/admin
   */
 
-if ( !class_exists('WPRuby_Help_Desk_Settings' ) ):
-class WPRuby_Help_Desk_Settings {
+if ( !class_exists('RHD_Settings' ) ):
+class RHD_Settings {
 
     private $settings_api;
 
     public function __construct() {
-        $this->settings_api = new WPRuby_Settings_API;
+        $this->settings_api = new RHD_Settings_API;
 
         add_action( 'admin_init', array($this, 'admin_init') );
         add_action( 'admin_menu', array($this, 'admin_menu') );
@@ -32,17 +32,17 @@ class WPRuby_Help_Desk_Settings {
     }
 
     public function admin_menu() {
-        add_submenu_page('edit.php?post_type=support_ticket',	__( 'Settings', 'ruby-help-desk' ),	__( 'Settings', 'ruby-help-desk' ),	'manage_options',	'wpruby-help-desk-settings',	array($this, 'plugin_page'));
+        add_submenu_page('edit.php?post_type=support_ticket',	__( 'Settings', 'ruby-help-desk' ),	__( 'Settings', 'ruby-help-desk' ),	'manage_options',	'ruby-help-desk-settings',	array($this, 'plugin_page'));
     }
 
     public function get_settings_sections() {
         $sections = array(
             array(
-                'id'    => 'wpruby_help_desk_general',
+                'id'    => 'rhd_general',
                 'title' => __( 'General', 'ruby-help-desk' )
             ),
             array(
-                'id'    => 'wpruby_help_desk_attachments',
+                'id'    => 'rhd_attachments',
                 'title' => __( 'Attachments', 'ruby-help-desk' )
             )
         );
@@ -55,9 +55,9 @@ class WPRuby_Help_Desk_Settings {
      * @return array settings fields
      */
     public function get_settings_fields() {
-        $agents = WPRuby_User::get_agents();
+        $agents = RHD_User::get_agents();
         $settings_fields = array(
-            'wpruby_help_desk_general' => array(
+            'rhd_general' => array(
               array(
                   'name'    => 'default_agent_assignee',
                   'label'   => __( 'Assign tickets by default to:', 'ruby-help-desk' ),
@@ -73,7 +73,7 @@ class WPRuby_Help_Desk_Settings {
               ),
 
             ),
-            'wpruby_help_desk_attachments' => array(
+            'rhd_attachments' => array(
               array(
                   'name'  => 'enable_attachments',
                   'label' => __( 'Enable Attachments', 'ruby-help-desk' ),
@@ -109,7 +109,7 @@ class WPRuby_Help_Desk_Settings {
     }
 
     public function plugin_page() {
-        echo '<div id="wpruby_help_desk_settings_page" class="wrap">';
+        echo '<div id="rhd_settings_page" class="wrap">';
 
         $this->settings_api->show_navigation();
         $this->settings_api->show_forms();

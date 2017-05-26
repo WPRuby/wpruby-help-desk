@@ -83,7 +83,7 @@ class Ruby_Help_Desk {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-		$this->settings = new WPRuby_Help_Desk_Settings();
+		$this->settings = new RHD_Settings();
 
 	}
 
@@ -109,33 +109,33 @@ class Ruby_Help_Desk {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpruby-help-desk-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ruby-help-desk-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpruby-help-desk-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ruby-help-desk-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-help-desk-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wpruby-help-desk-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ruby-help-desk-public.php';
 
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-ticket.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-user.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-email.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-ticket.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-user.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-email.php';
 
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-settings-api.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpruby-settings.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-settings-api.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-settings.php';
 
 
 
@@ -207,7 +207,7 @@ class Ruby_Help_Desk {
 		$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'helpdesk_status_dashboard_widget');
 
 		//info: a hook to perform upgrades if necessary
-		$db_version = get_option('wpruby_help_desk_db_version', '1.0.0');
+		$db_version = get_option('rhd_db_version', '1.0.0');
 		if(version_compare($db_version, RHD_VERSION, 'ne')){
 			//upgrade might be needed since the db version and files version are different
 			$this->loader->add_action( 'admin_init', $plugin_admin, 'perform_upgrades');

@@ -6,19 +6,19 @@
  * @link       https://wpruby.com
  * @since      1.0.0
  *
- * @package    WPRuby_Email
- * @subpackage WPRuby_Email/admin
+ * @package    RHD_Email
+ * @subpackage RHD_Email/admin
  */
 
 /**
  * The User helper class of the plugin.
  *
  *
- * @package    WPRuby_Email
- * @subpackage WPRuby_Email/admin
+ * @package    RHD_Email
+ * @subpackage RHD_Email/admin
  * @author     WPRuby <info@wpruby.com>
  */
-class WPRuby_Email {
+class RHD_Email {
 
   /**
   * Send notification when a ticket is opened
@@ -26,7 +26,7 @@ class WPRuby_Email {
   * @since    1.0.0
   */
   public static function ticket_opened( $ticket_id = '' ){
-    $ticket         =  new WPRuby_Ticket( $ticket_id  );
+    $ticket         =  new RHD_Ticket( $ticket_id  );
     $assignee       =  $ticket->get_assignee();
     $ticket_author  =  $ticket->get_author();
     //info: 1. email to assignee
@@ -54,9 +54,9 @@ class WPRuby_Email {
   * @since    1.0.0
   */
   public static function ticket_reassigned( $ticket_id = '', $old_assignee = '' ){
-    $ticket         =  new WPRuby_Ticket( $ticket_id  );
+    $ticket         =  new RHD_Ticket( $ticket_id  );
     $assignee       =  $ticket->get_assignee();
-    $old_assignee  =   new WPRuby_User( intval($old_assignee)  );
+    $old_assignee  =   new RHD_User( intval($old_assignee)  );
     //info: 1. email to assignee
     ob_start();
     require_once plugin_dir_path( __FILE__ ) . 'partials/emails/ticket_reassigned.php';
@@ -73,10 +73,10 @@ class WPRuby_Email {
     * @since    1.0.0
     */
     public static function reply_added( $ticket_id = '', $reply_id = '' ){
-      $ticket         =  new WPRuby_Ticket( $ticket_id  );
+      $ticket         =  new RHD_Ticket( $ticket_id  );
       $assignee       =  $ticket->get_assignee();
       $ticket_author  =  $ticket->get_author();
-      $reply_author   =  new WPRuby_User( get_current_user_id() );
+      $reply_author   =  new RHD_User( get_current_user_id() );
       if($reply_author->get_id()  == $assignee->get_id()){
         //send notification to ticket author
         ob_start();
@@ -103,7 +103,7 @@ class WPRuby_Email {
   * @since    1.0.0
   */
   public static function ticket_closed(  $ticket_id  ){
-    $ticket = new WPRuby_Ticket(  $ticket_id  );
+    $ticket = new RHD_Ticket(  $ticket_id  );
     $author = $ticket->get_author();
     $current_user = wp_get_current_user();
     //preparing the email body
@@ -114,7 +114,7 @@ class WPRuby_Email {
     $headers         =  array('Content-Type: text/html; charset=UTF-8');
 
     $attachments = array();
-    $general_options = get_option('wpruby_help_desk_general');
+    $general_options = get_option('rhd_general');
     if(isset($general_options['enable_email_transcript']) && $general_options['enable_email_transcript'] == 'on'){
       $temp_text       =  plugin_dir_path( __FILE__ ) . 'partials/emails/temp/ticket_transcript_'. $ticket_id . '.txt';
       $temp_text_file  =  fopen($temp_text, 'w');
@@ -124,8 +124,12 @@ class WPRuby_Email {
     }
 
     wp_mail($author->get_email(),  $email_title, $email_content, $headers, $attachments);
-    //info: delete the temp text attachment.
-    unlink($temp_text);
+
+    if(isset($general_options['enable_email_transcript']) && $general_options['enable_email_transcript'] == 'on'){
+      //info: delete the temp text attachment.
+      unlink($temp_text);
+    }
+    
   }
 
   /**
@@ -135,7 +139,7 @@ class WPRuby_Email {
   * @since    1.0.0
   */
   public static function get_transcript_text(  $ticket_id  ){
-    $ticket = new WPRuby_Ticket(  $ticket_id  );
+    $ticket = new RHD_Ticket(  $ticket_id  );
     $ticket_title    =     get_post_field( 'post_title', $ticket_id );
     $ticket_content  =     strip_tags( get_post_field( 'post_content', $ticket_id ) );
     $ticket_date     =     get_post_field( 'post_date', $ticket_id );
