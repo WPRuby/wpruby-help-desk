@@ -47,7 +47,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk.php';
  */
 function rhd_activate_wpruby_help_desk() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk-activator.php';
-	$plugin_name = 'wpruby-help-desk';
+	$plugin_name = 'ruby-help-desk';
 	$plugin_admin = new RHD_Admin( $plugin_name, RHD_VERSION );
 	$plugin_admin->register_post_types();
 	$plugin_admin->register_taxonomies();

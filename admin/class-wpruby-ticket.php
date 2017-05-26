@@ -248,7 +248,7 @@ class WPRuby_Ticket {
        }
        //info: if the reply is empty
        if(isset($_POST['ticket_reply']) && trim($_POST['ticket_reply']) == ''){
-         return array('error' =>  __('The reply should not be empty', 'wpruby-help-desk'));
+         return array('error' =>  __('The reply should not be empty', 'ruby-help-desk'));
        }
        //info: if the file is not validated
        if(isset($reply_uploaded_file['error'])){
@@ -288,7 +288,7 @@ class WPRuby_Ticket {
        foreach ($tickets as $key => $ticket):
          $user = new WPRuby_User($ticket->post_author);
          $tickets[$key]->user = $user;
-         $tickets[$key]->post_title = ($ticket->post_title == '')?__('(No Subject)', 'wpruby-help-desk'):$ticket->post_title;
+         $tickets[$key]->post_title = ($ticket->post_title == '')?__('(No Subject)', 'ruby-help-desk'):$ticket->post_title;
          $tick = new WPRuby_Ticket($ticket->ID);
          $tickets[$key]->product = $tick->get_product();
          $tickets[$key]->status = $tick->get_status();

@@ -33,7 +33,7 @@ class WPRuby_Email {
     ob_start();
     require_once plugin_dir_path( __FILE__ ) . 'partials/emails/ticket_opened_assignee.php';
     $email_content   =  ob_get_clean();
-    $email_title     =  sprintf(__('You have a new ticket( #%s ) assigned', 'wpruby-help-desk'), $ticket_id);
+    $email_title     =  sprintf(__('You have a new ticket( #%s ) assigned', 'ruby-help-desk'), $ticket_id);
     $headers         =  array('Content-Type: text/html; charset=UTF-8');
     wp_mail($assignee->get_email(),  $email_title, $email_content, $headers);
 
@@ -41,7 +41,7 @@ class WPRuby_Email {
     ob_start();
     require_once plugin_dir_path( __FILE__ ) . 'partials/emails/ticket_opened_author.php';
     $email_content   =  ob_get_clean();
-    $email_title     =  sprintf(__('We recieved your ticket #%s', 'wpruby-help-desk'), $ticket_id);
+    $email_title     =  sprintf(__('We recieved your ticket #%s', 'ruby-help-desk'), $ticket_id);
     $headers         =  array('Content-Type: text/html; charset=UTF-8');
     wp_mail($ticket_author->get_email(),  $email_title, $email_content, $headers);
 
@@ -61,7 +61,7 @@ class WPRuby_Email {
     ob_start();
     require_once plugin_dir_path( __FILE__ ) . 'partials/emails/ticket_reassigned.php';
     $email_content   =  ob_get_clean();
-    $email_title     =  sprintf(__('You have a new ticket( #%s ) assigned', 'wpruby-help-desk'), $ticket_id);
+    $email_title     =  sprintf(__('You have a new ticket( #%s ) assigned', 'ruby-help-desk'), $ticket_id);
     $headers         =  array('Content-Type: text/html; charset=UTF-8');
     wp_mail($assignee->get_email(),  $email_title, $email_content, $headers);
 
@@ -82,7 +82,7 @@ class WPRuby_Email {
         ob_start();
         require_once plugin_dir_path( __FILE__ ) . 'partials/emails/reply_added_author.php';
         $email_content   =  ob_get_clean();
-        $email_title     =  sprintf(__('New Reply on your ticket #%s', 'wpruby-help-desk'), $ticket_id);
+        $email_title     =  sprintf(__('New Reply on your ticket #%s', 'ruby-help-desk'), $ticket_id);
         $headers         =  array('Content-Type: text/html; charset=UTF-8');
         wp_mail($ticket_author->get_email(),  $email_title, $email_content, $headers);
       }elseif($reply_author->get_id()  == $ticket_author->get_id()){
@@ -90,7 +90,7 @@ class WPRuby_Email {
         ob_start();
         require_once plugin_dir_path( __FILE__ ) . 'partials/emails/reply_added_assignee.php';
         $email_content   =  ob_get_clean();
-        $email_title     =  sprintf(__('New Reply on your assigned ticket #%s', 'wpruby-help-desk'), $ticket_id);
+        $email_title     =  sprintf(__('New Reply on your assigned ticket #%s', 'ruby-help-desk'), $ticket_id);
         $headers         =  array('Content-Type: text/html; charset=UTF-8');
         wp_mail($assignee->get_email(),  $email_title, $email_content, $headers);
       }
@@ -110,7 +110,7 @@ class WPRuby_Email {
     ob_start();
     require_once plugin_dir_path( __FILE__ ) . 'partials/emails/ticket_closed.php';
     $email_content   =  ob_get_clean();
-    $email_title     =  sprintf(__('Your ticket #%s is closed', 'wpruby-help-desk'), $ticket_id);
+    $email_title     =  sprintf(__('Your ticket #%s is closed', 'ruby-help-desk'), $ticket_id);
     $headers         =  array('Content-Type: text/html; charset=UTF-8');
 
     $attachments = array();
@@ -143,9 +143,9 @@ class WPRuby_Email {
 
     $final_transcript = '';
     $final_transcript .= $ticket_title .  PHP_EOL . PHP_EOL;
-    $final_transcript .= '========='.  __('Ticket Content', 'wpruby-help-desk')  .' ('.  $ticket_date  .')===========' .  PHP_EOL;
+    $final_transcript .= '========='.  __('Ticket Content', 'ruby-help-desk')  .' ('.  $ticket_date  .')===========' .  PHP_EOL;
     $final_transcript .= $ticket_content .  PHP_EOL;
-    $final_transcript .= PHP_EOL. '=========='.  __('Ticket Replies', 'wpruby-help-desk') .'==========' .  PHP_EOL . PHP_EOL . PHP_EOL;
+    $final_transcript .= PHP_EOL. '=========='.  __('Ticket Replies', 'ruby-help-desk') .'==========' .  PHP_EOL . PHP_EOL . PHP_EOL;
     $reply_number = 1;
     foreach ($replies as $key => $reply) {
       $final_transcript .= '========== #'. $reply_number .' ( '.  $reply->post_date .' by '. get_the_author_meta('nicename', $reply->post_author) .' )==========' .  PHP_EOL . PHP_EOL;

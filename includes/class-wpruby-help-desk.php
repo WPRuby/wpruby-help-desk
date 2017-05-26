@@ -76,7 +76,7 @@ class Ruby_Help_Desk {
 	 */
 	public function __construct() {
 
-		$this->plugin_name = 'wpruby-help-desk';
+		$this->plugin_name = 'ruby-help-desk';
 		$this->version = '1.0.0';
 
 		$this->load_dependencies();

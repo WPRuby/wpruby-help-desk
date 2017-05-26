@@ -14,11 +14,11 @@
 
 <?php if($ticket_status['slug'] != 'closed'): ?>
   <p>
-  <input type="submit" name="reply"  class="button button-primary button-large" value="<?php _e('Reply', 'wpruby-help-desk'); ?>">
-  <input type="submit" name="reply-close" class="button button-close button-large" value="<?php _e('Reply and Close', 'wpruby-help-desk'); ?>">
+  <input type="submit" name="reply"  class="button button-primary button-large" value="<?php _e('Reply', 'ruby-help-desk'); ?>">
+  <input type="submit" name="reply-close" class="button button-close button-large" value="<?php _e('Reply and Close', 'ruby-help-desk'); ?>">
   </p>
 <?php else: ?>
   <p>
-  <input type="submit" name="reply-reopen" class="button button-primary button-large" value="<?php _e('Reply and re-open', 'wpruby-help-desk'); ?>">
+  <input type="submit" name="reply-reopen" class="button button-primary button-large" value="<?php _e('Reply and re-open', 'ruby-help-desk'); ?>">
   </p>
 <?php endif; ?>

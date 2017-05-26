@@ -235,10 +235,10 @@ class RHD_Public {
 				//info: validation start
 				$errors = array();
 				if(trim($ticket['subject']) == ''){
-					$errors[] = __('Ticket Subject should not be empty', 'wpruby-help-desk');
+					$errors[] = __('Ticket Subject should not be empty', 'ruby-help-desk');
 				}
 				if(trim($ticket['content']) == ''){
-					$errors[] = __('Ticket Description should not be empty', 'wpruby-help-desk');
+					$errors[] = __('Ticket Description should not be empty', 'ruby-help-desk');
 				}
 				//info: if there is an attachment
 				if(isset($_FILES['ticket_attachment']) && $_FILES['ticket_attachment']['name'] != ''){
@@ -324,11 +324,11 @@ class RHD_Public {
 		$max_file_size_bytes = $max_file_size * 1024 * 1024;
 
 		if ( ! in_array( $ext, $filetypes ) ) {
-			$file['error'] = sprintf( __( 'This file type (%s) is not allowed', 'wpruby-help-desk' ), $ext );
+			$file['error'] = sprintf( __( 'This file type (%s) is not allowed', 'ruby-help-desk' ), $ext );
 		}
 
 		if ( $file['size'] > $max_file_size_bytes ) {
-			$file['error'] = sprintf( __( 'The file is too big. The maximum allowed file size is %s', 'wpruby-help-desk' ), "$max_file_size Mb" );
+			$file['error'] = sprintf( __( 'The file is too big. The maximum allowed file size is %s', 'ruby-help-desk' ), "$max_file_size Mb" );
 		}
 
 		return $file;
@@ -392,23 +392,23 @@ class RHD_Public {
 			//info: validate username
 			$user['user_login'] = sanitize_user( $_POST['user_login']	);
 			if(username_exists($user['user_login'])){
-				$this->errors[] = __('The usrename already exists', 'wpruby-help-desk');
+				$this->errors[] = __('The usrename already exists', 'ruby-help-desk');
 			}
 			//info: validate email
 			$user['user_email'] = sanitize_email( $_POST['user_email']	);
 			if($user['user_email'] == ''){
-				$this->errors[] = __('Please provide a valid email', 'wpruby-help-desk');
+				$this->errors[] = __('Please provide a valid email', 'ruby-help-desk');
 			}
 			if ( email_exists( $user['user_email'] ) ) {
-				$this->errors[] = __('The email is already exist', 'wpruby-help-desk');
+				$this->errors[] = __('The email is already exist', 'ruby-help-desk');
 			}
 			//info: validate password
 			$user['user_pass'] = sanitize_text_field( $_POST['user_pass'] );
 			if(strlen(trim($user['user_pass'])) < 7 ){
-				$this->errors[] = __('Please provide a password longer than 7 charachters', 'wpruby-help-desk');
+				$this->errors[] = __('Please provide a password longer than 7 charachters', 'ruby-help-desk');
 			}
 			if(trim($user['user_pass']) != trim(sanitize_text_field($_POST['user_pass_repeated']))){
-				$this->errors[] = __('The passwords do not match', 'wpruby-help-desk');
+				$this->errors[] = __('The passwords do not match', 'ruby-help-desk');
 			}
 
 			if(empty($this->errors)){

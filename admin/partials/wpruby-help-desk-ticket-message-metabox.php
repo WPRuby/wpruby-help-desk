@@ -24,7 +24,7 @@
 
     <?php if ($attachments): ?>
       <hr>
-      <h3><?php _e('Attachments', 'wpruby-help-desk'); ?></h3>
+      <h3><?php _e('Attachments', 'ruby-help-desk'); ?></h3>
 
       <div class="ticket_attachments">
         <ol>

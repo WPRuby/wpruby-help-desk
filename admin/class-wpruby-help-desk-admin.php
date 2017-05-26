@@ -106,20 +106,20 @@ class RHD_Admin {
 	 */
 	public function register_post_types(){
 		$labels = array(
-			'name'               => _x( 'Tickets', 'post type general name', 'wpruby-help-desk' ),
-			'singular_name'      => _x( 'Create Ticket', 'post type singular name', 'wpruby-help-desk' ),
-			'menu_name'          => _x( 'Ruby Desk', 'admin menu', 'wpruby-help-desk' ),
-			'name_admin_bar'     => _x( 'Ticket', 'add new on admin bar', 'wpruby-help-desk' ),
-			'add_new'            => _x( 'Create Ticket', 'book', 'wpruby-help-desk' ),
-			'add_new_item'       => __( 'Create New Ticket', 'wpruby-help-desk' ),
-			'new_item'           => __( 'Create New Ticket', 'wpruby-help-desk' ),
-			'edit_item'          => __( 'Edit Ticket', 'wpruby-help-desk' ),
-			'view_item'          => __( 'View Ticket', 'wpruby-help-desk' ),
-			'all_items'          => __( 'All Tickets', 'wpruby-help-desk' ),
-			'search_items'       => __( 'Search Tickets', 'wpruby-help-desk' ),
-			'parent_item_colon'  => __( 'Parent Tickets:', 'wpruby-help-desk' ),
-			'not_found'          => __( 'No tickets found.', 'wpruby-help-desk' ),
-			'not_found_in_trash' => __( 'No tickets found in Trash.', 'wpruby-help-desk' )
+			'name'               => _x( 'Tickets', 'post type general name', 'ruby-help-desk' ),
+			'singular_name'      => _x( 'Create Ticket', 'post type singular name', 'ruby-help-desk' ),
+			'menu_name'          => _x( 'Ruby Desk', 'admin menu', 'ruby-help-desk' ),
+			'name_admin_bar'     => _x( 'Ticket', 'add new on admin bar', 'ruby-help-desk' ),
+			'add_new'            => _x( 'Create Ticket', 'book', 'ruby-help-desk' ),
+			'add_new_item'       => __( 'Create New Ticket', 'ruby-help-desk' ),
+			'new_item'           => __( 'Create New Ticket', 'ruby-help-desk' ),
+			'edit_item'          => __( 'Edit Ticket', 'ruby-help-desk' ),
+			'view_item'          => __( 'View Ticket', 'ruby-help-desk' ),
+			'all_items'          => __( 'All Tickets', 'ruby-help-desk' ),
+			'search_items'       => __( 'Search Tickets', 'ruby-help-desk' ),
+			'parent_item_colon'  => __( 'Parent Tickets:', 'ruby-help-desk' ),
+			'not_found'          => __( 'No tickets found.', 'ruby-help-desk' ),
+			'not_found_in_trash' => __( 'No tickets found in Trash.', 'ruby-help-desk' )
 		);
 		$supports = array('title');
 
@@ -149,20 +149,20 @@ class RHD_Admin {
 
 			//Knowledgebase Articles
 			$labels = array(
-				'name'               => _x( 'Knowledgebase', 'post type general name', 'wpruby-help-desk' ),
-				'singular_name'      => _x( 'New Document', 'post type singular name', 'wpruby-help-desk' ),
-				'menu_name'          => _x( 'Ruby Desk Knowledgebase', 'admin menu', 'wpruby-help-desk' ),
-				'name_admin_bar'     => _x( 'Knowledgebase', 'add new on admin bar', 'wpruby-help-desk' ),
-				'add_new'            => _x( 'New Document', 'book', 'wpruby-help-desk' ),
-				'add_new_item'       => __( 'Create New Document', 'wpruby-help-desk' ),
-				'new_item'           => __( 'Create New Document', 'wpruby-help-desk' ),
-				'edit_item'          => __( 'Edit Document', 'wpruby-help-desk' ),
-				'view_item'          => __( 'View Document', 'wpruby-help-desk' ),
-				'all_items'          => __( 'Knowledgebase', 'wpruby-help-desk' ),
-				'search_items'       => __( 'Search Documents', 'wpruby-help-desk' ),
-				'parent_item_colon'  => __( 'Parent Documents:', 'wpruby-help-desk' ),
-				'not_found'          => __( 'No documents found.', 'wpruby-help-desk' ),
-				'not_found_in_trash' => __( 'No documents found in Trash.', 'wpruby-help-desk' )
+				'name'               => _x( 'Knowledgebase', 'post type general name', 'ruby-help-desk' ),
+				'singular_name'      => _x( 'New Document', 'post type singular name', 'ruby-help-desk' ),
+				'menu_name'          => _x( 'Ruby Desk Knowledgebase', 'admin menu', 'ruby-help-desk' ),
+				'name_admin_bar'     => _x( 'Knowledgebase', 'add new on admin bar', 'ruby-help-desk' ),
+				'add_new'            => _x( 'New Document', 'book', 'ruby-help-desk' ),
+				'add_new_item'       => __( 'Create New Document', 'ruby-help-desk' ),
+				'new_item'           => __( 'Create New Document', 'ruby-help-desk' ),
+				'edit_item'          => __( 'Edit Document', 'ruby-help-desk' ),
+				'view_item'          => __( 'View Document', 'ruby-help-desk' ),
+				'all_items'          => __( 'Knowledgebase', 'ruby-help-desk' ),
+				'search_items'       => __( 'Search Documents', 'ruby-help-desk' ),
+				'parent_item_colon'  => __( 'Parent Documents:', 'ruby-help-desk' ),
+				'not_found'          => __( 'No documents found.', 'ruby-help-desk' ),
+				'not_found_in_trash' => __( 'No documents found in Trash.', 'ruby-help-desk' )
 			);
 
 
@@ -185,20 +185,20 @@ class RHD_Admin {
 
 			//Tickets Reply
 			$labels = array(
-				'name'               => _x( 'Tickets Reply', 'post type general name', 'wpruby-help-desk' ),
-				'singular_name'      => _x( 'Create Ticket Reply', 'post type singular name', 'wpruby-help-desk' ),
-				'menu_name'          => _x( 'Ruby Desk', 'admin menu', 'wpruby-help-desk' ),
-				'name_admin_bar'     => _x( 'Ticket Reply', 'add new on admin bar', 'wpruby-help-desk' ),
-				'add_new'            => _x( 'Create Ticket Reply', 'book', 'wpruby-help-desk' ),
-				'add_new_item'       => __( 'Create New Ticket Reply', 'wpruby-help-desk' ),
-				'new_item'           => __( 'Create New Ticket Reply', 'wpruby-help-desk' ),
-				'edit_item'          => __( 'Edit Ticket Reply', 'wpruby-help-desk' ),
-				'view_item'          => __( 'View Ticket Reply', 'wpruby-help-desk' ),
-				'all_items'          => __( 'All Tickets Reply', 'wpruby-help-desk' ),
-				'search_items'       => __( 'Search Tickets Reply', 'wpruby-help-desk' ),
-				'parent_item_colon'  => __( 'Parent Tickets Reply:', 'wpruby-help-desk' ),
-				'not_found'          => __( 'No tickets found.', 'wpruby-help-desk' ),
-				'not_found_in_trash' => __( 'No tickets found in Trash.', 'wpruby-help-desk' )
+				'name'               => _x( 'Tickets Reply', 'post type general name', 'ruby-help-desk' ),
+				'singular_name'      => _x( 'Create Ticket Reply', 'post type singular name', 'ruby-help-desk' ),
+				'menu_name'          => _x( 'Ruby Desk', 'admin menu', 'ruby-help-desk' ),
+				'name_admin_bar'     => _x( 'Ticket Reply', 'add new on admin bar', 'ruby-help-desk' ),
+				'add_new'            => _x( 'Create Ticket Reply', 'book', 'ruby-help-desk' ),
+				'add_new_item'       => __( 'Create New Ticket Reply', 'ruby-help-desk' ),
+				'new_item'           => __( 'Create New Ticket Reply', 'ruby-help-desk' ),
+				'edit_item'          => __( 'Edit Ticket Reply', 'ruby-help-desk' ),
+				'view_item'          => __( 'View Ticket Reply', 'ruby-help-desk' ),
+				'all_items'          => __( 'All Tickets Reply', 'ruby-help-desk' ),
+				'search_items'       => __( 'Search Tickets Reply', 'ruby-help-desk' ),
+				'parent_item_colon'  => __( 'Parent Tickets Reply:', 'ruby-help-desk' ),
+				'not_found'          => __( 'No tickets found.', 'ruby-help-desk' ),
+				'not_found_in_trash' => __( 'No tickets found in Trash.', 'ruby-help-desk' )
 			);
 
 
@@ -227,20 +227,20 @@ class RHD_Admin {
 			$labels = array(
 				'name'                       => _x( 'Ticket Status', 'taxonomy general name' ),
 				'singular_name'              => _x( 'Ticket Status', 'taxonomy singular name' ),
-				'search_items'               => __( 'Search Ticket Statuses', 'wpruby-help-desk' ),
-				'popular_items'              => __( 'Popular Ticket Statuses', 'wpruby-help-desk' ),
-				'all_items'                  => __( 'All Ticket Statuses','wpruby-help-desk' ),
+				'search_items'               => __( 'Search Ticket Statuses', 'ruby-help-desk' ),
+				'popular_items'              => __( 'Popular Ticket Statuses', 'ruby-help-desk' ),
+				'all_items'                  => __( 'All Ticket Statuses','ruby-help-desk' ),
 				'parent_item'                => null,
 				'parent_item_colon'          => null,
-				'edit_item'                  => __( 'Edit Ticket Status','wpruby-help-desk' ),
-				'update_item'                => __( 'Update Ticket Status','wpruby-help-desk' ),
-				'add_new_item'               => __( 'Add New Ticket Status','wpruby-help-desk' ),
-				'new_item_name'              => __( 'New Ticket Status','wpruby-help-desk' ),
-				'separate_items_with_commas' => __( 'Separate statuses with commas','wpruby-help-desk' ),
-				'add_or_remove_items'        => __( 'Add or remove ticket status','wpruby-help-desk' ),
-				'choose_from_most_used'      => __( 'Choose from the most used statuses','wpruby-help-desk' ),
-				'not_found'                  => __( 'No Tickets Statuses found.','wpruby-help-desk' ),
-				'menu_name'                  => __( 'Statuses','wpruby-help-desk' ),
+				'edit_item'                  => __( 'Edit Ticket Status','ruby-help-desk' ),
+				'update_item'                => __( 'Update Ticket Status','ruby-help-desk' ),
+				'add_new_item'               => __( 'Add New Ticket Status','ruby-help-desk' ),
+				'new_item_name'              => __( 'New Ticket Status','ruby-help-desk' ),
+				'separate_items_with_commas' => __( 'Separate statuses with commas','ruby-help-desk' ),
+				'add_or_remove_items'        => __( 'Add or remove ticket status','ruby-help-desk' ),
+				'choose_from_most_used'      => __( 'Choose from the most used statuses','ruby-help-desk' ),
+				'not_found'                  => __( 'No Tickets Statuses found.','ruby-help-desk' ),
+				'menu_name'                  => __( 'Statuses','ruby-help-desk' ),
 			);
 
 			$args = array(
@@ -258,20 +258,20 @@ class RHD_Admin {
 			$labels = array(
 				'name'                       => _x( 'Product', 'taxonomy general name' ),
 				'singular_name'              => _x( 'Product', 'taxonomy singular name' ),
-				'search_items'               => __( 'Search Products', 'wpruby-help-desk' ),
-				'popular_items'              => __( 'Popular Products', 'wpruby-help-desk' ),
-				'all_items'                  => __( 'All Products','wpruby-help-desk' ),
+				'search_items'               => __( 'Search Products', 'ruby-help-desk' ),
+				'popular_items'              => __( 'Popular Products', 'ruby-help-desk' ),
+				'all_items'                  => __( 'All Products','ruby-help-desk' ),
 				'parent_item'                => null,
 				'parent_item_colon'          => null,
-				'edit_item'                  => __( 'Edit Product','wpruby-help-desk' ),
-				'update_item'                => __( 'Update Product','wpruby-help-desk' ),
-				'add_new_item'               => __( 'Add New Product','wpruby-help-desk' ),
-				'new_item_name'              => __( 'New Product','wpruby-help-desk' ),
-				'separate_items_with_commas' => __( 'Separate statuses with commas','wpruby-help-desk' ),
-				'add_or_remove_items'        => __( 'Add or remove ticket status','wpruby-help-desk' ),
-				'choose_from_most_used'      => __( 'Choose from the most used statuses','wpruby-help-desk' ),
-				'not_found'                  => __( 'No Tickets Statuses found.','wpruby-help-desk' ),
-				'menu_name'                  => __( 'Products','wpruby-help-desk' ),
+				'edit_item'                  => __( 'Edit Product','ruby-help-desk' ),
+				'update_item'                => __( 'Update Product','ruby-help-desk' ),
+				'add_new_item'               => __( 'Add New Product','ruby-help-desk' ),
+				'new_item_name'              => __( 'New Product','ruby-help-desk' ),
+				'separate_items_with_commas' => __( 'Separate statuses with commas','ruby-help-desk' ),
+				'add_or_remove_items'        => __( 'Add or remove ticket status','ruby-help-desk' ),
+				'choose_from_most_used'      => __( 'Choose from the most used statuses','ruby-help-desk' ),
+				'not_found'                  => __( 'No Tickets Statuses found.','ruby-help-desk' ),
+				'menu_name'                  => __( 'Products','ruby-help-desk' ),
 			);
 
 			$args = array(
@@ -348,18 +348,18 @@ class RHD_Admin {
 			remove_meta_box( 'tickets_statusdiv', RHD_TICKET, 'side' );
 
 			// adding the reply box only when the ticket is already created
-			add_meta_box('ticket_options', __( 'Ticket Options', 'wpruby-help-desk' ), array($this, 'ticket_options_meta_box_callback'), RHD_TICKET, 'side', 'high');
+			add_meta_box('ticket_options', __( 'Ticket Options', 'ruby-help-desk' ), array($this, 'ticket_options_meta_box_callback'), RHD_TICKET, 'side', 'high');
 			if(isset($_GET['post'])){
 				$ticket = new WPRuby_Ticket(intval($_GET['post']));
 
-				add_meta_box('ticket_information', __( 'Ticket Details', 'wpruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), RHD_TICKET, 'side', 'high');
+				add_meta_box('ticket_information', __( 'Ticket Details', 'ruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), RHD_TICKET, 'side', 'high');
 
-				add_meta_box('ticket_message', __( 'Ticket Message', 'wpruby-help-desk' ), array($this, 'ticket_message_meta_box_callback'), RHD_TICKET, 'normal', 'high');
+				add_meta_box('ticket_message', __( 'Ticket Message', 'ruby-help-desk' ), array($this, 'ticket_message_meta_box_callback'), RHD_TICKET, 'normal', 'high');
 				if($ticket->get_replies()){
-					add_meta_box('ticket_replies', __( 'Replies', 'wpruby-help-desk' ), array($this, 'replies_meta_box_callback'), RHD_TICKET, 'normal', 'high');
+					add_meta_box('ticket_replies', __( 'Replies', 'ruby-help-desk' ), array($this, 'replies_meta_box_callback'), RHD_TICKET, 'normal', 'high');
 				}
 
-				add_meta_box('reply_to_ticket', __( 'Reply', 'wpruby-help-desk' ), array($this, 'reply_meta_box_callback'), RHD_TICKET, 'normal', 'high');
+				add_meta_box('reply_to_ticket', __( 'Reply', 'ruby-help-desk' ), array($this, 'reply_meta_box_callback'), RHD_TICKET, 'normal', 'high');
 
 			}
 		}
@@ -409,7 +409,7 @@ class RHD_Admin {
 
 			$ticket_product = (isset($ticket_product[0]))? $ticket_product[0]: -1;
 
-			$publish_button_text = (isset($_GET['post']))? __('Update Ticket', 'wpruby-help-desk'): __('Create Ticket','wpruby-help-desk');
+			$publish_button_text = (isset($_GET['post']))? __('Update Ticket', 'ruby-help-desk'): __('Create Ticket','ruby-help-desk');
 			require_once plugin_dir_path( __FILE__ ) . 'partials/wpruby-help-desk-ticket-options-metabox.php';
 		}
 
@@ -433,7 +433,7 @@ class RHD_Admin {
 				// this will add the color meta field to the add new status page
 				?>
 					<div class="form-field">
-						<label for="ticket_status_color"><?php _e( 'Status Color', 'wpruby-help-desk' ); ?></label>
+						<label for="ticket_status_color"><?php _e( 'Status Color', 'ruby-help-desk' ); ?></label>
 						<input type="text" name="ticket_status_color" class="ticket-status-color-field" id="ticket_status_color" value="">
 					</div>
 				<?php
@@ -447,7 +447,7 @@ class RHD_Admin {
 				 ?>
 
 				 <tr class="form-field">
- 				 		<th scope="row" valign="top"><label for="ticket_status_color"><?php _e( 'Status Color', 'wpruby-help-desk' ); ?></label></th>
+ 				 		<th scope="row" valign="top"><label for="ticket_status_color"><?php _e( 'Status Color', 'ruby-help-desk' ); ?></label></th>
 							<td>
 								<input type="text" name="ticket_status_color" class="ticket-status-color-field" id="ticket_status_color" value="<?php echo $color; ?>">
 							</td>
@@ -494,13 +494,13 @@ class RHD_Admin {
 		public function set_custom_edit_support_ticket_columns($old_columns) {
 				$new_columns = array();
 				$new_columns['cb'] = $old_columns['cb'];
-				$new_columns['support_ticket_title'] = __('Ticket title', 'wpruby-help-desk');
-				$new_columns['support_ticket_id'] = __('Ticket #ID', 'wpruby-help-desk');
+				$new_columns['support_ticket_title'] = __('Ticket title', 'ruby-help-desk');
+				$new_columns['support_ticket_id'] = __('Ticket #ID', 'ruby-help-desk');
 				$new_columns['taxonomy-tickets_products'] = $old_columns['taxonomy-tickets_products'];
-				$new_columns['support_ticket_status'] = __( 'Status', 'wpruby-help-desk' );
-				$new_columns['support_ticket_assignee'] = __( 'Assignee', 'wpruby-help-desk' );
-				$new_columns['support_ticket_customer'] = __( 'Customer', 'wpruby-help-desk' );
-		    $new_columns['support_ticket_replies'] = __( 'Replies', 'wpruby-help-desk' );
+				$new_columns['support_ticket_status'] = __( 'Status', 'ruby-help-desk' );
+				$new_columns['support_ticket_assignee'] = __( 'Assignee', 'ruby-help-desk' );
+				$new_columns['support_ticket_customer'] = __( 'Customer', 'ruby-help-desk' );
+		    $new_columns['support_ticket_replies'] = __( 'Replies', 'ruby-help-desk' );
 				$new_columns['date'] = $old_columns['date'];
 		    return $new_columns;
 		}
@@ -520,7 +520,7 @@ class RHD_Admin {
 								if($ticket_status)
 									echo '<span class="ticket_status_label" style="background:'.$ticket_status['color'].';">'. $ticket_status['name'] .'</span>';
 								else
-									_e( '-', 'wpruby-help-desk' );
+									_e( '-', 'ruby-help-desk' );
 		            break;
 						case 'support_ticket_assignee' :
 							 	$ticket = new WPRuby_Ticket(	$post_id	);
@@ -552,9 +552,9 @@ class RHD_Admin {
 	 * @since  1.0.0
 	 */
 	public function set_custom_ticket_status_columns_heads(	$columns	) {
-			$columns['posts'] = __('Tickets', 'wpruby-help-desk');
+			$columns['posts'] = __('Tickets', 'ruby-help-desk');
 			unset($columns['description']);
-			$columns['color'] = __('Color', 'wpruby-help-desk');
+			$columns['color'] = __('Color', 'ruby-help-desk');
 	    return $columns;
 	}
 
@@ -584,7 +584,7 @@ class RHD_Admin {
 	 */
 	public function helpdesk_status_dashboard_widget() {
 
-		wp_add_dashboard_widget('ruby_helpdesk_status_dashboard_widget',	__('Ruby Help Desk Status',	'wpruby-help-desk'),	array($this,	'helpdesk_status_dashboard_widget_content'));
+		wp_add_dashboard_widget('ruby_helpdesk_status_dashboard_widget',	__('Ruby Help Desk Status',	'ruby-help-desk'),	array($this,	'helpdesk_status_dashboard_widget_content'));
 
 		//info: Forcing the widget to the top
 		global $wp_meta_boxes;
@@ -620,42 +620,42 @@ class RHD_Admin {
 		if(!current_user_can('manage_options')) return;
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_main_menu',
-			'title' => __('Help Desk', 'wpruby-help-desk'),
+			'title' => __('Help Desk', 'ruby-help-desk'),
 			'href'  => '#',
 		));
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_all_tickets',
-			'title' => __('All Tickets','wpruby-help-desk'),
+			'title' => __('All Tickets','ruby-help-desk'),
 			'href'  => admin_url('edit.php?post_type='. RHD_TICKET),
 			'parent'=> 'rhd_main_menu'
 		));
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_create_ticket',
-			'title' => __('Create Ticket','wpruby-help-desk'),
+			'title' => __('Create Ticket','ruby-help-desk'),
 			'href'  => admin_url('post-new.php?post_type=' . RHD_TICKET),
 			'parent'=> 'rhd_main_menu'
 		));
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_statuses',
-			'title' => __('Statuses','wpruby-help-desk'),
+			'title' => __('Statuses','ruby-help-desk'),
 			'href'  => admin_url('edit-tags.php?taxonomy='. RHD_TICKET_STATUS .'&post_type=' . RHD_TICKET),
 			'parent'=> 'rhd_main_menu'
 		));
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_products',
-			'title' => __('Products','wpruby-help-desk'),
+			'title' => __('Products','ruby-help-desk'),
 			'href'  => admin_url('edit-tags.php?taxonomy='. RHD_TICKET_PRODUCT .'&post_type=' . RHD_TICKET),
 			'parent'=> 'rhd_main_menu'
 		));
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_knowledgebase',
-			'title' => __('Knowledgebase','wpruby-help-desk'),
+			'title' => __('Knowledgebase','ruby-help-desk'),
 			'href'  => admin_url('edit.php?post_type=' . RHD_KNOWLEDGEBASE),
 			'parent'=> 'rhd_main_menu'
 		));
 		$admin_bar->add_menu( array(
 			'id'    => 'rhd_settings',
-			'title' => __('Settings','wpruby-help-desk'),
+			'title' => __('Settings','ruby-help-desk'),
 			'href'  => admin_url('edit.php?post_type='. RHD_TICKET .'&page=wpruby-help-desk-settings'),
 			'parent'=> 'rhd_main_menu'
 		));

@@ -32,18 +32,18 @@ class WPRuby_Help_Desk_Settings {
     }
 
     public function admin_menu() {
-        add_submenu_page('edit.php?post_type=support_ticket',	__( 'Settings', 'wpruby-help-desk' ),	__( 'Settings', 'wpruby-help-desk' ),	'manage_options',	'wpruby-help-desk-settings',	array($this, 'plugin_page'));
+        add_submenu_page('edit.php?post_type=support_ticket',	__( 'Settings', 'ruby-help-desk' ),	__( 'Settings', 'ruby-help-desk' ),	'manage_options',	'wpruby-help-desk-settings',	array($this, 'plugin_page'));
     }
 
     public function get_settings_sections() {
         $sections = array(
             array(
                 'id'    => 'wpruby_help_desk_general',
-                'title' => __( 'General', 'wpruby-help-desk' )
+                'title' => __( 'General', 'ruby-help-desk' )
             ),
             array(
                 'id'    => 'wpruby_help_desk_attachments',
-                'title' => __( 'Attachments', 'wpruby-help-desk' )
+                'title' => __( 'Attachments', 'ruby-help-desk' )
             )
         );
         return $sections;
@@ -60,15 +60,15 @@ class WPRuby_Help_Desk_Settings {
             'wpruby_help_desk_general' => array(
               array(
                   'name'    => 'default_agent_assignee',
-                  'label'   => __( 'Assign tickets by default to:', 'wpruby-help-desk' ),
-                  'desc'    => __( 'When a ticket is created, it will be assigned to the selected agent.', 'wpruby-help-desk' ),
+                  'label'   => __( 'Assign tickets by default to:', 'ruby-help-desk' ),
+                  'desc'    => __( 'When a ticket is created, it will be assigned to the selected agent.', 'ruby-help-desk' ),
                   'type'    => 'select',
                   'options' => $agents
               ),
               array(
                   'name'  => 'enable_email_transcript',
-                  'label' => __( 'Enable Ticket Email Transcript', 'wpruby-help-desk' ),
-                  'desc'  => __( 'If this option is enabled, a transcript text file of the ticket will be sent to the client email when the ticket is closed.', 'wpruby-help-desk' ),
+                  'label' => __( 'Enable Ticket Email Transcript', 'ruby-help-desk' ),
+                  'desc'  => __( 'If this option is enabled, a transcript text file of the ticket will be sent to the client email when the ticket is closed.', 'ruby-help-desk' ),
                   'type'  => 'checkbox'
               ),
 
@@ -76,15 +76,15 @@ class WPRuby_Help_Desk_Settings {
             'wpruby_help_desk_attachments' => array(
               array(
                   'name'  => 'enable_attachments',
-                  'label' => __( 'Enable Attachments', 'wpruby-help-desk' ),
-                  'desc'  => __( 'Check this if you want to allow clients and agents to upload file attachments with the support tickets.', 'wpruby-help-desk' ),
+                  'label' => __( 'Enable Attachments', 'ruby-help-desk' ),
+                  'desc'  => __( 'Check this if you want to allow clients and agents to upload file attachments with the support tickets.', 'ruby-help-desk' ),
                   'type'  => 'checkbox'
               ),
               array(
                   'name'              => 'max_size_attachments',
-                  'label'             => __( 'Maximum file size', 'wpruby-help-desk' ),
-                  'desc'              => __( 'Maximum file size for each file attachment (in MB)', 'wpruby-help-desk' ),
-                  'placeholder'       => __( '2', 'wpruby-help-desk' ),
+                  'label'             => __( 'Maximum file size', 'ruby-help-desk' ),
+                  'desc'              => __( 'Maximum file size for each file attachment (in MB)', 'ruby-help-desk' ),
+                  'placeholder'       => __( '2', 'ruby-help-desk' ),
                   'min'               => 0,
                   'max'               => 1000,
                   'step'              => '1',
@@ -94,9 +94,9 @@ class WPRuby_Help_Desk_Settings {
               ),
                 array(
                     'name'        => 'allowed_extensions_attachments',
-                    'label'       => __( 'Allowed File Extensions', 'wpruby-help-desk' ),
-                    'desc'        => __( 'The allowed file extensions for support ticket attachments, separated by a comma (,).', 'wpruby-help-desk' ),
-                    'placeholder' => __( 'pdf,jpg,png,zip', 'wpruby-help-desk' ),
+                    'label'       => __( 'Allowed File Extensions', 'ruby-help-desk' ),
+                    'desc'        => __( 'The allowed file extensions for support ticket attachments, separated by a comma (,).', 'ruby-help-desk' ),
+                    'placeholder' => __( 'pdf,jpg,png,zip', 'ruby-help-desk' ),
                     'default'     => 'pdf,jpg,png,zip',
                     'type'        => 'textarea'
                 ),

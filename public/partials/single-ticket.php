@@ -1,8 +1,8 @@
 <div id="single_ticket">
   <div id="ticket_message">
     <div id="ticket_info_bar">
-      <span class="ticket_number"><?php _e('Ticket', 'wpruby-help-desk'); ?> #<?php echo $post->ID; ?></span>
-      <span class="ticket_date"><?php _e('Created before', 'wpruby-help-desk'); ?> <?php echo human_time_diff(strtotime($post->post_date), time()); ?> <?php _e('on','wpruby-help-desk'); ?> <?php echo date('M d, Y', strtotime($post->post_date)); ?> </span>
+      <span class="ticket_number"><?php _e('Ticket', 'ruby-help-desk'); ?> #<?php echo $post->ID; ?></span>
+      <span class="ticket_date"><?php _e('Created before', 'ruby-help-desk'); ?> <?php echo human_time_diff(strtotime($post->post_date), time()); ?> <?php _e('on','ruby-help-desk'); ?> <?php echo date('M d, Y', strtotime($post->post_date)); ?> </span>
       <span class="ticket_replies_count"><strong class="dashicons dashicons-admin-comments"></strong><?php echo $replies_count; ?></span>
       <span class="ticket_status_label status_single_ticket" style="background:<?php echo $status['color']; ?>;"><?php echo $status['name']; ?></span>
     </div>
@@ -11,7 +11,7 @@
 
       <?php if ($attachments): ?>
         <hr>
-        <h3><?php _e('Attachments', 'wpruby-help-desk'); ?></h3>
+        <h3><?php _e('Attachments', 'ruby-help-desk'); ?></h3>
 
         <div class="ticket_attachments">
           <ol>
@@ -37,7 +37,7 @@
 
            <?php if ($reply->attachments): ?>
              <hr>
-             <h3><?php _e('Attachments', 'wpruby-help-desk'); ?></h3>
+             <h3><?php _e('Attachments', 'ruby-help-desk'); ?></h3>
 
              <div class="ticket_attachments">
                <ol>
@@ -60,7 +60,7 @@
       <div class="alert"><?php echo $this->error; ?></div>
     <?php endif; ?>
     <form class="" action="" method="post" enctype="multipart/form-data">
-      <h4><?php _e('Write a reply', 'wpruby-help-desk'); ?></h4>
+      <h4><?php _e('Write a reply', 'ruby-help-desk'); ?></h4>
       <?php wp_editor('', 'ticket_reply', $editor_settings); ?>
       <p>
         <input type="hidden" name="ticket_id" value="<?php echo $post->ID; ?>">
@@ -68,15 +68,15 @@
 
         <?php if($attachments_settings['enable_attachments'] === 'on'): ?>
           <p>
-            <label for="ticket_attachment"><?php _e('Attachments', 'wpruby-help-desk'); ?></label><br>
+            <label for="ticket_attachment"><?php _e('Attachments', 'ruby-help-desk'); ?></label><br>
                 <input type="file" id="reply_attachment" name="reply_attachment" value="">
-                <span class="file_extensions"><?php _e('Allowed Extensions', 'wpruby-help-desk'); ?>: <?php echo $attachments_settings['allowed_extensions_attachments']; ?></span>
+                <span class="file_extensions"><?php _e('Allowed Extensions', 'ruby-help-desk'); ?>: <?php echo $attachments_settings['allowed_extensions_attachments']; ?></span>
 
           </p>
         <?php endif; ?>
 
-        <input type="submit" name="submit_reply" value="<?php _e('Submit a reply', 'wpruby-help-desk'); ?>">
-        <input type="submit" name="close_ticket" value="<?php _e('Close Ticket', 'wpruby-help-desk'); ?>" class="close_ticket">
+        <input type="submit" name="submit_reply" value="<?php _e('Submit a reply', 'ruby-help-desk'); ?>">
+        <input type="submit" name="close_ticket" value="<?php _e('Close Ticket', 'ruby-help-desk'); ?>" class="close_ticket">
       </p>
     </form>
 

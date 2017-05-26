@@ -67,7 +67,7 @@ class RHD_Activator {
 				// insert Default Pages
 				$main_page = array(
 							'post_content'	=>	'',
-							'post_title'	=>	__('Help Desk', 'wpruby-help-desk'),
+							'post_title'	=>	__('Help Desk', 'ruby-help-desk'),
 							'post_type'		=>	'page',
 							'post_status'	=>	'publish',
 							'post_parent' => null,
@@ -77,35 +77,35 @@ class RHD_Activator {
 				$pages =	array(
 					array(
 								'post_content'	=>	'[submit_ticket]',
-								'post_title'	=>	__('Submit Ticket', 'wpruby-help-desk'),
+								'post_title'	=>	__('Submit Ticket', 'ruby-help-desk'),
 								'post_type'		=>	'page',
 								'post_status'	=>	'publish',
 								'post_parent' => $main_page_id,
 					),
 					array(
 								'post_content'	=>	'[my_tickets]',
-								'post_title'	=>	__('My Tickets', 'wpruby-help-desk'),
+								'post_title'	=>	__('My Tickets', 'ruby-help-desk'),
 								'post_type'		=>	'page',
 								'post_status'	=>	'publish',
 								'post_parent' => $main_page_id,
 					),
 					array(
 								'post_content'	=>	'[ruby_help_desk_login]',
-								'post_title'	=>	__('Login', 'wpruby-help-desk'),
+								'post_title'	=>	__('Login', 'ruby-help-desk'),
 								'post_type'		=>	'page',
 								'post_status'	=>	'publish',
 								'post_parent' => $main_page_id,
 					),
 					array(
 								'post_content'	=>	'[ruby_help_desk_signup]',
-								'post_title'	=>	__('Sign Up', 'wpruby-help-desk'),
+								'post_title'	=>	__('Sign Up', 'ruby-help-desk'),
 								'post_type'		=>	'page',
 								'post_status'	=>	'publish',
 								'post_parent' => $main_page_id,
 					),
 					array(
 								'post_content'	=>	'[knowledgebase]',
-								'post_title'	=>	__('Knowledgebase', 'wpruby-help-desk'),
+								'post_title'	=>	__('Knowledgebase', 'ruby-help-desk'),
 								'post_type'		=>	'page',
 								'post_status'	=>	'publish',
 								'post_parent' => $main_page_id,
@@ -160,7 +160,7 @@ class RHD_Activator {
 			// insert default Ticket Statuses
 			$products = array(
 					array(
-						'term'	=>	__('Sample Product', 'wpruby-help-desk'),
+						'term'	=>	__('Sample Product', 'ruby-help-desk'),
 					)
 			);
 			foreach($products as $key => $product){
@@ -179,8 +179,8 @@ class RHD_Activator {
 		//info: add the help desk custom roles
 		$author     = get_role( 'author' );
 		$subscriber = get_role( 'subscriber' );
-		add_role( RHD_AGENT, __('Help Desk Agent', 'wpruby-help-desk'), $author->capabilities );
-		add_role( RHD_CUSTOMER, __('Help Desk Customer', 'wpruby-help-desk'), $subscriber->capabilities );
+		add_role( RHD_AGENT, __('Help Desk Agent', 'ruby-help-desk'), $author->capabilities );
+		add_role( RHD_CUSTOMER, __('Help Desk Customer', 'ruby-help-desk'), $subscriber->capabilities );
 
 		//add the Agent role to all of the admin
 		$administrators = get_users(

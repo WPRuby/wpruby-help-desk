@@ -3,11 +3,11 @@
 <?php if($my_tickets): ?>
     <table id="my_tickets_table">
       <thead>
-        <th style="width:35%;"><?php _e('Subject', 'wpruby-help-desk'); ?></th>
-        <th><?php _e('Status', 'wpruby-help-desk'); ?></th>
-        <th><?php _e('Product', 'wpruby-help-desk'); ?></th>
-        <th><?php _e('Date', 'wpruby-help-desk'); ?></th>
-        <th><?php _e('Replies', 'wpruby-help-desk'); ?></th>
+        <th style="width:35%;"><?php _e('Subject', 'ruby-help-desk'); ?></th>
+        <th><?php _e('Status', 'ruby-help-desk'); ?></th>
+        <th><?php _e('Product', 'ruby-help-desk'); ?></th>
+        <th><?php _e('Date', 'ruby-help-desk'); ?></th>
+        <th><?php _e('Replies', 'ruby-help-desk'); ?></th>
       </thead>
       <tbody>
       <?php foreach ($my_tickets as $key => $ticket): ?>
@@ -22,6 +22,6 @@
       </tbody>
     </table>
 <?php else: ?>
-  <p> <?php _e('You do not have any tickets yet', 'wpruby-help-desk'); ?>.</p>
+  <p> <?php _e('You do not have any tickets yet', 'ruby-help-desk'); ?>.</p>
 <?php endif; ?>
 </div>
