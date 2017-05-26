@@ -5,8 +5,8 @@
  * @link       https://wpruby.com
  * @since      1.0.0
  *
- * @package    Wpruby_Help_Desk
- * @subpackage Wpruby_Help_Desk/admin/partials
+ * @package    Ruby_Help_Desk
+ * @subpackage Ruby_Help_Desk/admin/partials
  */
 
 ?>

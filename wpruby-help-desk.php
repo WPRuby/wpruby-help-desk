@@ -4,7 +4,7 @@
  *
  * @link              https://wpruby.com
  * @since             1.0.0
- * @package           Wpruby_Help_Desk
+ * @package           Ruby_Help_Desk
  *
  * @wordpress-plugin
  * Plugin Name:       Ruby Help Desk
@@ -48,10 +48,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk.php';
 function rhd_activate_wpruby_help_desk() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk-activator.php';
 	$plugin_name = 'wpruby-help-desk';
-	$plugin_admin = new Wpruby_Help_Desk_Admin( $plugin_name, RHD_VERSION );
+	$plugin_admin = new RHD_Admin( $plugin_name, RHD_VERSION );
 	$plugin_admin->register_post_types();
 	$plugin_admin->register_taxonomies();
-	$activator = new Wpruby_Help_Desk_Activator();
+	$activator = new RHD_Activator();
 	$activator->activate();
 }
 
@@ -61,7 +61,7 @@ function rhd_activate_wpruby_help_desk() {
  */
 function rhd_deactivate_wpruby_help_desk() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpruby-help-desk-deactivator.php';
-	Wpruby_Help_Desk_Deactivator::deactivate();
+	RHD_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'rhd_activate_wpruby_help_desk' );
@@ -79,7 +79,7 @@ register_deactivation_hook( __FILE__, 'rhd_deactivate_wpruby_help_desk' );
  * @since    1.0.0
  */
 function rhd_run_wpruby_help_desk() {
-	$plugin = new Wpruby_Help_Desk();
+	$plugin = new Ruby_Help_Desk();
 	$plugin->run();
 }
 rhd_run_wpruby_help_desk();

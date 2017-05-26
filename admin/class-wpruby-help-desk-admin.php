@@ -6,8 +6,8 @@
  * @link       https://wpruby.com
  * @since      1.0.0
  *
- * @package    Wpruby_Help_Desk
- * @subpackage Wpruby_Help_Desk/admin
+ * @package    Ruby_Help_Desk
+ * @subpackage Ruby_Help_Desk/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Wpruby_Help_Desk
- * @subpackage Wpruby_Help_Desk/admin
+ * @package    Ruby_Help_Desk
+ * @subpackage Ruby_Help_Desk/admin
  * @author     WPRuby <info@wpruby.com>
  */
-class Wpruby_Help_Desk_Admin {
+class RHD_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -65,10 +65,10 @@ class Wpruby_Help_Desk_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Wpruby_Help_Desk_Loader as all of the hooks are defined
+		 * defined in RHD_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Wpruby_Help_Desk_Loader will then create the relationship
+		 * The RHD_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
@@ -88,10 +88,10 @@ class Wpruby_Help_Desk_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Wpruby_Help_Desk_Loader as all of the hooks are defined
+		 * defined in RHD_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Wpruby_Help_Desk_Loader will then create the relationship
+		 * The RHD_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */

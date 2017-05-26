@@ -6,8 +6,8 @@
  * @link       https://wpruby.com
  * @since      1.0.0
  *
- * @package    Wpruby_Help_Desk
- * @subpackage Wpruby_Help_Desk/includes
+ * @package    Ruby_Help_Desk
+ * @subpackage Ruby_Help_Desk/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Wpruby_Help_Desk
- * @subpackage Wpruby_Help_Desk/includes
+ * @package    Ruby_Help_Desk
+ * @subpackage Ruby_Help_Desk/includes
  * @author     WPRuby <info@wpruby.com>
  */
-class Wpruby_Help_Desk_Loader {
+class RHD_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

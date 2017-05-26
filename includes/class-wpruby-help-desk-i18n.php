@@ -9,8 +9,8 @@
  * @link       https://wpruby.com
  * @since      1.0.0
  *
- * @package    Wpruby_Help_Desk
- * @subpackage Wpruby_Help_Desk/includes
+ * @package    Ruby_Help_Desk
+ * @subpackage Ruby_Help_Desk/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Wpruby_Help_Desk
- * @subpackage Wpruby_Help_Desk/includes
+ * @package    Ruby_Help_Desk
+ * @subpackage Ruby_Help_Desk/includes
  * @author     WPRuby <info@wpruby.com>
  */
-class Wpruby_Help_Desk_i18n {
+class RHD_i18n {
 
 
 	/**

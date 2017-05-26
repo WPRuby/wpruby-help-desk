@@ -6,7 +6,7 @@
  * @link       https://wpruby.com
  * @since      1.0.0
  *
- * @package    Wpruby_Help_Desk
+ * @package    Ruby_Help_Desk
  */
 
 // If uninstall not called from WordPress, then exit.

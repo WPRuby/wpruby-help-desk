@@ -9,8 +9,8 @@
  * @link       https://wpruby.com
  * @since      1.0.0
  *
- * @package    Wpruby_Help_Desk
- * @subpackage Wpruby_Help_Desk/includes
+ * @package    Ruby_Help_Desk
+ * @subpackage Ruby_Help_Desk/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Wpruby_Help_Desk
- * @subpackage Wpruby_Help_Desk/includes
+ * @package    Ruby_Help_Desk
+ * @subpackage Ruby_Help_Desk/includes
  * @author     WPRuby <info@wpruby.com>
  */
-class Wpruby_Help_Desk {
+class Ruby_Help_Desk {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Wpruby_Help_Desk {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Wpruby_Help_Desk_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      RHD_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -92,10 +92,10 @@ class Wpruby_Help_Desk {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Wpruby_Help_Desk_Loader. Orchestrates the hooks of the plugin.
-	 * - Wpruby_Help_Desk_i18n. Defines internationalization functionality.
-	 * - Wpruby_Help_Desk_Admin. Defines all hooks for the admin area.
-	 * - Wpruby_Help_Desk_Public. Defines all hooks for the public side of the site.
+	 * - RHD_Loader. Orchestrates the hooks of the plugin.
+	 * - RHD_i18n. Defines internationalization functionality.
+	 * - RHD_Admin. Defines all hooks for the admin area.
+	 * - RHD_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -139,14 +139,14 @@ class Wpruby_Help_Desk {
 
 
 
-		$this->loader = new Wpruby_Help_Desk_Loader();
+		$this->loader = new RHD_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Wpruby_Help_Desk_i18n class in order to set the domain and to register the hook
+	 * Uses the RHD_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -154,7 +154,7 @@ class Wpruby_Help_Desk {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Wpruby_Help_Desk_i18n();
+		$plugin_i18n = new RHD_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -169,7 +169,7 @@ class Wpruby_Help_Desk {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Wpruby_Help_Desk_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new RHD_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'init', $plugin_admin, 'register_post_types' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_taxonomies' );
@@ -224,7 +224,7 @@ class Wpruby_Help_Desk {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Wpruby_Help_Desk_Public( $this->get_plugin_name(), $this->get_version(), $this->settings );
+		$plugin_public = new RHD_Public( $this->get_plugin_name(), $this->get_version(), $this->settings );
 
 		//adding shortcodes
 		add_shortcode('submit_ticket', array($plugin_public, 'shortcode_submit_ticket'));
@@ -272,7 +272,7 @@ class Wpruby_Help_Desk {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Wpruby_Help_Desk_Loader    Orchestrates the hooks of the plugin.
+	 * @return    RHD_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

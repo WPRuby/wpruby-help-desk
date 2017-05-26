@@ -6,8 +6,8 @@
  * @link       https://wpruby.com
  * @since      1.0.0
  *
- * @package    Wpruby_Help_Desk
- * @subpackage Wpruby_Help_Desk/includes
+ * @package    Ruby_Help_Desk
+ * @subpackage Ruby_Help_Desk/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Wpruby_Help_Desk
- * @subpackage Wpruby_Help_Desk/includes
+ * @package    Ruby_Help_Desk
+ * @subpackage Ruby_Help_Desk/includes
  * @author     WPRuby <info@wpruby.com>
  */
-class Wpruby_Help_Desk_Deactivator {
+class RHD_Deactivator {
 
 	/**
 	 * Short Description. (use period)
