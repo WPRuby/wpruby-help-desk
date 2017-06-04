@@ -673,4 +673,33 @@ class RHD_Admin {
 
 	}
 
+
+	/**
+	 * Syncing WooCommerce Products
+	 * @since  1.1.0
+	 */
+	public function sync_wc_products(){
+		// @TODO implement security nonce
+		$synced_products_count = 0;
+		if(function_exists('wc_get_products')){
+			$args = array(
+				'status' => 'publish',
+				'limit' => -1,
+			);
+			$wc_products = wc_get_products(	$args	);
+			foreach ($wc_products as $key => $product) {
+				if(!term_exists($product->get_name(), RHD_TICKET_PRODUCT)){
+					$synced_product = wp_insert_term($product->get_name(), RHD_TICKET_PRODUCT);
+
+					if(!is_wp_error($synced_product)){
+						add_term_meta ($synced_product['term_id'], 'wc_product_id', $product->get_id(), true);
+						$synced_products_count++;
+					}
+				}
+			}
+		}
+		echo $synced_products_count;
+		wp_die();
+	}
+
 } //class end

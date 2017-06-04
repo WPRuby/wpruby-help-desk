@@ -191,7 +191,7 @@ class RHD_Settings_API {
         $value       = esc_attr( $this->get_option( $args['section'], $args['id'] , $args['std'] ) );
         $type        = isset( $args['type'] ) ? $args['type'] : 'text';
         $placeholder = empty( $args['placeholder'] ) ? '' : $args['placeholder'];
-        $html        = sprintf( '<input class="button button-primary" type="%1$s" id="%2$s" name="%3$s" value="%4$s"/>', $type, $args['section'], $args['id'], $placeholder );
+        $html        = sprintf( '<input class="button button-primary" type="%1$s" id="%3$s" name="%3$s" value="%4$s"/><div id="%3$s_spinner" class="rhd_spinner"></div>', $type, $args['section'], $args['id'], $placeholder );
         $html       .= $this->get_field_description( $args );
 
         echo $html;

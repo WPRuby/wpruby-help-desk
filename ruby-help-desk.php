@@ -25,14 +25,14 @@ if ( ! defined( 'WPINC' ) ) {
 }
 define('RHD_VERSION', 					'1.0.0');
 // define the plugin constants
-define('RHD_TICKET', 				'support_ticket');
+define('RHD_TICKET', 					'support_ticket');
 define('RHD_KNOWLEDGEBASE', 	'help_knowledgebase');
-define('RHD_TICKET_REPLY', 	'support_ticket_reply');
+define('RHD_TICKET_REPLY', 		'support_ticket_reply');
 define('RHD_TICKET_STATUS', 	'tickets_status');
-define('RHD_TICKET_PRODUCT', 'tickets_products');
+define('RHD_TICKET_PRODUCT', 	'tickets_products');
 //Help Desk roles
 define('RHD_AGENT', 					'ruby_desk_agent');
-define('RHD_CUSTOMER', 			'ruby_desk_customer');
+define('RHD_CUSTOMER', 				'ruby_desk_customer');
 
 
 /**

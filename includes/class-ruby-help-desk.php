@@ -206,6 +206,10 @@ class Ruby_Help_Desk {
 		//info: add the helpdesk status dashboard widget
 		$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'helpdesk_status_dashboard_widget');
 
+		//info: syncing WC products (Ajax Action in the Settings page)
+		$this->loader->add_action( 'wp_ajax_sync_wc_products', $plugin_admin, 'sync_wc_products');
+
+
 		//info: a hook to perform upgrades if necessary
 		$db_version = get_option('rhd_db_version', '1.0.0');
 		if(version_compare($db_version, RHD_VERSION, 'ne')){
