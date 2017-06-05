@@ -701,5 +701,31 @@ class RHD_Admin {
 		echo $synced_products_count;
 		wp_die();
 	}
+	/**
+	 * Syncing Easy Digital Downloads Products
+	 * @since  1.1.0
+	 */
+	public function sync_edd_products(){
+		// @TODO implement security nonce
+		$synced_products_count = 0;
+		if(class_exists('EDD_API')){
+			$edd_api = new EDD_API();
+			$args = array(
+				'posts_per_page' => 9999999,
+			);
+			$edd_products = $edd_api->get_products(	$args	);
+			foreach ($edd_products['products'] as $key => $product) {
+				if(!term_exists($product['info']['title'], RHD_TICKET_PRODUCT)){
+					$synced_product = wp_insert_term($product['info']['title'], RHD_TICKET_PRODUCT);
 
+					if(!is_wp_error($synced_product)){
+						add_term_meta ($synced_product['term_id'], 'edd_product_id', $product['info']['id'], true);
+						$synced_products_count++;
+					}
+				}
+			}
+		}
+		echo $synced_products_count;
+		wp_die();
+	}
 } //class end

@@ -15,16 +15,31 @@
 						'action': 'sync_wc_products',
 			};
 
-			// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
 			$.post(ajaxurl, data, function(response) {
 				alert(response + ' Products synced successfully' );
 				$('#sync_wc_products').removeAttr('disabled');
 				$('#sync_wc_products_spinner').css('display', 'none');
 			});
-
-
-
 		});
+
+
+
+		$('#sync_edd_products').click(function(){
+
+			$('#sync_edd_products').attr('disabled', 'disabled');
+			$('#sync_edd_products_spinner').css('display', 'inline-block');
+
+			var data = {
+						'action': 'sync_edd_products',
+			};
+
+			$.post(ajaxurl, data, function(response) {
+				alert(response + ' Products synced successfully' );
+				$('#sync_edd_products').removeAttr('disabled');
+				$('#sync_edd_products_spinner').css('display', 'none');
+			});
+		});
+
 
   });
 

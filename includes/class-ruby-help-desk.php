@@ -206,8 +206,10 @@ class Ruby_Help_Desk {
 		//info: add the helpdesk status dashboard widget
 		$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'helpdesk_status_dashboard_widget');
 
-		//info: syncing WC products (Ajax Action in the Settings page)
+		//info: syncing WooCommerce products (Ajax Action in the Settings page)
 		$this->loader->add_action( 'wp_ajax_sync_wc_products', $plugin_admin, 'sync_wc_products');
+		//info: syncing Easy Digital Downloads products (Ajax Action in the Settings page)
+		$this->loader->add_action( 'wp_ajax_sync_edd_products', $plugin_admin, 'sync_edd_products');
 
 
 		//info: a hook to perform upgrades if necessary
