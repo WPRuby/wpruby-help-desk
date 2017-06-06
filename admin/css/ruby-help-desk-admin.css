@@ -244,3 +244,9 @@ height: 16px;
 margin: 5px 5px 5px 5px;
 display: none;
 }
+.rhd_spinner_result{
+  color: #408640;
+  display: none;
+  margin: 5px;
+
+}
