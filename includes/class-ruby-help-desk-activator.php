@@ -31,6 +31,8 @@ class RHD_Activator {
 	 * @since    1.0.0
 	 */
 	public function activate() {
+		$this->set_seeded('no');
+
 			if(!$this->is_seeded()){
 					$this->add_roles();
 					$this->seed_pages();
@@ -215,7 +217,7 @@ class RHD_Activator {
 		);
 
 		foreach($default_options as $key => $option){
-				add_option($key,	$option);
+				add_option($key,	$option) OR update_option($key,	$option);
 		}
 	}
 
