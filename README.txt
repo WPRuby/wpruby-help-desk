@@ -4,7 +4,7 @@ Donate link: https://wpruby.com
 Tags: helpdesk, admin
 Requires at least: 3.0.1
 Tested up to: 4.7.5
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,11 +54,16 @@ All of the plugins related pages will be added under one menu item called ‘Rub
 
 == Changelog ==
 
-= 1.0 =
+= 1.1.0 =
 * Initial release.
 
+= 1.0.0 =
+* Added: Importing WooCommerce products.
+* Added: Importing Easy Digital Downloads products.
+* Fixed: CSS aligning of the dashboard widget.
+* Fixed: Settings default values seeding.
 
 == Upgrade Notice ==
 
-= 1.0 =
+= 1.0.0 =
 * Initial Release.

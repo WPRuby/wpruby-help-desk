@@ -102,6 +102,7 @@ class RHD_Admin {
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ruby-help-desk-admin.js', array( 'jquery' ), $this->version, false );
 			wp_localize_script( $this->plugin_name, 'rhd', array(
 				'text_processed_products'	=>	__('Products have been successfully synced.', 'ruby-help-desk'),
+				'text_no_processed_products'	=>	__('No new products were found.', 'ruby-help-desk'),
 				'wc_sync_nonce'						=>	$wc_sync_nonce,
 				'edd_sync_nonce'					=>	$edd_sync_nonce,
 			) );
