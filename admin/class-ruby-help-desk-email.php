@@ -50,7 +50,6 @@ class RHD_Email {
 
   /**
   * Send notification when a ticket is re-assigned to another agent
-  * @TODO Need testing
   * @since    1.0.0
   */
   public static function ticket_reassigned( $ticket_id = '', $old_assignee = '' ){
@@ -129,7 +128,7 @@ class RHD_Email {
       //info: delete the temp text attachment.
       unlink($temp_text);
     }
-    
+
   }
 
   /**

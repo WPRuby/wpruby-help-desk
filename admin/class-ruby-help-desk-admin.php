@@ -95,9 +95,16 @@ class RHD_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		wp_enqueue_script( 'wp-color-picker');
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ruby-help-desk-admin.js', array( 'jquery' ), $this->version, false );
+		 	$wc_sync_nonce 	= wp_create_nonce( 'wc_sync_nonce' );
+		 	$edd_sync_nonce  = wp_create_nonce( 'edd_sync_nonce' );
 
+			wp_enqueue_script( 'wp-color-picker');
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ruby-help-desk-admin.js', array( 'jquery' ), $this->version, false );
+			wp_localize_script( $this->plugin_name, 'rhd', array(
+				'text_processed_products'	=>	__('Products have been successfully synced.', 'ruby-help-desk'),
+				'wc_sync_nonce'						=>	$wc_sync_nonce,
+				'edd_sync_nonce'					=>	$edd_sync_nonce,
+			) );
 	}
 	/**
 	 * The plugin use this method to register the main custom post type of the links.
@@ -679,7 +686,10 @@ class RHD_Admin {
 	 * @since  1.1.0
 	 */
 	public function sync_wc_products(){
-		// @TODO implement security nonce
+		$nonce = $_POST['_wpnonce'];
+		if ( ! wp_verify_nonce( $nonce, 'wc_sync_nonce' ) ) {
+			wp_die(__('Security validation failed', 'ruby-help-desk'));
+		}
 		$synced_products_count = 0;
 		if(function_exists('wc_get_products')){
 			$args = array(
@@ -706,7 +716,10 @@ class RHD_Admin {
 	 * @since  1.1.0
 	 */
 	public function sync_edd_products(){
-		// @TODO implement security nonce
+		$nonce = $_POST['_wpnonce'];
+		if ( ! wp_verify_nonce( $nonce, 'edd_sync_nonce' ) ) {
+			wp_die(__('Security validation failed', 'ruby-help-desk'));
+		}
 		$synced_products_count = 0;
 		if(class_exists('EDD_API')){
 			$edd_api = new EDD_API();

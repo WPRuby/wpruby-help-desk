@@ -31,7 +31,6 @@ class RHD_Activator {
 	 * @since    1.0.0
 	 */
 	public function activate() {
-		$this->set_seeded('no');
 
 			if(!$this->is_seeded()){
 					$this->add_roles();
