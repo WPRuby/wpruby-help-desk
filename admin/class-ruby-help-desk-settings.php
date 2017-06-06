@@ -111,14 +111,14 @@ class RHD_Settings {
               array(
                   'name'        => 'sync_wc_products',
                   'label'       => __( 'Sync WooCommerce Products', 'ruby-help-desk' ),
-                  'desc'        => __( 'Click to import WooCommerce products as Ruby Help Desk products. If the same products name exists, it will be ignored.', 'ruby-help-desk' ),
+                  'desc'        => __( "Click to import WooCommerce products as Ruby Help Desk products. If the same product's name exists, it will be ignored.", 'ruby-help-desk' ),
                   'type'        => 'button',
                   'placeholder' => __('Sync', 'ruby-help-desk'),
               ),
               array(
                   'name'        => 'sync_edd_products',
                   'label'       => __( 'Sync EDD Products', 'ruby-help-desk' ),
-                  'desc'        => __( 'Click to import Easy Digital Downloads products as Ruby Help Desk products. If the same products name exists, it will be ignored.', 'ruby-help-desk' ),
+                  'desc'        => __( "Click to import Easy Digital Downloads products as Ruby Help Desk products. If the same product's name exists, it will be ignored.", 'ruby-help-desk' ),
                   'type'        => 'button',
                   'placeholder' => __('Sync', 'ruby-help-desk'),
               ),

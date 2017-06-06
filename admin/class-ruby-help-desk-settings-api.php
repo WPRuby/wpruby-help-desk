@@ -577,12 +577,8 @@ class RHD_Settings_API {
                     });
                 });
 
-                if (activetab != '' && $(activetab + '-tab').length ) {
-                    $(activetab + '-tab').addClass('nav-tab-active');
-                }
-                else {
-                    $('.nav-tab-wrapper a:first').addClass('nav-tab-active');
-                }
+                
+                $('.nav-tab-wrapper a:first').addClass('nav-tab-active');
                 $('.nav-tab-wrapper a').click(function(evt) {
                     $('.nav-tab-wrapper a').removeClass('nav-tab-active');
                     $(this).addClass('nav-tab-active').blur();
