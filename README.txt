@@ -54,14 +54,16 @@ All of the plugins related pages will be added under one menu item called ‘Rub
 
 == Changelog ==
 
-= 1.1.0 =
-* Initial release.
 
-= 1.0.0 =
+
+= 1.1.0 =
 * Added: Importing WooCommerce products.
 * Added: Importing Easy Digital Downloads products.
 * Fixed: CSS aligning of the dashboard widget.
 * Fixed: Settings default values seeding.
+
+= 1.0.0 =
+* Initial release.
 
 == Upgrade Notice ==
 

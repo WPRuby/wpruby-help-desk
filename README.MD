@@ -7,7 +7,7 @@
 
 **Tested up to:** WordPress 4.7.5
 
-**Stable tag:** 1.0.0
+**Stable tag:** 1.1.0
 
 **License:** GPLv2 or later
 
@@ -44,7 +44,14 @@ Ruby Help Desk is a WordPress plugin which works as a customer support platform.
 
 ## Changelog
 
-### 1.0
+### 1.1.0
+* Added: Importing WooCommerce products.
+* Added: Importing Easy Digital Downloads products.
+* Fixed: CSS aligning of the dashboard widget.
+* Fixed: Settings default values seeding.
+
+
+### 1.0.0
 * Initial release.
 
 
