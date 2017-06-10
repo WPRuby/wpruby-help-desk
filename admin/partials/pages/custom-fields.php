@@ -5,7 +5,7 @@
 <form class="" action="" method="post">
 
   <div id="active_custom_fields">
-<?php foreach ($rhd_custom_fields->get_core_fields() as $key => $field): ?>
+<?php foreach ($rhd_custom_fields->get_fields() as $key => $field): ?>
       <div class="group">
         <h3 class="form-element-<?php echo $field['type']; ?>"><?php echo $field['label']; ?><b></b></h3>
         <div>

@@ -45,11 +45,11 @@ class RHD_Custom_Fields {
   * Setup default fields
   * @since 1.2.0
   */
-  public function get_core_fields()
+  public function get_fields()
   {
     $products = get_terms( RHD_TICKET_PRODUCT, array(	'hide_empty' => false		) );
 
-    $fields = array(
+    $core_fields = array(
       'rhd_ticket_subject'  =>  array(
         'id'          => 'rhd_ticket_subject',
         'core'        => true,
@@ -91,7 +91,7 @@ class RHD_Custom_Fields {
         'default'     => null,
       ),
     );
-    $fields = get_option('saved_cusom_fields', $fields);
+    $fields = get_option('saved_cusom_fields', $core_fields);
     //@TODO add_filter
     return $fields;
   }
