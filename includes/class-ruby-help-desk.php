@@ -137,7 +137,7 @@ class Ruby_Help_Desk {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-settings-api.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-settings.php';
 
-
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-custom-fields.php';
 
 		$this->loader = new RHD_Loader();
 
@@ -188,6 +188,7 @@ class Ruby_Help_Desk {
 
 		//info: add opened tickets count notice in the admin menu.
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'tickets_count' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_subpages' );
 
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
@@ -211,6 +212,7 @@ class Ruby_Help_Desk {
 		//info: syncing Easy Digital Downloads products (Ajax Action in the Settings page)
 		$this->loader->add_action( 'wp_ajax_sync_edd_products', $plugin_admin, 'sync_edd_products');
 
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'process_custom_fields' );
 
 		//info: a hook to perform upgrades if necessary
 		$db_version = get_option('rhd_db_version', '1.0.0');

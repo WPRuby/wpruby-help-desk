@@ -74,6 +74,8 @@ class RHD_Admin {
 		 */
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ruby-help-desk-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name . '-jquery-ui', plugin_dir_url( __FILE__ ) . 'css/jquery-ui.min.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name . '-jquery-ui-theme', plugin_dir_url( __FILE__ ) . 'css/jquery-ui.theme.min.css', array(), $this->version, 'all' );
 
 	}
 
@@ -106,6 +108,10 @@ class RHD_Admin {
 				'wc_sync_nonce'						=>	$wc_sync_nonce,
 				'edd_sync_nonce'					=>	$edd_sync_nonce,
 			) );
+			/* @since 1.2.0 for Custom Fields */
+			wp_enqueue_script( 'jquery-ui-sortable' );
+			wp_enqueue_script( 'jquery-ui-accordion' );
+
 	}
 	/**
 	 * The plugin use this method to register the main custom post type of the links.
@@ -742,4 +748,39 @@ class RHD_Admin {
 		echo $synced_products_count;
 		wp_die();
 	}
+	/**
+	 * Adding subpages of the plugin's menu items
+	 * @since  1.2.0
+	 */
+	public function add_subpages(){
+		/*
+		* @since 1.2.0 adding subpage for custom fields
+		*/
+		add_submenu_page('edit.php?post_type=support_ticket',	__( 'Custom Fields', 'ruby-help-desk' ),	__( 'Custom Fields', 'ruby-help-desk' ),	'manage_options',	'ruby-help-desk-custom-fields',	array($this, 'custom_fields_page_output'));
+	}
+	/**
+	 * Adding subpages of the plugin's menu items
+	 * @since  1.2.0
+	 */
+	public function custom_fields_page_output(){
+		$rhd_custom_fields = new RHD_Custom_Fields();
+		ob_start();
+		require_once plugin_dir_path( __FILE__ ) . 'partials/pages/custom-fields.php';
+		echo ob_get_clean();
+	}
+	/**
+	 * Saving custom fields settings
+	 * @since  1.2.0
+	 */
+	public function process_custom_fields(){
+		if(isset($_POST['save_custom_fields'])){
+			if(isset($_POST['rhd_custom_fields']) && is_array($_POST['rhd_custom_fields'])){
+				$saved_cusom_fields = $_POST['rhd_custom_fields'];
+				update_option('saved_cusom_fields', $saved_cusom_fields);
+			}
+		}
+
+	}
+
+
 } //class end

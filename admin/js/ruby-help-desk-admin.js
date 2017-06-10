@@ -54,6 +54,72 @@
 			});
 		});
 
+		/*
+		* Custom Fields logic
+		* @since 1.2.0
+		*/
+	 $( "#active_custom_fields" )
+		 .accordion({
+			 header: "> div > h3",
+			 collapsible: true,
+			 active: false,
+		 })
+		 .sortable({
+			 axis: "y",
+			 handle: "h3",
+			 placeholder: "ui-state-highlight",
+			 stop: function( event, ui ) {
+				 // IE doesn't register the blur when sorting
+				 // so trigger focusout handlers to remove .ui-state-focus
+				 ui.item.children( "h3" ).triggerHandler( "focusout" );
+
+				 // Refresh accordion to handle new order
+				 $( this ).accordion( "refresh" );
+			 }
+		 });
+		 $('.draggable-custom-field-item').click(function(e){
+			 var label 		=  $(this).attr('data-label');
+			 var type 		=  $(this).attr('data-type');
+			 var key 		=  $(this).attr('data-key');
+			 var new_element = `<div class="group">
+         <h3 class="form-element-{type}">{label}<b></b></h3>
+         <div>
+           <p>
+             <label for="{key}-label">Label</label><br>
+             <input id="{key}-label" type="text" name="rhd_custom_fields[{key}][label]" value="">
+           </p>
+           <p>
+             <label for="{key}-description">Description</label><br>
+             <textarea id="{key}-description" name="rhd_custom_fields[{key}][description]" rows="4" cols="50"></textarea>
+           </p>
+           <p>
+             <label for="{key}-size">Field size</label><br>
+             <select id="{key}-size" name="rhd_custom_fields[{key}][size]">
+               <option value="small">Small</option>
+               <option value="medium">Medium</option>
+               <option value="large">Large</option>
+             </select>
+           </p>
+           <p>
+             <label for="{key}-required">Required</label><br>
+             <select id="{key}-required" name="rhd_custom_fields[{key}][required]">
+               <option value="yes">Yes</option>
+               <option value="no">No</option>
+             </select>
+           </p>
+					 <input type="hidden" name="rhd_custom_fields[{key}][core]'; ?>" value="{core}">
+					 <input type="hidden" name="rhd_custom_fields[{key}][type]'; ?>" value="{type}">
+					 <input type="hidden" name="rhd_custom_fields[{key}][default]'; ?>" value="{default}">
+         </div>
+       </div>`;
+			 new_element = new_element.replace(/{label}/g, label).replace(/{type}/g, type).replace(/{key}/g, type);
+			 $('#active_custom_fields').append(new_element);
+			 $( "#active_custom_fields" ).accordion( "refresh" );
+			 $('#active_custom_fields').sortable();
+		 });
+
+
+
 
   });
 
