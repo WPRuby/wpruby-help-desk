@@ -231,6 +231,9 @@ class RHD_Ticket {
 
        //info: send email notifications ticket-is-opened
        RHD_Email::ticket_opened($ticket_id);
+       //info: set ticket NEW status
+       $new_status = get_option( 'rhd_ticket_status_new', 'new');
+       wp_set_object_terms( intval($ticket_id), $new_status, RHD_TICKET_STATUS, false );
 
        return $ticket_id;
      }
@@ -247,7 +250,7 @@ class RHD_Ticket {
 
        }
        //info: if the reply is empty
-       if(isset($_POST['ticket_reply']) && trim($_POST['ticket_reply']) == ''){
+       if(isset($_POST['rhd_ticket_reply']) && trim($_POST['rhd_ticket_reply']) == ''){
          return array('error' =>  __('The reply should not be empty', 'ruby-help-desk'));
        }
        //info: if the file is not validated

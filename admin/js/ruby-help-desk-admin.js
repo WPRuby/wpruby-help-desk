@@ -78,9 +78,11 @@
 			 }
 		 });
 		 $('.draggable-custom-field-item').click(function(e){
-			 var label 		=  $(this).attr('data-label');
-			 var type 		=  $(this).attr('data-type');
-			 var key 		=  $(this).attr('data-key');
+			 var label 					=  $(this).attr('data-label');
+			 var type 					=  $(this).attr('data-type');
+			 var default_value	=  $(this).attr('data-default');
+			 var key 						=  $(this).attr('data-key');
+			 var core 					=  $(this).attr('data-core');
 			 var new_element = `<div class="group">
          <h3 class="form-element-{type}">{label}<b></b></h3>
          <div>
@@ -107,12 +109,11 @@
                <option value="no">No</option>
              </select>
            </p>
-					 <input type="hidden" name="rhd_custom_fields[{key}][core]'; ?>" value="{core}">
-					 <input type="hidden" name="rhd_custom_fields[{key}][type]'; ?>" value="{type}">
-					 <input type="hidden" name="rhd_custom_fields[{key}][default]'; ?>" value="{default}">
+					 <input type="hidden" name="rhd_custom_fields[{key}][core]" value="{core}">
+					 <input type="hidden" name="rhd_custom_fields[{key}][type]" value="{type}">
          </div>
        </div>`;
-			 new_element = new_element.replace(/{label}/g, label).replace(/{type}/g, type).replace(/{key}/g, type);
+			 new_element = new_element.replace(/{label}/g, label).replace(/{type}/g, type).replace(/{key}/g, key).replace(/{core}/g, core);
 			 $('#active_custom_fields').append(new_element);
 			 $( "#active_custom_fields" ).accordion( "refresh" );
 			 $('#active_custom_fields').sortable();

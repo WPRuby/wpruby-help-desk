@@ -776,7 +776,7 @@ class RHD_Admin {
 		if(isset($_POST['save_custom_fields'])){
 			if(isset($_POST['rhd_custom_fields']) && is_array($_POST['rhd_custom_fields'])){
 				$saved_cusom_fields = $_POST['rhd_custom_fields'];
-				update_option('saved_cusom_fields', $saved_cusom_fields);
+				update_option('rhd_saved_cusom_fields', $saved_cusom_fields);
 			}
 		}
 

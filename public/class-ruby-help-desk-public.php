@@ -124,6 +124,7 @@ class RHD_Public {
 		ob_start();
 		$products = $this->get_products();
 		$attachments_settings = get_option('rhd_attachments');
+		$custom_fields = new RHD_Custom_Fields();
 		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-submit-ticket.php';
 		return ob_get_clean();
 	}
@@ -229,9 +230,10 @@ class RHD_Public {
 	public function process_ticket_submission() {
 			if(isset($_POST['action']) && $_POST['action'] == 'submit_ticket'){
 				$ticket = array();
-				$ticket['subject'] = sanitize_text_field(	$_POST['ticket_subject']	);
-				$ticket['product'] = intval(	$_POST['ticket_product']	);
-				$ticket['content'] = sanitize_text_field(	$_POST['ticket_reply']	);
+				//info: 1st. process core fields first
+				$ticket['subject'] = sanitize_text_field(	$_POST['rhd_ticket_subject']	);
+				$ticket['product'] = intval(	$_POST['rhd_ticket_product']	);
+				$ticket['content'] = sanitize_text_field(	$_POST['rhd_ticket_reply']	);
 				//info: validation start
 				$errors = array();
 				if(trim($ticket['subject']) == ''){
@@ -241,11 +243,11 @@ class RHD_Public {
 					$errors[] = __('Ticket Description should not be empty', 'ruby-help-desk');
 				}
 				//info: if there is an attachment
-				if(isset($_FILES['ticket_attachment']) && $_FILES['ticket_attachment']['name'] != ''){
+				if(isset($_FILES['rhd_ticket_attachment']) && $_FILES['rhd_ticket_attachment']['name'] != ''){
 					if ( ! function_exists( 'wp_handle_upload' ) ) {
 							require_once( ABSPATH . 'wp-admin/includes/file.php' );
 					}
-					$uploadedfile = $_FILES['ticket_attachment'];
+					$uploadedfile = $_FILES['rhd_ticket_attachment'];
 					$upload_overrides = array( 'test_form' => false );
 					$ticket_uploaded_file = wp_handle_upload( $uploadedfile, $upload_overrides );
 					if(isset($ticket_uploaded_file['error'])){
@@ -253,6 +255,9 @@ class RHD_Public {
 					}
 					$ticket['attachment'] = $ticket_uploaded_file['file'];
 				}
+
+				//info: 2nd process custom fields
+				
 				if(empty($errors)){
 					$ticket_id =  RHD_Ticket::add($ticket);
 					wp_redirect(get_permalink($ticket_id));

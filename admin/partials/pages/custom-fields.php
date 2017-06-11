@@ -34,7 +34,7 @@
           </p>
           <input type="hidden" name="rhd_custom_fields[<?php echo $key . '][core]'; ?>" value="<?php echo esc_attr($field['core']); ?>">
           <input type="hidden" name="rhd_custom_fields[<?php echo $key . '][type]'; ?>" value="<?php echo esc_attr($field['type']); ?>">
-          <input type="hidden" name="rhd_custom_fields[<?php echo $key . '][default]'; ?>" value="<?php echo esc_attr($field['default']); ?>">
+          <input type="hidden" name="rhd_custom_fields[<?php echo $key . '][id]'; ?>" value="<?php echo esc_attr($field['id']); ?>">
         </div>
       </div>
 <?php endforeach; ?>
@@ -43,7 +43,7 @@
   <div id="custom_fields_components">
     <ul>
       <?php foreach ($rhd_custom_fields->get_components() as $key => $component): ?>
-        <li><a href="#" class="draggable-custom-field-item form-element-<?php echo $component['type']; ?>" data-key="<?php echo $key; ?>" data-label="<?php echo $component['label']; ?>" data-type="<?php echo $component['type']; ?>"><b></b><?php echo $component['label']; ?></a></li>
+        <li><a href="#" class="draggable-custom-field-item form-element-<?php echo $component['type']; ?>" data-core="no" data-default="" data-key="<?php echo $key; ?>" data-label="<?php echo $component['label']; ?>" data-type="<?php echo $component['type']; ?>"><b></b><?php echo $component['label']; ?></a></li>
       <?php endforeach; ?>
       </ul>
   </div>
