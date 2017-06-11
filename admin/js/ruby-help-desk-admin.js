@@ -81,8 +81,9 @@
 			 var label 					=  $(this).attr('data-label');
 			 var type 					=  $(this).attr('data-type');
 			 var default_value	=  $(this).attr('data-default');
-			 var key 						=  $(this).attr('data-key');
+			 //var key 						=  $(this).attr('data-key');
 			 var core 					=  $(this).attr('data-core');
+			 var key 						= type + '_' + Math.random().toString(36).substring(2, 12);
 			 var new_element = `<div class="group">
          <h3 class="form-element-{type}">{label}<b></b></h3>
          <div>
