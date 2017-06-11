@@ -88,7 +88,7 @@
          <div>
            <p>
              <label for="{key}-label">Label</label><br>
-             <input id="{key}-label" type="text" name="rhd_custom_fields[{key}][label]" value="">
+             <input id="{key}-label" type="text" name="rhd_custom_fields[{key}][label]" value="{label}">
            </p>
            <p>
              <label for="{key}-description">Description</label><br>
