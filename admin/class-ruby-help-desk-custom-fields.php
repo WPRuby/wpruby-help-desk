@@ -107,15 +107,16 @@ class RHD_Custom_Fields {
     echo sprintf('<span class="rhd_description">%s</span>', $field['description']);
   }
   public function the_field_label($field){
-    echo sprintf('<label for="%s">%s</label>', $field['id'], $field['label']);
+    echo sprintf('<label class="rhd_label" for="%s">%s</label>', $field['id'], $field['label']);
   }
+
   public function display_text($field){
     ob_start();
     ?>
     <p>
       <?php $this->the_field_label($field); ?>
-    <input type="text" id="<?php echo $field['id']; ?>" name="<?php echo $field['id']; ?>" value="">
-    <?php $this->the_field_description($field); ?>
+      <?php  echo sprintf('<input type="text" id="%s" name="%s" class="rhd_%s_field" value="">', $field['id'], $field['id'], $field['size']); ?>
+      <?php $this->the_field_description($field); ?>
     </p>
     <?php
     return ob_get_clean();
@@ -127,7 +128,7 @@ class RHD_Custom_Fields {
     ob_start();
     ?>
     <?php $this->the_field_label($field); ?>
-    <select id="<?php echo $field['id']; ?>" class="<?php echo $field['id']; ?>" name="<?php echo $field['id']; ?>">
+    <select id="<?php echo $field['id']; ?>" class="<?php echo 'rhd_' . $field['size'] . '_field'; ?>" name="<?php echo $field['id']; ?>">
       <?php if(isset($field['default']) && is_array($field['default'])){ ?>
         <?php foreach ($field['default'] as $key => $option) { ?>
           <option value="<?php echo $key; ?>"><?php echo $option; ?></option>
@@ -144,9 +145,8 @@ class RHD_Custom_Fields {
     ob_start();
     ?>
     <?php $this->the_field_label($field); ?>
-    <?php wp_editor('', $field['id'], $editor_settings); $this->the_field_label($field); ?> <br>
-    <?php
-    return ob_get_clean();
+    <?php wp_editor('', $field['id'], $editor_settings); $this->the_field_description($field); ?> <br>
+    <?php return ob_get_clean();
   }
 
   public function display_attachment($field){
@@ -155,9 +155,9 @@ class RHD_Custom_Fields {
       ob_start(); ?>
       <p>
         <?php $this->the_field_label($field); ?>
-        <input type="file" id="<?php echo $field['id']; ?>" name="<?php echo $field['id']; ?>" value="">
-        <span class="file_extensions"><?php _e('Allowed Extensions', 'ruby-help-desk'); ?>: <?php echo $attachments_settings['allowed_extensions_attachments']; ?></span>
-        <?php $this->the_field_description($field); ?>
+        <?php
+        echo sprintf('<input type="file" id="%s" name="%s" value=""><span class="file_extensions">%s: %s</span>',$field['id'], $field['id'], __('Allowed Extensions', 'ruby-help-desk'), $attachments_settings['allowed_extensions_attachments']);
+        $this->the_field_description($field); ?>
       </p>
     <?php  return ob_get_clean();
     }
