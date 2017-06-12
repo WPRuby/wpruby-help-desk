@@ -136,7 +136,8 @@ class RHD_Custom_Fields {
     ob_start();
     ?>
     <label for="<?php echo $field['id']; ?>"><?php echo $field['label']; ?></label>
-    <?php wp_editor('', $field['id'], $editor_settings);
+    <?php wp_editor('', $field['id'], $editor_settings); ?> <br>
+    <?php
     return ob_get_clean();
   }
 

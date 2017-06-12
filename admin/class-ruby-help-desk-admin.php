@@ -673,6 +673,12 @@ class RHD_Admin {
 			'href'  => admin_url('edit.php?post_type='. RHD_TICKET .'&page=ruby-help-desk-settings'),
 			'parent'=> 'rhd_main_menu'
 		));
+		$admin_bar->add_menu( array(
+			'id'    => 'rhd_custom_fields',
+			'title' => __('Custom Fields','ruby-help-desk'),
+			'href'  => admin_url('edit.php?post_type='. RHD_TICKET .'&page=ruby-help-desk-custom-fields'),
+			'parent'=> 'rhd_main_menu'
+		));
 	}
 	/**
 	 * Perform upgrades, shall be used extensively in the future releases.
