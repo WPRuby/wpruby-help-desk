@@ -302,3 +302,7 @@
 .submit_ticket_form #rhd_ticket_subject{
   width:90%;
 }
+.rhd_description{
+  color: #c1c1c1;
+  display: inline-block;
+}
