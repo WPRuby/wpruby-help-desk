@@ -47,7 +47,17 @@ class RHD_Custom_Fields {
   */
   public function get_fields()
   {
-    $core_fields = array(
+    $core_fields = $this->get_core_fields();
+    $fields = get_option('rhd_saved_cusom_fields', $core_fields);
+    if(!is_array($fields)){
+      return $core_fields;
+    }
+    //@TODO add_filter
+    return $fields;
+  }
+
+  public function get_core_fields(){
+    return array(
       'rhd_ticket_subject'  =>  array(
         'id'          => 'rhd_ticket_subject',
         'core'        => true,
@@ -89,15 +99,7 @@ class RHD_Custom_Fields {
         'default'     => '',
       ),
     );
-    $fields = get_option('rhd_saved_cusom_fields', $core_fields);
-    if(!is_array($fields)){
-      return $core_fields;
-    }
-    //@TODO add_filter
-    return $fields;
   }
-
-
   public function display($field){
     return call_user_func(array($this , 'display_' . $field['type'] ), $field);
   }

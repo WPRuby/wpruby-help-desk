@@ -81,9 +81,8 @@
 			 var label 					=  $(this).attr('data-label');
 			 var type 					=  $(this).attr('data-type');
 			 var default_value	=  $(this).attr('data-default');
-			 //var key 						=  $(this).attr('data-key');
 			 var core 					=  $(this).attr('data-core');
-			 var key 						= type + '_' + Math.random().toString(36).substring(2, 12);
+			 var key 						= 'rhd_'+ type + '_' + Math.random().toString(36).substring(2, 12);
 			 var new_element = `<div class="group">
          <h3 class="form-element-{type}">{label}<b></b></h3>
          <div>
@@ -112,6 +111,7 @@
            </p>
 					 <input type="hidden" name="rhd_custom_fields[{key}][core]" value="{core}">
 					 <input type="hidden" name="rhd_custom_fields[{key}][type]" value="{type}">
+					 <input type="hidden" name="rhd_custom_fields[{key}][id]" value="{key}">
          </div>
        </div>`;
 			 new_element = new_element.replace(/{label}/g, label).replace(/{type}/g, type).replace(/{key}/g, key).replace(/{core}/g, core);

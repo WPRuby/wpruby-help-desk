@@ -256,10 +256,22 @@ class RHD_Public {
 					$ticket['attachment'] = $ticket_uploaded_file['file'];
 				}
 
-				//info: 2nd process custom fields
-				
+
 				if(empty($errors)){
 					$ticket_id =  RHD_Ticket::add($ticket);
+					//info: 2nd process custom fields
+					$custom_fields = new RHD_Custom_Fields();
+					$core_fields_keys = array_keys($custom_fields->get_core_fields());
+					$all_custom_fields_keys = array_keys($custom_fields->get_fields());
+					$custom_fields_keys = array_keys( array_diff($custom_fields_keys, $core_fields_keys) );
+
+					foreach ($custom_fields_keys as $key){
+						if(isset($_POST[	$key 	])){
+							//@TODO Sanitize $_POST[	$key 	]
+							//@TODO Some CFs are FILES
+							update_post_meta( intval($ticket_id), $key, $_POST[	$key 	]);
+						}
+					}
 					wp_redirect(get_permalink($ticket_id));
 					exit;
 				}else{
