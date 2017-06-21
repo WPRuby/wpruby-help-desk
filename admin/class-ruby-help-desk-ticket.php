@@ -233,7 +233,7 @@ class RHD_Ticket {
        RHD_Email::ticket_opened($ticket_id);
        //info: set ticket NEW status
        $new_status = get_option( 'rhd_ticket_status_new', 'new');
-       wp_set_object_terms( intval($ticket_id), $new_status, RHD_TICKET_STATUS, false );
+       wp_set_object_terms( intval($ticket_id), intval($new_status), RHD_TICKET_STATUS, false );
 
        return $ticket_id;
      }

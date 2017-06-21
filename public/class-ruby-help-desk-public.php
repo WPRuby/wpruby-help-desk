@@ -263,7 +263,7 @@ class RHD_Public {
 					$custom_fields = new RHD_Custom_Fields();
 					$core_fields_keys = array_keys($custom_fields->get_core_fields());
 					$all_custom_fields_keys = array_keys($custom_fields->get_fields());
-					$custom_fields_keys = array_keys( array_diff($custom_fields_keys, $core_fields_keys) );
+					$custom_fields_keys = array_keys( array_diff($all_custom_fields_keys, $core_fields_keys) );
 
 					foreach ($custom_fields_keys as $key){
 						if(isset($_POST[	$key 	])){
