@@ -131,8 +131,8 @@ class RHD_Custom_Fields {
     ?>
     <?php $this->the_field_label($field); ?>
     <select id="<?php echo $field['id']; ?>" class="<?php echo 'rhd_' . $field['size'] . '_field'; ?>" name="<?php echo $field['id']; ?>">
-      <?php if(isset($field['default']) && is_array($field['default'])){ ?>
-        <?php foreach ($field['default'] as $key => $option) { ?>
+      <?php if(isset($field['options']) && is_array($field['options'])){ ?>
+        <?php foreach ($field['options'] as $key => $option) { ?>
           <option value="<?php echo $key; ?>"><?php echo $option; ?></option>
           <?php } ?>
       <?php } ?>
