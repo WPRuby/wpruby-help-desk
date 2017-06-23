@@ -421,6 +421,19 @@ display: none;
 #active_custom_fields h3{
   padding: 15px;
 }
+#active_custom_fields .dashicons-menu{
+  cursor: move;
+}
+#active_custom_fields .dashicons-trash{
+  cursor: pointer;
+}
+#active_custom_fields .dashicons{
+  line-height: 26px;
+}
+#active_custom_fields .group label{
+  font-weight: bold;
+}
+
 .clearboth {
   height: 0;
   clear: both;

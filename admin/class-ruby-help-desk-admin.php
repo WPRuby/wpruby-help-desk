@@ -765,7 +765,7 @@ class RHD_Admin {
 		add_submenu_page('edit.php?post_type=support_ticket',	__( 'Custom Fields', 'ruby-help-desk' ),	__( 'Custom Fields', 'ruby-help-desk' ),	'manage_options',	'ruby-help-desk-custom-fields',	array($this, 'custom_fields_page_output'));
 	}
 	/**
-	 * Adding subpages of the plugin's menu items
+	 * render Custom Fields page.
 	 * @since  1.2.0
 	 */
 	public function custom_fields_page_output(){

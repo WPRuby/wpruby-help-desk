@@ -77,12 +77,27 @@
 				 $( this ).accordion( "refresh" );
 			 }
 		 });
+		 //init filed option sortable()
+		 $('.field_options').sortable();
+
 		 $('.draggable-custom-field-item').click(function(e){
 			 var label 					=  $(this).attr('data-label');
 			 var type 					=  $(this).attr('data-type');
 			 var default_value	=  $(this).attr('data-default');
 			 var core 					=  $(this).attr('data-core');
 			 var key 						= 'rhd_'+ type + '_' + Math.random().toString(36).substring(2, 12);
+			 var options = '';
+			 if(type == 'select'){
+				 	options += '<p><label for="{key}-options">Options</label><br>';
+					options += '<ul class="field_options" id="{key}-options">';
+					options += '<li><input name="rhd_custom_fields[{key}][options][]" class="code" value="Option 1" type="text" /><span class="delete_option dashicons dashicons-trash"></span><span class="dashicons  dashicons-menu"></span></li>';
+					options += '<li><input name="rhd_custom_fields[{key}][options][]" class="code" value="Option 2" type="text" /><span class="delete_option dashicons dashicons-trash"></span><span class="dashicons  dashicons-menu"></span></li>';
+					options += '<li><input name="rhd_custom_fields[{key}][options][]" class="code" value="Option 3" type="text" /><span class="delete_option dashicons dashicons-trash"></span><span class="dashicons  dashicons-menu"></span></li>';
+					options += '</ul>';
+					options += '<a class="add_option button-secondary" data-key="{key}" data-field="{key}-options" href="javascript:void(0)"><span class="dashicons dashicons-plus-alt"></span>Add Option</a>';
+					options += '</p>';
+
+			 }
 			 var new_element = `<div class="group">
          <h3 class="form-element-{type}">{label}<b></b></h3>
          <div>
@@ -109,19 +124,36 @@
                <option value="no">No</option>
              </select>
            </p>
+					 {options}
 					 <input type="hidden" name="rhd_custom_fields[{key}][core]" value="{core}">
 					 <input type="hidden" name="rhd_custom_fields[{key}][type]" value="{type}">
 					 <input type="hidden" name="rhd_custom_fields[{key}][id]" value="{key}">
          </div>
        </div>`;
-			 new_element = new_element.replace(/{label}/g, label).replace(/{type}/g, type).replace(/{key}/g, key).replace(/{core}/g, core);
+			 new_element = new_element.replace(/{label}/g, label).replace(/{options}/g, options).replace(/{type}/g, type).replace(/{key}/g, key).replace(/{core}/g, core);
+
 			 $('#active_custom_fields').append(new_element);
+			 $('.field_options').sortable();
+
 			 $( "#active_custom_fields" ).accordion( "refresh" );
 			 $('#active_custom_fields').sortable();
 		 });
 
 
-
+		 $('.delete_option').click(function(e){
+			 e.preventDefault();
+			 $(this).parent().remove();
+		 });
+		 jQuery('.add_option').click(function(e){
+				e.preventDefault();
+				var key = $(this).attr('data-key');
+				jQuery('#'+ jQuery(this).attr('data-field')).append('<li><input name="rhd_custom_fields['+key+'][options][]" class="code" value="" type="text" /><span class="delete_option dashicons dashicons-trash"></span><span class="dashicons  dashicons-menu"></span></li>');
+				jQuery('.field_options').sortable();
+				jQuery('.delete_option').click(function(e){
+					e.preventDefault();
+					jQuery(this).parent().remove();
+				});
+		});
 
   });
 

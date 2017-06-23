@@ -174,4 +174,14 @@ class RHD_Custom_Fields {
     }
     return $result;
   }
+
+  public function sanitize($key,  $value){
+    $fields = $this->get_fields();
+    switch ($fields[$key]['type']){
+      case 'text':
+        $value  =  sanitize_text_field($value);
+        break;
+    }
+    return $value;
+  }
 }

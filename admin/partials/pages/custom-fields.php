@@ -32,6 +32,17 @@
               <option value="no" <?php selected($field['size'], 'no') ?>><?php _e('No', 'ruby-help-desk') ?></option>
             </select>
           </p>
+          <?php if(isset($field['options']) && is_array($field['options'])): ?>
+            <p>
+            <p><label for="<?php echo $key . '-options'; ?>">Options</label><br>
+            <ul class="field_options" id="<?php echo $key . '-options'; ?>">
+              <?php foreach ($field['options'] as $option_key => $option): ?>
+                <li><input name="rhd_custom_fields[<?php echo $key . '][options][]'; ?>" class="code" value="<?php echo esc_attr($option); ?>" type="text" /><span class="delete_option dashicons dashicons-trash"></span><span class="dashicons  dashicons-menu"></span></li>
+              <?php endforeach; ?>
+            </ul>
+            <a class="add_option button-secondary" data-key="<?php echo $key; ?>" data-field="<?php echo $key . '-options'; ?>" href="javascript:void(0)"><span class="dashicons dashicons-plus-alt"></span><?php _e('Add Option', 'ruby-help-desk'); ?></a>
+            </p>
+          <?php endif; ?>
           <input type="hidden" name="rhd_custom_fields[<?php echo $key . '][core]'; ?>" value="<?php echo esc_attr($field['core']); ?>">
           <input type="hidden" name="rhd_custom_fields[<?php echo $key . '][type]'; ?>" value="<?php echo esc_attr($field['type']); ?>">
           <input type="hidden" name="rhd_custom_fields[<?php echo $key . '][id]'; ?>" value="<?php echo esc_attr($field['id']); ?>">

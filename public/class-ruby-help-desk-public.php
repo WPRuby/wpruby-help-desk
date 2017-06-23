@@ -54,7 +54,15 @@ class RHD_Public {
 	 * @access   protected
 	 * @var      object    $version    The plugin settings Object.
 	 */
-	protected $settings;
+	 protected $settings;
+	 /**
+		* The plugin Custom Fields Object.
+		*
+		* @since    1.2.0
+		* @access   protected
+		* @var      object    $custom_fields    The plugin Custom Fields Object.
+		*/
+		protected $custom_fields;
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -69,6 +77,7 @@ class RHD_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		$this->settings = $settings;
+		$this->custom_fields = new RHD_Custom_Fields();
 
 	}
 
@@ -124,7 +133,7 @@ class RHD_Public {
 		ob_start();
 		$products = $this->get_products();
 		$attachments_settings = get_option('rhd_attachments');
-		$custom_fields = new RHD_Custom_Fields();
+		$custom_fields = $this->custom_fields;
 		require_once plugin_dir_path( __FILE__ ) . 'partials/shortcodes/shortcode-submit-ticket.php';
 		return ob_get_clean();
 	}
@@ -260,16 +269,14 @@ class RHD_Public {
 				if(empty($errors)){
 					$ticket_id =  RHD_Ticket::add($ticket);
 					//info: 2nd process custom fields
-					$custom_fields = new RHD_Custom_Fields();
-					$core_fields_keys = array_keys($custom_fields->get_core_fields());
-					$all_custom_fields_keys = array_keys($custom_fields->get_fields());
+					$core_fields_keys = array_keys($this->custom_fields->get_core_fields());
+					$all_custom_fields_keys = array_keys($this->custom_fields->get_fields());
 					$custom_fields_keys = array_keys( array_diff($all_custom_fields_keys, $core_fields_keys) );
 
 					foreach ($custom_fields_keys as $key){
 						if(isset($_POST[	$key 	])){
-							//@TODO Sanitize $_POST[	$key 	]
-							//@TODO Some CFs are FILES
-							update_post_meta( intval($ticket_id), $key, $_POST[	$key 	]);
+							$value = $this->custom_fields->sanitize($key,	$_POST[$key]);
+							update_post_meta( intval($ticket_id), $key, $value);
 						}
 					}
 					wp_redirect(get_permalink($ticket_id));
