@@ -326,6 +326,14 @@ class RHD_Admin {
 										RHD_Email::ticket_reassigned(	$post_id, 	$old_assignee);
 									}
 									update_post_meta( $post_id, 'ticket_agent_id', $ticket_agent );
+									//info: update custom fields
+									$rhd_custom_fields = new RHD_Custom_Fields();
+									foreach ($rhd_custom_fields->get_custom_fields_keys() as $key){
+										if(isset($_POST[	$key 	])){
+											$value = $rhd_custom_fields->sanitize($key,	$_POST[$key]);
+											update_post_meta( intval($post_id), $key, $value);
+										}
+									}
 						}elseif (isset( $_POST['reply'] ) || isset( $_POST['reply-close'] )	|| isset( $_POST['reply-reopen'] )) {
 								if(isset($_POST['ticket_reply']) && "" != $_POST['ticket_reply']){
 										$ticket_reply_args = array(
