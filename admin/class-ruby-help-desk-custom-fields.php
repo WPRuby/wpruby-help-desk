@@ -329,4 +329,21 @@ class RHD_Custom_Fields {
     }
     return $value;
   }
+
+  public function validate_post(){
+    $errors = array();
+    foreach ($this->get_custom_fields() as $key => $field){
+        if($field['required'] == 'yes'){
+          if(isset($_POST[$key])){
+            $value = is_array($_POST[$key])?$_POST[$key]:trim($_POST[$key]);
+            if(empty($value)){
+              $errors[] = sprintf(__('%s is required', 'ruby-help-desk'), $field['label']);
+            }
+          }else{
+            $errors[] = sprintf(__('%s is required', 'ruby-help-desk'), $field['label']);
+          }
+        }
+      }
+      return (empty($errors))?false:$errors;
+    }
 }

@@ -28,8 +28,8 @@
           <p>
             <label for="<?php echo $key . '-required'; ?>"><?php _e('Required', 'ruby-help-desk'); ?></label><br>
             <select id="<?php echo $key . '-required'; ?>" name="rhd_custom_fields[<?php echo $key . '][required]'; ?>">
-              <option value="yes" <?php selected($field['size'], 'yes') ?>><?php _e('Yes', 'ruby-help-desk') ?></option>
-              <option value="no" <?php selected($field['size'], 'no') ?>><?php _e('No', 'ruby-help-desk') ?></option>
+              <option value="yes" <?php selected($field['required'], 'yes') ?>><?php _e('Yes', 'ruby-help-desk') ?></option>
+              <option value="no" <?php selected($field['required'], 'no') ?>><?php _e('No', 'ruby-help-desk') ?></option>
             </select>
           </p>
           <?php if(isset($field['options']) && is_array($field['options'])): ?>

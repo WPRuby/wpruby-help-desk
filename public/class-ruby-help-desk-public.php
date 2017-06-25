@@ -264,7 +264,10 @@ class RHD_Public {
 					}
 					$ticket['attachment'] = $ticket_uploaded_file['file'];
 				}
-
+				//info: validate the posted Custom Fields values
+				if($cf_errors = $this->custom_fields->validate_post()){
+					$errors = array_merge($errors, $cf_errors);
+				}
 
 				if(empty($errors)){
 					$ticket_id =  RHD_Ticket::add($ticket);
@@ -272,6 +275,7 @@ class RHD_Public {
 					foreach ($this->custom_fields->get_custom_fields_keys() as $key){
 						if(isset($_POST[	$key 	])){
 							$value = $this->custom_fields->sanitize($key,	$_POST[$key]);
+
 							update_post_meta( intval($ticket_id), $key, $value);
 						}
 					}
