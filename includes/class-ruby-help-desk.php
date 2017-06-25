@@ -173,6 +173,7 @@ class Ruby_Help_Desk {
 
 		$this->loader->add_action( 'init', $plugin_admin, 'register_post_types' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_taxonomies' );
+		$this->loader->add_filter( 'post_updated_messages', $plugin_admin, 'ticket_updated_messages' );
 
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_tickets_metaboxes' );
 

@@ -302,6 +302,35 @@ class RHD_Admin {
 		}
 
 		/**
+		 * Ticket update messages.
+		 * @param array $messages Existing post update messages.
+		 * @return array Amended post update messages with new CPT update messages.
+		 */
+		public function ticket_updated_messages( $messages ) {
+			$post             = get_post();
+			$post_type        = get_post_type( $post );
+			$post_type_object = get_post_type_object( $post_type );
+
+			$messages[RHD_TICKET] = array(
+				0  => '', // Unused. Messages start at index 1.
+				1  => __( 'Ticket updated.', 'ruby-help-desk' ),
+				2  => __( 'Custom field updated.', 'ruby-help-desk' ),
+				3  => __( 'Custom field deleted.', 'ruby-help-desk' ),
+				4  => __( 'Ticket updated.', 'ruby-help-desk' ),
+				5  => isset( $_GET['revision'] ) ? sprintf( __( 'Ticket restored to revision from %s', 'ruby-help-desk' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+				6  => __( 'Ticket updated.', 'ruby-help-desk' ),
+				7  => __( 'Ticket saved.', 'ruby-help-desk' ),
+				8  => __( 'Ticket submitted.', 'ruby-help-desk' ),
+				9  => sprintf(
+					__( 'Ticket scheduled for: <strong>%1$s</strong>.', 'ruby-help-desk' ),
+					date_i18n( __( 'M j, Y @ G:i', 'ruby-help-desk' ), strtotime( $post->post_date ) )
+				),
+				10 => __( 'Ticket draft updated.', 'ruby-help-desk' )
+			);
+
+			return $messages;
+		}
+		/**
 		 * The plugin use this method to save ticket details, such as status, product ... etc.
 		 * @since    1.0.0
 		 */
@@ -375,11 +404,11 @@ class RHD_Admin {
 				$ticket = new RHD_Ticket(intval($_GET['post']));
 
 				add_meta_box('ticket_information', __( 'Customer Details', 'ruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), RHD_TICKET, 'side', 'high');
-				add_meta_box('custom_fields', __( 'Custom Fields', 'ruby-help-desk' ), array($this, 'custom_fields_meta_box_callback'), RHD_TICKET, 'side', 'high');
+				add_meta_box('custom_fields', __( 'Custom Fields', 'ruby-help-desk' ), array($this, 'custom_fields_meta_box_callback'), RHD_TICKET, 'normal', 'high');
 				add_meta_box('ticket_message', __( 'Ticket Message', 'ruby-help-desk' ), array($this, 'ticket_message_meta_box_callback'), RHD_TICKET, 'normal', 'high');
 
 				if($ticket->get_replies()){
-					add_meta_box('ticket_replies', __( 'Replies', 'ruby-help-desk' ), array($this, 'replies_meta_box_callback'), RHD_TICKET, 'normal', 'high');
+					add_meta_box('ticket_replies', __( 'Replies', 'ruby-help-desk' ), array($this, 'replies_meta_box_callback'), RHD_TICKET, 'normal');
 				}
 
 				add_meta_box('reply_to_ticket', __( 'Reply', 'ruby-help-desk' ), array($this, 'reply_meta_box_callback'), RHD_TICKET, 'normal', 'high');

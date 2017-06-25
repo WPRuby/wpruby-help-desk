@@ -219,7 +219,7 @@ class RHD_Custom_Fields {
   public function display_date($field){
     ob_start();
     echo '<p>';
-    $this->the_field_label($field);echo '<br>';
+    $this->the_field_label($field);
     echo sprintf('<input type="date" id="%s" name="%s" class="rhd_%s_field" value="%s">', $field['id'], $field['id'], $field['size'], $field['value']);
     $this->the_field_description($field);
     echo '</p>';
@@ -229,7 +229,7 @@ class RHD_Custom_Fields {
   public function display_textarea($field){
     ob_start();
     echo '<p>';
-    $this->the_field_label($field); echo '<br>';
+    $this->the_field_label($field);
     echo sprintf('<textarea id="%s" name="%s" class="rhd_%s_field">%s</textarea>', $field['id'], $field['id'], $field['size'], $field['value']);
     $this->the_field_description($field);
     echo '</p>';
@@ -260,7 +260,7 @@ class RHD_Custom_Fields {
     $this->the_field_label($field);
     if(isset($field['options']) && is_array($field['options'])){
       foreach ($field['options'] as $key => $option) {
-        echo sprintf('<br><input %s type="radio" name="%s" value="%s">%s ',checked($key, $field['value'], false), $field['id'], $key, $option);
+        echo sprintf('<input %s type="radio" name="%s" value="%s">%s <br>',checked($key, $field['value'], false), $field['id'], $key, $option);
       }
     }
      $this->the_field_description($field);echo '</p>';
@@ -273,7 +273,7 @@ class RHD_Custom_Fields {
     $this->the_field_label($field);
     if(isset($field['options']) && is_array($field['options'])){
       foreach ($field['options'] as $key => $option) {
-        echo sprintf('<br><input %s type="checkbox" name="%s[]" value="%s">%s ',checked(true, in_array($key, $field['value']), false), $field['id'], $key, $option);
+        echo sprintf('<input %s type="checkbox" name="%s[]" value="%s">%s <br>',checked(true, in_array($key, $field['value']), false), $field['id'], $key, $option);
       }
     }
      $this->the_field_description($field);

@@ -433,6 +433,19 @@ display: none;
 #active_custom_fields .group label{
   font-weight: bold;
 }
+#custom_fields.postbox label{
+  display: block;
+  font-weight: bold;
+}
+#custom_fields.postbox input[type=text]{
+  width:100% !important;
+}
+#custom_fields.postbox input[type=date]{
+  width:100% !important;
+}
+#custom_fields.postbox textarea{
+  width:100% !important;
+}
 
 .clearboth {
   height: 0;
