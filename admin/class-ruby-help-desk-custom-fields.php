@@ -20,9 +20,12 @@ class RHD_Custom_Fields {
     }
     $this->multivalue_fields = array( 'checkbox' );
   }
+
+
   /**
   * Setup default core components
   * @since 1.2.0
+  * @return array   The array of forms components that users can drag to the Custom Fields form.
   */
   public function get_components()
   {
@@ -93,8 +96,9 @@ class RHD_Custom_Fields {
     return $components;
   }
   /**
-  * Setup default fields
+  * Get default fields
   * @since 1.2.0
+  * @return array   The array of all of the fields including the core fields and the custom fields.
   */
   public function get_fields()
   {
@@ -108,22 +112,31 @@ class RHD_Custom_Fields {
   }
 
   /**
-  * Get the keys of the added custom fields
+  * Get the keys of the custom fields keys (Core Fields keys Excluded)
   * @since 1.2.0
+  * @return array   The array of the fields keys.
   */
   public function get_custom_fields_keys(){
     return array_diff(array_keys($this->get_fields()), array_keys($this->get_core_fields()));
   }
+
+
   /**
-  * Get Custom Fields
+  * Get the custom fields (Core Fields Excluded)
   * @since 1.2.0
+  * @return array   The array of all of the custom fields excluding the core fields.
   */
   public function get_custom_fields(){
     $fields = array_intersect_key( $this->get_fields(), array_flip($this->get_custom_fields_keys()));
     $fields = $this->populate_fields($fields);
     return $fields;
   }
-
+  /**
+  * Inject the stored value for each field. This method is necessary in the Ticket page.
+  * @since 1.2.0
+  * @param array    The array of fields
+  * @return array   The array of fields and their values included.
+  */
   public function populate_fields($fields){
       foreach($fields as $key => $field){
         $field_value = get_post_meta($this->ticket_id, $key, true);
@@ -133,6 +146,13 @@ class RHD_Custom_Fields {
     return $fields;
   }
 
+
+
+  /**
+  * Get the core fields (Custom Fields Excluded)
+  * @since 1.2.0
+  * @return array   The array of all of the core fields.
+  */
   public function get_core_fields(){
     return array(
       'rhd_ticket_subject'  =>  array(
@@ -180,30 +200,41 @@ class RHD_Custom_Fields {
 
 
 
-
+  /**
+  * Display a certain field
+  * @since 1.2.0
+  * @param array   The array of the field to be displayed
+  * @return function   The function which responsible to display the field will be called.
+  */
   public function display($field){
     return call_user_func(array($this , 'display_' . $field['type'] ), $field);
   }
 
-
-
-
-
+  /**
+  * Display the field discription
+  * @since 1.2.0
+  * @param array        The array of the field.
+  */
   public function the_field_description($field){
     if($this->in_metabox == true) return;
     echo sprintf('<span class="rhd_description">%s</span>', $field['description']);
   }
 
-
-
-
+  /**
+  * Display the field label
+  * @since 1.2.0
+  * @param array        The array of the field.
+  */
   public function the_field_label($field){
     echo sprintf('<label class="rhd_label" for="%s">%s</label>', $field['id'], $field['label']);
   }
 
-
-
-
+  /**
+  * Display the field if it is a Text input
+  * @since 1.2.0
+  * @param array        The array of the field.
+  * @param string       The HTML replacement of the field
+  */
   public function display_text($field){
     ob_start();
     echo '<p>';
@@ -214,8 +245,12 @@ class RHD_Custom_Fields {
     return ob_get_clean();
   }
 
-
-
+  /**
+  * Display the field if it is a Datepicket input
+  * @since 1.2.0
+  * @param array        The array of the field.
+  * @param string       The HTML replacement of the field
+  */
   public function display_date($field){
     ob_start();
     echo '<p>';
@@ -226,6 +261,12 @@ class RHD_Custom_Fields {
     return ob_get_clean();
   }
 
+  /**
+  * Display the field if it is a Textarea input
+  * @since 1.2.0
+  * @param array        The array of the field.
+  * @param string       The HTML replacement of the field
+  */
   public function display_textarea($field){
     ob_start();
     echo '<p>';
@@ -235,6 +276,13 @@ class RHD_Custom_Fields {
     echo '</p>';
     return ob_get_clean();
   }
+
+  /**
+  * Display the field if it is a Select input
+  * @since 1.2.0
+  * @param array        The array of the field.
+  * @param string       The HTML replacement of the field
+  */
   public function display_select($field){
     if($field['id'] == 'rhd_ticket_product'){
       $field['options'] = $this->get_products();
@@ -254,6 +302,12 @@ class RHD_Custom_Fields {
     return ob_get_clean();
   }
 
+  /**
+  * Display the field if it is a Radio input
+  * @since 1.2.0
+  * @param array        The array of the field.
+  * @param string       The HTML replacement of the field
+  */
   public function display_radio($field){
     ob_start();
     echo '<p>';
@@ -266,6 +320,13 @@ class RHD_Custom_Fields {
      $this->the_field_description($field);echo '</p>';
     return ob_get_clean();
   }
+
+  /**
+  * Display the field if it is a Checkbox input
+  * @since 1.2.0
+  * @param array        The array of the field.
+  * @param string       The HTML replacement of the field
+  */
   public function display_checkbox($field){
     ob_start();
     echo '<p>';
@@ -281,7 +342,12 @@ class RHD_Custom_Fields {
     return ob_get_clean();
   }
 
-
+  /**
+  * Display the field if it is a WYSIWYG input
+  * @since 1.2.0
+  * @param array        The array of the field.
+  * @param string       The HTML replacement of the field
+  */
   public function display_editor($field){
     $editor_settings = array( 'media_buttons' => false, 'textarea_rows' => 7 );
     ob_start();
@@ -291,9 +357,12 @@ class RHD_Custom_Fields {
     return ob_get_clean();
   }
 
-
-
-
+  /**
+  * Display the field if it is a FILE input
+  * @since 1.2.0
+  * @param array        The array of the field.
+  * @param string       The HTML replacement of the field
+  */
   public function display_attachment($field){
     $attachments_settings = get_option('rhd_attachments');
     if($attachments_settings['enable_attachments'] === 'on'){
@@ -308,9 +377,12 @@ class RHD_Custom_Fields {
     return '';
   }
 
-
-
-
+  /**
+  * Get the helpdesk products
+  * @since 1.2.0
+  * @todo The method is redundant in another class.
+  * @param array    The array of the products
+  */
   private function get_products(){
     $products = get_terms( RHD_TICKET_PRODUCT, array(	'hide_empty' => false		) );
     $result = array();
@@ -320,6 +392,14 @@ class RHD_Custom_Fields {
     return $result;
   }
 
+  /**
+  * sanitize cutom field value before reaching the database.
+  * @todo sanitize all of the possible field types.
+  * @since 1.2.0
+  * @param string    The custom field key
+  * @param string    The posted value
+  * @return array    The sanitized value
+  */
   public function sanitize($key,  $value){
     $fields = $this->get_fields();
     switch ($fields[$key]['type']){
@@ -330,6 +410,11 @@ class RHD_Custom_Fields {
     return $value;
   }
 
+  /**
+  * validate cutom field value before reaching the database.
+  * @since 1.2.0
+  * @return mixed    (Array) of errors found. False if no errors were found.
+  */
   public function validate_post(){
     $errors = array();
     foreach ($this->get_custom_fields() as $key => $field){
