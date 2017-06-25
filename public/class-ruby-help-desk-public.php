@@ -269,11 +269,7 @@ class RHD_Public {
 				if(empty($errors)){
 					$ticket_id =  RHD_Ticket::add($ticket);
 					//info: 2nd process custom fields
-					$core_fields_keys = array_keys($this->custom_fields->get_core_fields());
-					$all_custom_fields_keys = array_keys($this->custom_fields->get_fields());
-					$custom_fields_keys = array_keys( array_diff($all_custom_fields_keys, $core_fields_keys) );
-
-					foreach ($custom_fields_keys as $key){
+					foreach ($this->custom_fields->get_custom_fields_keys() as $key){
 						if(isset($_POST[	$key 	])){
 							$value = $this->custom_fields->sanitize($key,	$_POST[$key]);
 							update_post_meta( intval($ticket_id), $key, $value);

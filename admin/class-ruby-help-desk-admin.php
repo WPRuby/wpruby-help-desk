@@ -366,9 +366,11 @@ class RHD_Admin {
 			if(isset($_GET['post'])){
 				$ticket = new RHD_Ticket(intval($_GET['post']));
 
+				add_meta_box('custom_fields', __( 'Custom Fields', 'ruby-help-desk' ), array($this, 'custom_fields_meta_box_callback'), RHD_TICKET, 'side', 'high');
 				add_meta_box('ticket_information', __( 'Ticket Details', 'ruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), RHD_TICKET, 'side', 'high');
 
 				add_meta_box('ticket_message', __( 'Ticket Message', 'ruby-help-desk' ), array($this, 'ticket_message_meta_box_callback'), RHD_TICKET, 'normal', 'high');
+
 				if($ticket->get_replies()){
 					add_meta_box('ticket_replies', __( 'Replies', 'ruby-help-desk' ), array($this, 'replies_meta_box_callback'), RHD_TICKET, 'normal', 'high');
 				}
@@ -386,6 +388,14 @@ class RHD_Admin {
 			$ticket_object = new RHD_Ticket($ticket->ID);
 			$ticket_stats = $ticket_object->get_tickets_stats($ticket->post_author);
 			require_once plugin_dir_path( __FILE__ ) . 'partials/ruby-help-desk-ticket-details-metabox.php';
+		}
+		/**
+		 * This method is used to display the ticket_information meta box content
+		 * @since    1.0.0
+		 */
+		public function custom_fields_meta_box_callback($ticket){
+			$rhd_custom_fields = new RHD_Custom_Fields(true);
+			require_once plugin_dir_path( __FILE__ ) . 'partials/ruby-help-desk-custom-fields-metabox.php';
 		}
 		/**
 		 * This method is used to display the ticket_message meta box content

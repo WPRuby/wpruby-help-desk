@@ -9,7 +9,15 @@
  */
 class RHD_Custom_Fields {
 
+  private $in_metabox;
+  private $ticket_id;
 
+  public function __construct($in_metabox = false){
+    $this->in_metabox = $in_metabox;
+    if($this->in_metabox == true && isset($_GET['post'])){
+      $this->ticket_id = intval($_GET['post']);
+    }
+  }
   /**
   * Setup default core components
   * @since 1.2.0
@@ -50,9 +58,34 @@ class RHD_Custom_Fields {
     $core_fields = $this->get_core_fields();
     $fields = get_option('rhd_saved_cusom_fields', $core_fields);
     if(!is_array($fields)){
-      return $core_fields;
+      return $this->populate_fields($core_fields);
     }
     //@TODO add_filter
+    return $this->populate_fields($fields);
+  }
+
+  /**
+  * Get the keys of the added custom fields
+  * @since 1.2.0
+  */
+  public function get_custom_fields_keys(){
+    return array_diff(array_keys($this->get_fields()), array_keys($this->get_core_fields()));
+  }
+  /**
+  * Get Custom Fields
+  * @since 1.2.0
+  */
+  public function get_custom_fields(){
+    $fields = array_intersect_key( $this->get_fields(), array_flip($this->get_custom_fields_keys()));
+    $fields = $this->populate_fields($fields);
+    return $fields;
+  }
+
+  public function populate_fields($fields){
+      foreach($fields as $key => $field){
+        $field_value = get_post_meta($this->ticket_id, $key, true);
+        $fields[$key]['value'] = ($field_value)? $field_value: '';
+      }
     return $fields;
   }
 
@@ -104,8 +137,8 @@ class RHD_Custom_Fields {
     return call_user_func(array($this , 'display_' . $field['type'] ), $field);
   }
 
-
   public function the_field_description($field){
+    if($this->in_metabox == true) return;
     echo sprintf('<span class="rhd_description">%s</span>', $field['description']);
   }
   public function the_field_label($field){
@@ -117,7 +150,7 @@ class RHD_Custom_Fields {
     ?>
     <p>
       <?php $this->the_field_label($field); ?>
-      <?php  echo sprintf('<input type="text" id="%s" name="%s" class="rhd_%s_field" value="">', $field['id'], $field['id'], $field['size']); ?>
+      <?php  echo sprintf('<input type="text" id="%s" name="%s" class="rhd_%s_field" value="%s">', $field['id'], $field['id'], $field['size'], $field['value']); ?>
       <?php $this->the_field_description($field); ?>
     </p>
     <?php
@@ -125,7 +158,7 @@ class RHD_Custom_Fields {
   }
   public function display_select($field){
     if($field['id'] == 'rhd_ticket_product'){
-      $field['default'] = $this->get_products();
+      $field['options'] = $this->get_products();
     }
     ob_start();
     ?>
@@ -133,7 +166,7 @@ class RHD_Custom_Fields {
     <select id="<?php echo $field['id']; ?>" class="<?php echo 'rhd_' . $field['size'] . '_field'; ?>" name="<?php echo $field['id']; ?>">
       <?php if(isset($field['options']) && is_array($field['options'])){ ?>
         <?php foreach ($field['options'] as $key => $option) { ?>
-          <option value="<?php echo $key; ?>"><?php echo $option; ?></option>
+          <option <?php selected($key, $field['value']); ?> value="<?php echo $key; ?>"><?php echo $option; ?></option>
           <?php } ?>
       <?php } ?>
     </select>
@@ -147,7 +180,7 @@ class RHD_Custom_Fields {
     ob_start();
     ?>
     <?php $this->the_field_label($field); ?>
-    <?php wp_editor('', $field['id'], $editor_settings); $this->the_field_description($field); ?> <br>
+    <?php wp_editor($field['value'], $field['id'], $editor_settings); $this->the_field_description($field); ?> <br>
     <?php return ob_get_clean();
   }
 

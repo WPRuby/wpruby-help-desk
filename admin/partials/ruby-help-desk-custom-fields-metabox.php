@@ -11,5 +11,7 @@
 
 ?>
 
-
+<?php foreach ($rhd_custom_fields->get_custom_fields() as $key => $field): ?>
+  <?php echo $rhd_custom_fields->display($field); ?>
+<?php endforeach; ?>
 <div class="clear"></div>
