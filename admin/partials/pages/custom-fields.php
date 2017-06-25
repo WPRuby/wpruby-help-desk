@@ -53,6 +53,7 @@
 
   <div id="custom_fields_components">
     <ul>
+      <li><?php _e('Drag Custom Fields to the Submit Ticket page.', 'ruby-help-desk'); ?></li>
       <?php foreach ($rhd_custom_fields->get_components() as $key => $component): ?>
         <li><a href="#" class="draggable-custom-field-item form-element-<?php echo $component['type']; ?>" data-core="no" data-default="" data-key="<?php echo $key; ?>" data-label="<?php echo $component['label']; ?>" data-type="<?php echo $component['type']; ?>"><b></b><?php echo $component['label']; ?></a></li>
       <?php endforeach; ?>

@@ -374,9 +374,8 @@ class RHD_Admin {
 			if(isset($_GET['post'])){
 				$ticket = new RHD_Ticket(intval($_GET['post']));
 
+				add_meta_box('ticket_information', __( 'Customer Details', 'ruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), RHD_TICKET, 'side', 'high');
 				add_meta_box('custom_fields', __( 'Custom Fields', 'ruby-help-desk' ), array($this, 'custom_fields_meta_box_callback'), RHD_TICKET, 'side', 'high');
-				add_meta_box('ticket_information', __( 'Ticket Details', 'ruby-help-desk' ), array($this, 'ticket_information_meta_box_callback'), RHD_TICKET, 'side', 'high');
-
 				add_meta_box('ticket_message', __( 'Ticket Message', 'ruby-help-desk' ), array($this, 'ticket_message_meta_box_callback'), RHD_TICKET, 'normal', 'high');
 
 				if($ticket->get_replies()){

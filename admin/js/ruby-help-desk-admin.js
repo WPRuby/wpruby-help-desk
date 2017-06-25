@@ -87,7 +87,8 @@
 			 var core 					=  $(this).attr('data-core');
 			 var key 						= 'rhd_'+ type + '_' + Math.random().toString(36).substring(2, 12);
 			 var options = '';
-			 if(type == 'select'){
+			 var multiselect_fields = ['select', 'radio', 'checkbox'];
+			 if(multiselect_fields.indexOf(type) != -1){
 				 	options += '<p><label for="{key}-options">Options</label><br>';
 					options += '<ul class="field_options" id="{key}-options">';
 					options += '<li><input name="rhd_custom_fields[{key}][options][]" class="code" value="Option 1" type="text" /><span class="delete_option dashicons dashicons-trash"></span><span class="dashicons  dashicons-menu"></span></li>';

@@ -11,12 +11,14 @@ class RHD_Custom_Fields {
 
   private $in_metabox;
   private $ticket_id;
+  private $multivalue_fields;
 
   public function __construct($in_metabox = false){
     $this->in_metabox = $in_metabox;
     if($this->in_metabox == true && isset($_GET['post'])){
       $this->ticket_id = intval($_GET['post']);
     }
+    $this->multivalue_fields = array( 'checkbox' );
   }
   /**
   * Setup default core components
@@ -39,11 +41,52 @@ class RHD_Custom_Fields {
         'id'          => 'rhd_select',
         'core'        => true,
         'type'        => 'select',
-        'label'       => __('Multiple Options', 'ruby-help-desk'),
+        'label'       => __('Select List', 'ruby-help-desk'),
         'description' => '',
         'required'    => 'no',
         'size'        => 'medium',
         'default'     => '',
+      ),
+      'rhd_checkbox'  =>  array(
+        'id'          => 'rhd_checkbox',
+        'core'        => true,
+        'type'        => 'checkbox',
+        'label'       => __('Checkboxes', 'ruby-help-desk'),
+        'description' => '',
+        'required'    => 'no',
+        'size'        => 'medium',
+        'default'     => '',
+      ),
+      'rhd_radio'  =>  array(
+        'id'          => 'rhd_radio',
+        'core'        => true,
+        'type'        => 'radio',
+        'label'       => __('Radio Buttons', 'ruby-help-desk'),
+        'description' => '',
+        'required'    => 'no',
+        'size'        => 'medium',
+        'default'     => '',
+      ),
+
+      'rhd_textarea'  =>  array(
+          'id'          => 'rhd_textarea',
+          'core'        => true,
+          'type'        => 'textarea',
+          'label'       => __('Text Box', 'ruby-help-desk'),
+          'description' => '',
+          'required'    => 'no',
+          'size'        => 'medium',
+          'default'     => '',
+      ),
+      'rhd_date'  =>  array(
+          'id'          => 'rhd_date',
+          'core'        => true,
+          'type'        => 'date',
+          'label'       => __('Date', 'ruby-help-desk'),
+          'description' => '',
+          'required'    => 'no',
+          'size'        => 'medium',
+          'default'     => '',
       ),
     );
     //@TODO add_filter
@@ -84,7 +127,8 @@ class RHD_Custom_Fields {
   public function populate_fields($fields){
       foreach($fields as $key => $field){
         $field_value = get_post_meta($this->ticket_id, $key, true);
-        $fields[$key]['value'] = ($field_value)? $field_value: '';
+        $empty_value = (in_array($field['type'], $this->multivalue_fields))?array():'';
+        $fields[$key]['value'] = ($field_value)? $field_value: $empty_value;
       }
     return $fields;
   }
@@ -133,27 +177,62 @@ class RHD_Custom_Fields {
       ),
     );
   }
+
+
+
+
   public function display($field){
     return call_user_func(array($this , 'display_' . $field['type'] ), $field);
   }
+
+
+
+
 
   public function the_field_description($field){
     if($this->in_metabox == true) return;
     echo sprintf('<span class="rhd_description">%s</span>', $field['description']);
   }
+
+
+
+
   public function the_field_label($field){
     echo sprintf('<label class="rhd_label" for="%s">%s</label>', $field['id'], $field['label']);
   }
 
+
+
+
   public function display_text($field){
     ob_start();
-    ?>
-    <p>
-      <?php $this->the_field_label($field); ?>
-      <?php  echo sprintf('<input type="text" id="%s" name="%s" class="rhd_%s_field" value="%s">', $field['id'], $field['id'], $field['size'], $field['value']); ?>
-      <?php $this->the_field_description($field); ?>
-    </p>
-    <?php
+    echo '<p>';
+    $this->the_field_label($field);
+    echo sprintf('<input type="text" id="%s" name="%s" class="rhd_%s_field" value="%s">', $field['id'], $field['id'], $field['size'], $field['value']);
+    $this->the_field_description($field);
+    echo '</p>';
+    return ob_get_clean();
+  }
+
+
+
+  public function display_date($field){
+    ob_start();
+    echo '<p>';
+    $this->the_field_label($field);echo '<br>';
+    echo sprintf('<input type="date" id="%s" name="%s" class="rhd_%s_field" value="%s">', $field['id'], $field['id'], $field['size'], $field['value']);
+    $this->the_field_description($field);
+    echo '</p>';
+    return ob_get_clean();
+  }
+
+  public function display_textarea($field){
+    ob_start();
+    echo '<p>';
+    $this->the_field_label($field); echo '<br>';
+    echo sprintf('<textarea id="%s" name="%s" class="rhd_%s_field">%s</textarea>', $field['id'], $field['id'], $field['size'], $field['value']);
+    $this->the_field_description($field);
+    echo '</p>';
     return ob_get_clean();
   }
   public function display_select($field){
@@ -161,43 +240,76 @@ class RHD_Custom_Fields {
       $field['options'] = $this->get_products();
     }
     ob_start();
-    ?>
-    <?php $this->the_field_label($field); ?>
-    <select id="<?php echo $field['id']; ?>" class="<?php echo 'rhd_' . $field['size'] . '_field'; ?>" name="<?php echo $field['id']; ?>">
-      <?php if(isset($field['options']) && is_array($field['options'])){ ?>
-        <?php foreach ($field['options'] as $key => $option) { ?>
-          <option <?php selected($key, $field['value']); ?> value="<?php echo $key; ?>"><?php echo $option; ?></option>
-          <?php } ?>
-      <?php } ?>
-    </select>
-    <?php $this->the_field_description($field); ?>
-    </p>
-    <?php
+    echo '<p>';
+    $this->the_field_label($field);
+    echo sprintf('<select id="%s" class="rhd_%s_field" name="%s">', $field['id'], $field['size'], $field['id'] );
+    if(isset($field['options']) && is_array($field['options'])){
+      foreach ($field['options'] as $key => $option) {
+        echo sprintf('<option %s value="%s">%s</option>', selected($key, $field['value']), $key, $option);
+      }
+    }
+    echo '</select>';
+    $this->the_field_description($field);
+    echo '</p>';
     return ob_get_clean();
   }
+
+  public function display_radio($field){
+    ob_start();
+    echo '<p>';
+    $this->the_field_label($field);
+    if(isset($field['options']) && is_array($field['options'])){
+      foreach ($field['options'] as $key => $option) {
+        echo sprintf('<br><input %s type="radio" name="%s" value="%s">%s ',checked($key, $field['value'], false), $field['id'], $key, $option);
+      }
+    }
+     $this->the_field_description($field);echo '</p>';
+    return ob_get_clean();
+  }
+  public function display_checkbox($field){
+    ob_start();
+    echo '<p>';
+
+    $this->the_field_label($field);
+    if(isset($field['options']) && is_array($field['options'])){
+      foreach ($field['options'] as $key => $option) {
+        echo sprintf('<br><input %s type="checkbox" name="%s[]" value="%s">%s ',checked(true, in_array($key, $field['value']), false), $field['id'], $key, $option);
+      }
+    }
+     $this->the_field_description($field);
+     echo '</p>';
+    return ob_get_clean();
+  }
+
+
   public function display_editor($field){
     $editor_settings = array( 'media_buttons' => false, 'textarea_rows' => 7 );
     ob_start();
-    ?>
-    <?php $this->the_field_label($field); ?>
-    <?php wp_editor($field['value'], $field['id'], $editor_settings); $this->the_field_description($field); ?> <br>
-    <?php return ob_get_clean();
+    $this->the_field_label($field);
+    wp_editor($field['value'], $field['id'], $editor_settings); $this->the_field_description($field);
+    echo '<br>';
+    return ob_get_clean();
   }
+
+
+
 
   public function display_attachment($field){
     $attachments_settings = get_option('rhd_attachments');
     if($attachments_settings['enable_attachments'] === 'on'){
-      ob_start(); ?>
-      <p>
-        <?php $this->the_field_label($field); ?>
-        <?php
+      ob_start();
+      echo '<p>';
+        $this->the_field_label($field);
         echo sprintf('<input type="file" id="%s" name="%s" value=""><span class="file_extensions">%s: %s</span>',$field['id'], $field['id'], __('Allowed Extensions', 'ruby-help-desk'), $attachments_settings['allowed_extensions_attachments']);
-        $this->the_field_description($field); ?>
-      </p>
-    <?php  return ob_get_clean();
+        $this->the_field_description($field);
+      echo '</p>';
+      return ob_get_clean();
     }
     return '';
   }
+
+
+
 
   private function get_products(){
     $products = get_terms( RHD_TICKET_PRODUCT, array(	'hide_empty' => false		) );
