@@ -103,8 +103,21 @@ class RHD_Admin {
 			wp_enqueue_script( 'wp-color-picker');
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ruby-help-desk-admin.js', array( 'jquery' ), $this->version, false );
 			wp_localize_script( $this->plugin_name, 'rhd', array(
-				'text_processed_products'	=>	__('Products have been successfully synced.', 'ruby-help-desk'),
+				'text_processed_products'			=>	__('Products have been successfully synced.', 'ruby-help-desk'),
 				'text_no_processed_products'	=>	__('No new products were found.', 'ruby-help-desk'),
+				'text_ticket_subject'					=>	__('Ticket Subject', 'ruby-help-desk'),
+				'text_options'								=>	__('Options', 'ruby-help-desk'),
+				'text_add_option'							=>	__('Add Option', 'ruby-help-desk'),
+				'text_delete_confirmation'		=>	__('Are you sure that you want to delete this field? You can not Undo it if you save the changes.', 'ruby-help-desk'),
+
+				'text_label'									=>	__('Label', 'ruby-help-desk'),
+				'text_description'						=>	__('Description', 'ruby-help-desk'),
+				'text_field_size'							=>	__('Field Size', 'ruby-help-desk'),
+				'text_small'									=>	__('Small', 'ruby-help-desk'),
+				'text_medium'									=>	__('Medium', 'ruby-help-desk'),
+				'text_large'									=>	__('Large', 'ruby-help-desk'),
+				'text_required'								=>	__('Required', 'ruby-help-desk'),
+
 				'wc_sync_nonce'						=>	$wc_sync_nonce,
 				'edd_sync_nonce'					=>	$edd_sync_nonce,
 			) );

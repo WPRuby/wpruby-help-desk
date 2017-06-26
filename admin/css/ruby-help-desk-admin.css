@@ -297,6 +297,17 @@ display: none;
   background-repeat: no-repeat;
   line-height: 16px;
 }
+.delete_custom_field{
+  right: 15px;
+  float: right;
+  position: relative;
+  bottom: 4px;
+}
+.delete_custom_field .dashicons-trash{
+    font-size: 11pt !important;
+    text-decoration: none;
+}
+
 .form-element-address b {
     background-position: -128px 0
 }

@@ -1,7 +1,7 @@
 (function( $ ) {
 	'use strict';
 	$(function() {
-		$('.post-type-support_ticket #title-prompt-text').html('Ticket Subject');
+		$('.post-type-support_ticket #title-prompt-text').html(rhd.text_ticket_subject);
 		$('.ticket-status-color-field').wpColorPicker();
 
 
@@ -90,37 +90,37 @@
 			 var options = '';
 			 var multiselect_fields = ['select', 'radio', 'checkbox'];
 			 if(multiselect_fields.indexOf(type) != -1){
-				 	options += '<p><label for="{key}-options">Options</label><br>';
+				 	options += '<p><label for="{key}-options">'+ rhd.text_options +'</label><br>';
 					options += '<ul class="field_options" id="{key}-options">';
 					options += '<li><input name="rhd_custom_fields[{key}][options][]" class="code" value="Option 1" type="text" /><span class="delete_option dashicons dashicons-trash"></span><span class="dashicons  dashicons-menu"></span></li>';
 					options += '<li><input name="rhd_custom_fields[{key}][options][]" class="code" value="Option 2" type="text" /><span class="delete_option dashicons dashicons-trash"></span><span class="dashicons  dashicons-menu"></span></li>';
 					options += '<li><input name="rhd_custom_fields[{key}][options][]" class="code" value="Option 3" type="text" /><span class="delete_option dashicons dashicons-trash"></span><span class="dashicons  dashicons-menu"></span></li>';
 					options += '</ul>';
-					options += '<a class="add_option button-secondary" data-key="{key}" data-field="{key}-options" href="javascript:void(0)"><span class="dashicons dashicons-plus-alt"></span>Add Option</a>';
+					options += '<a class="add_option button-secondary" data-key="{key}" data-field="{key}-options" href="javascript:void(0)"><span class="dashicons dashicons-plus-alt"></span>'+ rhd.add_option +'</a>';
 					options += '</p>';
 
 			 }
 			 var new_element = `<div class="group">
-         <h3 class="form-element-{type}">{label}<b></b></h3>
+         <h3 class="form-element-{type}">{label}<b></b><a href="javascript:void(0)" class="delete_custom_field"><span class="dashicons dashicons-trash"></span></a></h3>
          <div>
            <p>
-             <label for="{key}-label">Label</label><br>
+             <label for="{key}-label">{text_label}</label><br>
              <input id="{key}-label" type="text" name="rhd_custom_fields[{key}][label]" value="{label}">
            </p>
            <p>
-             <label for="{key}-description">Description</label><br>
+             <label for="{key}-description">{text_description}</label><br>
              <textarea id="{key}-description" name="rhd_custom_fields[{key}][description]" rows="4" cols="50"></textarea>
            </p>
            <p>
-             <label for="{key}-size">Field size</label><br>
+             <label for="{key}-size">{text_field_size}</label><br>
              <select id="{key}-size" name="rhd_custom_fields[{key}][size]">
-               <option value="small">Small</option>
-               <option value="medium">Medium</option>
-               <option value="large">Large</option>
+               <option value="small">{text_small}</option>
+               <option value="medium">{text_medium}</option>
+               <option value="large">{text_large}</option>
              </select>
            </p>
            <p>
-             <label for="{key}-required">Required</label><br>
+             <label for="{key}-required">{text_required}</label><br>
              <select id="{key}-required" name="rhd_custom_fields[{key}][required]">
                <option value="yes">Yes</option>
                <option value="no">No</option>
@@ -133,7 +133,8 @@
          </div>
        </div>`;
 			 new_element = new_element.replace(/{label}/g, label).replace(/{options}/g, options).replace(/{type}/g, type).replace(/{key}/g, key).replace(/{core}/g, core);
-
+			 //info: replace locale texts.
+			 new_element = new_element.replace(/{text_label}/g, rhd.text_label).replace(/{text_description}/g, rhd.text_description).replace(/{text_field_size}/g, rhd.text_field_size).replace(/{text_small}/g, rhd.text_small).replace(/{text_medium}/g, rhd.text_medium).replace(/{text_large}/g, rhd.text_large).replace(/{text_required}/g, rhd.text_required);
 			 $('#active_custom_fields').append(new_element);
 			 $('.field_options').sortable();
 
@@ -146,6 +147,13 @@
 			 e.preventDefault();
 			 $(this).parent().remove();
 		 });
+		 $('.delete_custom_field').click(function(e){
+			 e.preventDefault();
+			 if(window.confirm( rhd.text_delete_confirmation )){
+				 $(this).parent().parent().remove();
+			 }
+		 });
+
 		 jQuery('.add_option').click(function(e){
 				e.preventDefault();
 				var key = $(this).attr('data-key');
@@ -154,6 +162,12 @@
 				jQuery('.delete_option').click(function(e){
 					e.preventDefault();
 					jQuery(this).parent().remove();
+				});
+				$('.delete_custom_field').click(function(e){
+					e.preventDefault();
+					if(window.confirm( rhd.text_delete_confirmation )){
+						$(this).parent().parent().remove();
+					}
 				});
 		});
 
