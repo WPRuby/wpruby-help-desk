@@ -446,7 +446,11 @@ display: none;
 #custom_fields.postbox textarea{
   width:100% !important;
 }
-
+#active_custom_fields .ui-state-highlight{
+  height:50px;
+  background: #e8a3bd;
+  border: 1px #e8a3bd solid;
+}
 .clearboth {
   height: 0;
   clear: both;

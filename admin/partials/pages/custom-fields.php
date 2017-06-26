@@ -1,7 +1,11 @@
 <div id="rhd_custom_fields" class="wrap">
   <h1><?php _e('Custom Fields', 'ruby-help-desk'); ?></h1>
   <p class="description"><?php _e('You can customize the Submit Ticket page by adding custom fields from the right column, and you can drag the field to order them', 'ruby-help-desk'); ?></p>
-
+  <?php if(isset($_POST['save_custom_fields'])): ?>
+  <div class="notice notice-success is-dismissible">
+    <p><?php _e( 'Custom Fields settings have been saved.', 'ruby-help-desk' ); ?></p>
+  </div>
+  <?php endif; ?>
 <form class="" action="" method="post">
 
   <div id="active_custom_fields">

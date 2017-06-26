@@ -546,7 +546,6 @@ class RHD_Settings_API {
     /**
      * Tabbable JavaScript codes & Initiate Color Picker
      *
-     * This code uses localstorage for displaying active tabs
      */
     function script() {
         ?>
@@ -558,9 +557,6 @@ class RHD_Settings_API {
                 // Switches option sections
                 $('.group').hide();
                 var activetab = '';
-                if (typeof(localStorage) != 'undefined' ) {
-                    activetab = localStorage.getItem("activetab");
-                }
                 if (activetab != '' && $(activetab).length ) {
                     $(activetab).fadeIn();
                 } else {
@@ -577,15 +573,13 @@ class RHD_Settings_API {
                     });
                 });
 
-                
+
                 $('.nav-tab-wrapper a:first').addClass('nav-tab-active');
                 $('.nav-tab-wrapper a').click(function(evt) {
                     $('.nav-tab-wrapper a').removeClass('nav-tab-active');
                     $(this).addClass('nav-tab-active').blur();
                     var clicked_group = $(this).attr('href');
-                    if (typeof(localStorage) != 'undefined' ) {
-                        localStorage.setItem("activetab", $(this).attr('href'));
-                    }
+
                     $('.group').hide();
                     $(clicked_group).fadeIn();
                     evt.preventDefault();
