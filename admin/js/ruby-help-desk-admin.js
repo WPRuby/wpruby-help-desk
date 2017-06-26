@@ -63,6 +63,7 @@
 			 header: "> div > h3",
 			 collapsible: true,
 			 active: false,
+			 heightStyle: "content",
 		 })
 		 .sortable({
 			 axis: "y",

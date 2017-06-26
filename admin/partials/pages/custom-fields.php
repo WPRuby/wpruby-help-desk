@@ -1,6 +1,6 @@
 <div id="rhd_custom_fields" class="wrap">
   <h1><?php _e('Custom Fields', 'ruby-help-desk'); ?></h1>
-  <p class="description"><?php _e('You can create a customizable ticket submission page blah blah ...', 'ruby-help-desk'); ?></p>
+  <p class="description"><?php _e('You can customize the Submit Ticket page by adding custom fields from the right column, and you can drag the field to order them', 'ruby-help-desk'); ?></p>
 
 <form class="" action="" method="post">
 
@@ -53,7 +53,7 @@
 
   <div id="custom_fields_components">
     <ul>
-      <li><?php _e('Drag Custom Fields to the Submit Ticket page.', 'ruby-help-desk'); ?></li>
+      <li><strong><?php _e('Click on Custom Fields to add them to the Submit Ticket page', 'ruby-help-desk'); ?></strong></li>
       <?php foreach ($rhd_custom_fields->get_components() as $key => $component): ?>
         <li><a href="#" class="draggable-custom-field-item form-element-<?php echo $component['type']; ?>" data-core="no" data-default="" data-key="<?php echo $key; ?>" data-label="<?php echo $component['label']; ?>" data-type="<?php echo $component['type']; ?>"><b></b><?php echo $component['label']; ?></a></li>
       <?php endforeach; ?>
