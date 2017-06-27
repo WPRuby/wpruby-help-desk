@@ -23,7 +23,7 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-define('RHD_VERSION', 					'1.0.0');
+define('RHD_VERSION', 					'1.2.0');
 // define the plugin constants
 define('RHD_TICKET', 					'support_ticket');
 define('RHD_KNOWLEDGEBASE', 	'help_knowledgebase');
