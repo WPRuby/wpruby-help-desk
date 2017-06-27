@@ -829,6 +829,7 @@ class RHD_Admin {
 	 */
 	public function custom_fields_page_output(){
 		$rhd_custom_fields = new RHD_Custom_Fields();
+		$core_fields = $rhd_custom_fields->get_core_fields();
 		ob_start();
 		require_once plugin_dir_path( __FILE__ ) . 'partials/pages/custom-fields.php';
 		echo ob_get_clean();

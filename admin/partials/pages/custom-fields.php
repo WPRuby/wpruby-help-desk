@@ -11,7 +11,7 @@
   <div id="active_custom_fields">
 <?php foreach ($rhd_custom_fields->get_fields() as $key => $field): ?>
       <div class="group">
-        <h3 class="form-element-<?php echo $field['type']; ?>"><?php echo $field['label']; ?><b></b><a href="javascript:void(0)" class="delete_custom_field"><span class="dashicons dashicons-trash"></span></a></h3>
+        <h3 class="form-element-<?php echo $field['type']; ?>"><?php echo $field['label']; ?><b></b><?php if(!isset($core_fields[$key])): ?><a href="javascript:void(0)" class="delete_custom_field"><span class="dashicons dashicons-trash"></span></a><?php endif; ?></h3>
         <div>
           <p>
             <label for="<?php echo $key . '-label'; ?>"><?php _e('Label', 'ruby-help-desk'); ?></label><br>
