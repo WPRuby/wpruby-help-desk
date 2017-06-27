@@ -47,6 +47,7 @@ Ruby Help Desk is a WordPress plugin which works as a customer support platform.
 4. The Admin dashboard widget with the Help Desk statistics and recent tickets list.
 5. Managing tickets in the dashboard.
 6. Managing tickets statuses in the dashboard with the ability to assign a different color for each status.
+7. Custom Fields builder for the Submit Ticket page.
 == Frequently Asked Questions ==
 
 = How can I access the plugin pages after activation? =
