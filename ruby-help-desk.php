@@ -27,6 +27,8 @@ define('RHD_VERSION', 					'1.2.0');
 // define the plugin constants
 define('RHD_TICKET', 					'support_ticket');
 define('RHD_KNOWLEDGEBASE', 	'help_knowledgebase');
+define('RHD_REPLIES_TEMPLATE', 	'replies_template');
+
 define('RHD_TICKET_REPLY', 		'support_ticket_reply');
 define('RHD_TICKET_STATUS', 	'tickets_status');
 define('RHD_TICKET_PRODUCT', 	'tickets_products');

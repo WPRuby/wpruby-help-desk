@@ -209,6 +209,41 @@ class RHD_Admin {
 			);
 			register_post_type( RHD_KNOWLEDGEBASE, $args );
 
+		// Replies Templates
+		$labels = array(
+			'name'               => _x( 'Replies Templates', 'post type general name', 'ruby-help-desk' ),
+			'singular_name'      => _x( 'New Replies Template', 'post type singular name', 'ruby-help-desk' ),
+			'menu_name'          => _x( 'Replies Templates', 'admin menu', 'ruby-help-desk' ),
+			'name_admin_bar'     => _x( 'Replies Template', 'add new on admin bar', 'ruby-help-desk' ),
+			'add_new'            => _x( 'New Replies Template', 'book', 'ruby-help-desk' ),
+			'add_new_item'       => __( 'Create New Replies Template', 'ruby-help-desk' ),
+			'new_item'           => __( 'Create New Replies Template', 'ruby-help-desk' ),
+			'edit_item'          => __( 'Edit Replies Template', 'ruby-help-desk' ),
+			'view_item'          => __( 'View Replies Template', 'ruby-help-desk' ),
+			'all_items'          => __( 'Replies Templates', 'ruby-help-desk' ),
+			'search_items'       => __( 'Search Replies Templates', 'ruby-help-desk' ),
+			'parent_item_colon'  => __( 'Parent Replies Templates:', 'ruby-help-desk' ),
+			'not_found'          => __( 'No Replies Template found.', 'ruby-help-desk' ),
+			'not_found_in_trash' => __( 'No Replies Template found in Trash.', 'ruby-help-desk' )
+		);
+
+
+		$args = array(
+			'labels'             => $labels,
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => 'edit.php?post_type='	.	RHD_TICKET,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => RHD_REPLIES_TEMPLATE ),
+			'capability_type'    => 'post',
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_icon'			 => 'dashicons-admin-comments',
+
+		);
+		register_post_type( RHD_REPLIES_TEMPLATE, $args );
+
 
 			//Tickets Reply
 			$labels = array(
