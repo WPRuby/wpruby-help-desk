@@ -138,6 +138,7 @@ class Ruby_Help_Desk {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-settings.php';
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-custom-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruby-help-desk-replies-templates.php';
 
 		$this->loader = new RHD_Loader();
 

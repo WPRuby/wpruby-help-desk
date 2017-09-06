@@ -468,3 +468,14 @@ display: none;
   margin: 0;
   padding: 0;
 }
+
+#rhd_templates_tags_list li{
+    display:inline;
+    float:left;
+    margin: 10px;
+}
+#rhd_templates_tags_list li a{
+    background-color: #f6fbfd;
+    padding: 7px;
+    text-decoration: none;
+}
