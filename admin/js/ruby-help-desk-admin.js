@@ -1,6 +1,40 @@
 (function( $ ) {
 	'use strict';
 	$(function() {
+
+        $('.rhd_template_tag').click(function(e){
+
+        	e.preventDefault();
+        	var tag = $(this).attr('data-value');
+            /* Check if TinyMCE is loaded */
+            if (typeof (tinyMCE) != 'undefined') {
+
+                /* Check version of TinyMCE */
+                if (tinymce.majorVersion < 4) {
+                    tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, tag);
+                } else {
+                    tinyMCE.get('content').insertContent(tag);
+                }
+
+            }
+		});
+
+        $('.rhd_template_unit').click(function(e){
+
+            e.preventDefault();
+            var content = $(this).attr('data-content');
+            /* Check if TinyMCE is loaded */
+            if (typeof (tinyMCE) != 'undefined') {
+
+                /* Check version of TinyMCE */
+                if (tinymce.majorVersion < 4) {
+                    tinyMCE.execInstanceCommand('ticket_reply', 'mceInsertContent', false, content);
+                } else {
+                    tinyMCE.get('ticket_reply').insertContent(content);
+                }
+
+            }
+        });
 		$('.post-type-support_ticket #title-prompt-text').html(rhd.text_ticket_subject);
 		$('.ticket-status-color-field').wpColorPicker();
 
@@ -172,6 +206,7 @@
 		});
 
   });
+
 
 
 

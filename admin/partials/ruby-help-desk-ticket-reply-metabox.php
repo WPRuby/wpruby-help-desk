@@ -11,6 +11,17 @@
  */
 ?>
 <?php wp_editor('', 'ticket_reply', $editor_settings); ?>
+<?php if($replies_templates): ?>
+<br>
+<div id="rhd_reply_templates">
+    <h3><?php _e('Templates', 'wpruby-help-desk'); ?></h3>
+    <ul class="rhd_template_units">
+		<?php foreach ($replies_templates as $template): ?>
+            <li><a class="rhd_template_unit" href="#" data-content="<?php echo $template['content']; ?>" data-value="<?php echo sprintf('{%s}',$template['title']); ?>"><?php echo sprintf('%s', $template['title']); ?></a></li>
+		<?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>
 
 <?php if($ticket_status['slug'] != 'closed'): ?>
   <p>

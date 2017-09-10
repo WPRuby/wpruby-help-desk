@@ -498,6 +498,7 @@ class RHD_Admin {
 			$editor_settings = array( 'media_buttons' => false, 'textarea_rows' => 7 );
 			$ticket = new RHD_Ticket(	$post->ID	);
 			$ticket_status = $ticket->get_status();
+			$replies_templates = RHD_Replies_Templates::getTemplates($ticket);
 			require_once plugin_dir_path( __FILE__ ) . 'partials/ruby-help-desk-ticket-reply-metabox.php';
 		}
 		/**

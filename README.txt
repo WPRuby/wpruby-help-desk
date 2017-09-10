@@ -4,7 +4,7 @@ Donate link: https://wpruby.com
 Tags: helpdesk, admin
 Requires at least: 3.0.1
 Tested up to: 4.8
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,8 @@ All of the plugins related pages will be added under one menu item called ‘Rub
 
 == Changelog ==
 
+= 1.3.0 =
+* Added: replies templates to pre-create ready templates for common issues in the tickets.
 
 = 1.2.0 =
 * Added: Custom Fields for the Submit Ticket page.

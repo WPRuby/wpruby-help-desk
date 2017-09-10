@@ -23,7 +23,15 @@ class RHD_Ticket {
   public function __construct($ticket_id = 0){
     $this->ticket_id = intval($ticket_id);
   }
-
+	/**
+	 * Get ticket id
+	 *
+	 * @since    1.0.0
+	 * @param      number    $ticket_id       The ID of the ticket.
+	 */
+	public function get_id(){
+		return $this->ticket_id;
+	}
   /**
 	 * Closing the ticket.
 	 *
@@ -351,7 +359,7 @@ class RHD_Ticket {
 
      /**
      * Get ticket author
-     * @return  Object the ticket author
+     * @return  RHD_User the ticket author
      * @since    1.0.0
      */
      public function get_author(){
@@ -361,7 +369,7 @@ class RHD_Ticket {
      }
      /**
      * Get ticket assignee
-     * @return  Object the ticket assingee
+     * @return  RHD_User the ticket assingee
      * @since    1.0.0
      */
      public function get_assignee(){
@@ -371,7 +379,7 @@ class RHD_Ticket {
      }
      /**
      * Get ticket title
-     * @return  Object the ticket author
+     * @return  string the ticket title
      * @since    1.0.0
      */
      public function get_title(){
@@ -379,7 +387,7 @@ class RHD_Ticket {
      }
      /**
      * Get status ticket admin interface URL.
-     * @return  Object the ticket author
+     * @return  string the ticket author
      * @since    1.0.0
      */
      public function get_status_tickets_link( $status = ''){
