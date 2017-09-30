@@ -92,7 +92,7 @@ class RHD_Custom_Fields {
           'default'     => '',
       ),
     );
-    //@TODO add_filter
+    $components = apply_filters('ruby_helpdesk_add_components', $components);
     return $components;
   }
   /**
@@ -107,7 +107,7 @@ class RHD_Custom_Fields {
     if(!is_array($fields)){
       return $this->populate_fields($core_fields);
     }
-    //@TODO add_filter
+    $fields = apply_filters('ruby_helpdesk_add_fields', $fields);
     return $this->populate_fields($fields);
   }
 
@@ -345,8 +345,8 @@ class RHD_Custom_Fields {
   /**
   * Display the field if it is a WYSIWYG input
   * @since 1.2.0
-  * @param array        The array of the field.
-  * @param string       The HTML replacement of the field
+  * @param array  $field The array of the field.
+  * @param string  The HTML replacement of the field
   */
   public function display_editor($field){
     $editor_settings = array( 'media_buttons' => false, 'textarea_rows' => 7 );
@@ -360,7 +360,7 @@ class RHD_Custom_Fields {
   /**
   * Display the field if it is a FILE input
   * @since 1.2.0
-  * @param array        The array of the field.
+  * @param array        $field The array of the field.
   * @param string       The HTML replacement of the field
   */
   public function display_attachment($field){
@@ -380,8 +380,7 @@ class RHD_Custom_Fields {
   /**
   * Get the helpdesk products
   * @since 1.2.0
-  * @todo The method is redundant in another class.
-  * @param array    The array of the products
+  * @param array    $result The array of the products
   */
   private function get_products(){
     $products = get_terms( RHD_TICKET_PRODUCT, array(	'hide_empty' => false		) );
@@ -396,9 +395,9 @@ class RHD_Custom_Fields {
   * sanitize cutom field value before reaching the database.
   * @todo sanitize all of the possible field types.
   * @since 1.2.0
-  * @param string    The custom field key
-  * @param string    The posted value
-  * @return array    The sanitized value
+  * @param string    $key The custom field key
+  * @param string    $value The posted value
+  * @return string    The sanitized value
   */
   public function sanitize($key,  $value){
     $fields = $this->get_fields();

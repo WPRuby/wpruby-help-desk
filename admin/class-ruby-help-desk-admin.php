@@ -603,15 +603,15 @@ class RHD_Admin {
 		public function set_custom_edit_support_ticket_columns($old_columns) {
 				$new_columns = array();
 				$new_columns['cb'] = $old_columns['cb'];
-				$new_columns['support_ticket_title'] = __('Ticket title', 'ruby-help-desk');
+			    $new_columns['support_ticket_title'] = __('Ticket title', 'ruby-help-desk');
 				$new_columns['support_ticket_id'] = __('Ticket #ID', 'ruby-help-desk');
 				$new_columns['taxonomy-tickets_products'] = $old_columns['taxonomy-tickets_products'];
-				$new_columns['support_ticket_status'] = __( 'Status', 'ruby-help-desk' );
 				$new_columns['support_ticket_assignee'] = __( 'Assignee', 'ruby-help-desk' );
 				$new_columns['support_ticket_customer'] = __( 'Customer', 'ruby-help-desk' );
-		    $new_columns['support_ticket_replies'] = __( 'Replies', 'ruby-help-desk' );
+		        $new_columns['support_ticket_replies'] = __( 'Replies', 'ruby-help-desk' );
 				$new_columns['date'] = $old_columns['date'];
-		    return $new_columns;
+			    $new_columns['support_ticket_status'] = __( 'Status', 'ruby-help-desk' );
+			return $new_columns;
 		}
 
 		/**
@@ -656,7 +656,7 @@ class RHD_Admin {
 
 	/**
 	 * Add the ticket status HTML to the custom column in the taxonomy page
-	 * @param		array The original columns
+	 * @param		array $columns original columns
 	 * @return array The altered columns
 	 * @since  1.0.0
 	 */
@@ -670,9 +670,9 @@ class RHD_Admin {
 
 	/**
 	 * Add the ticket status HTML to the custom column
-	 * @param		string Original Content
-	 * @param		string The column name
-	 * @param		number The term (Status) ID
+	 * @param		string $out Original Content
+	 * @param		string $column_name The column name
+	 * @param		number $term_id The term (Status) ID
 	 * @since  1.0.0
 	 */
 	public function set_custom_ticket_status_columns_data($out, $column_name, $term_id) {

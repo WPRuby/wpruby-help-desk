@@ -1,13 +1,16 @@
 <div id="my_tickets">
 
 <?php if($my_tickets): ?>
+	<?php do_action('ruby_helpdesk_before_my_tickets_table', $my_tickets);  ?>
     <table id="my_tickets_table">
       <thead>
-        <th style="width:35%;"><?php _e('Subject', 'ruby-help-desk'); ?></th>
-        <th><?php _e('Status', 'ruby-help-desk'); ?></th>
-        <th><?php _e('Product', 'ruby-help-desk'); ?></th>
-        <th><?php _e('Date', 'ruby-help-desk'); ?></th>
-        <th><?php _e('Replies', 'ruby-help-desk'); ?></th>
+          <tr>
+            <th style="width:35%;"><?php _e('Subject', 'ruby-help-desk'); ?></th>
+            <th><?php _e('Status', 'ruby-help-desk'); ?></th>
+            <th><?php _e('Product', 'ruby-help-desk'); ?></th>
+            <th><?php _e('Date', 'ruby-help-desk'); ?></th>
+            <th><?php _e('Replies', 'ruby-help-desk'); ?></th>
+          </tr>
       </thead>
       <tbody>
       <?php foreach ($my_tickets as $key => $ticket): ?>
@@ -21,6 +24,7 @@
       <?php endforeach; ?>
       </tbody>
     </table>
+    <?php do_action('ruby_helpdesk_after_my_tickets_table', $my_tickets);  ?>
 <?php else: ?>
   <p> <?php _e('You do not have any tickets yet', 'ruby-help-desk'); ?>.</p>
 <?php endif; ?>

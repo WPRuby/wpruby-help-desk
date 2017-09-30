@@ -40,6 +40,7 @@ class RHD_Ticket {
   public function close_ticket(){
     RHD_Email::ticket_closed($this->ticket_id);
     wp_set_object_terms( intval($this->ticket_id), 'closed', RHD_TICKET_STATUS, false );
+    do_action('ruby_helpdesk_closing_ticket', $this->ticket_id);
   }
   /**
 	 * Opening the ticket.
@@ -48,6 +49,7 @@ class RHD_Ticket {
 	 */
   public function open_ticket(){
     wp_set_object_terms( intval($this->ticket_id), 'in-progress', RHD_TICKET_STATUS, false );
+    do_action('ruby_helpdesk_opening_ticket', $this->ticket_id);
   }
   /**
 	 * Get the replies of the current ticket.
@@ -80,7 +82,6 @@ class RHD_Ticket {
    * @param      array    $args      The parameters of the tickets query.
    */
   public function get_tickets(	$args ){
-
 
     $tickets_args = array();
     $tickets_args['post_type']  = RHD_TICKET;
@@ -228,6 +229,9 @@ class RHD_Ticket {
                     'post_status'   =>  'publish',
 
        );
+
+       do_action('ruby_helpdesk_before_ticket_added', $ticket);
+
        $ticket_id = wp_insert_post($postattr);
        if(isset($ticket['attachment'])){
          self::add_attachment($ticket_id, $ticket['attachment']);
@@ -243,43 +247,53 @@ class RHD_Ticket {
        $new_status = get_option( 'rhd_ticket_status_new', 'new');
        wp_set_object_terms( intval($ticket_id), intval($new_status), RHD_TICKET_STATUS, false );
 
+       do_action('ruby_helpdesk_after_ticket_added', $ticket_id, $ticket);
+
        return $ticket_id;
      }
 
      public static function add_reply( $ticket_id = '' ){
-       //info: if there is an attachment
-       if(isset($_FILES['reply_attachment'])  && $_FILES['reply_attachment']['name'] != ''){
-         if ( ! function_exists( 'wp_handle_upload' ) ) {
-             require_once( ABSPATH . 'wp-admin/includes/file.php' );
-         }
-         $uploadedfile = $_FILES['reply_attachment'];
-         $upload_overrides = array( 'test_form' => false );
-         $reply_uploaded_file = wp_handle_upload( $uploadedfile, $upload_overrides );
 
-       }
-       //info: if the reply is empty
-       if(isset($_POST['rhd_ticket_reply']) && trim($_POST['rhd_ticket_reply']) == ''){
-         return array('error' =>  __('The reply should not be empty', 'ruby-help-desk'));
-       }
-       //info: if the file is not validated
-       if(isset($reply_uploaded_file['error'])){
-         return $reply_uploaded_file;
-       }
+		$reply_uploaded_file = '';
+		//info: if there is an attachment
+		if(isset($_FILES['reply_attachment'])  && $_FILES['reply_attachment']['name'] != ''){
+		if ( ! function_exists( 'wp_handle_upload' ) ) {
+		 require_once( ABSPATH . 'wp-admin/includes/file.php' );
+		}
+		$uploadedfile = $_FILES['reply_attachment'];
+		$upload_overrides = array( 'test_form' => false );
+		$reply_uploaded_file = wp_handle_upload( $uploadedfile, $upload_overrides );
 
-       $ticket_reply_args = array(
-         'post_title'		  =>	'Reply to ticket #' . $ticket_id,
-         'post_content'	  =>	sanitize_textarea_field($_POST['ticket_reply']),
-         'post_status'		=>	'publish',
-         'post_type'			=>	RHD_TICKET_REPLY,
-         'post_parent'		=>	intval($ticket_id),
-       );
-       $reply_id = wp_insert_post( $ticket_reply_args );
+		}
+		//info: if the reply is empty
+		if(isset($_POST['rhd_ticket_reply']) && trim($_POST['rhd_ticket_reply']) == ''){
+		return array('error' =>  __('The reply should not be empty', 'ruby-help-desk'));
+		}
+		//info: if the file is not validated
+		if(isset($reply_uploaded_file['error'])){
+		return $reply_uploaded_file;
+		}
 
-       if(isset($reply_uploaded_file['file']) && $reply_id){
-         self::add_attachment($reply_id, $reply_uploaded_file['file']);
-       }
-       RHD_Email::reply_added( $ticket_id, $reply_id  );
-       return $reply_id;
+		$ticket_reply_args = array(
+		'post_title'		  =>	'Reply to ticket #' . $ticket_id,
+		'post_content'	  =>	sanitize_textarea_field($_POST['ticket_reply']),
+		'post_status'		=>	'publish',
+		'post_type'			=>	RHD_TICKET_REPLY,
+		'post_parent'		=>	intval($ticket_id),
+		);
+
+		do_action('ruby_helpdesk_before_ticket_added', $ticket_reply_args);
+
+		$reply_id = wp_insert_post( $ticket_reply_args );
+
+		if(isset($reply_uploaded_file['file']) && $reply_id){
+		self::add_attachment($reply_id, $reply_uploaded_file['file']);
+		}
+		RHD_Email::reply_added( $ticket_id, $reply_id  );
+
+		do_action('ruby_helpdesk_after_ticket_added', $reply_id, $ticket_reply_args);
+
+		return $reply_id;
      }
      /**
      * Get the tickets of the current user.

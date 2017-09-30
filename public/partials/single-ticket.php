@@ -76,8 +76,9 @@
         <?php endif; ?>
 
         <input type="submit" name="submit_reply" value="<?php _e('Submit a reply', 'ruby-help-desk'); ?>">
+        <?php if($status['slug'] != 'closed'): ?>
         <input type="submit" name="close_ticket" value="<?php _e('Close Ticket', 'ruby-help-desk'); ?>" class="close_ticket">
-      </p>
+        <?php endif; ?>
     </form>
 
   </div>
