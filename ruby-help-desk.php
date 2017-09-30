@@ -10,7 +10,7 @@
  * Plugin Name:       Ruby Help Desk
  * Plugin URI:        https://wpruby.com/plugin/ruby-help-desk
  * Description:       A simple Help Desk to support your customers efficiently.
- * Version:           1.3.0
+ * Version:           1.3.1
  * Author:            WPRuby
  * Author URI:        https://wpruby.com
  * License:           GPL-2.0+
@@ -23,7 +23,7 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-define('RHD_VERSION', 					'1.3.0');
+define('RHD_VERSION', 					'1.3.1');
 // define the plugin constants
 define('RHD_TICKET', 					'support_ticket');
 define('RHD_KNOWLEDGEBASE', 	'help_knowledgebase');
