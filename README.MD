@@ -5,7 +5,7 @@
 
 **Requires at least:** WordPress 3.0.1
 
-**Tested up to:** WordPress 4.8
+**Tested up to:** WordPress 4.9
 
 **Stable tag:** 1.3.1
 
