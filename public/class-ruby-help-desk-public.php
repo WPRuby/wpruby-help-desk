@@ -294,6 +294,13 @@ class RHD_Public {
 			if(isset($_POST['ticket_id'])){
 				$ticket_id = intval($_POST['ticket_id']);
 			}
+
+			$ticket = new RHD_Ticket(	$ticket_id	);
+
+			if (isset($_POST['ticket_id']) && $ticket->get_author()->get_id() !== $ticket_id) {
+				$this->error = __('You are not allowed to add a reply to this ticket', 'ruby-help-desk');
+			}
+
 			//if closing the ticket
 			if(isset($_POST['close_ticket'])){
 				$ticket = new RHD_Ticket(	$ticket_id	);
