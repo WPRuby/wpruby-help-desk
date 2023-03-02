@@ -3,8 +3,8 @@ Contributors: wprubyplugins, waseem_senjer
 Donate link: https://wpruby.com
 Tags: helpdesk, admin
 Requires at least: 3.0.1
-Tested up to: 4.9
-Stable tag: 1.3.2
+Tested up to: 6.1.1
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,6 +54,10 @@ Ruby Help Desk is a WordPress plugin which works as a customer support platform.
 All of the plugins related pages will be added under one menu item called ‘Ruby Desk’, also you will find the same item at the admin bar on top of the dashboard.
 
 == Changelog ==
+
+= 1.3.3 =
+* Fixed: Preventing user to edit the ticket if they are not the owner of the ticket.
+
 = 1.3.2 =
 * Fixed: Adding reply templates to Text area field
 

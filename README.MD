@@ -7,7 +7,7 @@
 
 **Tested up to:** WordPress 4.9
 
-**Stable tag:** 1.3.2
+**Stable tag:** 1.3.3
 
 **License:** GPLv2 or later
 
