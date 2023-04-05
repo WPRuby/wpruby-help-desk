@@ -297,7 +297,7 @@ class RHD_Public {
 
 			$ticket = new RHD_Ticket(	$ticket_id	);
 
-			if (isset($_POST['ticket_id']) && $ticket->get_author()->get_id() !== $ticket_id) {
+			if (isset($_POST['ticket_id']) && $ticket->get_author()->get_id() !== wp_get_current_user()->ID) {
 				$this->error = __('You are not allowed to add a reply to this ticket', 'ruby-help-desk');
 			}
 
